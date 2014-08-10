@@ -1,6 +1,7 @@
-#align-right { 
+.align-right { 
     font-size: 12px;
     vertical-align: baseline;
+  text-align: right;
     float: right;
     color: #696969;
 }
@@ -9,4 +10,28 @@
     width: 100%;
     height: auto;
     max-width: 100%;
+}
+
+#lahs {
+  color: #1c3680;
+}
+
+#skybox {
+  color: #296591;
+}
+
+#scu {
+  color: #9e1f0f;
+}
+
+#galileo {
+  color: #90a1d9;
+}
+
+#kappa-sigma {
+  color: #9e1f0f;
+}
+
+#vwp {
+  color: #9e1f0f;
 }
