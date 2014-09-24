@@ -1,10 +1,10 @@
 <?php
 $to = "rdrishi12@gmail.com";
-$email = $_REQUEST('email');
-$subject = "New email from ryanrishi.com";
-$message = $_REQUEST('message');
-$headers .= "From: $email";
+$email = $_REQUEST['email'];
+$subject = "New email from ryanrishi.com: " . $_REQUEST['subject'];
+$message = $_REQUEST['message'];
+$from = "From: " . $email;
 
-mail($to, $subject, $message, $headers);
+mail($to, $subject, $message, $from);
 header("Location: index.html");
 ?>
