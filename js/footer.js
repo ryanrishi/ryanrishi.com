@@ -1,3 +1,7 @@
+//	get date for copyright
+var date = new Date();
+var year = date.getFullYear();
+
 document.write('<div class="container">');
 //	left
 document.write('<div class="col-md-4">');
@@ -8,10 +12,10 @@ document.write('<a href="http://www.twitter.com/rdrishi12" target="_blank"><img 
 document.write('</div>')
 //	middle
 document.write('<div class="col-md-4" align="center">');
-document.write('<p>&copy; 2014 Ryan Rishi. All Rights Reserved.</p>');
+document.write('<p>&copy; ' + year.toString() + ' Ryan Rishi. All Rights Reserved.</p>');
 document.write('<p>Created using <a href="http://www.getbootstrap.com" target="_blank">Bootstrap</a>.</p>');
 document.write('</div>');
-// right
+//	right
 document.write('<div class="col-md-4" align="right">');
 document.write('<a href="contact.html">Contact</a>');
 document.write('</div>');
