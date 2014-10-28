@@ -21,3 +21,6 @@ document.write('<a href="contact.html">Contact</a>');
 document.write('</div>');
 
 document.write('</div>');
+
+//	analytics -- after page has loaded
+document.write('<script src="js/analytics.js"></script>')
