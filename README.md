@@ -1,4 +1,4 @@
 website
 =======
 
-Repo for my personal website, ryanrishi.com.
+Repo for my personal website, http://ryanrishi.com .
