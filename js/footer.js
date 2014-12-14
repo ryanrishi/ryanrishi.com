@@ -2,7 +2,7 @@
 var date = new Date();
 var year = date.getFullYear();
 
-document.write('<div class="container">');
+document.write('<div class="container" id="footer">');
 //	left
 document.write('<div class="col-md-4">');
 //	social

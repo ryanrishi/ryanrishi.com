@@ -6,7 +6,7 @@ document.write('<link rel="stylesheet" type"=text/css" href="css/bootstrap.css">
 document.write('<link rel="stylesheet" type"=text/css" href="css/ryan.css">');
 
 //  js
-document.write('<script src="js/jquery-1.11.1.min.js"></script>');
+document.write('<script src="bower_components/jquery/dist/jquery.min.js"></script>');
 document.write('<script src="js/bootstrap.min.js"></script>');
 
 //  meta
