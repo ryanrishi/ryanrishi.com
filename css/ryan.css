@@ -18,7 +18,7 @@
 #splash {
   /*position: relative;*/
   display: table;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   background-color: #012d42;
   font-family: 'Summit';
@@ -32,15 +32,31 @@
   height: 100%;
 }
 
-#logo {
-  width: 50%;
-  margin: 0 auto;
+
+#about {
+  min-height: 80vh;
+  background-color: orange;
+}
+
+
+#experience {
+  min-height: 80vh;
+  background-color: purple;
 }
 
 
 #footer {
+  min-height: 30vh;
   background-color: #00702a;
+  color: white;
 }
+
+#footer > div {
+  padding-top: 20px;
+}
+
+
+
 
 
 /*  old stuff below */
