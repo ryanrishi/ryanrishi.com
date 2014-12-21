@@ -2,6 +2,7 @@
 <head>
   <title>Resume | Ryan Rishi</title>
   <script src="js/header.js"></script>
+  <link href="css/resume.css" type="text/css" rel="stylesheet">
 </head>
 <body>
   <div class="container-fluid">
@@ -68,9 +69,9 @@
       </div>
 
       <div class="col-md-4">
-        <h1 id="experience">Experience</h1><hr>
+        <h1>Experience</h1><hr>
         <!--    skybox  -->
-        <div class="experience">
+        <div>
           <h4 id="skybox">Skybox Imaging, Inc.</h4>
           <h5>Operate Team Engineering Intern<span class="align-right">May 2014 - August 2014</span></h5>
           <ul>
@@ -149,4 +150,7 @@
 <footer>
   <script src="js/footer.js"></script>
 </footer>
+<script>
+  $('#footer').removeAttr('id');
+</script>
 </body>
