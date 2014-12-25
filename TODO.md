@@ -13,6 +13,7 @@ Content
 -	about
 -	experience
 -	footer
+-	contact (hidden, fixed position when active, etc.)
 
 
 Extra
