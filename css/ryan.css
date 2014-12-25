@@ -84,32 +84,46 @@ li {
 
 #splash .header {
   display: table-cell;
-  color: white;
   text-align: center;
   vertical-align: middle;
   height: 100%;
 }
 
-
 #about {
   min-height: 80vh;
-  background-color: orange;
+  color: #333;
+  background-color: white;
 }
 
 
 #experience {
-  min-height: 80vh;
-  background-color: purple;
+  min-height: 800px;
+  height: 80vh;
+  background-color: #994444;
 }
 
 
 #footer {
-  min-height: 30vh;
-  background-color: #00702a;
-  color: white;
+  min-height: 300px;
+  height: 30vh;
+  background-color: #aaaaaa;
+  color: #222222;
 }
 
 #footer > div {
   padding-top: 20px;
+}
+
+#contact {
+  position: fixed;
+  bottom: 0px;
+}
+
+#contact.active {
+   position: fixed;
+  top: 15%;
+  bottom: 15%;
+  left: 15%;
+  right: 15%;
 }
 
