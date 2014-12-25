@@ -6,11 +6,28 @@
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
   <link href="css/ryan.css" type="text/css" rel="stylesheet">
+  <link href="fonts/font-awesome-4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
   <script src="js/main.js"></script>
-
+  <link rel="icon" type="image/png" href="ico/favicon.png">
 </head>
 
 <body>
+  <!--  sidebar -->
+  <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><!-- TODO define this class -->
+    <i class="fa fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle">
+        <i class="fa fa-times"></i>
+      </a>
+      <li class="sidebar-brand">Ryan Rishi</li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+    </ul>
+  </nav>
+
+  <!--  content -->
     <div id="splash">
       <div class="header">
         <h1 class="hidden">Ryan Rishi</h1>
@@ -18,39 +35,70 @@
     </div>
     
     <div id="about">
-      <div class="container">asdf</div>
+      <div class="container">
+        <h1>About</h1><hr>
+        <img src="img/face.png" alt="Ryan Rishi" class="col-md-3 col-sm-3">
+        <p style="font-size: 18px">Hi there! I'm Ryan. I'm studying computer science and music at the beautiful Santa Clara University. In my free time, I like to code, play drums, and hang out with my dog, Gus.</p>
+        <p style="font-size: 18px">Feel free to <a href="http://linkedin.com/in/ryanrishi" target="_blank">connect with me on LinkedIn</a>, <a href="http://twitter.com/rdrishi12" target="_blank">follow me on Twitter</a>, or <a href="http://github.com/ryanrishi" target="_blank">follow me on Github</a>.</p>
+        <p style="font-size: 18px">This website is a work in progress, but feel free to poke around. Thanks for visiting!</p>
+      </div>
     </div>
 
     <div id="experience">
       <div class="container">
         <div class="row">
-          <h1>Experience</h1>
+          <h1>Experience</h1><hr>
           <div class="row">
-            <div class="col-md-3 col-sm-6">A</div>
-            <div class="col-md-3 col-sm-6">B</div>
-            <div class="col-md-3 col-sm-6">C</div>
-            <div class="col-md-3 col-sm-6">D</div>
+            <div class="col-md-3 col-sm-12">
+              <h1>Life in theBO</h1>
+              <p>I just returned to the United States after studying abroad in Bologna, Italy. The program I was in focused on social justice, which is cool because I was pretty involved with Amnesty International while I was in high school. I was lucky enough to do some serious travelling while I was abroad&emdash;I experienced lots of cool places, including Croatia, Sarajevo, Istanbul, and Amsterdam.</p>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <h1>Personal Website</h1>
+              <p>You're already here! I just revamped my website. I built it using <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>. It's still a work in progress, but I hope you find it easy on the eye and enjoyable to use!</p>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <h1>Rhythm in Travel</h1>
+              <p>While I was abroad, I kept a blog called <a href="http://rhythmintravel.com" target="_blank">Rhythm In Travel</a>. I'm a pretty musically-inclined person, and I love to travel, so the name reflects that travelling should be done in a (regular) rhythm. Anyway, you can check out what I did abroad on my blog.</p>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <h1>Resume</h1>
+              <a href="resume.html"><button class="btn-lg">See my resume here &#x279d;</button></a>
+            </div>
           </div>
-          <a href="resume.html"><button class="btn-lg">See my resume here &#x279d;</button></a>
         </div>
       </div>
     </div>
 
     <div id="footer" class="footer">
       <div class="container">
-        <div class="col-md-3"><img src="img/logo.png" style="max-width: 100%"></div>
-        <div class="col-md-6">
+        <div class="col-md-3 col-sm-3"><img src="img/logo.png" style="max-width: 100%"></div>
+        <div class="col-md-6 col-sm-6">
           <p>Copyright 2014 Ryan Rishi. All rights reserved.</p>
           <p>Created with <a href="http://getbootstrap.com">Bootstrap</a>.</p>
         </div>
-        <div class="col-md-3">
-          <a href="http://github.com/ryanrishi" target="_blank"><img src="ico/github-9-32.png"></a>
-          <a href="http://twitter.com/rdrishi12" target="_blank"><img src="ico/twitter-4-32.png"></a>
-          <a href="http://linkedin.com/in/ryanrishi" target="_blank"><img src="ico/linkedin-4-32.png"></a>
-          <a href="http://plus.google.com/u/0/101205771451956695448" target="_blank"><img src="ico/google-plus-4-32.png"></a>
+        <div class="col-md-3 col-sm-3">
+          <a href="http://github.com/ryanrishi" target="_blank"><img src="ico/github-9-32.png" alt="Github icon"></a>
+          <a href="http://twitter.com/rdrishi12" target="_blank"><img src="ico/twitter-4-32.png" alt="Twitter icon"></a>
+          <a href="http://linkedin.com/in/ryanrishi" target="_blank"><img src="ico/linkedin-4-32.png" alt="LinkedIn icon"></a>
+          <a href="http://plus.google.com/u/0/101205771451956695448" target="_blank"><img src="ico/google-plus-4-32.png" alt="Google Plus icon"></a>
         </div>
       </div>
     </div>
+
+    <script>
+      //  open sidebar
+      $('#menu-toggle').click(function(e) {
+        e.preventDefault();
+        $('#sidebar-wrapper').toggleClass('active');
+      })
+
+      //  close sidebar
+      $('#menu-close').click(function(e) {
+        e.preventDefault();
+        $('#sidebar-wrapper').toggleClass('active');
+      })
+    </script>
 
 </body>
 </html>

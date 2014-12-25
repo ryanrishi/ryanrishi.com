@@ -11,8 +11,66 @@
   src: url('../fonts/SummitLight-Solid.otf') format('opentype');
 }
 
+body {
+  color: white;
+}
+
 .hidden {
   display: none;
+}
+
+#menu-toggle {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+#sidebar-wrapper {
+  position: fixed;
+  right: 0px;
+  width: 250px;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #343434;
+  margin-right: -250px;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper.active {
+  right: 250px;
+  width: 250px;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper .sidebar-brand {
+  height: 55px;
+  font-size: 18px;
+  line-height: 55px;
+}
+
+.toggle {
+  margin: 5px 5px 0 0;
+}
+
+.sidebar-nav li {
+  text-indent: 20px
+}
+
+li {
+  display: list-item;
+}
+
+.btn-dark {
+  border-radius: 0px;
+  color: #eeeeee;
+  background-color: #333333;
+}
+
+.btn-light {
+  border-radius: 0px;
+  color: #000000;
+  background-color: #cccccc;
 }
 
 #splash {
