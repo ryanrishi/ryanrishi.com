@@ -86,10 +86,11 @@ li {
 #splash {
   /*position: relative;*/
   display: table;
-  min-height: 100vh;
+  height: 10vh;
   width: 100%;
   background-color: #012d42;
-  font-family: 'Summit';
+  font-family: 'Prime Light', sans-serif;
+  font-size: 64px;
 }
 
 #splash .header {
