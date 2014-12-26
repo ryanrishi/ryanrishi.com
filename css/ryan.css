@@ -11,6 +11,16 @@
   src: url('../fonts/SummitLight-Solid.otf') format('opentype');
 }
 
+@font-face {
+  font-family: 'RBNo2';
+  src: url('../fonts/RBNo2Light.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Prime Light';
+  src: url('../fonts/PrimeLight.otf') format('opentype');
+}
+
 body {
   color: white;
 }
