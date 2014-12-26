@@ -6,32 +6,141 @@
   color: #696969;
 }
 
-#logo img {
+@font-face {
+  font-family: 'Summit';
+  src: url('../fonts/SummitLight-Solid.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'RBNo2';
+  src: url('../fonts/RBNo2Light.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Prime Light';
+  src: url('../fonts/PrimeLight.otf') format('opentype');
+}
+
+body {
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+#menu-toggle {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+#sidebar-wrapper {
+  position: fixed;
+  right: 0px;
+  width: 250px;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #343434;
+  margin-right: -250px;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper.active {
+  right: 250px;
+  width: 250px;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper .sidebar-brand {
+  height: 55px;
+  font-size: 18px;
+  line-height: 55px;
+}
+
+.toggle {
+  margin: 5px 5px 0 0;
+}
+
+.sidebar-nav li {
+  text-indent: 20px
+}
+
+li {
+  display: list-item;
+}
+
+.btn-dark {
+  border-radius: 0px;
+  color: #eeeeee;
+  background-color: #333333;
+}
+
+.btn-light {
+  border-radius: 0px;
+  color: #000000;
+  background-color: #cccccc;
+}
+
+#splash {
+  /*position: relative;*/
+  display: table;
+  height: 10vh;
   width: 100%;
-  height: auto;
-  max-width: 100%;
+  background-color: #012d42;
+  font-family: 'Prime Light', sans-serif;
+  font-size: 64px;
 }
 
-#lahs {
-  color: #1c3680;
+#splash .header {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  height: 100%;
 }
 
-#skybox {
-  color: #296591;
+#about {
+  min-height: 500px;
+  height: 50vh;
+  color: #333;
+  background-color: white;
 }
 
-#scu {
-  color: #9e1f0f;
+
+#experience {
+  min-height: 500px;
+  height: 80vh;
+  background-color: #ff906a;
+  color: black;
 }
 
-#galileo {
-  color: #90a1d9;
+#experience hr {
+  border-top-color: black;
 }
 
-#kappa-sigma {
-  color: #9e1f0f;
+
+#footer {
+  min-height: 300px;
+  height: 20vh;
+  background-color: #aaaaaa;
+  color: #222222;
 }
 
-#vwp {
-  color: #9e1f0f;
+#footer > div {
+  padding-top: 20px;
 }
+
+#contact {
+  position: fixed;
+  bottom: 0px;
+}
+
+#contact.active {
+   position: fixed;
+  top: 15%;
+  bottom: 15%;
+  left: 15%;
+  right: 15%;
+}
+
