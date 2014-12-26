@@ -13,7 +13,7 @@ document.write('</div>')
 //	middle
 document.write('<div class="col-md-4" align="center">');
 document.write('<p>&copy; ' + year.toString() + ' Ryan Rishi. All Rights Reserved.</p>');
-document.write('<p>Created using <a href="http://www.getbootstrap.com" target="_blank">Bootstrap</a>.</p>');
+document.write('<p>Created with <a href="http://www.getbootstrap.com" target="_blank">Bootstrap</a>.</p>');
 document.write('</div>');
 //	right
 document.write('<div class="col-md-4" align="center">');
