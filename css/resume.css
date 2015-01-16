@@ -8,6 +8,11 @@
 	color: #666;
 }
 
+#experience .subtitle {
+	font-size: 14px;
+	color: #000;
+}
+
 #experience h5 {
 	margin-bottom: 15px;
 }
@@ -34,4 +39,8 @@
 
 #vwp {
 	color: #9e1f0f;
+}
+
+#jose {
+	color: #5f93a0;
 }
