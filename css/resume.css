@@ -1,0 +1,37 @@
+#experience {
+	color: black;
+}
+
+.align-right {
+	float: right;
+	font-size: 12px;
+	color: #666;
+}
+
+#experience h5 {
+	margin-bottom: 15px;
+}
+
+#experience li {
+	font-family: Montserrat, 'Helvetica Neue', Helvetica, Arial, sans-serif, serif;
+}
+
+#scu {
+	color: #9e1f0f;
+}
+
+#lahs {
+	color: #1c3680;
+}
+
+#skybox {
+	color: #296591;
+}
+
+#kappasigma {
+	color: #9e1f0f;
+}
+
+#vwp {
+	color: #9e1f0f;
+}
