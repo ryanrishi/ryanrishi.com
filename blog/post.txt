@@ -1,0 +1,181 @@
++ Digital Audio
+Digital audio can be represented in a variety of different formats. In digital
+audio, sound is represented by an array or numbers. Increasing array indices 
+corresponding to various times, and the value of each array index corresponds
+to the volume at that particular time. A common format is a 16-bit array with
+values ranging from -1 to 1. The human hearing range is from about 20 Hz to 20 kHz.
+The Nyquist-Shannon Theorem states that a sample rate of 2x the highest frequency
+is possible to represent audio, so 22,050 * 2 = 44,100 samples per second. 44.1k
+is called the sample rate. Putting the bit depth (16 bit) and the sample rate (44.1 kHz)
+together, we can represent audio in a pretty accurate manner.
+
+
++ Web Audio API
+The Web Audio API is native browser code that allows users to render audio in
+the browser and create audio tools from within the browser.
+
+The types of audio tools the Web Audio API can create are waveforms (relates
+amplitude to time), ferquency bar graphs (mapping amplitude over frequency), and
+spectrograms (maps frequency and amplitude over time).
+
+- Waveforms
+Waveforms are probably the most common way of visually representing audio data.
+Here is what the beginning of <i>Such Great Heights</i> by The Postal Service
+looks like:
+{{ waveform of such great heights }}
+
+Time is on the x-domain, each sample of time represents a speaker's position
+between -1 and 1. Samples with a higher magnitude relate to louder noises.
+
+- Frequency Bar Graphs
+Another popular audio tool provided by the Web Audio API is the frequency
+bar graph. This is similar to EQ tools found in programs like Logic and Pro Tools. {{ link}}
+{{ frequency bar graph }}
+
+Frequencies from 20 Hz to 20 kHz (log scale) are on the x-domain, and the
+corresponding amplitude of those frequencies are represented by the height of
+the bar.
+
+- Spectrograms
+The last audio tool we'll be looking at is a spectrogram. This is one of my
+favorite ways to represent digital audio, because it shows both frequency <i>
+and</i> amplitude in relation to time.
+{{ spectrogram }}
+
+Unfortunately, the Web Audio API cannot render spectrograms faster than real-time.
+This is a problem I am working on, because it would be nice to show the spectrogram
+without having to listen to the entire audio file.
+
+
++ sox
+sox is a command-line tool that is the "Swiss Army Knife of sound processing 
+programs" (========SOX SOURCE=========). It can efficiently convert audio file types,
+change characters of audio files (such as sample rate and bit depth), or simply
+to get statistics about audio files. I use sox primarily for the last purpose.
+
+If I run <code>sox suchgreatheights.wav -n stat</code>, I see this:
+<code>
+Samples read:           3652062
+Length (seconds):     41.406599
+Scaled by:         2147483647.0
+Maximum amplitude:     0.980316
+Minimum amplitude:    -0.992493
+Midline amplitude:    -0.006088
+Mean    norm:          0.111005
+Mean    amplitude:    -0.000524
+RMS     amplitude:     0.150947
+Maximum delta:         0.856506
+Minimum delta:         0.000000
+Mean    delta:         0.072774
+RMS     delta:         0.101534
+Rough   frequency:         4721
+Volume adjustment:        1.008
+</code>
+
+Similarly, I can view statistics by channel data:
+<code>$ sox suchgreatheights.wav -n stats
+             Overall     Left      Right
+DC offset  -0.000546 -0.000502 -0.000546
+Min level  -0.992493 -0.992493 -0.974030
+Max level   0.980316  0.980316  0.935608
+Pk lev dB      -0.07     -0.07     -0.23
+RMS lev dB    -16.42    -16.39    -16.46
+RMS Pk dB      -9.64     -9.77     -9.64
+RMS Tr dB     -78.54    -78.54    -77.13
+Crest factor       -      6.55      6.48
+Flat factor     0.00      0.00      0.00
+Pk count           2         2         2
+Bit-depth      16/16     16/16     16/16
+Num samples    1.83M
+Length s      41.407
+Scale max   1.000000
+Window s       0.050
+</code>
+
+The first 40 seconds of Such Great Heights uses panning (imaging from left to 
+right) to fill the space in the listener's aural spectrum. We can see that the
+left channel has a higher peak than the right channel by comparing the amplitude
+of the min and max levels.
+
+Now let's say that the left channel isn't working for whatever reason. This is
+what we would expect to see from the above commands:
+<code>$ sox suchgreatheights-noL.wav -n stat
+Samples read:           3652062
+Length (seconds):     41.406599
+Scaled by:         2147483647.0
+Maximum amplitude:     0.935638
+Minimum amplitude:    -0.974030
+Midline amplitude:    -0.019196
+Mean    norm:          0.055051
+Mean    amplitude:    -0.000273
+RMS     amplitude:     0.106304
+Maximum delta:         0.974060
+Minimum delta:         0.000000
+Mean    delta:         0.110054
+RMS     delta:         0.150337
+Rough   frequency:         9925
+Volume adjustment:        1.027
+
+$ sox suchgreatheights-noL-.wav -n stats
+             Overall     Left      Right
+DC offset  -0.000546 -0.000000 -0.000546
+Min level  -0.974030 -0.000305 -0.974030
+Max level   0.935638  0.000305  0.935638
+Pk lev dB      -0.23    -70.31     -0.23
+RMS lev dB    -19.47    -84.13    -16.46
+RMS Pk dB      -9.64    -83.44     -9.64
+RMS Tr dB     -84.79    -84.79    -76.39
+Crest factor       -      4.91      6.48
+Flat factor     0.00      0.00      0.00
+Pk count           2         2         2
+Bit-depth      16/16      5/16     16/16
+Num samples    1.83M
+Length s      41.407
+Scale max   1.000000
+Window s       0.050
+</code>
+(Note that -70 dB is close to silent. The noise in the left channel is probably
+just post-processing noise.)
+
++ Radio Advertisements
+Advertisements drive the radio industry. Radio stations include advertisements
+in their broadcasts to make money to cover costs of running the radio station.
+
++ Using the Web Audio API and sox to track radio advertisements
+Now let's put this in the context of radio advertisements. In my case,
+advertising agencies provide us with the advertisements, and when the radio
+station wishes to play an ad, all they have to do is press a button and a program
+will programmatically decide which ad to play in order to reach the target audience.
+
+{{ statistics on radio ads ? }}
+
+
++ Comparing two audio files
+One way of verifying ad playback is by comparing the expected file to the 
+audio that was actually played. There are a few factors that affect the version
+that actually played. First, the station's DJ could have been talking over the
+advertisement. Secondly, the audio levels on the mixing board may have been too
+high or too low (levels that are too high will result in clipping). Lastly,
+the ad may have not played at the correct time. Any of the above factors will
+result in an ad that was not played correctly, and the radio station will
+not be paid for the incorrect playback of that advertisement.
+
+To compare the two audio files, we can use sox again. Because I am unable to
+use real commercials for this post, I will be using a library containing Roland
+TR-808 and Roland TR-909 Drum Machine samples. All samples have a bit depth of
+16 bits and a sample rate of 44.1k.
+
+Let's take a 808 kick and compare it to a 909 kick. The 808 kick is relatively
+simple: it is simply a sine wave with a low-pass filter and a VCA circuit to control
+the envelope. A 909 kick, on the other hand, is a bit more complex: it uses a mix of
+high-frequency clicks for the attack and noise passed through a low-pass filter,
+and eventually passed through a VCA to control the envelope.
+
+{{ continue }}
+
+
+
++ Analytics (challenges)
+
+
+
