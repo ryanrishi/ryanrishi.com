@@ -3,4 +3,4 @@ website
 
 Repo for my personal website [ryanrishi.com](http://ryanrishi.com).
 
-Built using [Bootstrap](http://getbootstrap.com) and [Greyscale](http://startbootstrap.com/template-overviews/grayscale/).
+Built using [Jekyll](http://jekyllrb.com/).
