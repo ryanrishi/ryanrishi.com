@@ -2,7 +2,10 @@
 layout: post
 title:  "The Twelve Days of an A Cappella Christmas Album"
 date:   2015-12-26 17:56:07 -0700
-categories: jekyll update
+thumb:  /assets/img/christmas_in_claradise.png
+tags:
+  - music
+  - a cappella
 ---
 For those of you who know me well, you know that I should not be singing---I should stick to my guns, which are percussion and recording. Even though the extent of my vocal ability rarely leaves the confines of my shower, I ended up auditioning for an a cappella group at school, and to my surprise, I ended up making the cut!
 
@@ -16,9 +19,9 @@ Further discussion with the recording teacher led to a field trip of about eight
 One interesting practice Bill does is to record vocalists using a MIDI backing track. When recording multiple vocalists, I had previously had them sing at once and use that recording as a backing track as I record individual voices. However, with that practice, vocalists can be a few cents off from the true pitch, which will lead to them being off from the true pitch of the song when they record later. With MIDI, however, the sounds are exactly in tune. It never crossed my mind before, but in hindsight, it makes a lot of sense.
 
 ### On the first day of recording, my true love gave to me...
-...the largest a cappella group on campus---17 members. I booked the school studio for four hours, and got there an hour early to set up three microphones in an isolation booth. The back of the microphones faced each other, since the null point of a cardioid microphone is in the back. There was a little bit of bleed into each microphone, but it was an acceptable amount.
+...the largest a cappella group on campus---17 members! I booked the school studio for four hours, and got there an hour early to set up three microphones in an isolation booth. The back of the microphones faced each other, since the null point of a cardioid microphone is in the back. There was a little bit of bleed into each microphone, but it was an acceptable amount.
 
-On the sixth day of recording, I recorded the last group. It was time to start editing and mixing!
+I recorded the remaining groups over the next five days. On the sixth day of recording, I recorded the last group. It was time to start editing and mixing!
 
 ### Editing/Mixing
 I had already started to mix the groups I recorded first. My process was as follows:
