@@ -1,23 +1,45 @@
 ---
 layout: default
 ---
+<header class="intro">
+  <div class="intro-body">
+    <div class="container">
+
+    </div>
+  </div>
+</header>
 
 <div class="home">
 
-  <h1 class="page-heading">Posts</h1>
+  <h2>Hi there! I'm Ryan.</h2>
+  <p>I'm a senior studying computer science and music at the beautiful
+    Santa Clara University. In my free time, I like to code, play drums, and hang
+    out with my dog Gus.</p>
+  <p>Feel free to <a href="http://linkedin.com/in/{{ site.linkedin_username }}" target="_blank">connect with my via LinkedIn</a>,
+    <a href="http://twitter.com/{{ site.twitter_username }}" target="_blank">follow me on Twitter</a>, or
+    <a href="http://github.com/{{ site.github_username }}" target="_blank">follow me on Github</a>.
+  </p>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
+  <div id="music">
+    <h1>Music</h1>
+    <ul class="post-list">
+      {% for post in site.posts %}
+        {% for tag in post.tags %}
+          {% if tag == 'music' %}
+          <li>
+            <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+            <h2>
+              <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+            </h2>
+          </li>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p> -->
 
 </div>
