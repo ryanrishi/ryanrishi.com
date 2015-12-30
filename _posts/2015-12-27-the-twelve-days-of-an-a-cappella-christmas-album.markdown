@@ -56,3 +56,4 @@ Thank you do Bill Hare, Jeff Hanson, and Dean-Austin Mayor for your help on the 
 Thanks for reading!
 
 ![Christmas in Claradise](/assets/img/christmas_in_claradise.png)
+{: style="text-align: center"}
