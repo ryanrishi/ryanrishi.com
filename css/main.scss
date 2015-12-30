@@ -56,3 +56,16 @@ $on-laptop:        800px;
   background-image: url('/assets/img/vwp.png');
 }
 
+#music {
+  // background-color: #64C284;
+  // color: black;
+}
+
+.post-list li {
+  align: left;
+}
+
+.footer {
+  max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
+  max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
+}
