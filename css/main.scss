@@ -70,7 +70,12 @@ body {
   align: left;
 }
 
-.footer {
-  max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
-  max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
+footer {
+  // max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
+  // max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
+  font:      400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.social-media-list {
+  float: right;
 }
