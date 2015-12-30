@@ -52,13 +52,18 @@ $on-laptop:        800px;
         "syntax-highlighting"
 ;
 
+// Ryan's CSS
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 .intro {
   background-image: url('/assets/img/vwp.png');
 }
 
-#music {
-  // background-color: #64C284;
-  // color: black;
+.content-section {
+  padding-top: 20px;
+  padding-bottom: 250px;
 }
 
 .post-list li {
