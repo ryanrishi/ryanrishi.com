@@ -55,5 +55,6 @@ Thank you do Bill Hare, Jeff Hanson, and Dean-Austin Mayor for your help on the 
 
 Thanks for reading!
 
-![Christmas in Claradise](/assets/img/christmas_in_claradise.png)
-{: style="text-align: center"}
+<div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
+  <iframe width="100%" height="450" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/239762077&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>
+</div>
