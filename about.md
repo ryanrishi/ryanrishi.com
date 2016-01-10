@@ -1,15 +1,10 @@
 ---
 layout: page
 title: About
-permalink: /about/
+permalink: /about
 ---
+![Ryan Rishi](/assets/img/face.png)
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+Hi there! I'm Ryan. I'm a senior studying computer science and music at the beautiful Santa Clara University. In my free time, I like to code, play drums, and hang out with my dog, Gus.
 
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jglovier" %} /
-[jekyll-new](https://github.com/jglovier/jekyll-new)
-
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+Feel free to [connect with my via LinkedIn](http://linkedin.com/in/{{ site.linkedin_username }}), [follow me on Twitter](http://twitter.com/{{ site.twitter_username }}), or [follow me on Github](http://github.com/{{ site.github_username }}).
