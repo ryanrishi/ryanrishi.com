@@ -2,42 +2,39 @@
 
   <div class="col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 
-    <h2 class="footer-heading">{{ site.title }}</h2>
+    <!-- <h2 class="footer-heading">{{ site.title }}</h2> -->
 
-      <div class="col-md-4 col-lg-4">
+      <div class="col-md-4 col-lg-4 col-sm-4">
         <ul class="contact-list">
           <li>{{ site.title }}</li>
           <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
         </ul>
       </div>
 
-      <div class="col-md-4 col-lg-4">
+      <div class="col-md-4 col-lg-4 col-sm-4 copyright">
         <p>&copy; Copyright {{ site.time | date: "%Y" }} Ryan Rishi. All rights reserved.</p>
       </div>
 
-      <div class="col-md-4 col-lg-4">
+      <div class="col-md-4 col-lg-4 col-sm-4">
         <ul class="social-media-list">
           {% if site.github_username %}
           <li>
             {% include icon-github.html username=site.github_username %}
           </li>
           {% endif %}
-
           {% if site.twitter_username %}
           <li>
             {% include icon-twitter.html username=site.twitter_username %}
           </li>
           {% endif %}
-
           {% if site.linkedin_username %}
           <li>
             {% include icon-linkedin.html username=site.linkedin_username %}
           </li>
           {% endif %}
-
         </ul>
       </div>
-      
+
   </div>
 </footer>
 
