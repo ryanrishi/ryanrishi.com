@@ -9,6 +9,6 @@ License
 The following directories and their contents are Copyright Ryan Rishi. You may
 not reuse anything therein without my permission:
 * _posts/
-* assets/
+* files/
 
 All other directories and files are MIT Licensed.
