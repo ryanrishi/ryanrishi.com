@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - 2.1
+install: gem install jekyll -v 2.4.0
+script: jekyll build
+
+deploy:
+  provider: s3
+  access_key_id: <encrypted access_key_id>
+  secret_access_key: <encrypted secret_access_key>
+  bucket: <bucket>
+  on:
+    branch: master
