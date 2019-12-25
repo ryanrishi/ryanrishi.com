@@ -1,7 +1,7 @@
 language: ruby
 rvm:
-  - 2.1
-install: gem install jekyll -v 2.4.0
+  - 2.3
+install: gem install jekyll
 script: jekyll build
 
 deploy:
