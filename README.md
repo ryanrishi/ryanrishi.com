@@ -5,6 +5,8 @@ Built using [Jekyll](http://jekyllrb.com/), [Bootstrap](http://getbootstrap.com)
 
 ### Building
 `bundle exec jekyll build`
+
+### Local Development
 `bundle exec jekyll serve`
 
 License
