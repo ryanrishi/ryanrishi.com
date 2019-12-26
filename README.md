@@ -1,8 +1,13 @@
-Ryan Rishi's Personal Website
-=======
+### website
 Repo for my personal website, [ryanrishi.com](http://ryanrishi.com).
 
 Built using [Jekyll](http://jekyllrb.com/), [Bootstrap](http://getbootstrap.com), and [Grayscale](http://startbootstrap.com/template-overviews/grayscale/).
+
+### Building
+`bundle exec jekyll build`
+
+### Local Development
+`bundle exec jekyll serve`
 
 License
 ===
