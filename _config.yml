@@ -10,8 +10,8 @@ title: Ryan Rishi
 email: ryan@ryanrishi.com
 description: > # this means to ignore newlines until "baseurl:"
   Ryan Rishi - drum guy, brogrammer
-baseurl: "/" # the subpath of your site, e.g. /blog
-url: "http://ryanrishi.com" # the base hostname & protocol for your site
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://ryanrishi.com" # the base hostname & protocol for your site
 twitter_username: ryanrishi
 github_username:  ryanrishi
 linkedin_username: ryanrishi
