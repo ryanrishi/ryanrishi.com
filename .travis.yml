@@ -4,7 +4,7 @@ cache:
   - pip
 install:
   - gem install jekyll
-  - pip install awscli
+  - pip install --user awscli
 script: jekyll build
 deploy:
   provider: s3
