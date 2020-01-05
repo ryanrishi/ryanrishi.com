@@ -158,10 +158,22 @@ after_deploy:
 
 You can see the full Travis CI configuration [here](https://github.com/ryanrishi/website/commit/fcc70801ece6d09b494f6026476213696eb59e65#diff-354f30a63fb0907d4ad57269548329e3).
 
+# Benchmark
+Moving from my own VPS in New York to a CDN shaved the load time from 1.2s to 200ms. Visitors in California used to have higher latency due to cross-country travel, but now that it is served via a CDN, geographic location plays a much smaller factor&mdash;the content will be served from the closest edge of the network topology.
+
+<figure class="image">
+  <img src="/assets/img/waterfall-vps.png" alt="Waterfall VPS" />
+  <figcaption>Waterfall when serving over VPS</figcaption>
+</figure>
+
+<figure class="image">
+  <img src="/assets/img/waterfall-cdn.png" alt="Waterfall CDN" />
+  <figcaption>Waterfall when serving over CDN</figcaption>
+</figure>
 
 # Next Steps
-I'm currently running `terraform apply` on my laptop, but I'd rather run that in a continuous integration pipeline.
+I'm currently running `terraform apply` on my laptop&mdash;I'd rather run that in a continuous integration pipeline.
 
-Using Terraform was challenging at first, but in the end it seems like the safest way to track infrastructure changes. I'd like to continue learning how to manage infrastructure using Terraform, including migrating some other VPSs to Kubernetes.
+Using Terraform was challenging at first, but in the end it seems like a great way to track infrastructure changes. I'd like to continue learning how to manage infrastructure using Terraform, including migrating some other VPSs to EC2/Kubernetes.
 
 You can see the final Terraform code [here](https://github.com/ryanrishi/devops/tree/f858d1448d5105df3a231c91fc60882b82d4d05a).
