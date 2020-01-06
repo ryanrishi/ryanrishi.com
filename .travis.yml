@@ -3,7 +3,6 @@ cache:
   - bundler
   - pip
 install:
-  - gem install jekyll
   - pip install --user awscli
 script: bundle exec jekyll build
 deploy:
