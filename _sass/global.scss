@@ -136,3 +136,8 @@ figure {
 figcaption {
   font-size: $fz / $type-scale / $type-scale;
 }
+
+.mt-0 {
+  // borrowed from https://getbootstrap.com/docs/4.0/utilities/spacing/
+  margin-top: 0;
+}
