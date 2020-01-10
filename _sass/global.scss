@@ -24,15 +24,15 @@ html {
 
 body {
   width: 100%;
-  max-width: calc(700px + (2 * #{$lh}));
+  max-width: calc(700px + (2 * #{$line-height}));
   margin: 0 auto;
-  padding: 0 $lh;
+  padding: 0 $line-height;
   background-color: #fff;
   color: $color-text;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: $fz;
-  line-height: $lh;
+  font-size: $font-size;
+  line-height: $line-height;
 
   // background-image: linear-gradient(rgba(50, 50, 50, .15) 1px, transparent 1px);
   // background-size: 100% 32px;
@@ -64,7 +64,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin-bottom: $lh;
+  margin-bottom: $line-height;
 }
 
 h1,
@@ -73,7 +73,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: $lh * 1.5;
+  margin-top: $line-height * 1.5;
   font-style: italic;
   font-weight: 900;
   text-decoration: none;
@@ -81,16 +81,16 @@ h6 {
 }
 
 h1 {
-  font-size: $fz * $type-scale * $type-scale * $type-scale;
-  line-height: $lh * 1.5;
+  font-size: $font-size * $type-scale * $type-scale * $type-scale;
+  line-height: $line-height * 1.5;
 }
 
 h2 {
-  font-size: $fz * $type-scale * $type-scale;
+  font-size: $font-size * $type-scale * $type-scale;
 }
 
 h3 {
-  font-size: $fz * $type-scale;
+  font-size: $font-size * $type-scale;
 }
 
 h4 {
@@ -98,28 +98,28 @@ h4 {
 }
 
 h5 {
-  font-size: $fz / $type-scale;
+  font-size: $font-size / $type-scale;
 }
 
 h6 {
-  font-size: $fz / $type-scale / $type-scale;
+  font-size: $font-size / $type-scale / $type-scale;
 }
 
 ul,
 ol {
-  margin: 0 0 $lh $lh;
+  margin: 0 0 $line-height $line-height;
 }
 
 hr {
   display: block;
-  height: $lh;
+  height: $line-height;
   border: 0;
   box-shadow: 0 1px 0 #eee;
 }
 
 blockquote {
-  margin-bottom: $lh;
-  padding: $lh;
+  margin-bottom: $line-height;
+  padding: $line-height;
   background: #f7f7f7;
   box-shadow: 0 0 0 1px #eee;
 }
@@ -130,11 +130,11 @@ blockquote p {
 }
 
 figure {
-  margin-bottom: $lh;
+  margin-bottom: $line-height;
 }
 
 figcaption {
-  font-size: $fz / $type-scale / $type-scale;
+  font-size: $font-size / $type-scale / $type-scale;
 }
 
 .mt-0 {

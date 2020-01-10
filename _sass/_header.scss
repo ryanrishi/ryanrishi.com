@@ -1,20 +1,20 @@
 .header {
   position: relative;
-  padding: ($lh * 3) 0;
+  padding: ($line-height * 3) 0;
 }
 
 .header-logo {
   margin: 0;
-  line-height: $lh;
+  line-height: $line-height;
   
   .header-link {
-    font-size: $fz * $type-scale;
+    font-size: $font-size * $type-scale;
   }
 }
 
 .header-link {
   color: $color-text;
-  font-size: $fz / $type-scale;
+  font-size: $font-size / $type-scale;
   font-style: italic;
   font-weight: 900;
   text-decoration: none;
@@ -33,5 +33,5 @@
 }
 
 .header-item {
-  margin-right: $lh / 4;
+  margin-right: $line-height / 4;
 }

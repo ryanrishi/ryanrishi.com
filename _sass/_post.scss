@@ -1,5 +1,5 @@
 .post {
-  margin-bottom: $lh * 3;
+  margin-bottom: $line-height * 3;
 }
 
 .post-title {
@@ -16,12 +16,12 @@
 }
 
 .post-meta {
-  margin-top: -$lh;
-  font-size: $fz / $type-scale;
+  margin-top: -$line-height;
+  font-size: $font-size / $type-scale;
 }
 
 .post-read-more {
-  font-size: $fz / $type-scale;
+  font-size: $font-size / $type-scale;
   font-style: italic;
   font-weight: 900;
   text-decoration: none;
