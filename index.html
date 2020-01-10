@@ -1,56 +1,10 @@
 ---
 layout: default
 ---
-<header class="intro">
-  <div class="intro-body">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <h1 class="brand-heading">Ryan Rishi</h1>
-          <p class="intro-text">Computer programmer // Drum aficionado</p>
-          <a href="#about" class="btn btn-circle page-scroll">
-            <i class="fa fa-angle-double-down animated"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
 
-
-<!-- About Section -->
-<section id="about" class="container content-section">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-          <img id="face" src="{{ "assets/img/face.png" | prepend: site.baseurl }}" alt="Ryan Rishi" style="height: 20em; width: auto"/>
-          <br>
-          <h1 class="text-center">About Ryan</h1>
-          <p>Hi there! I'm Ryan. I'm a software engineer and drummer living in the beautiful Bay Area. In my free time, I like to hike, code, play drums, and hang out with my dog Gus.</p>
-          <p>Feel free to <a href="http://linkedin.com/in/{{ site.linkedin_username }}" target="_blank">connect with me on LinkedIn</a>, <a href="http://twitter.com/{{ site.twitter_username }}" target="_blank">follow me on Twitter</a>, or <a href="http://github.com/{{ site.github_username }}" target="_blank">follow me on Github</a>.</p>
-        </div>
-    </div>
-</section>
-
-<section id="music" class="container content-section">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
-          <h1 class="text-center">Music</h1>
-          <ul class="post-list">
-            {% for post in site.posts %}
-              {% for tag in post.tags %}
-                {% if tag == 'music' %}
-                <li>
-                  <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-                  <h2>
-                    <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                  </h2>
-                </li>
-                {% endif %}
-              {% endfor %}
-            {% endfor %}
-          </ul>
-          <p>Feel free to also check out my <a href="http://soundcloud.com/{{ site.soundcloud_username }}" target="_blank">Soundcloud</a>.</p>
-        </div>
-    </div>
-</section>
-<!-- <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p> -->
+<p>
+  I'm a full-stack software engineer looking for opportunities to develop products serving a social good.
+  I started making websites in high school, and have since progressed through frontend development, backend development, and infrastructure.
+  Having a background in computer science and music, I enjoy playing in the intersection of the two.
+  I'm currently in the process of getting my private pilot license, and I am continually awestruck by California's beauty.
+</p>

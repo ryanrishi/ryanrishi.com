@@ -1,11 +1,30 @@
-nav .navbar {
-  background-color: black;
+.post {
+  margin-bottom: $line-height * 3;
 }
 
-.post {
-  margin-top: 50px;
+.post-title {
+  @extend .mt-0;
+}
 
-  .li {
-    font-size: 20px;
+.post-link {
+  color: $color-text;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-link;
   }
+}
+
+.post-meta {
+  margin-top: -$line-height;
+  font-size: $font-size / $type-scale;
+}
+
+.post-read-more {
+  font-size: $font-size / $type-scale;
+  font-style: italic;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: top;
 }
