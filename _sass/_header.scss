@@ -1,0 +1,37 @@
+.header {
+  position: relative;
+  padding: ($lh * 3) 0;
+}
+
+.header-logo {
+  margin: 0;
+  line-height: $lh;
+  
+  .header-link {
+    font-size: $fz * $type-scale;
+  }
+}
+
+.header-link {
+  color: $color-text;
+  font-size: $fz / $type-scale;
+  font-style: italic;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: top;
+
+  &:hover {
+    color: $color-link;
+  }
+}
+
+.header-nav {
+  display: flex;
+  margin: 0;
+  list-style: none;
+}
+
+.header-item {
+  margin-right: $lh / 4;
+}
