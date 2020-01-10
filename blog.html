@@ -9,14 +9,13 @@ layout: default
         <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
       </h2>
       <p class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</p>
-      
+
       <div class="post-preview">
         <p>
           {{ post.content | strip_html | truncatewords: 75 }}
         </p>
         <a class="post-read-more" href="{{ post.url }}">Read more &raquo;</a>
-      </div>      
+      </div>
     </div>
   {% endfor %}
 </div>
-
