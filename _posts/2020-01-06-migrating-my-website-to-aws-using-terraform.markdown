@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  Migrating My Website to AWS Using Terraform
-image:  /assets/img/terraform.svg
+image:  /assets/img/waterfall-cdn.png
 date:   2020-01-06
 tags:
   - terraform
