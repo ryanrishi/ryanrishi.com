@@ -130,7 +130,7 @@ resource "aws_route53_record" "www" {
 ```
 
 I can then get the AWS nameservers, which I can configure in Google Domains:
-<script src="https://asciinema.org/a/bJOwrCeOn5bgh6PprRU8ZNa1k.js" id="asciicast-bJOwrCeOn5bgh6PprRU8ZNa1k" async data-autoplay="true" data-loop="true" data-cols="480" data-rows="10"></script>
+<script src="https://asciinema.org/a/bJOwrCeOn5bgh6PprRU8ZNa1k.js" id="asciicast-bJOwrCeOn5bgh6PprRU8ZNa1k" async data-autoplay="true" data-loop="true" data-cols="96" data-rows="10"></script>
 
 # Deploying the Website
 The final step is to deploy the website to the S3 bucket. I use [Travis CI](https://travis-ci.org/) to build and deploy my code.
