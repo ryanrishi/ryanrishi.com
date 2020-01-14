@@ -24,8 +24,7 @@
 {% if page.image %}
   <meta property="og:image" content="{{ site.url }}{{ page.image }}">
 {% else %}
-  <!-- TODO use image that exists -->
-  <meta property="og:image" content="/img/logo-high-resolution.png">
+  <meta property="og:image" content="{{ site.url }}/assets/img/face.png">
 {% endif %}
 {% if page.categories %}
   {% for category in page.categories limit:1 %}
