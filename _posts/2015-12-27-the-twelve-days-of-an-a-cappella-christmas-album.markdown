@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "The Twelve Days of an A Cappella Christmas Album"
+title:  The Twelve Days of an A Cappella Christmas Album
 date:   2015-12-26 17:56:07 -0700
-thumb:  /assets/img/christmas_in_claradise.png
+image:  /assets/img/christmas_in_claradise.png
 tags:
   - music
   - a cappella
