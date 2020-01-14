@@ -1,10 +1,16 @@
 ---
-layout: post
-title:  Migrating My Website to AWS Using Terraform
-image:  /assets/img/waterfall-cdn.png
-date:   2020-01-06
+layout:       post
+title:        Migrating My Website to AWS Using Terraform
+description:  I recently migrated my personal website infrastructure from a VPS to AWS S3 + CloudFront, with infrastructure managed by Terraform.
+image:        /assets/img/waterfall-cdn.png
+date:         2020-01-06
 tags:
   - terraform
+  - aws
+  - cloudfront
+  - s3
+  - jekylll
+  - travis
 ---
 
 I recently migrated my personal website hosting from a [DigitalOcean VPS](https://www.digitalocean.com/products/droplets/) to [Amazon AWS S3 + CloudFront](https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/). As part of this, I wanted to use [Terraform](https://www.terraform.io/) to manage infrastructure-as-code.
