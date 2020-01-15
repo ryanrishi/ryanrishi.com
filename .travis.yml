@@ -9,20 +9,34 @@ install:
   - bundle install
   - pip install --user awscli
 script: bundle exec jekyll build
-deploy:
-  provider: s3
-  skip_cleanup: true
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: $S3_BUCKET
-  local-dir: _site
-  acl: public_read
-  on:
-    repo: ryanrishi/website
-    branch: master
+jobs:
+  include:
+    - stage: "Stage Deploy"
+      deploy:
+        proviider: s3
+        skip_cleanup: true
+        access_key_id: $AWS_ACCESS_KEY
+        secret_access_key: $AWS_SECRET_ACCESS_KEY
+        bucket: stage.ryanrishi.com
+        local-dir: _site
+        acl: public_read
+        on:
+          repo: ryanrishi/website
+          branch: staging
+# deploy:
+#   provider: s3
+#   skip_cleanup: true
+#   access_key_id: $AWS_ACCESS_KEY_ID
+#   secret_access_key: $AWS_SECRET_ACCESS_KEY
+#   bucket: $S3_BUCKET
+#   local-dir: _site
+#   acl: public_read
+#   on:
+#     repo: ryanrishi/website
+#     branch: master
 after_deploy:
-  - aws configure set preview.cloudfront true
-  - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+  # - aws configure set preview.cloudfront true
+  # - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
 env:
   global:
     - secure: 4QC8D+Nl9NJXZDeueKX7oMlfBHvlUiuphqZyJGGxpwNhY0zqByi7pbyNQwZH1FYDcIic6b3WBjPyGJjH0S2mlWJZLZcfgx6PCNHHJ7N1p1eRceGUKkLk45YdYVsECdnrZujc4nWzPEJYLpaYqA76nztuG05cXrX8tPjtE5S51VlDjBi+fW7pws/vTLBwbKuGxmRFBg0BAYpT0z7BdKZ0juUEspxpiPNxI1//N8qFSaT+TosMXcDwMBcPI3R+oIUic2VM0bZBoU2wjvoy0V/ONbHV2IuyyTt8jSbLNKyPlgI2k+gYH25MB+QyHRBimAE2QDswiQpdk/C+dDoqQdmZynLtTIVz5qlkehcienUSom4jnYZcciR/+Ovf75LgP0gWSpDj75h6faJuamEQS2pLFs7WuD2PcU9YHlhhhavKSp0u/DIwkJGz/tm5HZZ8ILR+bm67aBTWsiDlXOunPCRxcSD0J5UXAWfH1BkbPdEcfR3k0Bohq2/hLssEqrUrwfhTf2wATM5yZFKCAugF2ag0vtyzg15K1ObhQbAY/ujfmXSNLQJCMYqGD0NkSjYVldHXkrPsUFBtOHP+xA3SPtaarekJFwQKS8+h/5zrvvdZ0fEmQaVZ9bNoTAQWu6fpiDhppF2bdwW6vw1tKi2TUpRG6+fKNEqN8hyBC9pkxyyH2QU=
