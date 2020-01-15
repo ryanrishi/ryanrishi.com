@@ -13,33 +13,39 @@ jobs:
   include:
     - stage: "Stage Deploy"
       deploy:
-        proviider: s3
+        provider: s3
         skip_cleanup: true
         access_key_id: $AWS_ACCESS_KEY
         secret_access_key: $AWS_SECRET_ACCESS_KEY
-        bucket: stage.ryanrishi.com
+        bucket: $STAGE_S3_BUCKET
         local-dir: _site
         acl: public_read
         on:
           repo: ryanrishi/website
           branch: staging
-# deploy:
-#   provider: s3
-#   skip_cleanup: true
-#   access_key_id: $AWS_ACCESS_KEY_ID
-#   secret_access_key: $AWS_SECRET_ACCESS_KEY
-#   bucket: $S3_BUCKET
-#   local-dir: _site
-#   acl: public_read
-#   on:
-#     repo: ryanrishi/website
-#     branch: master
-after_deploy:
-  # - aws configure set preview.cloudfront true
-  # - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+      after_deploy:
+        - aws configure set preview.cloudfront true
+        - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_STAGE_DISTRIBUTION_ID --paths "/*"
+  - stage: "Production Deploy"
+    deploy:
+      provider: s3
+      skip_cleanup: true
+      access_key_id: $AWS_ACCESS_KEY_ID
+      secret_access_key: $AWS_SECRET_ACCESS_KEY
+      bucket: $S3_BUCKET
+      local-dir: _site
+      acl: public_read
+      on:
+        repo: ryanrishi/website
+        branch: master
+    after_deploy:
+      - aws configure set preview.cloudfront true
+      - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
 env:
   global:
     - secure: 4QC8D+Nl9NJXZDeueKX7oMlfBHvlUiuphqZyJGGxpwNhY0zqByi7pbyNQwZH1FYDcIic6b3WBjPyGJjH0S2mlWJZLZcfgx6PCNHHJ7N1p1eRceGUKkLk45YdYVsECdnrZujc4nWzPEJYLpaYqA76nztuG05cXrX8tPjtE5S51VlDjBi+fW7pws/vTLBwbKuGxmRFBg0BAYpT0z7BdKZ0juUEspxpiPNxI1//N8qFSaT+TosMXcDwMBcPI3R+oIUic2VM0bZBoU2wjvoy0V/ONbHV2IuyyTt8jSbLNKyPlgI2k+gYH25MB+QyHRBimAE2QDswiQpdk/C+dDoqQdmZynLtTIVz5qlkehcienUSom4jnYZcciR/+Ovf75LgP0gWSpDj75h6faJuamEQS2pLFs7WuD2PcU9YHlhhhavKSp0u/DIwkJGz/tm5HZZ8ILR+bm67aBTWsiDlXOunPCRxcSD0J5UXAWfH1BkbPdEcfR3k0Bohq2/hLssEqrUrwfhTf2wATM5yZFKCAugF2ag0vtyzg15K1ObhQbAY/ujfmXSNLQJCMYqGD0NkSjYVldHXkrPsUFBtOHP+xA3SPtaarekJFwQKS8+h/5zrvvdZ0fEmQaVZ9bNoTAQWu6fpiDhppF2bdwW6vw1tKi2TUpRG6+fKNEqN8hyBC9pkxyyH2QU=
     - secure: 63MoA6u0EzZBxSRlb7oDOv2DVLtHl+WCHDFtLvO2o+3/FSQbkEEVkNplfCaLUKQkaRt7wDDWF6blWNIXMofJ8wyzx1wb/BhIDfBu6eLS4dxGBOjjN02iNts8vAXmwuIEPGpftOZrOeJSW4Z4i0KDyRRymnh2IUn6+D18pYFdn5NoRKwfh0lvh2aBgIx1khdRcOH5WIwe03Li9NWSTNEvhrgLaj1btRkt7bRrmRJJd/xmwrGZo08yu70Wpzds44lyLkCpHwEFk9QqhumbPajA5rZcHzLLJNULjSYqTLxGxoc8Wz8i018UnSX7zgzU3nVB+2qtxFcw2JeIGfplY2hbrF0omZwl8f6P+xwJX+juCL+whgC7IYHsUzvizr7wZ/6GsXCCTmhEMLKTWHgAxn7MLa21H0LPrU8F9lMSF3Sr0vRfGSagZzLpuVYEotQcF0ChZuV7vmKhp08mLHdYalMrXHaNYxx7r5uHDG8VYez2jkVqitPz5UVci8+/ILiterCH0N8NEAFeT5TCs8Z8zyy8GJtzfRlIq2MquZQfYEFoz3cWsFyk6egi+i37qsa+nDbnnvwpKrkYXsCoo4K7LbHCWVh+lmlGAaaOawVPEoW64KyWlLTzpPKlNBgXNBDMk65tmLC+ELNq2IRCqC1G0tdYPvLNELUUBGjsRjwjL3ZVHDo=
+    - secure: 9EGjghd9wstVthnTNDH7zCNryQ3FGgS1iLRq4Yz2i0C1ck+JL9jDV/PiT5k2t1ygwOkxugT0Pvmuut6JRxV8D1lt7up/Nd2IlQkVhCPMBgxBPzvI33ml5SV4kC4LMnhqS5KfU9N4V3399ylXZAgtdh9sVQ2R9SjYuZyvOuIfKhG7691W/tXdFXa5XyYchnFv+gll2WSmYXx6QE/Zpj8DpowEIpQpVelaEqJPi9Gd7PB+BzAfmjnMThad0/emJKCDOknyL9PuZjaO4KHYHzSS23daj7EELGXKXLaAaDyxE2E+WDG5OJQeVjjgPqOs457Hj0DnsIu81uAhwW5LgpTp3NMNgNWOB/ZokPrC7BlBlz5yNTm2QacpbxExfge7j2119GbzsRhjqfaLrWZ6cuxRAmzbzxQG4ixxCxMX+9qWsPDi64EnyQKr9WNEibwqmRCw/sxDnCWB74kE8T9eod0AdIx7gprqBn6TxExA97lZHID/vDV0MAACF03jV4BjESwFiQFmKC83yINveOdR2EyWk80/4AXYI7f0zyJihbXUzfF+68ekbpvyXFcKl9JpV/o1LIjPBjcQn7SLGDQZzODvTF5NU8L7aYYLEDDUhmBM9KcF7bhT+Scb5YfADa6O54YSvwheD0YSTc2JSF+nmadBmSSPphU0mOGMSQQmk/xuzhw=
+    - secure: FJC8mbIzMCzvaILqrK/JlLxT2gbDTooe26KRAroPWfp7/9twRlxuf6HUO7vPIwlNNKYGcXZ9rgol2kXansdqX3yjJfIG0DswVlWtB8JDZooxc/WnJnYUzDb0uZxsFywM9kqKiZRZy/F0ZjlNExn6Yd12vp/gwFA/hi5xWXN+gjIox/5pa/sfIA0RVQY9pp3bT8n2H/6V7hrffehNiNBUzZ9DAooogDEOX3wUZ0KAc+Z9kBUJbpQJudU8NjoqWXlxelP01jpkMu788vljDGv8b3VybD0b6dKwz5fZfT/jeZ6pDJyQsx84X26jOOBvTzN9j0VzY8vxEVTKFamZ/ZF0jdOu8T5lRsUIt+6vXn18/v1ko08Dskz9l1WWoysbE9NCCcPqBcPjstCRapkKU+iFJ7jPbw8xOgr7t22t6wOljvl/doIHPcEnaVbviKXhHw2whuVrfCDOVHHQzMeVwXymKIvQtb2GGe+uYd2+15cUz7EFYkyNPfm9oP/uS78MF/fhvCO8n0Up+NqYpYLfnJT1Gb7p5WfmGfzDANqPcbXWc/na35TV8ilCaYAgScTP19cbwaqc0BIc2kXECUzmVatGm84LZTp4wUPZJzFUzmGWyy3gl/APjw2w1rkpn4ylrcVpZZh+wYgvOL6Z57QBI38HEAGfmmkJR/QYGc4tA9hPTD0=
     - secure: Z7Vrds92qnre7nNvzmqedwPqcvTxNqNzaDX1bIg3GI3sIeJN5uqDTuybG1xAqhFUr/Xl9bcCRcOq7pthihSWpCBFNcqTVjYOFwbreTX29HI7ILzFRQAtsh5BG0hxMUgIH72nwcDcxNe0WXThH9Rewfwdqy/Nzyv1Rw6Uxpi/uIuaaXHGOXQvnBJ0usVU1XkxowOS1vP9ESZkQY8g6nzihnr+Rhl7sCs84iOVjIQFP0kUyue8jtgXf1P3Q7vFhKONE6MfbSNswbJaKn9OjUasbVrAO+58vrm+fagXdMdGafsL9WL5gHdVLmB6RAApv3M4cBxKicBrlmjL/aT3TZGdH38Ske4tIF95i1yQxxDN/aP+q5belikJ7u/EFKjTSqKgYauwG/AT54TFiAVxzUFw/6sHr+asM5pe9C0ew8ibAKRvoe20tWQj9kShrBp+bBM6ucXVl0SkVx0ITYoKlRwUfP8Zhr8VXATqGzpsVLnu4HxlZaj3pk94j8dCiZxuu2QcU0JzX1KhF+5b1e/D6InYg602u1ig96BbDQ0xW7+QRehNYK/7kaoPbW/mlVKBgpMrmbtFJeCUHp7ncAcSO/uIOguaNUrysLe+bD1rRTTGw4yMp+OlfEjtcfU357qgg20ta0zLxT0GyNEE9xUQbv+wA0AyzomZ34njg4u3fsjoqvs=
     - secure: vzQs4VWzoa7OxRa6Fu8KsQU8hgO20KK5Suyh3LcFij9cvzbbYPu7qtfgkkiLQGgSKfj5YBIaSfAwgLxxf51/0RVC+p0X8AwPKD4Vrr/gtCGCWcB4YcQQR1rE0DFSDO1K/cGOFFcghN1nnWSdywAtVl0TCfuKVQjyuD4EO6scJauRyw7QflvkD01I3o6XtRYuJTyKBw8FC/xmGQm2SnZ7X9WPpqK6HQVcmERv0M+B0wRJ7O5gCJVScnBjY0YaX9F5qR8VzASG8GS1vKsqqKFg6BJ48UhXTltQ292fQknP813ppluaAnaCwaGHgJUC5+k24X4y6WO8NKXnuK1WAt6wvwDtoqSVuweTHKpCbwkplGTOIdjxNhfAsm+/MZ1H+LpvSmTspVa/+3cSZ3SjUd8y+0Ui71wvY8kzNN2++zK/79ldDbuBCx0SAbBm1OiacZatjCiM/LOs8BUfw6ZfETcmeshBRdfkIXHymuXnKW2zgSRmyPEbkqzqQxfYCAA4ZymZRjg/sAeB7rIcpJpI4SgIHjdXVmLtrp84gFRITPjgT+an3hLMPc+Sitrcia9h76SzjQch19SKxX0IWQC4KvGhqQb3FkgVOuCu3lC4H9zlU/LSEUb7Idh5L4HzSTB8DCCp7HjsVw8tt2nIMmdmolWAn8SAuFvtunAA6CyB32NVFow=
