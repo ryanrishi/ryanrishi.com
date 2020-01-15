@@ -2,6 +2,7 @@ language: ruby
 branches:
   only:
     - master
+    - staging
 cache:
   - bundler
   - pip
