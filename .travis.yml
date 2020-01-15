@@ -27,6 +27,8 @@ jobs:
         - secure: 0Jp0cCGsDmJ//2tnAFGCW5aXgLQIC/YxMzRTtmDapo9Z3q5rX7ourJMaHL6RpwSScU7Pz0FaeU2ppmG/npmKPdslNTo7yHWCr/uWG9QPo3j8e3jl5hkd3a8Eyu3DulCNMB+91q66dXMZ6QNwF8s281oRHBMPjUBX6S/m2aG/s4Di+7hR2PTFxmATqJhn83wXRxPDU3dYjEJFfnJPjwoBcsTrI40HZnvwrjsiIf/WlJ2zXW9IYUoC/q5D8yswEjZMdodFqFMJBKVGb5SKqRUuB9B72ZTXkH8HFaUyIWfaOhU/9sGqr5Qkpeu9eAqTo1fuCSvqlzBEejAROib7iDr9OcevldIVSw+cGjNmyce3+tNjb3mEv8YAw04LlgS4HSXFUpxgL/SmzHQ8XI3PncGBez4vM128tzL+8gSA4sRorBmsyj8G4gnKYzbKzp7ZIajh+dRW+vY3YcOllsWoqI9O7BWyQN6AZ4Y5Ci5JtJIN8IY3bu5IMSzW0v5AZ55r71HeTbkYFseupvfM3LfssJpq081bPvZ01rpnKA0Ay8rG1MY0e5EcN6I2BiYcxgTdg44hVUsxVdvk3+jg+AsNPpdZBL5bpeSkG/IJwbQZ+0yy9AidfIf+Eh9nRFo4qc8Danyd6Cy8zDPXqiNLXghs81XTinJIv9tRgu3sVj+rF8MHmNI=
       deploy:
         <<: *_deploy_provider
+        on:
+          branch: staging
       after_deploy:
         - aws configure set preview.cloudfront true
         - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
@@ -36,15 +38,11 @@ jobs:
         - secure: vzQs4VWzoa7OxRa6Fu8KsQU8hgO20KK5Suyh3LcFij9cvzbbYPu7qtfgkkiLQGgSKfj5YBIaSfAwgLxxf51/0RVC+p0X8AwPKD4Vrr/gtCGCWcB4YcQQR1rE0DFSDO1K/cGOFFcghN1nnWSdywAtVl0TCfuKVQjyuD4EO6scJauRyw7QflvkD01I3o6XtRYuJTyKBw8FC/xmGQm2SnZ7X9WPpqK6HQVcmERv0M+B0wRJ7O5gCJVScnBjY0YaX9F5qR8VzASG8GS1vKsqqKFg6BJ48UhXTltQ292fQknP813ppluaAnaCwaGHgJUC5+k24X4y6WO8NKXnuK1WAt6wvwDtoqSVuweTHKpCbwkplGTOIdjxNhfAsm+/MZ1H+LpvSmTspVa/+3cSZ3SjUd8y+0Ui71wvY8kzNN2++zK/79ldDbuBCx0SAbBm1OiacZatjCiM/LOs8BUfw6ZfETcmeshBRdfkIXHymuXnKW2zgSRmyPEbkqzqQxfYCAA4ZymZRjg/sAeB7rIcpJpI4SgIHjdXVmLtrp84gFRITPjgT+an3hLMPc+Sitrcia9h76SzjQch19SKxX0IWQC4KvGhqQb3FkgVOuCu3lC4H9zlU/LSEUb7Idh5L4HzSTB8DCCp7HjsVw8tt2nIMmdmolWAn8SAuFvtunAA6CyB32NVFow=
       deploy:
         <<: *_deploy_provider
+        on:
+          branch: master
       after_deploy:
         - aws configure set preview.cloudfront true
         - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
-
-stages:
-  - name: stage-deploy
-    if: type = push AND branch = staging
-  - name: production-deploy
-    if: type = push AND branch = master
 
 env:
   global:
