@@ -11,7 +11,7 @@ install:
 script: bundle exec jekyll build
 jobs:
   include:
-    - stage: "Stage Deploy"
+    - stage: stage-deploy
       deploy:
         provider: s3
         access_key_id: $AWS_ACCESS_KEY
@@ -19,13 +19,10 @@ jobs:
         bucket: $STAGE_S3_BUCKET
         local-dir: _site
         acl: public_read
-        on:
-          repo: ryanrishi/website
-          branch: staging
       after_deploy:
         - aws configure set preview.cloudfront true
         - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_STAGE_DISTRIBUTION_ID --paths "/*"
-    - stage: "Production Deploy"
+    - stage: production-deploy
       deploy:
         provider: s3
         access_key_id: $AWS_ACCESS_KEY_ID
@@ -33,12 +30,14 @@ jobs:
         bucket: $S3_BUCKET
         local-dir: _site
         acl: public_read
-        on:
-          repo: ryanrishi/website
-          branch: master
       after_deploy:
         - aws configure set preview.cloudfront true
         - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+stages:
+  - name: stage-deploy
+    if: type = push AND branch = staging
+  - name: production-deploy
+    if: type = push AND branch = master
 env:
   global:
     - secure: 4QC8D+Nl9NJXZDeueKX7oMlfBHvlUiuphqZyJGGxpwNhY0zqByi7pbyNQwZH1FYDcIic6b3WBjPyGJjH0S2mlWJZLZcfgx6PCNHHJ7N1p1eRceGUKkLk45YdYVsECdnrZujc4nWzPEJYLpaYqA76nztuG05cXrX8tPjtE5S51VlDjBi+fW7pws/vTLBwbKuGxmRFBg0BAYpT0z7BdKZ0juUEspxpiPNxI1//N8qFSaT+TosMXcDwMBcPI3R+oIUic2VM0bZBoU2wjvoy0V/ONbHV2IuyyTt8jSbLNKyPlgI2k+gYH25MB+QyHRBimAE2QDswiQpdk/C+dDoqQdmZynLtTIVz5qlkehcienUSom4jnYZcciR/+Ovf75LgP0gWSpDj75h6faJuamEQS2pLFs7WuD2PcU9YHlhhhavKSp0u/DIwkJGz/tm5HZZ8ILR+bm67aBTWsiDlXOunPCRxcSD0J5UXAWfH1BkbPdEcfR3k0Bohq2/hLssEqrUrwfhTf2wATM5yZFKCAugF2ag0vtyzg15K1ObhQbAY/ujfmXSNLQJCMYqGD0NkSjYVldHXkrPsUFBtOHP+xA3SPtaarekJFwQKS8+h/5zrvvdZ0fEmQaVZ9bNoTAQWu6fpiDhppF2bdwW6vw1tKi2TUpRG6+fKNEqN8hyBC9pkxyyH2QU=
