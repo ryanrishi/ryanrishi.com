@@ -9,5 +9,5 @@ public/
 vendor/
 
 # Ignore built webpack bundle
-src/assets/javascript/main.js
+src/assets/javascript
 node_modules
