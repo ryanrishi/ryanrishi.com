@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/ryanrishi/website/issues"
   },
-  "homepage": "https://github.com/ryanrishi/website#readme"
+  "homepage": "https://github.com/ryanrishi/website#readme",
+  "devDependencies": {
+    "babel-core": "~6.26.3",
+    "babel-loader": "~8.0.6",
+    "babel-preset-env": "~1.7.0",
+    "webpack": "~4.41.5"
+  }
 }
