@@ -19,3 +19,5 @@ site_image: /assets/img/ryan-lattice.jpg
 
 # Build settings
 markdown: kramdown
+source: src
+destination: public
