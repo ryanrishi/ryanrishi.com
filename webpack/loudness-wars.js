@@ -1,34 +1,18 @@
 import * as d3 from 'd3';
 
-d3.csv('/files/loudness-wars.csv', (row) => {
-  // TODO use d3.csvParse / d3.csvParseRow
-  return {
-    year: +row.Year,
-    position: +row.Position,
-    title: row["Song Title"],
-    artist: row.Artist,
-    loudness: +row.Loudness
-  }
-}).then((data) => {
-  // draw
-}).catch((error) => {
-  console.error(error);
-});
-
-
-var margin = {
+const margin = {
   top: 20,
   right: 20,
   bottom: 30,
   left: 40
 };
 
-var $chart = document.querySelector('#chart');
+const $chart = document.querySelector('#chart');
 
-var width = $chart.offsetWidth - margin.left - margin.right;
-var height = 800 - margin.top - margin.bottom;
+const width = $chart.offsetWidth - margin.left - margin.right;
+const height = 800 - margin.top - margin.bottom;
 
-var chart = d3.select('#chart');
+const chart = d3.select('#chart');
 
 var svg = chart.append('svg')
   .attr('width', width + margin.left + margin.right)
@@ -42,20 +26,20 @@ var y = d3.scaleLinear();
 var xAxis = d3.axisBottom().scale(x);
 var yAxis = d3.axisLeft().scale(y);
 
-d3.csv("/files/loudness-wars.csv", function(data) {
+d3.csv("/files/loudness-wars.csv", function(row) {
   return {
-    artist: data['Artist'],
-    song: data['Song Title'],
-    rank: data['Position'],
-    loudness: data['Loudness'],
-    year: data['Year'],
-    releaseDate: new Date(data['Year'], 0, 1)  // just use year
+    artist: row.Artist,
+    song: row['Song Title'],
+    rank: +row.Position,
+    loudness: +row.Loudness,
+    year: +row.Year,
   };
 }).then(function(data) {
   // get rid of 0s / undefined
   data = data.filter(song => song.loudness);
 
-  x.domain(d3.extent([new Date(1950, 0, 1), new Date(2015, 0, 1)]))
+  let years = data.map(r => r.year);
+  x.domain(d3.extent([Math.min(...years), Math.max(...years)]))
    .range([0, width])
    .nice();
 
@@ -126,7 +110,7 @@ d3.csv("/files/loudness-wars.csv", function(data) {
       .append('circle')
       .attr('class', 'song')
       .attr('r', 3.5)
-      .attr('cx', d => x(d.releaseDate))
+      .attr('cx', d => x(d.year))
       .attr('cy', d => y(d.loudness))
       .on('mouseover', onMouseover)
       .on('mouseout', onMouseout);
