@@ -1,9 +1,11 @@
 const path = require('path');
 
 module.exports = {
-  entry: './webpack/index.js',
+  entry: {
+    'loudness-wars': './webpack/loudness-wars.js'
+  },
   output: {
     path: path.resolve(__dirname, 'src/assets/javascript/'),
-    filename: 'main.js'
+    filename: '[name].js'
   }
 };
