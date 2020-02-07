@@ -1,0 +1,19 @@
+{
+  "name": "ryanrishi-com",
+  "version": "1.0.0",
+  "description": "Repo for my personal website, [ryanrishi.com](https://ryanrishi.com).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanrishi/website.git"
+  },
+  "author": "Ryan Rishi <ryan@ryanrishi.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryanrishi/website/issues"
+  },
+  "homepage": "https://github.com/ryanrishi/website#readme"
+}
