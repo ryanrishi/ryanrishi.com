@@ -42,7 +42,7 @@ var y = d3.scaleLinear();
 var xAxis = d3.axisBottom().scale(x);
 var yAxis = d3.axisLeft().scale(y);
 
-d3.csv("{{ "/files/loudness-wars.csv" | prepend: site.baseurl }}", function(data) {
+d3.csv("/files/loudness-wars.csv", function(data) {
   return {
     artist: data['Artist'],
     song: data['Song Title'],
