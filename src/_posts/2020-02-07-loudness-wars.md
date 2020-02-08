@@ -1,6 +1,12 @@
 ---
 layout: post
-title: "Loudness Wars"
+title:  Loudness Wars
+description:  TBD
+image:        /assets/img/tbd.png
+date:         2020-02-06
+tags:
+  - music
+  - d3
 ---
 
 <style>
