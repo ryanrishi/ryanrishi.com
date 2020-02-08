@@ -9,10 +9,10 @@ cache:
   - pip
 install:
   - bundle install
+  - npm install
   - pip install --user awscli
-script: bundle exec jekyll build
-
-_deploy_provider: &_deploy_provider
+script: npm run-script build
+deploy:
   provider: s3
   skip_cleanup: true
   access_key_id: $AWS_ACCESS_KEY_ID
@@ -41,10 +41,10 @@ jobs:
       deploy:
         <<: *_deploy_provider
         on:
-          branch: master
-      after_deploy:
-        - aws configure set preview.cloudfront true
-        - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+    branch: master
+after_deploy:
+  - aws configure set preview.cloudfront true
+  - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
 
 env:
   global:
