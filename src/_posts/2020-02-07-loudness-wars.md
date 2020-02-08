@@ -15,5 +15,7 @@ title: "Loudness Wars"
 
 
 ### Resources
-- http://teropa.info/blog/2016/08/30/amplitude-and-loudness.html
-- https://artists.spotify.com/faq/mastering-and-loudness#how-does-spotify-calculate-loudness
+Want to learn more? Here are some more resources I found helpful in learning about the loudness wars.
+- [Dynamic Range Day - What is the Loudness Wars?](https://dynamicrangeday.co.uk/about/)
+- [Learn Web Audio from the Ground Up, Part 3: Controlling Amplitude and Loudness](https://teropa.info/blog/2016/08/30/amplitude-and-loudness.html)
+- [How Does Spotify Calculate Loudness?](https://artists.spotify.com/faq/mastering-and-loudness#how-does-spotify-calculate-loudness)
