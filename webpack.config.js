@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+  watch: true,
   entry: {
     'loudness-wars': './webpack/loudness-wars.js'
   },
