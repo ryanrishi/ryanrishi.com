@@ -4,7 +4,7 @@
   "description": "Repo for my personal website, [ryanrishi.com](https://ryanrishi.com).",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently -c green,cyan \"webpack-dev-server\" \"bundle exec jekyll serve\"",
+    "start": "concurrently -c green,cyan \"webpack\" \"bundle exec jekyll serve\"",
     "build": "webpack && bundle exec jekyll build"
   },
   "repository": {
