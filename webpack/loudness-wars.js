@@ -26,7 +26,7 @@ var y = d3.scaleLinear();
 var xAxis = d3.axisBottom().scale(x);
 var yAxis = d3.axisLeft().scale(y);
 
-d3.csv("/files/loudness-wars.csv", function(row) {
+d3.csv('/files/loudness-wars.csv', function(row) {
   return {
     artist: row.Artist,
     song: row['Song Title'],
