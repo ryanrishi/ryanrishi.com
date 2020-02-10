@@ -33,6 +33,10 @@ body {
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: $font-size;
   line-height: $line-height;
+
+  &.max-width-1200 {
+    max-width: calc(1200px + (2 * #{$line-height}));
+  }
 }
 
 img {

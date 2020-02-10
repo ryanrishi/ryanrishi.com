@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-max-width-1200
 title:  Loudness Wars
 description:  TBD
 image:        /assets/img/tbd.png
