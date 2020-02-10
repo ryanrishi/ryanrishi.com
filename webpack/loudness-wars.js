@@ -14,17 +14,17 @@ const height = 800 - margin.top - margin.bottom;
 
 const chart = d3.select('#chart');
 
-var svg = chart.append('svg')
+const svg = chart.append('svg')
   .attr('width', width + margin.left + margin.right)
   .attr('height', height + margin.top + margin.bottom)
   .append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-var x = d3.scaleTime();
-var y = d3.scaleLinear();
+const x = d3.scaleTime();
+const y = d3.scaleLinear();
 
-var xAxis = d3.axisBottom().scale(x);
-var yAxis = d3.axisLeft().scale(y);
+const xAxis = d3.axisBottom().scale(x).ticks(d3.timeYear.every(5));
+const yAxis = d3.axisLeft().scale(y);
 
 d3.csv('/files/loudness-wars.csv', function(row) {
   return {
@@ -33,13 +33,14 @@ d3.csv('/files/loudness-wars.csv', function(row) {
     rank: +row.Position,
     loudness: +row.Loudness,
     year: +row.Year,
+    releaseDate: new Date(+row.Year, 0, 1) // not the actual release date, just a Date with the year
   };
 }).then(function(data) {
   // get rid of 0s / undefined
   data = data.filter(song => song.loudness);
 
-  let years = data.map(r => r.year);
-  x.domain(d3.extent([Math.min(...years), Math.max(...years)]))
+  const years = data.map(r => r.year);
+  x.domain(d3.extent([new Date(Math.min(...years), 0, 1), new Date(Math.max(...years), 0, 1)]))
    .range([0, width])
    .nice();
 
@@ -110,7 +111,7 @@ d3.csv('/files/loudness-wars.csv', function(row) {
       .append('circle')
       .attr('class', 'song')
       .attr('r', 3.5)
-      .attr('cx', d => x(d.year))
+      .attr('cx', d => x(d.releaseDate))
       .attr('cy', d => y(d.loudness))
       .on('mouseover', onMouseover)
       .on('mouseout', onMouseout);
