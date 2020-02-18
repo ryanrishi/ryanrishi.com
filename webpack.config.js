@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   watch: true,
+  mode: process.env.NODE_ENV,
   entry: {
     'loudness-wars': './webpack/loudness-wars.js'
   },
