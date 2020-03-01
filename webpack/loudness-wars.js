@@ -4,7 +4,7 @@ const margin = {
   top: 20,
   right: 20,
   bottom: 20,
-  left: 20
+  left: 25
 };
 
 const $chart = document.querySelector('#chart');
@@ -47,8 +47,8 @@ const draw = (data) => {
     .attr('transform', `translate(0, ${height})`)
     .call(xAxis)
   .append('text')
-    .attr('stroke', '#000')
-    .attr('x', width - margin.right)
+    .attr('fill', '#000')
+    .attr('x', width - margin.left)
     .attr('y', -2)
     .text('Year');
 
