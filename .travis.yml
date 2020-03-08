@@ -13,6 +13,7 @@ script: bundle exec jekyll build
 
 _deploy_provider: &_deploy_provider
   provider: s3
+  skip_cleanup: true
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: $S3_BUCKET
