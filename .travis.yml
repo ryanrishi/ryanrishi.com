@@ -2,6 +2,7 @@ language: ruby
 branches:
   only:
     - master
+    - staging
 cache:
   - bundler
   - pip
@@ -9,7 +10,8 @@ install:
   - bundle install
   - pip install --user awscli
 script: bundle exec jekyll build
-deploy:
+
+_deploy_provider: &_deploy_provider
   provider: s3
   skip_cleanup: true
   access_key_id: $AWS_ACCESS_KEY_ID
@@ -17,15 +19,33 @@ deploy:
   bucket: $S3_BUCKET
   local-dir: _site
   acl: public_read
-  on:
-    repo: ryanrishi/website
-    branch: master
-after_deploy:
-  - aws configure set preview.cloudfront true
-  - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+
+jobs:
+  include:
+    - stage: "Stage Deploy"
+      env:
+        - secure: 8o2qddUbAGB/43vNSZCWWDftArTrnIJtFXvNNcvs0586GiIj7NnNGx+pHw2gNG/9+PowtnNCsMC63NpuBS51b8qzpIG0HFKWWMZ2wRg5uicweMaEDlWAUPwEQ4I2EqnWUKLSOjBJxQ5c1PHAfF6wL/BxYpr4uF9/nkt53gDjynB6UizEeIdZz7YXBMunKJMpk1LPjL1pFa7Ea1SjVgrjThMSiSw8/213tYiy2vOcr4TqZC3zzuy3Kb/XyFMpLYcFXzM6lxcimiC9OaQlFLeI3uvyBi01pUdkcNLU3KclB44VmXMAz3tTjR2yjvlT+v9uXWKHNVrEgmwvpgf+KDhaGQMwkNbkwEcCbaij540NFomlUP81zS4TEWweof4Mu7gNP1u/hhkMiOc/riaMKQXUCR2EYn5PijEs50YtpFzdtrkQRYP+INhwD4GsiPtGFgMIqx/aQWa0/BSBuj5v77kuQlqG0dKXkCa9drHU4SC9EwVaBaoHP/F28/yl42uIKSFjWeWuvlnvPkVDktTG1irFRNY5lJVDPInmKYFsTif6BzvmlqR2q1ALwSWRCEtKWsfPnIgZJ5TzdKq4rmgH8JJ3qUaiYTirACjq4BBmmaIni6d7Os5UH9/gTAcwCs/7tSyQlQV2Y/ww3eH/fcig4/Usjr39V9Y4X9/RjYwfG/AMUXU=
+        - secure: 0Jp0cCGsDmJ//2tnAFGCW5aXgLQIC/YxMzRTtmDapo9Z3q5rX7ourJMaHL6RpwSScU7Pz0FaeU2ppmG/npmKPdslNTo7yHWCr/uWG9QPo3j8e3jl5hkd3a8Eyu3DulCNMB+91q66dXMZ6QNwF8s281oRHBMPjUBX6S/m2aG/s4Di+7hR2PTFxmATqJhn83wXRxPDU3dYjEJFfnJPjwoBcsTrI40HZnvwrjsiIf/WlJ2zXW9IYUoC/q5D8yswEjZMdodFqFMJBKVGb5SKqRUuB9B72ZTXkH8HFaUyIWfaOhU/9sGqr5Qkpeu9eAqTo1fuCSvqlzBEejAROib7iDr9OcevldIVSw+cGjNmyce3+tNjb3mEv8YAw04LlgS4HSXFUpxgL/SmzHQ8XI3PncGBez4vM128tzL+8gSA4sRorBmsyj8G4gnKYzbKzp7ZIajh+dRW+vY3YcOllsWoqI9O7BWyQN6AZ4Y5Ci5JtJIN8IY3bu5IMSzW0v5AZ55r71HeTbkYFseupvfM3LfssJpq081bPvZ01rpnKA0Ay8rG1MY0e5EcN6I2BiYcxgTdg44hVUsxVdvk3+jg+AsNPpdZBL5bpeSkG/IJwbQZ+0yy9AidfIf+Eh9nRFo4qc8Danyd6Cy8zDPXqiNLXghs81XTinJIv9tRgu3sVj+rF8MHmNI=
+      deploy:
+        <<: *_deploy_provider
+        on:
+          branch: staging
+      after_deploy:
+        - aws configure set preview.cloudfront true
+        - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+    - stage: "Production Deploy"
+      env:
+        - secure: Z7Vrds92qnre7nNvzmqedwPqcvTxNqNzaDX1bIg3GI3sIeJN5uqDTuybG1xAqhFUr/Xl9bcCRcOq7pthihSWpCBFNcqTVjYOFwbreTX29HI7ILzFRQAtsh5BG0hxMUgIH72nwcDcxNe0WXThH9Rewfwdqy/Nzyv1Rw6Uxpi/uIuaaXHGOXQvnBJ0usVU1XkxowOS1vP9ESZkQY8g6nzihnr+Rhl7sCs84iOVjIQFP0kUyue8jtgXf1P3Q7vFhKONE6MfbSNswbJaKn9OjUasbVrAO+58vrm+fagXdMdGafsL9WL5gHdVLmB6RAApv3M4cBxKicBrlmjL/aT3TZGdH38Ske4tIF95i1yQxxDN/aP+q5belikJ7u/EFKjTSqKgYauwG/AT54TFiAVxzUFw/6sHr+asM5pe9C0ew8ibAKRvoe20tWQj9kShrBp+bBM6ucXVl0SkVx0ITYoKlRwUfP8Zhr8VXATqGzpsVLnu4HxlZaj3pk94j8dCiZxuu2QcU0JzX1KhF+5b1e/D6InYg602u1ig96BbDQ0xW7+QRehNYK/7kaoPbW/mlVKBgpMrmbtFJeCUHp7ncAcSO/uIOguaNUrysLe+bD1rRTTGw4yMp+OlfEjtcfU357qgg20ta0zLxT0GyNEE9xUQbv+wA0AyzomZ34njg4u3fsjoqvs=
+        - secure: vzQs4VWzoa7OxRa6Fu8KsQU8hgO20KK5Suyh3LcFij9cvzbbYPu7qtfgkkiLQGgSKfj5YBIaSfAwgLxxf51/0RVC+p0X8AwPKD4Vrr/gtCGCWcB4YcQQR1rE0DFSDO1K/cGOFFcghN1nnWSdywAtVl0TCfuKVQjyuD4EO6scJauRyw7QflvkD01I3o6XtRYuJTyKBw8FC/xmGQm2SnZ7X9WPpqK6HQVcmERv0M+B0wRJ7O5gCJVScnBjY0YaX9F5qR8VzASG8GS1vKsqqKFg6BJ48UhXTltQ292fQknP813ppluaAnaCwaGHgJUC5+k24X4y6WO8NKXnuK1WAt6wvwDtoqSVuweTHKpCbwkplGTOIdjxNhfAsm+/MZ1H+LpvSmTspVa/+3cSZ3SjUd8y+0Ui71wvY8kzNN2++zK/79ldDbuBCx0SAbBm1OiacZatjCiM/LOs8BUfw6ZfETcmeshBRdfkIXHymuXnKW2zgSRmyPEbkqzqQxfYCAA4ZymZRjg/sAeB7rIcpJpI4SgIHjdXVmLtrp84gFRITPjgT+an3hLMPc+Sitrcia9h76SzjQch19SKxX0IWQC4KvGhqQb3FkgVOuCu3lC4H9zlU/LSEUb7Idh5L4HzSTB8DCCp7HjsVw8tt2nIMmdmolWAn8SAuFvtunAA6CyB32NVFow=
+      deploy:
+        <<: *_deploy_provider
+        on:
+          branch: master
+      after_deploy:
+        - aws configure set preview.cloudfront true
+        - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+
 env:
   global:
     - secure: 4QC8D+Nl9NJXZDeueKX7oMlfBHvlUiuphqZyJGGxpwNhY0zqByi7pbyNQwZH1FYDcIic6b3WBjPyGJjH0S2mlWJZLZcfgx6PCNHHJ7N1p1eRceGUKkLk45YdYVsECdnrZujc4nWzPEJYLpaYqA76nztuG05cXrX8tPjtE5S51VlDjBi+fW7pws/vTLBwbKuGxmRFBg0BAYpT0z7BdKZ0juUEspxpiPNxI1//N8qFSaT+TosMXcDwMBcPI3R+oIUic2VM0bZBoU2wjvoy0V/ONbHV2IuyyTt8jSbLNKyPlgI2k+gYH25MB+QyHRBimAE2QDswiQpdk/C+dDoqQdmZynLtTIVz5qlkehcienUSom4jnYZcciR/+Ovf75LgP0gWSpDj75h6faJuamEQS2pLFs7WuD2PcU9YHlhhhavKSp0u/DIwkJGz/tm5HZZ8ILR+bm67aBTWsiDlXOunPCRxcSD0J5UXAWfH1BkbPdEcfR3k0Bohq2/hLssEqrUrwfhTf2wATM5yZFKCAugF2ag0vtyzg15K1ObhQbAY/ujfmXSNLQJCMYqGD0NkSjYVldHXkrPsUFBtOHP+xA3SPtaarekJFwQKS8+h/5zrvvdZ0fEmQaVZ9bNoTAQWu6fpiDhppF2bdwW6vw1tKi2TUpRG6+fKNEqN8hyBC9pkxyyH2QU=
     - secure: 63MoA6u0EzZBxSRlb7oDOv2DVLtHl+WCHDFtLvO2o+3/FSQbkEEVkNplfCaLUKQkaRt7wDDWF6blWNIXMofJ8wyzx1wb/BhIDfBu6eLS4dxGBOjjN02iNts8vAXmwuIEPGpftOZrOeJSW4Z4i0KDyRRymnh2IUn6+D18pYFdn5NoRKwfh0lvh2aBgIx1khdRcOH5WIwe03Li9NWSTNEvhrgLaj1btRkt7bRrmRJJd/xmwrGZo08yu70Wpzds44lyLkCpHwEFk9QqhumbPajA5rZcHzLLJNULjSYqTLxGxoc8Wz8i018UnSX7zgzU3nVB+2qtxFcw2JeIGfplY2hbrF0omZwl8f6P+xwJX+juCL+whgC7IYHsUzvizr7wZ/6GsXCCTmhEMLKTWHgAxn7MLa21H0LPrU8F9lMSF3Sr0vRfGSagZzLpuVYEotQcF0ChZuV7vmKhp08mLHdYalMrXHaNYxx7r5uHDG8VYez2jkVqitPz5UVci8+/ILiterCH0N8NEAFeT5TCs8Z8zyy8GJtzfRlIq2MquZQfYEFoz3cWsFyk6egi+i37qsa+nDbnnvwpKrkYXsCoo4K7LbHCWVh+lmlGAaaOawVPEoW64KyWlLTzpPKlNBgXNBDMk65tmLC+ELNq2IRCqC1G0tdYPvLNELUUBGjsRjwjL3ZVHDo=
-    - secure: Z7Vrds92qnre7nNvzmqedwPqcvTxNqNzaDX1bIg3GI3sIeJN5uqDTuybG1xAqhFUr/Xl9bcCRcOq7pthihSWpCBFNcqTVjYOFwbreTX29HI7ILzFRQAtsh5BG0hxMUgIH72nwcDcxNe0WXThH9Rewfwdqy/Nzyv1Rw6Uxpi/uIuaaXHGOXQvnBJ0usVU1XkxowOS1vP9ESZkQY8g6nzihnr+Rhl7sCs84iOVjIQFP0kUyue8jtgXf1P3Q7vFhKONE6MfbSNswbJaKn9OjUasbVrAO+58vrm+fagXdMdGafsL9WL5gHdVLmB6RAApv3M4cBxKicBrlmjL/aT3TZGdH38Ske4tIF95i1yQxxDN/aP+q5belikJ7u/EFKjTSqKgYauwG/AT54TFiAVxzUFw/6sHr+asM5pe9C0ew8ibAKRvoe20tWQj9kShrBp+bBM6ucXVl0SkVx0ITYoKlRwUfP8Zhr8VXATqGzpsVLnu4HxlZaj3pk94j8dCiZxuu2QcU0JzX1KhF+5b1e/D6InYg602u1ig96BbDQ0xW7+QRehNYK/7kaoPbW/mlVKBgpMrmbtFJeCUHp7ncAcSO/uIOguaNUrysLe+bD1rRTTGw4yMp+OlfEjtcfU357qgg20ta0zLxT0GyNEE9xUQbv+wA0AyzomZ34njg4u3fsjoqvs=
-    - secure: vzQs4VWzoa7OxRa6Fu8KsQU8hgO20KK5Suyh3LcFij9cvzbbYPu7qtfgkkiLQGgSKfj5YBIaSfAwgLxxf51/0RVC+p0X8AwPKD4Vrr/gtCGCWcB4YcQQR1rE0DFSDO1K/cGOFFcghN1nnWSdywAtVl0TCfuKVQjyuD4EO6scJauRyw7QflvkD01I3o6XtRYuJTyKBw8FC/xmGQm2SnZ7X9WPpqK6HQVcmERv0M+B0wRJ7O5gCJVScnBjY0YaX9F5qR8VzASG8GS1vKsqqKFg6BJ48UhXTltQ292fQknP813ppluaAnaCwaGHgJUC5+k24X4y6WO8NKXnuK1WAt6wvwDtoqSVuweTHKpCbwkplGTOIdjxNhfAsm+/MZ1H+LpvSmTspVa/+3cSZ3SjUd8y+0Ui71wvY8kzNN2++zK/79ldDbuBCx0SAbBm1OiacZatjCiM/LOs8BUfw6ZfETcmeshBRdfkIXHymuXnKW2zgSRmyPEbkqzqQxfYCAA4ZymZRjg/sAeB7rIcpJpI4SgIHjdXVmLtrp84gFRITPjgT+an3hLMPc+Sitrcia9h76SzjQch19SKxX0IWQC4KvGhqQb3FkgVOuCu3lC4H9zlU/LSEUb7Idh5L4HzSTB8DCCp7HjsVw8tt2nIMmdmolWAn8SAuFvtunAA6CyB32NVFow=
