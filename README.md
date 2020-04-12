@@ -1,7 +1,7 @@
 ### website
-Repo for my personal website, [ryanrishi.com](http://ryanrishi.com).
+Repo for my personal website, [ryanrishi.com](https://ryanrishi.com).
 
-Built using [Jekyll](http://jekyllrb.com/), [Bootstrap](http://getbootstrap.com), and [Grayscale](http://startbootstrap.com/template-overviews/grayscale/).
+Built using [Jekyll](https://jekyllrb.com/).
 
 ### Building
 `bundle exec jekyll build`
@@ -11,8 +11,7 @@ Built using [Jekyll](http://jekyllrb.com/), [Bootstrap](http://getbootstrap.com)
 
 License
 ===
-The following directories and their contents are Copyright Ryan Rishi. You may
-not reuse anything therein without my permission:
+The following directories and their contents are Copyright Ryan Rishi. You may not reuse anything therein without my permission:
 * _posts/
 * files/
 

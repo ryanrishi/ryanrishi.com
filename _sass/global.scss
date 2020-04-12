@@ -112,13 +112,13 @@ hr {
   height: $line-height;
   border: 0;
   box-shadow: 0 1px 0 #eee;
+  margin-bottom: $line-height;
 }
 
 blockquote {
   margin-bottom: $line-height;
   padding: $line-height;
-  background: #f7f7f7;
-  box-shadow: 0 0 0 1px #eee;
+  border-left: .3rem solid #ddd;
 }
 
 blockquote p {
