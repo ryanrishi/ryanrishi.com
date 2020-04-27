@@ -4,7 +4,8 @@ module.exports = {
   watch: true,
   mode: process.env.NODE_ENV,
   entry: {
-    'loudness-wars': './webpack/loudness-wars.js'
+    'loudness-wars': './webpack/loudness-wars.js',
+    'covid-19': './webpack/covid-19.js'
   },
   output: {
     path: path.resolve(__dirname, 'src/assets/javascript/'),
