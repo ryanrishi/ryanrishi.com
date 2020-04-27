@@ -1,7 +1,7 @@
 ---
 title:  COVID-19
 permalink:  /projects/covid-19/
-layout: default
+layout: default-max-width-1200
 ---
 
 <div id="map"></div>
