@@ -6,10 +6,12 @@ mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbnJpc2hpIiwiYSI6ImNqZjl6dnJmZTB6OHk0YXFoZ
 const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/dark-v10',
-  bounds: [[-179.1,-14.6],[179.8,71.4]],
-  // center: [ -98.5795, 39.8283],
-  zoom: 2
+  center: [ -98.5795, 39.8283],
+  zoom: 4
 });
+
+
+map.fitBounds([[-171.791110603, 18.91619], [-66.96466, 71.3577635769]]);
 
 let usCountyData;
 const fetchUsCountyData = () => {
