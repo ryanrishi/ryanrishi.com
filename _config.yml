@@ -23,6 +23,10 @@ source: src
 destination: public
 exclude: ['node_modules']
 
+collections:
+  projects:
+    output: true
+
 assets:
   sources:
     - assets/css
