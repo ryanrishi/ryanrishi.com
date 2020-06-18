@@ -92,9 +92,7 @@ $ terraform workspace select production</code>
 
 
 ## Edit Terraform state file
-The next step is to get the Terraform state file. Your mileage may vary depending on which [Terraform backend](https://www.terraform.io/docs/backends/index.html) you're using.
-
-In my case, I use the S3 backend, so I need to copy the production state file so I can edit it:
+The next step is to get the Terraform state file. Your mileage may vary depending on which [Terraform backend](https://www.terraform.io/docs/backends/index.html) you're using. In my case, I use the S3 backend, so I need to copy the production state file so I can edit it:
 <pre><code class="shell">$ aws s3 cp s3://terraform/env:/production/terraform.tfstate production.tfstate</code>
 </pre>
 
@@ -156,7 +154,7 @@ actions need to be performed.</code>
 </pre>
 
 # Conclusion
-That's it! Even though importing the AWS key pair didn't import the public key, we can manipulate the Terraform state to include the public key so that the resource is not re-created.
+That's it! Even though importing the AWS key pair didn't import the public key, we can manipulate the Terraform state to include the public key so that the resource is not recreated.
 
 While I went with the above solution for my use case, there are other solutions to this problem:
 - set up each Terraform workspace to use different AWS accounts
