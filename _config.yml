@@ -19,6 +19,8 @@ site_image: /assets/img/ryan-lattice.jpg
 
 # Build settings
 markdown: kramdown
+syntax_highlighter: false
+
 source: src
 destination: public
 exclude: ['node_modules']

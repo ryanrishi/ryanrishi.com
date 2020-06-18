@@ -5,7 +5,10 @@ pre {
 code {
   display: inline-block;
   line-height: $line-height / 1.5;
-  padding: $line-height / 3;
-  white-space: pre-wrap;
   word-wrap: break-word;
+
+  &.highlighter-rouge {
+    background-color: #f7f7f5;
+    color: #c66;
+  }
 }

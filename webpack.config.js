@@ -5,7 +5,8 @@ module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
     'loudness-wars': './webpack/loudness-wars.js',
-    'covid-19': './webpack/covid-19.js'
+    'covid-19': './webpack/covid-19.js',
+    'base': './webpack/base/index.js'
   },
   output: {
     path: path.resolve(__dirname, 'src/assets/javascript/'),
@@ -19,7 +20,11 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         }
-      }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ]
   }
 };
