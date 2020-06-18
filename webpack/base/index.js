@@ -1,1 +1,2 @@
+import './analytics';
 import './highlight';
