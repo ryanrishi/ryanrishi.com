@@ -4,8 +4,8 @@
   "description": "Repo for my personal website, [ryanrishi.com](https://ryanrishi.com).",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development concurrently -c green,cyan \"webpack\" \"bundle exec jekyll serve\"",
-    "build": "NODE_ENV=production webpack && bundle exec jekyll build",
+    "start": "NODE_ENV=development concurrently -c green,cyan \"webpack --config webpack.dev.js\" \"bundle exec jekyll serve -D\"",
+    "build": "NODE_ENV=production webpack --config webpack.production.js && bundle exec jekyll build",
     "test": "eslint webpack"
   },
   "repository": {
@@ -31,6 +31,7 @@
     "mapbox-gl": "~1.9.1",
     "style-loader": "~1.2.1",
     "webpack": "~4.41.5",
-    "webpack-cli": "~3.3.10"
+    "webpack-cli": "~3.3.10",
+    "webpack-merge": "~4.2.2"
   }
 }
