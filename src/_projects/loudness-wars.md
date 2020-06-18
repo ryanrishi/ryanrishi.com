@@ -1,9 +1,7 @@
 ---
-layout: post-max-width-1200
-title:  Loudness Wars
-description:  TBD
-image:        /assets/img/tbd.png
-date:         2020-02-06
+title:      Loudness Wars
+permalink:  /projects/loudness-wars/
+date:       2020-02-06
 tags:
   - music
   - d3
