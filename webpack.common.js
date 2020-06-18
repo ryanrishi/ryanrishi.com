@@ -1,16 +1,10 @@
 const path = require('path');
 
 module.exports = {
-  watch: true,
-  mode: process.env.NODE_ENV,
   entry: {
     'loudness-wars': './webpack/loudness-wars.js',
     'covid-19': './webpack/covid-19.js',
     'base': './webpack/base/index.js'
-  },
-  output: {
-    path: path.resolve(__dirname, 'src/assets/javascript/'),
-    filename: '[name].js'
   },
   module: {
     rules: [
@@ -26,5 +20,9 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
     ]
+  },
+  output: {
+    path: path.resolve(__dirname, 'src/assets/javascript/'),
+    filename: '[name].js'
   }
 };
