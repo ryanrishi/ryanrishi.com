@@ -2,8 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    'base': './webpack/base/index.js',
-    'covid-19': './webpack/covid-19.js'
+    'base': './webpack/base/index.js'
   },
   module: {
     rules: [
