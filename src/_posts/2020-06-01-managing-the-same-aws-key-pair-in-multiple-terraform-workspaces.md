@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Managing the same AWS Key Pair in Multiple Terraform workspaces
+title:  Managing the same AWS Key Pair in Multiple Terraform Workspaces
 blurb:  Importing key pairs into a Terraform workspace can lead to some unexpected results. This post outlines the problem and provides a solution by manipulating the Terraform state.
 date:   2020-06-01
 tags:
