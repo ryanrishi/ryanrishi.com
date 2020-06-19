@@ -2,9 +2,8 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    'loudness-wars': './webpack/loudness-wars.js',
-    'covid-19': './webpack/covid-19.js',
-    'base': './webpack/base/index.js'
+    'base': './webpack/base/index.js',
+    'covid-19': './webpack/covid-19.js'
   },
   module: {
     rules: [
