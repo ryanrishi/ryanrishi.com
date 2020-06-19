@@ -5,8 +5,9 @@ branches:
     - master
     - staging
 cache:
-  - bundler
-  - pip
+  bundler: true
+  pip: true
+  npm: true
 install:
   - bundle install
   - npm install
