@@ -25,8 +25,7 @@ I had played with Terraform a few months ago, and wanted to try it out in a real
 The generated static site needs to be stored somewhere. S3 is an object storage service designed with 99.999999999% (11 9’s) of data durability and relatively cheap prices.
 
 The Terraform code blow creates a S3 bucket that allows anyone to read objects from the bucket:
-```terraform
-resource "aws_s3_bucket" "www" {
+<pre><code class="terraform">resource "aws_s3_bucket" "www" {
   bucket = var.www_domain_name
   acl    = "public-read"
   policy = <<POLICY
@@ -48,23 +47,21 @@ POLICY
     index_document = "index.html"
     error_document = "404.html"
   }
-}
-```
+}</code>
+</pre>
 
 ## ACM Certificate
 To serve my website over HTTPS, I need a TLS certificate for my domain. [AWS ACM](https://aws.amazon.com/certificate-manager/) provides free public TLS certificates.
-```terraform
-resource "aws_acm_certificate" "certificate" {
+<pre><code class="terraform">resource "aws_acm_certificate" "certificate" {
   domain_name               = "*.${var.root_domain_name}"
   validation_method         = "EMAIL"
   subject_alternative_names = [var.www_domain_name]
-}
-```
+}</code>
+</pre>
 
 ## CloudFront CDN
 A CDN caches content at the edges of a network, which helps reduce load on the origin server and reduce and latency due to geographic location. When somebody visits my website, the CDN checks if has the file they are requesting, and if not, will fetch it from the S3 bucket.
-```terraform
-resource "aws_cloudfront_distribution" "www_distribution" {
+<pre><code class="terraform">resource "aws_cloudfront_distribution" "www_distribution" {
   origin {
     domain_name = aws_s3_bucket.www.website_endpoint
     origin_id   = var.www_domain_name
@@ -111,14 +108,12 @@ resource "aws_cloudfront_distribution" "www_distribution" {
     acm_certificate_arn = aws_acm_certificate.certificate.arn
     ssl_support_method  = "sni-only"
   }
-}
-
-```
+}</code>
+</pre>
 
 ## Domain Name
 I use [Google Domains](https://domains.google/) as my DNS provider. In order to route traffic from `www.ryanrishi.com` to the CloudFront distribution, I created a [AWS Route 53](https://aws.amazon.com/route53/) zone and record:
-```terraform
-resource "aws_route53_zone" "zone" {
+<pre><code class="terraform">resource "aws_route53_zone" "zone" {
   name = var.root_domain_name
 }
 
@@ -132,18 +127,33 @@ resource "aws_route53_record" "www" {
     zone_id                = aws_cloudfront_distribution.www_distribution.hosted_zone_id
     evaluate_target_health = false
   }
-}
-```
+}</code>
+</pre>
 
-I can then get the AWS nameservers, which I can configure in Google Domains:
-<script src="https://asciinema.org/a/bJOwrCeOn5bgh6PprRU8ZNa1k.js" id="asciicast-bJOwrCeOn5bgh6PprRU8ZNa1k" async data-autoplay="true" data-loop="true" data-cols="96" data-rows="10"></script>
+While DNS propagates, I can get the AWS nameservers from the Terraform state so I can configure Google Domains:
+<pre><code class="shell">$ terraform state show aws_route53_zone.zone
+# aws_route53_zone.zone:
+resource "aws_route53_zone" "zone" {
+    comment       = "Managed by Terraform"
+    force_destroy = false
+    id            = "Z1ETY..."
+    name          = "ryanrishi.com."
+    name_servers  = [
+        "ns-1188.awsdns-20.org",
+        "ns-161.awsdns-20.com",
+        "ns-1993.awsdns-57.co.uk",
+        "ns-689.awsdns-22.net",
+    ]
+    tags          = {}
+    zone_id       = "Z1ETYGU6SICX40"
+}
+</code></pre>
 
 # Deploying the Website
 The final step is to deploy the website to the S3 bucket. I use [Travis CI](https://travis-ci.org/) to build and deploy my code.
 
 This snippet of code will deploy to the preconfigured S3 bucket whenever a change is pushed to my `master` branch:
-```yaml
-deploy:
+<pre><code class="yaml">deploy:
   provider: s3
   skip_cleanup: true
   access_key_id: $AWS_ACCESS_KEY_ID
@@ -153,15 +163,14 @@ deploy:
   acl: public_read
   on:
     repo: ryanrishi/website
-    branch: master
-```
+    branch: master</code>
+</pre>
 
 After deploying, I want to invalidate the CloudFront cache. If I skipped this step, changes to my website may not show up for 24 hours because the `default_ttl` for the CloudFront distribution is set to 86400 seconds.
-```yaml
-after_deploy:
+<pre><code class="yaml">after_deploy:
   - aws configure set preview.cloudfront true
-  - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
-```
+  - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"</code>
+</pre>
 
 You can see the full Travis CI configuration [here](https://github.com/ryanrishi/website/commit/fcc70801ece6d09b494f6026476213696eb59e65#diff-354f30a63fb0907d4ad57269548329e3).
 
