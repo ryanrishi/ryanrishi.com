@@ -11,14 +11,15 @@ install:
   - bundle install
   - npm install
   - pip install --user awscli
-script: npm test && npm run-script build
-deploy:
+script: npm test && npm run build
+
+_deploy_provider: &_deploy_provider
   provider: s3
   skip_cleanup: true
   access_key_id: $AWS_ACCESS_KEY_ID
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: $S3_BUCKET
-  local-dir: public
+  local_dir: public
   acl: public_read
 
 jobs:
@@ -41,10 +42,10 @@ jobs:
       deploy:
         <<: *_deploy_provider
         on:
-    branch: master
-after_deploy:
-  - aws configure set preview.cloudfront true
-  - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+          branch: master
+      after_deploy:
+        - aws configure set preview.cloudfront true
+        - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
 
 env:
   global:
