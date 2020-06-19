@@ -9,6 +9,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
+  ignorePatterns: ['webpack/base/analytics.js'],
   rules: {
     'linebreak-style': [
       'error',
