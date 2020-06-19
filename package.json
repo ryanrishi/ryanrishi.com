@@ -1,0 +1,37 @@
+{
+  "name": "ryanrishi-com",
+  "version": "1.0.0",
+  "description": "Repo for my personal website, ryanrishi.com",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development concurrently -c green,cyan \"webpack --config webpack.dev.js\" \"bundle exec jekyll serve -D\"",
+    "build": "NODE_ENV=production webpack --config webpack.production.js && bundle exec jekyll build",
+    "test": "eslint webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanrishi/website.git"
+  },
+  "author": "Ryan Rishi <ryan@ryanrishi.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryanrishi/website/issues"
+  },
+  "homepage": "https://github.com/ryanrishi/website#readme",
+  "devDependencies": {
+    "@babel/core": "~7.8.4",
+    "babel-core": "~6.26.3",
+    "babel-loader": "~8.0.6",
+    "babel-preset-env": "~1.7.0",
+    "concurrently": "~5.1.0",
+    "css-loader": "~3.6.0",
+    "d3": "~5.15.0",
+    "eslint": "~6.8.0",
+    "highlight.js": "~10.1.1",
+    "mapbox-gl": "~1.9.1",
+    "style-loader": "~1.2.1",
+    "webpack": "~4.41.5",
+    "webpack-cli": "~3.3.10",
+    "webpack-merge": "~4.2.2"
+  }
+}
