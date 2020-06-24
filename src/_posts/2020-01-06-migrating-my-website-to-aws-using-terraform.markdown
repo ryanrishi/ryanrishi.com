@@ -47,8 +47,7 @@ POLICY
     index_document = "index.html"
     error_document = "404.html"
   }
-}</code>
-</pre>
+}</code></pre>
 
 ## ACM Certificate
 To serve my website over HTTPS, I need a TLS certificate for my domain. [AWS ACM](https://aws.amazon.com/certificate-manager/) provides free public TLS certificates.
@@ -56,8 +55,7 @@ To serve my website over HTTPS, I need a TLS certificate for my domain. [AWS ACM
   domain_name               = "*.${var.root_domain_name}"
   validation_method         = "EMAIL"
   subject_alternative_names = [var.www_domain_name]
-}</code>
-</pre>
+}</code></pre>
 
 ## CloudFront CDN
 A CDN caches content at the edges of a network, which helps reduce load on the origin server and reduce and latency due to geographic location. When somebody visits my website, the CDN checks if has the file they are requesting, and if not, will fetch it from the S3 bucket.
@@ -108,8 +106,7 @@ A CDN caches content at the edges of a network, which helps reduce load on the o
     acm_certificate_arn = aws_acm_certificate.certificate.arn
     ssl_support_method  = "sni-only"
   }
-}</code>
-</pre>
+}</code></pre>
 
 ## Domain Name
 I use [Google Domains](https://domains.google/) as my DNS provider. In order to route traffic from `www.ryanrishi.com` to the CloudFront distribution, I created a [AWS Route 53](https://aws.amazon.com/route53/) zone and record:
@@ -127,8 +124,7 @@ resource "aws_route53_record" "www" {
     zone_id                = aws_cloudfront_distribution.www_distribution.hosted_zone_id
     evaluate_target_health = false
   }
-}</code>
-</pre>
+}</code></pre>
 
 While DNS propagates, I can get the AWS nameservers from the Terraform state so I can configure Google Domains:
 <pre><code class="shell">$ terraform state show aws_route53_zone.zone
@@ -163,14 +159,12 @@ This snippet of code will deploy to the preconfigured S3 bucket whenever a chang
   acl: public_read
   on:
     repo: ryanrishi/website
-    branch: master</code>
-</pre>
+    branch: master</code></pre>
 
 After deploying, I want to invalidate the CloudFront cache. If I skipped this step, changes to my website may not show up for 24 hours because the `default_ttl` for the CloudFront distribution is set to 86400 seconds.
 <pre><code class="yaml">after_deploy:
   - aws configure set preview.cloudfront true
-  - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"</code>
-</pre>
+  - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"</code></pre>
 
 You can see the full Travis CI configuration [here](https://github.com/ryanrishi/website/commit/fcc70801ece6d09b494f6026476213696eb59e65#diff-354f30a63fb0907d4ad57269548329e3).
 

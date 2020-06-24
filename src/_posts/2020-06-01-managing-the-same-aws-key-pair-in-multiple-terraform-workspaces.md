@@ -19,8 +19,7 @@ Consider the following Terraform block in the `staging` workspace:
 resource "aws_instance" "web" {
   key_name = aws_key_pair.key_pair.key_name
   # rest of definition
-}</code>
-</pre>
+}</code></pre>
 
 
 If you want to use the same key pair in the `production` workspace, you might switch workspaces and import the key pair:
@@ -35,8 +34,7 @@ aws_key_pair.key_pair: Refreshing state... [id=ryan]
 Import successful!
 
 The resources that were imported are shown above. These resources are now in
-your Terraform state and will henceforth be managed by Terraform.</code>
-</pre>
+your Terraform state and will henceforth be managed by Terraform.</code></pre>
 
 This will import the key pair, but there is a problem&mdash;running `terraform plan` in the `production` workspace shows that the key pair will be recreated:
 <pre><code class="terraform"># aws_key_pair.key_pair must be replaced
@@ -47,12 +45,11 @@ This will import the key pair, but there is a problem&mdash;running `terraform p
       ~ key_pair_id = "key-0ef79e456a8daa98a" -> (known after apply)
       + public_key  = "ssh-rsa AAAAB...." # forces replacement
       - tags        = {} -> null
-    }</code>
-</pre>
+}</code></pre>
 
 Notice the "forces replacement" next to the `public_key`. Running `terraform import` imported the key pair but _not_ the `public_key` for the key pair&mdash;this is because the [AWS API does not expose the public key](https://github.com/terraform-providers/terraform-provider-aws/issues/1092).
 
-We can confirm that the Terraform state does not have the public key by running `terraform show`:
+We can confirm that the Terraform state does not have the public key by running `terraform state show`:
 <pre><code class="shell">$ terraform state show aws_key_pair.key_pair
 # aws_key_pair.key_pair:
 resource "aws_key_pair" "key_pair" {
@@ -61,18 +58,15 @@ resource "aws_key_pair" "key_pair" {
     key_name    = "ryan"
     key_pair_id = "key-0ef79e456a8daa98a"
     tags        = {}
-}</code>
-</pre>
+}</code></pre>
 
 
 # The Solution
 We’re going to update `terraform.tfstate` to include public key. I *do not* recommend this approach if you’re using Terraform as a team, as editing the Terraform state file by hand can lead to unexpected behaviors if a change to the infrastructure is made while you’re doing this.
 
 <pre><code class="shell">$ terraform workspace show
-staging</code>
-</pre>
-
-<pre><code class="shell"># get the public key
+staging
+# get the public key
 $ terraform state show aws_key_pair.key_pair
 # aws_key_pair.key_pair:
 resource "aws_key_pair" "key_pair" {
@@ -82,20 +76,16 @@ resource "aws_key_pair" "key_pair" {
     key_pair_id = "key-0ef79e456a8daa98a"
     public_key  = "ssh-rsa AAAAB...."
     tags        = {}
-}</code>
-</pre>
-
+}</code></pre>
 
 Make a note of the `public_key` from above, and then switch to the production workspace:
 <pre><code class="shell"># switch to production workspace
-$ terraform workspace select production</code>
-</pre>
+$ terraform workspace select production</code></pre>
 
 
 ## Edit Terraform state file
 The next step is to get the Terraform state file. Your mileage may vary depending on which [Terraform backend](https://www.terraform.io/docs/backends/index.html) you're using. In my case, I use the S3 backend, so I need to copy the production state file so I can edit it:
-<pre><code class="shell">$ aws s3 cp s3://terraform/env:/production/terraform.tfstate production.tfstate</code>
-</pre>
+<pre><code class="shell">$ aws s3 cp s3://terraform/env:/production/terraform.tfstate production.tfstate</code></pre>
 
 Find the resource with type `aws_key_pair` named `key_pair`. Add the public key from above to the `public_key` attribute:
 <pre><code class="diff">{
@@ -119,13 +109,11 @@ Find the resource with type `aws_key_pair` named `key_pair`. Add the public key 
       "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
     }
   ]
-}</code>
-</pre>
+}</code></pre>
 
 
 Finally, we need to re-upload the state file:
-<pre><code class="shell">$ aws s3 cp production.tfstate s3://terraform/env:/production/terraform.tfstate</code>
-</pre>
+<pre><code class="shell">$ aws s3 cp production.tfstate s3://terraform/env:/production/terraform.tfstate</code></pre>
 
 To ensure the public key was added to the key pair state, we can run `terraform plan` to verify that a second key pair won’t be created:
 <pre><code class="shell">$ terraform workspace show
@@ -151,8 +139,7 @@ No changes. Infrastructure is up-to-date.
 
 This means that Terraform did not detect any differences between your
 configuration and real physical resources that exist. As a result, no
-actions need to be performed.</code>
-</pre>
+actions need to be performed.</code></pre>
 
 # Conclusion
 That's it! Even though importing the AWS key pair didn't import the public key, we can manipulate the Terraform state to include the public key so that the resource is not recreated.
