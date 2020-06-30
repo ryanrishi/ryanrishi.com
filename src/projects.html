@@ -1,0 +1,20 @@
+---
+layout: default
+title: Projects
+permalink: /projects/
+---
+
+<h1>Projects</h1>
+
+<ul class="project-list">
+  {% assign projects = site.projects | reverse %}
+  {% for project in projects %}
+    <li>
+      <a href="{{ project.permalink }}">
+        {{ project.name }}
+      </a>
+      &mdash;
+      <span>{{ project.blurb }}</span>
+    </li>
+  {% endfor %}
+</ul>
