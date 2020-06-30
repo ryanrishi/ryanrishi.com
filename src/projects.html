@@ -1,0 +1,16 @@
+---
+layout: default
+title: Projects
+permalink: /projects/
+---
+
+More coming soon
+<div class="project-list">
+  {% for project in site.projects %}
+    <div class="project-list-item">
+      <a href="{{ project.permalink }}">
+        {{ project.name }}
+      </a>
+    </div>
+  {% endfor %}
+</div>
