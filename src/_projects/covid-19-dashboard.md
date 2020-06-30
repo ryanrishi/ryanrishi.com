@@ -1,6 +1,6 @@
 ---
 name:       COVID-19 Dashboard
-layout:     project
+layout:     default
 image:      /assets/
 permalink:  /projects/covid-19-dashboard/
 date:       2020-05-17
