@@ -19,8 +19,8 @@ Built using [Jekyll](https://jekyllrb.com/).
 License
 ===
 The following directories and their contents are Copyright Ryan Rishi. You may not reuse anything therein without my permission:
-* `src/_posts/`
-* `src/files/`
-* `src/_projects`
+- `src/_posts/`
+- `src/files/`
+- `src/_projects`
 
 All other directories and files are MIT Licensed.

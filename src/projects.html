@@ -4,14 +4,17 @@ title: Projects
 permalink: /projects/
 ---
 
-More coming soon
-<div class="project-list">
+<h1>Projects</h1>
+
+<ul class="project-list">
   {% assign projects = site.projects | reverse %}
   {% for project in projects %}
-    <div class="project-list-item">
+    <li>
       <a href="{{ project.permalink }}">
         {{ project.name }}
       </a>
-    </div>
+      &mdash;
+      <span>{{ project.blurb }}</span>
+    </li>
   {% endfor %}
-</div>
+</ul>
