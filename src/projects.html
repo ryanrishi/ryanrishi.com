@@ -6,7 +6,8 @@ permalink: /projects/
 
 More coming soon
 <div class="project-list">
-  {% for project in site.projects %}
+  {% assign projects = site.projects | reverse %}
+  {% for project in projects %}
     <div class="project-list-item">
       <a href="{{ project.permalink }}">
         {{ project.name }}
