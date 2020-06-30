@@ -1,5 +1,6 @@
-### website
-Repo for my personal website, [ryanrishi.com](https://ryanrishi.com).
+website
+===
+Repository for my personal website, [ryanrishi.com](https://ryanrishi.com).
 
 Built using [Jekyll](https://jekyllrb.com/).
 
