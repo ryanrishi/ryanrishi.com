@@ -7,6 +7,7 @@ date:       2020-05-17
 ---
 
 # COVID-19 Dashboard
+![COVID-19 Dashboard](/assets/img/projects/covid-19-dashboard.png)
 
 I wanted to provide a way for people to visualize the impact of COVID-19 in the US over time with the [New York Times COVID-19 dataset](https://github.com/nytimes/covid-19-data). I wanted this to be public, easy-to-use, and using off-the-shelf tools. With those requirements, I decided to pipe the time-series data into InfluxDB and visualize it with Grafana.
 
