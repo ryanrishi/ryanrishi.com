@@ -1,21 +1,31 @@
-import Head from 'next/head'
+import Header from '../components/header';
 import Link from 'next/Link';
 
 export default function Home() {
   return (
-    <div className='md:flex bg-white rounded-lg p-24 justify-center'>
-      <img
-        className='h-16 w-16 md:h-24 md:w-24 rounded-full mx-auto md:mx-0 md:mr-6'
-        src='https://ryanrishi.com/img/face.png'
-      />
-      <div className='text-center md:text-left'>
-        <h2 className='text-lg'>Ryan Rishi</h2>
-        <div className='text-purple-500'>Full-stack developer</div>
-        <div className='text-gray-600'>Twitter:&nbsp;
-          <Link href='https://twitter.com/ryanrishi'>@ryanrishi</Link>
+    <>
+    <Header></Header>
+    <div class="w-full">
+      <div className="flex bg-white" style={{ height: '900px' }}>
+        <div className="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
+          <div>
+            <h2 className="text-3xl font-semibold text-gray-800 md:text-4xl">Ryan Rishi</h2>
+            <p className="mt-2 text-2xl text-gray-500 lg:text-base">
+              Full-stack software engineer <span class="text-indigo-400">//</span> Drummer
+            </p>
+            <div className="flex justify-center lg:justify-start mt-6">
+              <a className="px-4 py-3 bg-gray-900 text-gray-200 text-xs font-semibold rounded hover:bg-gray-800" href="#">Get Started</a>
+              <a className="mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400" href="#">Learn More</a>
+            </div>
+          </div>
         </div>
-        <Link href='https://ryanrishi.com' className='text-gray-600'>ryanrishi.com</Link>
+        <div className="hidden lg:block lg:w-1/2" style={{ clipPath: 'polygon(10% 0, 100% 0%, 100% 100%, 0 100%)' }}>
+          <div className="h-full object-cover" style={{ backgroundImage: 'url(assets/img/ryan-sitting.jpg)' }}>
+            <div className="h-full bg-black opacity-25"></div>
+          </div>
+        </div>
       </div>
     </div>
+    </>
   );
 }
