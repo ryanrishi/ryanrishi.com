@@ -1,6 +1,10 @@
-import { Children, cloneElement, useState } from "react";
+import { Children, cloneElement, useState, useRef } from "react";
 import Link from "next/Link";
 import { useRouter } from "next/router";
+import { animated, useTransition, useTrail, a } from "react-spring";
+import { DialogOverlay, DialogContent } from "@reach/dialog";
+
+const AnimatedDialogOverlay = animated(DialogOverlay);
 
 const NavLink = ({ children, ...props }) => {
   const { asPath } = useRouter();
@@ -19,6 +23,32 @@ const NavLink = ({ children, ...props }) => {
   );
 }
 
+// const Trail = ({ open, children, ...props }) => {
+//   const items = React.Children.toArray(children)
+//   const trail = useTrail(items.length, {
+//     config: { mass: 5, tension: 2000, friction: 200 },
+//     opacity: open ? 1 : 0,
+//     x: open ? 0 : 20,
+//     height: open ? 110 : 0,
+//     from: { opacity: 0, x: 20, height: 0 },
+//   });
+
+//   return (
+//     <div className="trails-main" {...props}>
+//       <div>
+//         {trail.map(({ x, height, ...rest }, index) => (
+//           <a.div
+//             key={items[index]}
+//             className="trails-text"
+//             style={{ ...rest, transform: x.interpolate((x) => `translate3d(0, ${x}px, 0)`) }}>
+//             <a.div style={{ height }}>{items[index]}</a.div>
+//           </a.div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+
 const MobileNavButton = ({ isOpen, setIsOpen }) => {
   return (
     <div className="md:hidden">
@@ -32,19 +62,143 @@ const MobileNavButton = ({ isOpen, setIsOpen }) => {
   );
 }
 
-const MobileNav = ({ isOpen }) => {
+const MobileNav = ({ isOpen, closeMenu }) => {
   // TODO integrate react-spring "trails" https://www.react-spring.io/docs/hooks/examples
   // see https://codesandbox.io/embed/zn2q57vn13
+
+  const items = [
+    { href: '/music', title: 'Music' },
+    { href: '/projects', title: 'Projects'}
+  ];
+
+  const trail = useTrail(items.length, {
+    config: { mass: 5, tension: 2000, friction: 200 },
+    opacity: isOpen ? 1 : 0,
+    x: isOpen ? 0 : 20,
+    height: isOpen ? 110 : 0,
+    from: { opacity: 0, x: 20, height: 0 }
+  });
+
+  const MobileNavItem = ({ children }) => {
+    const child = Children.only(children);
+
+    return (
+      <div className="text-red-600">
+        {child}
+      </div>
+    );
+  };
+
+  // console.error(trail);
+
+  return (
+    <div className="md:hidden">
+      {trail.map(({ x, height, ...rest }, index) =>
+        items[index] && (
+          // <div className="text-green-600">{index}</div>
+          // <>
+          <AnimatedDialogOverlay
+            className={isOpen ? "" : "pointer-events-none"}
+            key={items[index].title}
+            style={{ ...rest, transform: x.interpolate(x => `translate3d(9, ${x}px, 0)` )}}>
+            <DialogContent className="w-full max-w-lg p-4 m-4 mx-auto bg-transparent"
+              aria-label="Site navigation">
+                <button>{items[index].title}</button>
+              </DialogContent>
+            </AnimatedDialogOverlay>
+          // </>
+        )
+        // <a.div
+        //   key={items[index].title}
+        //   className="trails-text"
+        //   style={{ ...rest, transform: x.interpolate((x) => `translate3d(0, ${x}px, 0)`) }}>
+        //   <a.div style={{ height }}>{items[index]}</a.div>
+        // </a.div>
+      )}
+      {/* <AnimatedDialogOverlay
+        className={isOpen ? "" : "pointer-events-none"}
+        key="test"
+        onDismiss={closeMenu}>
+          <DialogContent className="w-full max-w-lg p-4 m-4 mx-auto bg-transparent"
+          aria-label="Site navigation">
+            <button onClick={closeMenu} className="flex flex-wrap focus:outline-none">
+            </button>
+          </DialogContent>
+        </AnimatedDialogOverlay> */}
+        {/* {trail.map(({ item, key, x, height, ...rest }, index) => (
+          item && (
+            <>
+          <a.div
+            key={`${key}${index}`}
+            className="trails-text"
+            style={{ ...rest, transform: x.interpolate((x) => `translate3d(0, ${x}px, 0)`) }}>
+            <a.div style={{ height }}>{key}</a.div>
+          </a.div>
+          </>
+          )
+        ))} */}
+    </div>
+  );
+
+  return (
+    <div className="md:hidden">
+      {trail.map(
+        ({ item, key, props }) =>
+          item && (
+            <AnimatedDialogOverlay
+              className={isOpen ? "" : "pointer-events-none"}
+              key={key}
+              // style={{
+              //   backdropFilter: props.blur.interpolate((v) => `blur(${v}px)`),
+              //   WebkitBackdropFilter: props.blur.interpolate(
+              //     (v) => `blur(${v}px)`
+              //   ),
+              //   background: props.alpha.interpolate(
+              //     (v) => `rgba(120, 120, 120, ${v})`
+              //   ),
+              // }}
+              onDismiss={closeMenu}
+            >
+              {transitions.length > 0 && (
+                <DialogContent
+                  className="w-full max-w-lg p-4 m-0 mx-auto bg-transparent"
+                  aria-label="Site nav"
+                >
+                  <button
+                    onClick={closeMenu}
+                    className="flex flex-wrap focus:outline-none"
+                    style={{
+                      WebkitTapHighlightColor: "transparent",
+                    }}
+                  >
+                    <div className="w-1/3 px-2 mt-4">
+                      <MobileNavItem>
+                        <Link href="/music">Music</Link>
+                      </MobileNavItem>
+                      <div>1</div>
+                      <div>2</div>
+                      <div>3</div>
+                      <div>4</div>
+                      <div>5</div>
+                    </div>
+                  </button>
+                </DialogContent>
+              )}
+            </AnimatedDialogOverlay>
+          )
+      )}
+    </div>
+  );
 }
 
 export default function Header() {
   const router = useRouter();
-  const [isMobileNavOpen, setIsMobileNavOpen ] = useState(false);
+  const [ isMobileNavOpen, setIsMobileNavOpen ] = useState(false);
 
-  const handleClick = (href) => {
-    setIsMobileNavOpen(false);
-    router.push(href);
-  }
+  // const handleClick = (href) => {
+  //   setIsMobileNavOpen(false);
+  //   router.push(href);
+  // }
 
   return (
     <div className="w-full">
@@ -55,8 +209,11 @@ export default function Header() {
             <MobileNavButton
               isOpen={isMobileNavOpen}
               setIsOpen={setIsMobileNavOpen} />
-
           </div>
+          <MobileNav
+            isOpen={isMobileNavOpen}
+            // handleClick={handleClick}
+            closeMenu={() => setIsMobileNavOpen(false)} />
           <div className="flex flex-col md:flex-row hidden md:block -mx-2">
             <NavLink href="/music">
               <a>Music</a>
