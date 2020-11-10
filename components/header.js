@@ -66,127 +66,74 @@ const MobileNav = ({ isOpen, closeMenu }) => {
   // TODO integrate react-spring "trails" https://www.react-spring.io/docs/hooks/examples
   // see https://codesandbox.io/embed/zn2q57vn13
 
+  const springRef = useRef();
+  const overlayTransitions = useTransition(isOpen, null, {
+    ref: springRef,
+    config: {
+      mass: 1,
+      tension: 200,
+      friction: 20,
+      clamp: true,
+    },
+    from: { alpha: 0, blur: 0 },
+    leave: { alpha: 0, blur: 0 },
+    enter: { alpha: 0.3, blur: 25 },
+  });
+
   const items = [
     { href: '/music', title: 'Music' },
     { href: '/projects', title: 'Projects'}
   ];
 
   const trail = useTrail(items.length, {
-    config: { mass: 5, tension: 2000, friction: 200 },
+    config: {
+      mass: 5,
+      tension: 2000,
+      friction: 200
+    },
     opacity: isOpen ? 1 : 0,
     x: isOpen ? 0 : 20,
-    height: isOpen ? 110 : 0,
+    height: isOpen ? 200 : 0,
     from: { opacity: 0, x: 20, height: 0 }
   });
 
-  const MobileNavItem = ({ children }) => {
-    const child = Children.only(children);
-
-    return (
-      <div className="text-red-600">
-        {child}
-      </div>
-    );
-  };
-
-  // console.error(trail);
-
   return (
     <div className="md:hidden">
-      {trail.map(({ x, height, ...rest }, index) =>
-        items[index] && (
-          // <div className="text-green-600">{index}</div>
-          // <>
+      <span>{`isOpen: ${isOpen}`}</span>
+      {overlayTransitions.map(({ item, key, props }) => {
+        item && (
           <AnimatedDialogOverlay
-            className={isOpen ? "" : "pointer-events-none"}
-            key={items[index].title}
-            style={{ ...rest, transform: x.interpolate(x => `translate3d(9, ${x}px, 0)` )}}>
-            <DialogContent className="w-full max-w-lg p-4 m-4 mx-auto bg-transparent"
+            key={key}
+            className={`md:hidden flex items-center justify-center bg-white ${isOpen ? "" : "pointer-events-none"}`}
+            style={{
+              // backdropFilter: props.blur.interpolate((v) => `blur(${v}px)`),
+              background: props.alpha.interpolate((v) => `rgba(120, 120, 120, ${v})`)
+            }}
+            onDismiss={closeMenu}>
+            <DialogContent
+              className="w-full max-w-lg p-4 m-4 mx-auto bg-transparent"
               aria-label="Site navigation">
-                <button>{items[index].title}</button>
-              </DialogContent>
-            </AnimatedDialogOverlay>
-          // </>
-        )
-        // <a.div
-        //   key={items[index].title}
-        //   className="trails-text"
-        //   style={{ ...rest, transform: x.interpolate((x) => `translate3d(0, ${x}px, 0)`) }}>
-        //   <a.div style={{ height }}>{items[index]}</a.div>
-        // </a.div>
-      )}
-      {/* <AnimatedDialogOverlay
-        className={isOpen ? "" : "pointer-events-none"}
-        key="test"
-        onDismiss={closeMenu}>
-          <DialogContent className="w-full max-w-lg p-4 m-4 mx-auto bg-transparent"
-          aria-label="Site navigation">
-            <button onClick={closeMenu} className="flex flex-wrap focus:outline-none">
-            </button>
-          </DialogContent>
-        </AnimatedDialogOverlay> */}
-        {/* {trail.map(({ item, key, x, height, ...rest }, index) => (
-          item && (
-            <>
-          <a.div
-            key={`${key}${index}`}
-            className="trails-text"
-            style={{ ...rest, transform: x.interpolate((x) => `translate3d(0, ${x}px, 0)`) }}>
-            <a.div style={{ height }}>{key}</a.div>
-          </a.div>
-          </>
-          )
-        ))} */}
-    </div>
-  );
-
-  return (
-    <div className="md:hidden">
-      {trail.map(
-        ({ item, key, props }) =>
-          item && (
-            <AnimatedDialogOverlay
-              className={isOpen ? "" : "pointer-events-none"}
-              key={key}
-              // style={{
-              //   backdropFilter: props.blur.interpolate((v) => `blur(${v}px)`),
-              //   WebkitBackdropFilter: props.blur.interpolate(
-              //     (v) => `blur(${v}px)`
-              //   ),
-              //   background: props.alpha.interpolate(
-              //     (v) => `rgba(120, 120, 120, ${v})`
-              //   ),
-              // }}
-              onDismiss={closeMenu}
-            >
-              {transitions.length > 0 && (
-                <DialogContent
-                  className="w-full max-w-lg p-4 m-0 mx-auto bg-transparent"
-                  aria-label="Site nav"
-                >
-                  <button
-                    onClick={closeMenu}
-                    className="flex flex-wrap focus:outline-none"
-                    style={{
-                      WebkitTapHighlightColor: "transparent",
-                    }}
-                  >
-                    <div className="w-1/3 px-2 mt-4">
-                      <MobileNavItem>
-                        <Link href="/music">Music</Link>
-                      </MobileNavItem>
-                      <div>1</div>
-                      <div>2</div>
-                      <div>3</div>
-                      <div>4</div>
-                      <div>5</div>
-                    </div>
-                  </button>
-                </DialogContent>
+              <button
+                className="focus:outline-none"
+                onClick={closeMenu}>
+                  x
+              </button>
+              {trail.map(({ x, height, ...rest }, index) =>
+                items[index] && (
+                  <animated.div
+                    className="text-black"
+                    key={items[index].href}
+                    style={{ transform: x.interpolate(x => `translate3d(0, ${x}px, 0)`), height, ...rest }}>
+                    <Link href={items[index].href}>
+                      {items[index].title}
+                    </Link>
+                  </animated.div>
+                )
               )}
-            </AnimatedDialogOverlay>
-          )
-      )}
+            </DialogContent>
+          </AnimatedDialogOverlay>
+        )
+      })}
     </div>
   );
 }
