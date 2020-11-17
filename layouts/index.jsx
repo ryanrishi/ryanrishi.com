@@ -1,8 +1,10 @@
 import Layout from '../components/layout';
-import { H1 } from '../components/headings';
+import { H1, H3 } from '../components/headings';
+import Code from '../components/code';
 import Link from 'next/Link';
+import { MDXProvider } from "@mdx-js/react";
 
-const Index = ({ children, frontMatter }) => {
+export default function Index({ children, frontMatter }) {
   const { title, snippet } = frontMatter;
 
   return (
@@ -10,7 +12,7 @@ const Index = ({ children, frontMatter }) => {
       <div>
         <H1>{title}</H1>
         <p>{snippet}</p>
-        <section>{children}</section>
+        <MDXProvider components={components}>{children}</MDXProvider>
         <div className="flex justify-center">
           <Link href="/blog">
             <a>
@@ -21,6 +23,16 @@ const Index = ({ children, frontMatter }) => {
       </div>
     </Layout>
   )
-};
+}
 
-export default Index;
+const components = {
+  h1: H1,
+  h3: H3,
+  code: ({ className, children }) => {
+    return (
+      <div className="my-8 -mx-6 overflow-hidden sm:rounded-lg md:mx-auto">
+        <Code {...props} />
+      </div>
+    );
+  }
+}
