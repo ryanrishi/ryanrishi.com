@@ -1,10 +1,12 @@
-import Header from "../components/header";
+import ReactPlaceholder from "react-placeholder";
+import Layout from "../components/layout";
+import { H1, H3 } from "../components/headings";
 
 export default function Music() {
   return (
-    <>
-    <Header></Header>
-    <h1>Music - Soon!</h1>
-    </>
+    <Layout>
+      <H1>Music</H1>
+      <ReactPlaceholder type="text" rows={7} ready={false} />
+    </Layout>
   );
 }

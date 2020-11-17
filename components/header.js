@@ -60,6 +60,7 @@ const MobileNav = ({ isOpen, closeMenu }) => {
   return (
     <div className="md:hidden">
       <AnimatedDialogOverlay
+        // TODO pointer-events-none is hijacking scroll
         className={`md:hidden flex items-center justify-center bg-white ${isOpen ? "" : "pointer-events-none"}`}
         style={overlayProps}
         onDismiss={closeMenu}>
