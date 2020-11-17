@@ -7,5 +7,5 @@ export default function NotFound() {
       <H1>404</H1>
       <p>The page you requested doesn't exist. <a href="/">Return home</a>?</p>
     </Layout>
-    );
+  );
 }

@@ -1,7 +1,7 @@
 import { Children, cloneElement, useState, useRef } from "react";
 import Link from "next/Link";
 import { useRouter } from "next/router";
-import { animated, useSpring, useTrail } from "react-spring";
+import { animated, config, useChain, useSpring, useTrail, useTransition } from "react-spring";
 import { DialogOverlay, DialogContent } from "@reach/dialog";
 
 const AnimatedDialogOverlay = animated(DialogOverlay);
@@ -35,8 +35,17 @@ const MobileNavButton = ({ isOpen, setIsOpen }) => {
 }
 
 const MobileNav = ({ isOpen, closeMenu }) => {
-  const overlayProps = useSpring({
-    opacity: isOpen ? 1 : 0
+  const overlayRef = useRef();
+  const overlayTransitions = useTransition(isOpen, null, {
+    ref: overlayRef,
+    config: {
+      mass: 1,
+      tension: 200,
+      friction: 20
+    },
+    from: { height: 0 },
+    leave: { height: 0 },
+    enter: { height: 900 } // TODO not this
   });
 
   const items = [
@@ -45,7 +54,9 @@ const MobileNav = ({ isOpen, closeMenu }) => {
     { href: '/blog', title: 'Blog' }
   ];
 
+  const contentRef = useRef();
   const trail = useTrail(items.length, {
+    ref: contentRef,
     config: {
       mass: 5,
       tension: 2000,
@@ -57,28 +68,36 @@ const MobileNav = ({ isOpen, closeMenu }) => {
     from: { opacity: 0, x: 20, height: 0 }
   });
 
+  useChain(isOpen ? [contentRef, overlayRef] : [overlayRef, contentRef], [0, isOpen ? 0 : 0.1]);
+
   return (
     <div className="md:hidden">
-      <AnimatedDialogOverlay
-        // TODO pointer-events-none is hijacking scroll
-        className={`md:hidden flex items-center justify-center bg-white ${isOpen ? "" : "pointer-events-none"}`}
-        style={overlayProps}
-        onDismiss={closeMenu}>
-        <DialogContent
-          className="w-full max-w-lg p-4 m-4 mx-auto bg-transparent"
-          aria-label="Site navigation">
-          {trail.map(({ x, height, ...rest }, index) =>
-            <animated.div
-              className="text-black text-5xl font-extrabold relative"
-              key={items[index].href}
-              style={{ transform: x.interpolate(x => `translate3d(0, ${x}px, 0)`), height, ...rest }}>
-              <Link href={items[index].href} style={height}>
-                {items[index].title}
-              </Link>
-            </animated.div>
-          )}
-        </DialogContent>
-      </AnimatedDialogOverlay>
+      {overlayTransitions.map(({ item, key, props }) =>
+        item && (
+          <AnimatedDialogOverlay
+            key={key}
+            className={`md:hidden flex items-center justify-center bg-white ${isOpen ? "" : "pointer-events-none"}`}
+            style={{ height: props.height }}
+            onDismiss={closeMenu}>
+            <DialogContent
+              className="w-full max-w-lg p-4 m-4 mx-auto bg-transparent"
+              aria-label="Site navigation">
+              {trail.map(({ x, height, ...rest }, index) =>
+                <animated.div
+                  className="text-black text-5xl font-extrabold relative"
+                  key={items[index].href}
+                  style={{ transform: x.interpolate(x => `translate3d(0, ${x}px, 0)`), height, ...rest }}>
+                  <Link href={items[index].href} style={height}>
+                    <a className="block w-auto">
+                      {items[index].title}
+                    </a>
+                  </Link>
+                </animated.div>
+              )}
+            </DialogContent>
+          </AnimatedDialogOverlay>
+        )
+      )}
     </div>
   );
 }
@@ -88,7 +107,7 @@ export default function Header() {
 
   return (
     <div className="w-full">
-      <nav className="bg-white shadow-lg">
+      <nav className="bg-white shadow-md">
         <div className="md:flex items-center justify-between py-2 px-8 md:px-12">
           <div className="flex justify-between items-center">
             <a className="text-sm font-light tracking-wide uppercase md:text-base lg:text-xl" href="/">Ryan&nbsp;<span className="font-bold">Rishi</span></a>
@@ -115,6 +134,7 @@ export default function Header() {
           </div>
         </div>
       </nav>
+
     </div>
   );
 }
