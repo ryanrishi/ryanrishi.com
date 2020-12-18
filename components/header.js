@@ -1,7 +1,7 @@
 import { Children, cloneElement, useState, useRef } from "react";
 import Link from "next/Link";
 import { useRouter } from "next/router";
-import { animated, config, useChain, useSpring, useTrail, useTransition } from "react-spring";
+import { animated, useChain, useTrail, useTransition } from "react-spring";
 import { DialogOverlay, DialogContent } from "@reach/dialog";
 
 const AnimatedDialogOverlay = animated(DialogOverlay);
@@ -9,7 +9,7 @@ const AnimatedDialogOverlay = animated(DialogOverlay);
 const NavLink = ({ children, ...props }) => {
   const { asPath } = useRouter();
   const child = Children.only(children);
-  const baseClassNames = "pb-4 ml-6 -mb-px text-gray-600 border-b border-transparent xl:pb-6 lg:ml-8 lg:text-base xl:text-lg hover:text-gray-900";
+  const baseClassNames = "ml-6 -mb-px text-gray-600 border-b border-transparent xl:pb-6 lg:ml-8 lg:text-base xl:text-lg hover:text-gray-900";
   const isActive = props.href === asPath;
   const activeClassNames = "text-gray-900";
   const className = isActive ? `${baseClassNames} ${activeClassNames}`.trim() : baseClassNames;
@@ -134,7 +134,6 @@ export default function Header() {
           </div>
         </div>
       </nav>
-
     </div>
   );
 }

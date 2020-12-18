@@ -1,14 +1,14 @@
-export const H1 = ({ children }) => {
+export const H1 = ({ className, children }) => {
   return (
-    <h1 className="text-5xl font-semibold leading-tight text-gray-800 md:text-6xl md:font-bold lg:text-7xl lg:font-extrabold xl:text-8xl uppercase italic">
+    <h1 className={"text-5xl font-semibold leading-tight md:text-6xl md:font-bold lg:text-7xl lg:font-extrabold xl:text-8xl " + (className || "")}>
       {children}
     </h1>
   );
 }
 
-export const H3 = ({ children }) => {
+export const H3 = ({ className, children }) => {
   return (
-    <h3 className="text-3xl font-semibold leading-tight text-gray-800 md:text-4xl md:font-bold lg:text-5xl lg:font-extrabold xl:text-6xl uppercase italic">
+    <h3 className={"text-xl font-semibold leading-tight md:font-bold lg:font-bold " + (className || "")}>
       {children}
     </h3>
   );

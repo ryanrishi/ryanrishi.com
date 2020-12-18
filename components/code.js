@@ -2,9 +2,10 @@ import { Prism } from "react-syntax-highlighter";
 
 export default function Code({ language = "", children }) {
   return (
-    <Prism
-      language={language}>
-      {children}
-    </Prism>
+    <code>{children}</code>
+    // <Prism
+    //   language={language}>
+    //   {children}
+    // </Prism>
   )
 }
