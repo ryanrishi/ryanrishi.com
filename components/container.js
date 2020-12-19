@@ -1,5 +1,5 @@
 export default function Container({ size, children }) {
-  const baseClasses = "container mx-auto px-4 mt-4";
+  const baseClasses = "container mx-auto px-4 mt-8";
   const sizes = {
     sm: "max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl",
     md: "max-w-md lg:max-w-xl xl:max-w-2xl",

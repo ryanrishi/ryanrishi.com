@@ -1,6 +1,8 @@
+const baseClassNames = ["font-semibold", "leading-tight", "uppercase", "italic", "text-gray-800"];
+
 export const H1 = ({ className, children }) => {
   return (
-    <h1 className={"text-5xl font-semibold leading-tight md:text-6xl md:font-bold lg:text-7xl lg:font-extrabold xl:text-8xl " + (className || "")}>
+    <h1 className={baseClassNames.join(' ').concat(" text-4xl md:text-6xl " + (className || ""))}>
       {children}
     </h1>
   );
@@ -8,8 +10,16 @@ export const H1 = ({ className, children }) => {
 
 export const H3 = ({ className, children }) => {
   return (
-    <h3 className={"text-xl font-semibold leading-tight md:font-bold lg:font-bold " + (className || "")}>
+    <h3 className={baseClassNames.join(' ').concat(" text-xl md:text-4xl " + (className || ""))}>
       {children}
     </h3>
   );
+}
+
+export const H6 = ({ className, children }) => {
+  return (
+    <h6 className={baseClassNames.join(' ').concat(" text-sm md:text-xl " + (className || ""))}>
+      {children}
+    </h6>
+  )
 }
