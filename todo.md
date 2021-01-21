@@ -23,4 +23,6 @@ see tags.md
   - also cache npm and pip packages
 
 # ui
-- [ ] explore using tailwindcss
+- [x] explore using tailwindcss
+- [ ] remove tailwindcss
+
