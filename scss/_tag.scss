@@ -1,0 +1,21 @@
+// className="uppercase italic text-xs"
+.tag {
+  text-transform: uppercase;
+  font-style: italic;
+  text-decoration: none;
+  font-weight: bold;
+  border: 1px solid lighten($color-text, 50%);
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 0 1rem;
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:hover {
+    border-color: $color-text;
+  }
+
+  transition: border-color .5s;
+}

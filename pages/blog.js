@@ -1,6 +1,5 @@
 import React from 'react';
 import Layout from '../components/layout';
-import { H3 } from '../components/headings';
 import Link from 'next/Link'
 import { getAllPosts } from '../lib/posts';
 
@@ -9,10 +8,8 @@ const TagsList = ({ tags }) => {
     return null;
   }
 
-  console.log('tags', tags);
-
   return (
-    <div class="flex flex-row mt-4">
+    <div>
       {tags.map((tag) => (
         <Tag tag={tag} />
       ))}
@@ -25,9 +22,7 @@ const Tag = ({ tag }) => {
   return (
     // TODO probably need encodeURIComponent
     <Link href={`/tags/${tag.replace(' ', '-')}`}>
-      <a
-        className="uppercase italic text-xs font-bold border border-gray-400 hover:border-gray-600 transition duration-500 rounded p-2 mx-2 first:ml-0"
-      >{tag}</a>
+      <a className="tag">{tag}</a>
     </Link>
   );
 }
@@ -37,25 +32,20 @@ export default function BlogIndex({ allPosts }) {
     <Layout>
       <ul>
         {allPosts.map((post, index) => (
-          <React.Fragment key={post.slug}>
-          <li
-            className={`mb-8 ${index === 0 ? "" : "pt-4"}`}
-            key={post.slug}>
-            <Link href={`/blog/${post.slug}`} key={post.slug}>
-              <a>
-                <H3 className="pb-2">{post.title}</H3>
-                {post.date && (
-                  <p class="text-gray-600 pb-4">{new Date(post.date).toLocaleDateString()}</p>
-                )}
-                <p>{post.blurb}</p>
-              </a>
-            </Link>
-            <TagsList tags={post.tags} />
-          </li>
-          {index !== allPosts.length && (
-            <hr />
-          )}
-          </React.Fragment>
+          <div class="post">
+            <h2 class="post-title">
+              <a class="post-link" href={`/blog/${post.slug}`}>{post.title}</a>
+            </h2>
+            <p class="post-meta">{new Date(post.date).toLocaleDateString()}</p>
+
+            <div class="post-preview">
+              <p>
+                {post.blurb}
+              </p>
+              <a class="post-read-more" href={`/blog/${post.slug}`}>Read more &raquo;</a>
+              <TagsList tags={post.tags} />
+            </div>
+          </div>
         ))}
       </ul>
     </Layout>

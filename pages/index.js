@@ -1,7 +1,6 @@
 import ReactPlaceholder from "react-placeholder";
 import Layout from "../components/layout";
 import Image from 'next/image';
-import { H1, H3 } from '../components/headings';
 import UnorderedList from '../components/UnorderedList';
 import Link from 'next/Link';
 
@@ -11,9 +10,9 @@ export default function Home() {
       <div className="container flex flex-wrap flex-col md:flex-row flex-1">
         <div className="flex flex-col md:flex-row md:text-left">
           <div class="flex flex-col">
-            <H1>Hi, I'm Ryan 👋🏼</H1>
+            <h1>Hi, I'm Ryan 👋🏼</h1>
             <div className="mt-6 text-lg md:text-xl lg:text-2xl">
-              <H3>I'm currently:</H3>
+              <h3>I'm currently:</h3>
               <ul className="list-disc list-inside">
                 <li>👨🏻‍💻 working as a backend-leaning-full-stack engineer&mdash; mostly Java, Spring, MySQL, Kafka, Kubernetes, with a sprinkle of Ember.js</li>
                 {/* TODO link to lab */}
@@ -22,7 +21,7 @@ export default function Home() {
             </div>
 
             <div className="mt-6 text-lg md:text-xl lg:text-2xl">
-              <H3>Outside of engineering:</H3>
+              <h3>Outside of engineering:</h3>
               <ul className="list-disc list-inside">
                 <li>✈️ I'm in the process of getting my private pilot license</li>
                 <li>🥁 I play drums and arrange/perform percussion covers</li>

@@ -1,0 +1,10 @@
+pre {
+  overflow-x: auto;
+  border-radius: 0.33rem;
+}
+
+code {
+  display: inline-block;
+  line-height: $line-height / 1.5;
+  word-wrap: break-word;
+}

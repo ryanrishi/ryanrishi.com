@@ -1,5 +1,4 @@
 import Layout from '../components/layout';
-import { H1, H3 } from '../components/headings';
 import Code from '../components/code';
 import Link from 'next/Link';
 import { MDXProvider } from "@mdx-js/react";
@@ -10,7 +9,7 @@ export default function Index({ children, frontMatter }) {
   return (
     <Layout>
       <div>
-        <H1>{title}</H1>
+        <h1>{title}</h1>
         <p>{snippet}</p>
         <MDXProvider components={components}>{children}</MDXProvider>
         <div className="flex justify-center">
@@ -26,8 +25,6 @@ export default function Index({ children, frontMatter }) {
 }
 
 const components = {
-  h1: H1,
-  h3: H3,
   // h2: ({ children, ...rest }) => (
   //   <h2
   //     className="mt-12 text-lg font-semibold leading-tight text-gray-900 md:text-2xl"

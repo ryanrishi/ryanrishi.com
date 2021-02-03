@@ -1,0 +1,143 @@
+::selection {
+  background: $color-link;
+  color: #fff;
+  text-shadow: none;
+}
+
+html {
+  font-size: 112.5%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  width: 100%;
+  max-width: calc(1200px + (2 * #{$line-height}));
+  margin: 0 auto;
+  padding: 0 $line-height;
+  background-color: #fff;
+  color: $color-text;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: $font-size;
+  line-height: $line-height;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: 0;
+}
+
+a {
+  background: transparent;
+  color: $color-link;
+  word-wrap: break-word;
+
+  transition: color .2s;
+}
+
+a:hover,
+a:focus,
+a:active {
+  color: $color-text;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre {
+  margin-bottom: $line-height;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: $line-height * 1.5;
+  font-style: italic;
+  font-weight: 900;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: $font-size * $type-scale * $type-scale * $type-scale;
+  line-height: $line-height * 1.5;
+}
+
+h2 {
+  font-size: $font-size * $type-scale * $type-scale;
+}
+
+h3 {
+  font-size: $font-size * $type-scale;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+h5 {
+  font-size: $font-size / $type-scale;
+}
+
+h6 {
+  font-size: $font-size / $type-scale / $type-scale;
+}
+
+ul,
+ol {
+  margin: 0 0 $line-height $line-height;
+}
+
+hr {
+  display: block;
+  height: $line-height;
+  border: 0;
+  box-shadow: 0 1px 0 #eee;
+  margin-bottom: $line-height;
+}
+
+blockquote {
+  margin-bottom: $line-height;
+  padding: $line-height;
+  border-left: .3rem solid #ddd;
+}
+
+blockquote p {
+  margin: 0;
+  font-style: italic;
+}
+
+figure {
+  margin-bottom: $line-height;
+}
+
+figcaption {
+  font-size: $font-size / $type-scale / $type-scale;
+}
+
+.mt-0 {
+  // borrowed from https://getbootstrap.com/docs/4.0/utilities/spacing/
+  margin-top: 0;
+}
