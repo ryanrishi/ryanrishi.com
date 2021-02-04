@@ -22,7 +22,7 @@ const Tag = ({ tag }) => {
   return (
     // TODO probably need encodeURIComponent
     <Link href={`/tags/${tag.replace(' ', '-')}`}>
-      <a className="tag">{tag}</a>
+      <a className="tag">#{tag}</a>
     </Link>
   );
 }
