@@ -33,6 +33,10 @@ const components = {
     if (languageMatch) {
       props.language = languageMatch[1];
     }
+    let highlightedLinesMatch = className && className.match("{(.+)}");
+    if (highlightedLinesMatch) {
+      props.highlightedLines = highlightedLinesMatch[1];
+    }
 
     return (
       <div>

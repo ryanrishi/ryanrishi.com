@@ -8,11 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "@mapbox/rehype-prism": "^0.5.0",
     "@mdx-js/react": "^1.6.21",
     "next": "~10.0.5",
-    "next-compose-plugins": "^2.2.1",
     "next-mdx-enhanced": "^5.0.0",
+    "prism-react-renderer": "^1.1.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-placeholder": "^4.0.3",
