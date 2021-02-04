@@ -1,10 +1,17 @@
 pre {
   overflow-x: auto;
   border-radius: 0.33rem;
-}
 
-code {
-  display: inline-block;
-  line-height: $line-height / 1.5;
-  word-wrap: break-word;
+  &[class*="language-"] {
+    display: inline-block;
+    line-height: $line-height / 1.5;
+    word-wrap: break-word;
+
+    padding: 0.5rem .75rem;
+
+    @include md {
+      padding: 1rem 1.5rem;
+    }
+    width: 100%
+  }
 }

@@ -1,14 +1,7 @@
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-// import rangeParser from "parse-numeric-range";
 
 export default function Code(props) {
-  // debugger
   let language = props.language || "";
-
-  // let highlightedLines = props.highlightedLines
-  //   ? rangeParser.parse(props.highlightedLines)
-  //   : [];
-  let highlightedLines = [];
 
   // Filter out any empty lines at end
   let reversedLines = props.children.split("\n").reverse();
@@ -21,18 +14,7 @@ export default function Code(props) {
     <SyntaxHighlighter
       style={theme}
       language={language}
-      className={`language-${language} subpixel-antialiased leading-relaxed text-sm- md:text-sm px-6 py-4 overflow-auto scrolling-touch`}
-      wrapLines={true}
-      lineProps={(lineNumber) => {
-        let props = {};
-        if (highlightedLines.includes(lineNumber)) {
-          props.className = "block px-5 -mx-5 bg-green-500";
-          props.style = {
-            background: "#343b46", // dark:303641 bright:3D4452 medium: ##343b46
-          };
-        }
-        return props;
-      }}
+      className={`language-${language}`}
     >
       {lines.join("\n")}
     </SyntaxHighlighter>

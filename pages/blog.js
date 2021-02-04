@@ -11,14 +11,13 @@ const TagsList = ({ tags }) => {
   return (
     <div>
       {tags.map((tag) => (
-        <Tag tag={tag} />
+        <Tag tag={tag} key={tag} />
       ))}
     </div>
   );
 }
 
 const Tag = ({ tag }) => {
-  console.log('tag', tag);
   return (
     // TODO probably need encodeURIComponent
     <Link href={`/tags/${tag.replace(' ', '-')}`}>
@@ -32,17 +31,15 @@ export default function BlogIndex({ allPosts }) {
     <Layout>
       <ul>
         {allPosts.map((post, index) => (
-          <div class="post">
-            <h2 class="post-title">
-              <a class="post-link" href={`/blog/${post.slug}`}>{post.title}</a>
+          <div className="post" key={post.slug}>
+            <h2 className="post-title">
+              <a className="post-link" href={`/blog/${post.slug}`}>{post.title}</a>
             </h2>
-            <p class="post-meta">{new Date(post.date).toLocaleDateString()}</p>
+            <p className="post-meta">{new Date(post.date).toLocaleDateString()}</p>
 
-            <div class="post-preview">
-              <p>
-                {post.blurb}
-              </p>
-              <a class="post-read-more" href={`/blog/${post.slug}`}>Read more &raquo;</a>
+            <div className="post-preview">
+              <p>{post.blurb}</p>
+              <a className="post-read-more" href={`/blog/${post.slug}`}>Read more &raquo;</a>
               <TagsList tags={post.tags} />
             </div>
           </div>
