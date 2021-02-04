@@ -4,3 +4,34 @@ $color-link: #d33a2c;
 $font-size: 1rem;
 $line-height: 1.77778rem;
 $type-scale: 1.25;
+
+// screen variables + mixins
+// see https://medium.com/codeartisan/breakpoints-and-media-queries-in-scss-46e8f551e2f2
+$screen-sm-min: 576px;
+$screen-md-min: 768px;
+$screen-lg-min: 992px;
+$screen-xl-min: 1200px;
+
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: #{$screen-xl-min}) {
+    @content;
+  }
+}
