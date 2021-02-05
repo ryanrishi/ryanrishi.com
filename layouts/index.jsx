@@ -12,10 +12,10 @@ export default function Index({ children, frontMatter }) {
         <h1>{title}</h1>
         <p>{snippet}</p>
         <MDXProvider components={components}>{children}</MDXProvider>
-        <div className="flex justify-center">
+        <div className="back-to-blog">
           <Link href="/blog">
             <a>
-              Back to Blog
+              &larr; Back to Blog
             </a>
           </Link>
         </div>
