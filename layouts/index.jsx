@@ -2,15 +2,17 @@ import Layout from '../components/layout';
 import Code from '../components/code';
 import Link from 'next/Link';
 import { MDXProvider } from "@mdx-js/react";
+import dayjs from 'dayjs'
 
 export default function Index({ children, frontMatter }) {
-  const { title, snippet } = frontMatter;
+  const { title, date } = frontMatter;
 
   return (
     <Layout>
       <div>
         <h1>{title}</h1>
-        <p>{snippet}</p>
+        <p>{dayjs(date).format('MMMM D, YYYY')}</p>
+        <hr />
         <MDXProvider components={components}>{children}</MDXProvider>
         <div className="back-to-blog">
           <Link href="/blog">
