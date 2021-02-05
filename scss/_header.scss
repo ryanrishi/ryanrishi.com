@@ -1,14 +1,26 @@
 .header {
   position: relative;
   padding: ($line-height * 3) 0;
+
+  .header-logo {
+    margin: 0;
+    line-height: $line-height;
+
+    .header-link {
+      font-size: $font-size * $type-scale;
+    }
+  }
 }
 
-.header-logo {
-  margin: 0;
-  line-height: $line-height;
+nav {
+  .header-item {
+    margin-right: $line-height / 4;
+  }
 
-  .header-link {
-    font-size: $font-size * $type-scale;
+  .header-nav {
+    display: flex;
+    margin: 0;
+    list-style: none;
   }
 }
 
@@ -24,14 +36,4 @@
   &:hover {
     color: $color-link;
   }
-}
-
-.header-nav {
-  display: flex;
-  margin: 0;
-  list-style: none;
-}
-
-.header-item {
-  margin-right: $line-height / 4;
 }

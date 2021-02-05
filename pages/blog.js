@@ -3,29 +3,6 @@ import Layout from '../components/layout';
 import Link from 'next/Link'
 import { getAllPosts } from '../lib/posts';
 
-const TagsList = ({ tags }) => {
-  if (!tags || !tags.length) {
-    return null;
-  }
-
-  return (
-    <div>
-      {tags.map((tag) => (
-        <Tag tag={tag} key={tag} />
-      ))}
-    </div>
-  );
-}
-
-const Tag = ({ tag }) => {
-  return (
-    // TODO probably need encodeURIComponent
-    <Link href={`/tags/${tag.replace(' ', '-')}`}>
-      <a className="tag">#{tag}</a>
-    </Link>
-  );
-}
-
 export default function BlogIndex({ allPosts }) {
   return (
     <Layout>
@@ -40,7 +17,6 @@ export default function BlogIndex({ allPosts }) {
             <div className="post-preview">
               <p>{post.blurb}</p>
               <a className="post-read-more" href={`/blog/${post.slug}`}>Read more &raquo;</a>
-              <TagsList tags={post.tags} />
             </div>
           </div>
         ))}

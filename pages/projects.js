@@ -9,7 +9,9 @@ export default function ProjectsIndex({ projects }) {
       <h1>Projects</h1>
       <ul>
         {projects.map((project) => (
-          <li><Link href={project.permalink}>{project.name}</Link>&mdash; {project.blurb}</li>
+          <li key={project.permalink}>
+            <Link href={project.permalink}>{project.name}</Link>&mdash; {project.blurb}
+          </li>
         ))}
       </ul>
     </Layout>

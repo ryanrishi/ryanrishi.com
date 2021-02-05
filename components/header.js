@@ -71,7 +71,7 @@ const MobileNav = ({ isOpen, closeMenu }) => {
   useChain(isOpen ? [contentRef, overlayRef] : [overlayRef, contentRef], [0, isOpen ? 0 : 0.1]);
 
   return (
-    <div className="md:hidden">
+    <>
       {overlayTransitions.map(({ item, key, props }) =>
         item && (
           <AnimatedDialogOverlay
@@ -98,42 +98,32 @@ const MobileNav = ({ isOpen, closeMenu }) => {
           </AnimatedDialogOverlay>
         )
       )}
-    </div>
+    </>
   );
 }
 
 export default function Header() {
-  const [ isMobileNavOpen, setIsMobileNavOpen ] = useState(false);
-
   return (
-    <div className="w-full">
-      <nav className="bg-white shadow-md">
-        <div className="md:flex items-center justify-between py-2 px-8 md:px-12">
-          <div className="flex justify-between items-center">
-            <a className="text-sm font-light tracking-wide uppercase md:text-base lg:text-xl" href="/">Ryan&nbsp;<span className="font-bold">Rishi</span></a>
-            <MobileNavButton
-              isOpen={isMobileNavOpen}
-              setIsOpen={setIsMobileNavOpen} />
-          </div>
-          <MobileNav
-            isOpen={isMobileNavOpen}
-            closeMenu={() => setIsMobileNavOpen(false)} />
-          <div className="flex flex-col md:flex-row hidden md:block -mx-2">
-            <NavLink href="/music">
-              <a>Music</a>
-            </NavLink>
-            <NavLink href="/projects">
-              <a>Projects</a>
-            </NavLink>
-            <NavLink href="/blog">
-              <a>Blog</a>
-            </NavLink>
-            <NavLink href="https://github.com/ryanrishi">
-              <a>Github</a>
-            </NavLink>
-          </div>
-        </div>
+    <header className="header">
+      <div className="header-logo">
+        <a className="header-link" href="/">Ryan Rishi</a>
+      </div>
+      <nav>
+        <ul className="header-nav">
+          <li className="header-item">
+            <a className="header-link" href="/music">Music</a>
+          </li>
+          <li className="header-item">
+            <a className="header-link" href="/projects">Projects</a>
+          </li>
+          <li className="header-item">
+            <a className="header-link" href="/blog">Blog</a>
+          </li>
+          <li className="header-item">
+            <a className="header-link" href="https://github.com/ryanrishi">Github</a>
+          </li>
+        </ul>
       </nav>
-    </div>
+    </header>
   );
 }
