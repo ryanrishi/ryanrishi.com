@@ -1,9 +1,13 @@
 import ReactPlaceholder from "react-placeholder";
 import Layout from "../components/layout";
+import Head from 'next/Head';
 
 export default function Music() {
   return (
     <Layout>
+      <Head>
+        <title key="title">Music | Ryan Rishi</title>
+      </Head>
       <h1 class="mt-0">Music</h1>
 
       <h3>Senior Recital</h3>

@@ -1,14 +1,37 @@
 import Layout from '../components/layout';
 import Code from '../components/code';
 import Link from 'next/Link';
+import Head from 'next/Head';
 import { MDXProvider } from "@mdx-js/react";
 import dayjs from 'dayjs'
 
 export default function Index({ children, frontMatter }) {
-  const { title, date } = frontMatter;
+  const { title, date, tags, image, blurb } = frontMatter;
 
   return (
     <Layout>
+      <Head>
+        <title key="title">{(title ? `${title} | ` : '') + 'Ryan Rishi'}</title>
+
+        <meta property="article:published_time" content={dayjs(date).toISOString()} />
+        <meta property="article:author" content="Ryan Rishi" />
+        <meta property="og:type" key="og:type" content="article" />
+
+        {title && (
+          <meta property="og:title" key="og:title" content={title} />
+        )}
+
+        {blurb && (
+          <meta property="og:description" key="og:description" content={blurb} />
+        )}
+
+        {image && (
+          <meta property="og:image" key="og:image" content={image} />
+        )}
+        {tags.map((tag) => (
+          <meta property="article:tag" key={tag} content={tag} />
+        ))}
+      </Head>
       <div>
         <h1>{title}</h1>
         <p>{dayjs(date).format('MMMM D, YYYY')}</p>
@@ -23,7 +46,7 @@ export default function Index({ children, frontMatter }) {
         </div>
       </div>
     </Layout>
-  )
+  );
 }
 
 const components = {

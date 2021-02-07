@@ -1,33 +1,35 @@
 import React from 'react';
 import Layout from '../components/layout';
 import Link from 'next/Link'
+import Head from 'next/Head';
 import { getAllPosts } from '../lib/posts';
 import dayjs from 'dayjs';
 
 export default function BlogIndex({ allPosts }) {
   return (
     <Layout>
-      <ul>
-        {allPosts.map((post, index) => (
-          <div className="post" key={post.slug}>
-            <h2 className="post-title">
-              <a className="post-link" href={`/blog/${post.slug}`}>{post.title}</a>
-            </h2>
-            <p className="post-meta">{dayjs(post.date).format('MMMM D, YYYY')}</p>
+      <Head>
+        <title key="title">Blog | Ryan Rishi</title>
+      </Head>
+      {allPosts.map((post, index) => (
+        <div className="post" key={post.slug}>
+          <h2 className="post-title">
+            <a className="post-link" href={`/blog/${post.slug}`}>{post.title}</a>
+          </h2>
+          <p className="post-meta">{dayjs(post.date).format('MMMM D, YYYY')}</p>
 
-            <div className="post-preview">
-              <p>{post.blurb}</p>
-              <a className="post-read-more" href={`/blog/${post.slug}`}>Read more &raquo;</a>
-            </div>
+          <div className="post-preview">
+            <p>{post.blurb}</p>
+            <a className="post-read-more" href={`/blog/${post.slug}`}>Read more &raquo;</a>
           </div>
-        ))}
-      </ul>
+        </div>
+      ))}
     </Layout>
   );
 }
 
 export async function getStaticProps() {
-  const allPosts = getAllPosts(["title", "date", "slug", "blurb", "tags"]);
+  const allPosts = getAllPosts(["title", "date", "slug", "blurb", "image", "tags"]);
 
   return {
     props: { allPosts },
