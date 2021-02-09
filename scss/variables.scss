@@ -1,6 +1,10 @@
 $color-text: #333;
 $color-link: #d33a2c;
 
+// subset of https://tailwindcss.com/docs/customizing-colors
+$gray-700: #374151;
+$gray-800: #1F2937;
+
 $font-size: 1rem;
 $line-height: 1.77778rem;
 $type-scale: 1.25;
@@ -11,6 +15,13 @@ $screen-sm-min: 576px;
 $screen-md-min: 768px;
 $screen-lg-min: 992px;
 $screen-xl-min: 1200px;
+
+$screen-sizes: (
+  sm: $screen-sm-min,
+  md: $screen-md-min,
+  lg: $screen-lg-min,
+  xl: $screen-xl-min
+);
 
 @mixin sm {
   @media (min-width: #{$screen-sm-min}) {

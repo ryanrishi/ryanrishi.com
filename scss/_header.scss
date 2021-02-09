@@ -10,6 +10,29 @@
       font-size: $font-size * $type-scale;
     }
   }
+
+  .mobile-nav-button {
+    display: block;
+    color: $gray-800;
+    background: white;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      color: $gray-700;
+    }
+
+    &:focus {
+      color: $gray-700;
+      outline: none;
+    }
+
+    svg {
+      height: 1.5rem;
+      width: 1.5rem;
+      fill: current;
+    }
+  }
 }
 
 nav {

@@ -24,8 +24,8 @@ const NavLink = ({ children, ...props }) => {
 const MobileNavButton = ({ isOpen, setIsOpen }) => {
   return (
     <div className="md:hidden">
-      <button type="button" className="block text-gray-800 hover:text-gray-700 focus:text-gray-700 focus:outline-none" onClick={() => setIsOpen(!isOpen)}>
-        <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
+      <button type="button" className="mobile-nav-button" onClick={() => setIsOpen(!isOpen)}>
+        <svg className="fill-current" viewBox="0 0 24 24">
           <path className="hidden" d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z" />
           <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z" />
         </svg>
@@ -103,24 +103,37 @@ const MobileNav = ({ isOpen, closeMenu }) => {
 }
 
 export default function Header() {
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
   return (
     <header className="header">
       <div className="header-logo">
         <a className="header-link" href="/">Ryan Rishi</a>
       </div>
-      <nav>
+      <MobileNavButton
+        isOpen={isMobileNavOpen}
+        setIsOpen={setIsMobileNavOpen} />
+      <nav className="sm:hidden md:flex">
         <ul className="header-nav">
           <li className="header-item">
-            <a className="header-link" href="/music">Music</a>
+            <Link href="/music">
+              <a className="header-link" href="/music">Music</a>
+            </Link>
           </li>
           <li className="header-item">
-            <a className="header-link" href="/projects">Projects</a>
+            <Link href="/projects">
+              <a className="header-link" href="/projects">Projects</a>
+            </Link>
           </li>
           <li className="header-item">
-            <a className="header-link" href="/blog">Blog</a>
+            <Link href="/blog">
+              <a className="header-link" href="/blog">Blog</a>
+            </Link>
           </li>
           <li className="header-item">
-            <a className="header-link" href="https://github.com/ryanrishi">Github</a>
+            <Link href="https://github.com/ryanrishi">
+              <a className="header-link" href="https://github.com/ryanrishi">Github</a>
+            </Link>
           </li>
         </ul>
       </nav>

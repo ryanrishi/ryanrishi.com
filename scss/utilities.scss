@@ -1,0 +1,53 @@
+//
+// hidden breakpoints
+//
+.sm\:hidden {
+  @include sm {
+    display: none;
+  }
+}
+
+.md\:hidden {
+  @include md {
+    display: none;
+  }
+}
+
+.lg\:hidden {
+  @include lg {
+    display: none;
+  }
+}
+
+.xl\:hidden {
+  @include xl {
+    display: none;
+  }
+}
+
+//
+// flex breakpoints
+//
+.sm\:flex {
+  @include sm {
+    display: flex;
+  }
+}
+
+.md\:flex {
+  @include md {
+    display: flex;
+  }
+}
+
+.lg\:flex {
+  @include lg {
+    display: flex;
+  }
+}
+
+.xl\:flex {
+  @include xl {
+    display: flex;
+  }
+}
