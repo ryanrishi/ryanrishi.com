@@ -1,6 +1,10 @@
 //
 // hidden breakpoints
 //
+.hidden {
+  display: none;
+}
+
 .sm\:hidden {
   @include sm {
     display: none;

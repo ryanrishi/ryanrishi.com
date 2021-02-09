@@ -113,7 +113,7 @@ export default function Header() {
       <MobileNavButton
         isOpen={isMobileNavOpen}
         setIsOpen={setIsMobileNavOpen} />
-      <nav className="sm:hidden md:flex">
+      <nav className="hidden md:flex">
         <ul className="header-nav">
           <li className="header-item">
             <Link href="/music">
