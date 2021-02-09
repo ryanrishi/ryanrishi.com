@@ -1,6 +1,21 @@
 .header {
   position: relative;
-  padding: ($line-height * 3) 0;
+
+  @include sm {
+    padding: $line-height 0;
+  }
+
+  @include md {
+    padding: $line-height * 1.5 0;
+  }
+
+  @include lg {
+    padding: $line-height * 2 0;
+  }
+
+  @include xl {
+    padding: $line-height * 3 0;
+  }
 
   .header-logo {
     margin: 0;
