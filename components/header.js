@@ -3,6 +3,7 @@ import Link from "next/Link";
 import { useRouter } from "next/router";
 import { animated, useChain, useTrail, useTransition } from "react-spring";
 import { DialogOverlay, DialogContent } from "@reach/dialog";
+import { Cross as Hamburger } from "hamburger-react";
 
 const AnimatedDialogOverlay = animated(DialogOverlay);
 
@@ -18,19 +19,6 @@ const NavLink = ({ children, ...props }) => {
     <Link {...props}>
       {cloneElement(child, { className })}
     </Link>
-  );
-}
-
-const MobileNavButton = ({ isOpen, setIsOpen }) => {
-  return (
-    <div className="md:hidden">
-      <button type="button" className="mobile-nav-button" onClick={() => setIsOpen(!isOpen)}>
-        <svg className="fill-current" viewBox="0 0 24 24">
-          <path className="hidden" d="M16.24 14.83a1 1 0 0 1-1.41 1.41L12 13.41l-2.83 2.83a1 1 0 0 1-1.41-1.41L10.59 12 7.76 9.17a1 1 0 0 1 1.41-1.41L12 10.59l2.83-2.83a1 1 0 0 1 1.41 1.41L13.41 12l2.83 2.83z" />
-          <path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z" />
-        </svg>
-      </button>
-    </div>
   );
 }
 
@@ -109,10 +97,10 @@ export default function Header() {
     <header className="header">
       <div className="header-logo">
         <a className="header-link" href="/">Ryan Rishi</a>
+        <div className="md:hidden">
+          <Hamburger toggled={isMobileNavOpen} toggle={setIsMobileNavOpen} />
+        </div>
       </div>
-      <MobileNavButton
-        isOpen={isMobileNavOpen}
-        setIsOpen={setIsMobileNavOpen} />
       <nav className="hidden md:flex">
         <ul className="header-nav">
           <li className="header-item">

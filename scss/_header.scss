@@ -1,6 +1,4 @@
 .header {
-  position: relative;
-
   @include sm {
     padding: $line-height 0;
   }
@@ -18,6 +16,9 @@
   }
 
   .header-logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 0;
     line-height: $line-height;
 
