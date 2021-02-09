@@ -1,26 +1,23 @@
-import ReactPlaceholder from "react-placeholder";
 import Layout from "../components/layout";
-import Head from 'next/Head';
+import Head from '../components/head';
 
 export default function Music() {
   return (
     <Layout>
-      <Head>
-        <title key="title">Music | Ryan Rishi</title>
-      </Head>
-      <h1 class="mt-0">Music</h1>
+      <Head title="Music" />
+      <h1 className="mt-0">Music</h1>
 
       <h3>Senior Recital</h3>
       <p>As a music major, I was awarded the opportunity to put on a recital in my senior year. It composed of various musical elements including live looping marimba with <a href="https://www.ableton.com/">Ableton Live</a>, percussion ensemble, <em>a cappella</em>, gamelan, and mallet solos.</p>
-      <div class="video-container">
-        <iframe src="https://www.youtube-nocookie.com/embed/v_Dzb1uit8k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div className="video-container">
+        <iframe src="https://www.youtube-nocookie.com/embed/v_Dzb1uit8k" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
       </div>
 
       <h3>Percussion Covers</h3>
       <p>In college, I enjoyed arranging and recording popular songs played on keyboard percussion instruments.</p>
 
-      <div class="video-container">
-        <iframe src="https://www.youtube-nocookie.com/embed/sMzCV91D3ao" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div className="video-container">
+        <iframe src="https://www.youtube-nocookie.com/embed/sMzCV91D3ao" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
       </div>
 
       <h3>Recording</h3>
@@ -31,7 +28,7 @@ export default function Music() {
           The second is <a href="https://open.spotify.com/album/5Tbpm70sMQ2aUwdsEieHn5?si=pucr00KFSq-X_hMGfvNRrA">Bellomy</a>, an album of songs written by my band from college.
         </p>
 
-        <iframe src="https://open.spotify.com/embed/album/5Tbpm70sMQ2aUwdsEieHn5" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        <iframe src="https://open.spotify.com/embed/album/5Tbpm70sMQ2aUwdsEieHn5" width="100%" height="380" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
       </p>
     </Layout>
   );

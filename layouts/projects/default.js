@@ -1,4 +1,4 @@
-import Head from 'next/Head';
+import Head from '../../components/head';
 import Layout from '../../components/layout';
 
 export default function Index({ children, frontMatter }) {
@@ -6,9 +6,8 @@ export default function Index({ children, frontMatter }) {
 
   return (
     <Layout>
-      <Head>
-      <title key="title">{(name ? `${name} | ` : '') + 'Ryan Rishi'}</title>
-      </Head>
+      <Head
+        title={name} />
       <div>
         <h1>{name}</h1>
         <div>
