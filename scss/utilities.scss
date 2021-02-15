@@ -32,6 +32,10 @@
 //
 // flex breakpoints
 //
+.flex {
+  display: flex;
+}
+
 .sm\:flex {
   @include sm {
     display: flex;
@@ -53,5 +57,67 @@
 .xl\:flex {
   @include xl {
     display: flex;
+  }
+}
+
+//
+// flex row
+//
+.flex-row {
+  flex-direction: row;
+}
+
+.sm\:flex-row {
+  @include sm {
+    flex-direction: row !important;
+  }
+}
+
+.md\:flex-row {
+  @include md {
+    flex-direction: row !important;
+  }
+}
+
+.lg\:flex-row {
+  @include lg {
+    flex-direction: row !important;
+  }
+}
+
+.xl\:flex-row {
+  @include xl {
+    flex-direction: row !important;
+  }
+}
+
+//
+// flex col
+//
+.flex-col {
+  flex-direction: column;
+}
+
+.sm\:flex-col {
+  @include sm {
+    flex-direction: column !important;
+  }
+}
+
+.md\:flex-col {
+  @include md {
+    flex-direction: column !important;
+  }
+}
+
+.lg\:flex-col {
+  @include lg {
+    flex-direction: column !important;
+  }
+}
+
+.xl\:flex-col {
+  @include xl {
+    flex-direction: column !important;
   }
 }

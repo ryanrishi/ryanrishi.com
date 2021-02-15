@@ -65,7 +65,15 @@ h4,
 h5,
 h6,
 pre {
-  margin-bottom: $line-height;
+  margin-bottom: $line-height / 2;
+
+  @include md {
+    margin-bottom: $line-height * 2/3;
+  }
+
+  @include xl {
+    margin-bottom: $line-height;
+  }
 }
 
 h1,
@@ -74,7 +82,14 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: $line-height * 1.5;
+  @include md {
+    margin-top: $line-height;
+  }
+
+  @include xl {
+    margin-top: $line-height * 1.5;
+  }
+
   font-style: italic;
   font-weight: 900;
   text-decoration: none;
@@ -112,11 +127,19 @@ ol {
 }
 
 hr {
+  @include md {
+    height: $line-height / 2;
+    margin-bottom: $line-height / 2;
+  }
+
+  @include xl {
+    height: $line-height;
+    margin-bottom: $line-height;
+  }
+
   display: block;
-  height: $line-height;
   border: 0;
   box-shadow: 0 1px 0 #eee;
-  margin-bottom: $line-height;
 }
 
 blockquote {

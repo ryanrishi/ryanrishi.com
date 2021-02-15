@@ -7,10 +7,10 @@ pre {
     line-height: $line-height / 1.5;
     word-wrap: break-word;
 
-    padding: 0.5rem .75rem;
+    padding: 0.75rem .5rem;
 
-    @include md {
-      padding: 1rem 1.5rem;
+    @include lg {
+      padding: 1.5rem 1rem;
     }
     width: 100%
   }
