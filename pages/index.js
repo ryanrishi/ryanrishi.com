@@ -1,8 +1,5 @@
-import ReactPlaceholder from "react-placeholder";
 import Layout from "../components/layout";
 import Image from 'next/image';
-import UnorderedList from '../components/UnorderedList';
-import Link from 'next/Link';
 
 export default function Home() {
   return (
@@ -33,22 +30,6 @@ export default function Home() {
           <Image src="/img/ryan-sitting.jpg" alt="Ryan Rishi" className="object-contain rounded-lg h-full w-full" width="3648" height="5472" />
         </div>
       </div>
-
-      {/* <div className="flex bg-white" style={{ height: '900px' }}>
-        <div className="flex items-center text-center lg:text-left px-8 md:px-12 lg:w-1/2">
-          <div>
-            <h2 className="text-3xl font-semibold text-gray-800 md:text-4xl">Ryan Rishi</h2>
-                <ReactPlaceholder type="text" rows={4} ready={false} />
-            <div className="flex justify-center lg:justify-start mt-6">
-              <a className="px-4 py-3 bg-gray-900 text-gray-200 text-xs font-semibold rounded hover:bg-gray-800" href="#">Get Started</a>
-              <a className="mx-4 px-4 py-3 bg-gray-300 text-gray-900 text-xs font-semibold rounded hover:bg-gray-400" href="#">Learn More</a>
-            </div>
-          </div>
-        </div>
-        <div>
-          <Image src="/img/ryan-sitting.jpg" alt="Ryan Rishi" layout="fill" />
-        </div>
-      </div> */}
     </Layout>
   );
 }

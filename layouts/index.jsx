@@ -34,6 +34,7 @@ export default function Index({ children, frontMatter }) {
   );
 }
 
+/* eslint-disable react/display-name */
 const components = {
   pre: (props) => <div {...props} />,
 
@@ -51,3 +52,4 @@ const components = {
     );
   }
 }
+/* eslint-enable react/display-name */
