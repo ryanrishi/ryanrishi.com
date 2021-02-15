@@ -2,7 +2,7 @@
 # layout: post
 title:  Migrating My Website to AWS Using Terraform
 blurb:  I recently migrated my personal website infrastructure from a VPS to AWS S3 + CloudFront, with infrastructure managed by Terraform.
-image:  /assets/img/waterfall-cdn.png
+image:  /img/waterfall-cdn.png
 date:   2020-01-06 00:00:00 -0000
 tags:
   - terraform
@@ -185,12 +185,12 @@ You can see the full Travis CI configuration [here](https://github.com/ryanrishi
 Moving from my own VPS in New York to a CDN shaved the load time from 1.2s to 200ms. Visitors in California used to have higher latency due to cross-country travel, but now that it is served via a CDN, geographic location plays a much smaller factor&mdash;the content will be served from the closest edge of the network topology.
 
 <figure className="image">
-  <img src="/assets/img/waterfall-vps.png" alt="Waterfall VPS" />
+  <img src="/img/waterfall-vps.png" alt="Waterfall VPS" />
   <figcaption>Waterfall when serving over VPS</figcaption>
 </figure>
 
 <figure className="image">
-  <img src="/assets/img/waterfall-cdn.png" alt="Waterfall CDN" />
+  <img src="/img/waterfall-cdn.png" alt="Waterfall CDN" />
   <figcaption>Waterfall when serving over CDN</figcaption>
 </figure>
 

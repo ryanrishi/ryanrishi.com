@@ -58,12 +58,12 @@ export default function Head(props) {
       <meta name="twitter:site"    content="ryanrishi" />
       <meta name="twitter:creator" content="ryanrishi" />
 
-      <link rel="icon" href="/assets/img/favicon.ico?v=1.1" />
+      <link rel="icon" href="/img/favicon.ico?v=1.1" />
       <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
-      <link rel="icon" type="image/png" sizes="192x192"  href="/assets/img/android-chrome-192x192.png" />
-      <link rel="icon" type="image/png" sizes="512x512"  href="/assets/img/android-chrome-512x512.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="192x192"  href="/img/android-chrome-192x192.png" />
+      <link rel="icon" type="image/png" sizes="512x512"  href="/img/android-chrome-512x512.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png" />
     </NextHead>
   );
 }
