@@ -135,7 +135,7 @@ resource "aws_route53_record" "www" {
 ```
 
 While DNS propagates, I can get the AWS nameservers from the Terraform state so I can configure Google Domains:
-```shell
+```hcl
 $ terraform state show aws_route53_zone.zone
 # aws_route53_zone.zone:
 resource "aws_route53_zone" "zone" {
@@ -150,7 +150,7 @@ resource "aws_route53_zone" "zone" {
         "ns-689.awsdns-22.net",
     ]
     tags          = {}
-    zone_id       = "Z1ETYGU6SICX40"
+    zone_id       = "Z1ETY..."
 }
 ```
 
@@ -195,7 +195,7 @@ Moving from my own VPS in New York to a CDN shaved the load time from 1.2s to 20
 </figure>
 
 # Next Steps
-I'm currently running `terraform apply` on my laptop&mdash;I'd rather run that in a continuous integration pipeline.
+I'm currently running `terraform apply` on my laptop&mdash; I'd rather run that in a continuous integration pipeline.
 
 Using Terraform was challenging at first, but in the end it seems like a great way to track infrastructure changes. I'd like to continue learning how to manage infrastructure using Terraform, including migrating some other VPSs to EC2/Kubernetes.
 

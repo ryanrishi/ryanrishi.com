@@ -24,7 +24,7 @@ resource "aws_instance" "web" {
 ```
 
 If you want to use the same key pair in the `production` workspace, you might switch workspaces and import the key pair:
-```shell
+```shell-session
 $ terraform workspace show
 production
 $ terraform import -var-file=production.tfvars aws_key_pair.key_pair ryan
@@ -55,7 +55,7 @@ This will import the key pair, but there is a problem&mdash;running `terraform p
 Notice the "forces replacement" next to the `public_key`. Running `terraform import` imported the key pair but _not_ the `public_key` for the key pair&mdash;this is because the [AWS API does not expose the public key](https://github.com/terraform-providers/terraform-provider-aws/issues/1092).
 
 We can confirm that the Terraform state does not have the public key by running `terraform state show`:
-```shell
+```shell-session
 $ terraform state show aws_key_pair.key_pair
 # aws_key_pair.key_pair:
 resource "aws_key_pair" "key_pair" \{
@@ -70,7 +70,7 @@ resource "aws_key_pair" "key_pair" \{
 # The Solution
 We’re going to update `terraform.tfstate` to include public key. I *do not* recommend this approach if you’re using Terraform as a team, as editing the Terraform state file by hand can lead to unexpected behaviors if a change to the infrastructure is made while you’re doing this.
 
-```shell
+```shell-session
 $ terraform workspace show
 staging
 # get the public key
@@ -87,14 +87,14 @@ resource "aws_key_pair" "key_pair" {
 ```
 
 Make a note of the `public_key` from above, and then switch to the production workspace:
-```shell
+```shell-session
 # switch to production workspace
-$ terraform workspace select production</code></pre>
+$ terraform workspace select production
 ```
 
 ## Edit Terraform state file
 The next step is to get the Terraform state file. Your mileage may vary depending on which [Terraform backend](https://www.terraform.io/docs/backends/index.html) you're using. In my case, I use the S3 backend, so I need to copy the production state file so I can edit it:
-```shell
+```shell-session
 $ aws s3 cp s3://terraform/env:/production/terraform.tfstate production.tfstate
 ```
 
@@ -125,12 +125,12 @@ Find the resource with type `aws_key_pair` named `key_pair`. Add the public key 
 ```
 
 Finally, we need to re-upload the state file:
-```shell
-$ aws s3 cp production.tfstate s3://terraform/env:/production/terraform.tfstate</code></pre>
+```shell-session
+$ aws s3 cp production.tfstate s3://terraform/env:/production/terraform.tfstate
 ```
 
 To ensure the public key was added to the key pair state, we can run `terraform plan` to verify that a second key pair won’t be created:
-```shell
+```shell-session
 $ terraform workspace show
 production
 $ terraform plan -var-file=production.tfvars
