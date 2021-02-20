@@ -4,6 +4,7 @@ describe('404', () => {
   });
 
   it('renders 404 page', () => {
+    cy.title().should('contain', '404');
     cy.get('h1').contains('404');
     cy.get('a:not(".header-link")').should('have.text', 'Return home');
     cy.percySnapshot();
