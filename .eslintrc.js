@@ -1,24 +1,31 @@
+/* eslint-env node */
+
 module.exports = {
-    "env": {
-        "browser": true,
-        "es2021": true
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'airbnb',
+    'plugin:react/recommended',
+  ],
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off"
-    }
+    ecmaVersion: 12,
+    sourceType: 'module',
+  },
+  plugins: [
+    'react',
+  ],
+  rules: {
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+    'react/jsx-filename-extension': 'off',
+    'comma-dangle': 'off',
+    'react/destructuring-assignment': 'warn',
+    'max-len': ['warn', 120]
+  }
 };

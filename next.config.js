@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 const withMdxEnhanced = require('next-mdx-enhanced');
 
 module.exports = withMdxEnhanced({
@@ -14,6 +16,6 @@ module.exports = withMdxEnhanced({
         destination: '/blog/:year-:month-:day-:post',
         permanent: false
       }
-    ]
+    ];
   }
 });

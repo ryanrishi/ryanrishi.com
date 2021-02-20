@@ -7,7 +7,8 @@ export default function Index({ children, frontMatter }) {
   return (
     <Layout>
       <Head
-        title={name} />
+        title={name}
+      />
       <div>
         <h1>{name}</h1>
         <div>

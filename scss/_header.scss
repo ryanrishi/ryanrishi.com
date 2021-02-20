@@ -30,14 +30,8 @@
     }
   }
 
-  nav {
-    .header-item {
-      margin-right: $line-height / 4;
-    }
-  }
-
   .header-link {
-    margin-right: $line-height / 4;
+    margin-right: $line-height / 3;
     color: $color-text;
     font-size: $font-size / $type-scale;
     font-style: italic;

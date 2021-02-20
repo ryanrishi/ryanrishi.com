@@ -1,15 +1,16 @@
 import React from 'react';
+import dayjs from 'dayjs';
+import Link from 'next/Link';
 import Layout from '../components/layout';
-import Link from 'next/Link'
 import Head from '../components/head';
 import { getAllPosts } from '../lib/posts';
-import dayjs from 'dayjs';
 
 export default function BlogIndex({ allPosts }) {
   return (
     <Layout>
       <Head
-        title="Blog" />
+        title="Blog"
+      />
       {allPosts.map((post) => (
         <div className="post" key={post.slug}>
           <h2 className="post-title">
@@ -30,7 +31,7 @@ export default function BlogIndex({ allPosts }) {
 }
 
 export async function getStaticProps() {
-  const allPosts = getAllPosts(["title", "date", "slug", "blurb", "image", "tags"]);
+  const allPosts = getAllPosts(['title', 'date', 'slug', 'blurb', 'image', 'tags']);
 
   return {
     props: { allPosts }

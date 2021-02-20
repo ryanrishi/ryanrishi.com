@@ -1,79 +1,58 @@
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-
-export default function Code(props) {
-  let language = props.language || "";
-
-  // Filter out any empty lines at end
-  let reversedLines = props.children.split("\n").reverse();
-  let firstNonEmptyIndex = reversedLines.findIndex((line) => line !== "");
-  let lines = reversedLines
-    .filter((line, index) => index >= firstNonEmptyIndex)
-    .reverse();
-
-  return (
-    <SyntaxHighlighter
-      style={theme}
-      language={language}
-      className={`language-${language}`}
-    >
-      {lines.join("\n")}
-    </SyntaxHighlighter>
-  );
-}
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
 const colors = {
-  green: "#8CC570",
-  purple: "#D373E3",
-  red: "#F16372",
-  gray: "#A9B2C0",
-  darkGray: "#5A6371",
-  yellow: "#DB975C",
-  brightYellow: "#ECBE70",
-  blue: "#40B1F5",
-  cyan: "#19B9C4",
-  orange: "#DB975C",
+  green: '#8CC570',
+  purple: '#D373E3',
+  red: '#F16372',
+  gray: '#A9B2C0',
+  darkGray: '#5A6371',
+  yellow: '#DB975C',
+  brightYellow: '#ECBE70',
+  blue: '#40B1F5',
+  cyan: '#19B9C4',
+  orange: '#DB975C',
 };
 
 const theme = {
   'code[class*="language-"]': {
     color: colors.gray,
-    direction: "ltr",
-    textAlign: "left",
-    whiteSpace: "pre",
-    wordSpacing: "normal",
-    wordBreak: "normal",
-    MozTabSize: "4",
-    OTabSize: "4",
-    tabSize: "4",
-    WebkitHyphens: "none",
-    MozHyphens: "none",
-    msHyphens: "none",
-    hyphens: "none",
+    direction: 'ltr',
+    textAlign: 'left',
+    whiteSpace: 'pre',
+    wordSpacing: 'normal',
+    wordBreak: 'normal',
+    MozTabSize: '4',
+    OTabSize: '4',
+    tabSize: '4',
+    WebkitHyphens: 'none',
+    MozHyphens: 'none',
+    msHyphens: 'none',
+    hyphens: 'none',
   },
   'pre[class*="language-"]': {
     color: colors.gray,
-    direction: "ltr",
-    textAlign: "left",
-    whiteSpace: "pre",
-    wordSpacing: "normal",
-    wordBreak: "normal",
-    MozTabSize: "4",
-    OTabSize: "4",
-    tabSize: "4",
-    WebkitHyphens: "none",
-    MozHyphens: "none",
-    msHyphens: "none",
-    hyphens: "none",
-    background: "#282c34",
+    direction: 'ltr',
+    textAlign: 'left',
+    whiteSpace: 'pre',
+    wordSpacing: 'normal',
+    wordBreak: 'normal',
+    MozTabSize: '4',
+    OTabSize: '4',
+    tabSize: '4',
+    WebkitHyphens: 'none',
+    MozHyphens: 'none',
+    msHyphens: 'none',
+    hyphens: 'none',
+    background: '#282c34',
   },
   ':not(pre) > code[class*="language-"]': {
-    background: "#282c34",
-    padding: ".1em",
-    borderRadius: ".3em",
+    background: '#282c34',
+    padding: '.1em',
+    borderRadius: '.3em',
   },
   comment: {
     color: colors.darkGray,
-    fontStyle: "italic",
+    fontStyle: 'italic',
   },
   prolog: {
     color: colors.darkGray,
@@ -88,12 +67,12 @@ const theme = {
     color: colors.gray,
   },
   block: {
-    display: "inline", // needed to ovverride tailwind's block class
+    display: 'inline', // needed to ovverride tailwind's block class
   },
-  ".namespace": {
-    Opacity: ".7",
+  '.namespace': {
+    Opacity: '.7',
   },
-  "property-access": {
+  'property-access': {
     color: colors.blue,
   },
   property: {
@@ -105,10 +84,10 @@ const theme = {
   tag: {
     color: colors.red,
   },
-  "maybe-class-name": {
+  'maybe-class-name': {
     color: colors.red,
   },
-  "class-name": {
+  'class-name': {
     color: colors.brightYellow,
   },
   boolean: {
@@ -118,10 +97,10 @@ const theme = {
     color: colors.orange,
   },
   symbol: {
-    color: "#f92672",
+    color: '#f92672',
   },
   deleted: {
-    color: "#f92672",
+    color: '#f92672',
   },
   number: {
     color: colors.yellow,
@@ -129,7 +108,7 @@ const theme = {
   selector: {
     color: colors.green,
   },
-  "attr-name": {
+  'attr-name': {
     color: colors.green,
   },
   string: {
@@ -152,37 +131,56 @@ const theme = {
   },
   entity: {
     color: colors.brightYellow,
-    cursor: "help",
+    cursor: 'help',
   },
   url: {
     color: colors.red,
   },
-  ".language-css .token.string": {
-    color: "#87C38A",
+  '.language-css .token.string': {
+    color: '#87C38A',
   },
-  ".style .token.string": {
-    color: "#87C38A",
+  '.style .token.string': {
+    color: '#87C38A',
   },
   atrule: {
     color: colors.brightYellow,
   },
-  "attr-value": {
+  'attr-value': {
     color: colors.brightYellow,
   },
   function: {
     color: colors.blue,
   },
   regex: {
-    color: "#E9C062",
+    color: '#E9C062',
   },
   important: {
-    color: "#fd971f",
-    fontWeight: "bold",
+    color: '#fd971f',
+    fontWeight: 'bold',
   },
   bold: {
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   italic: {
-    fontStyle: "italic",
+    fontStyle: 'italic',
   },
 };
+
+export default function Code({ language = '', children }) {
+  // Filter out any empty lines at end
+  const reversedLines = children.split('\n').reverse();
+  const firstNonEmptyIndex = reversedLines.findIndex((line) => line !== '');
+  const lines = reversedLines
+    .filter((line, index) => index >= firstNonEmptyIndex)
+    .reverse();
+
+  return (
+    <SyntaxHighlighter
+      style={theme}
+      language={language}
+      className={`language-${language}`}
+    >
+      {lines.join('\n')}
+    </SyntaxHighlighter>
+  );
+}

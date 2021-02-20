@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable react/no-unescaped-entities */
+
 import Layout from '../components/layout';
 
 export default function NotFound() {

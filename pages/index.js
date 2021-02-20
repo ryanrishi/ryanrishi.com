@@ -1,5 +1,7 @@
-import Layout from "../components/layout";
-import Image from 'next/image';
+/* eslint-disable react/no-unescaped-entities */
+
+import Image from 'next/Image';
+import Layout from '../components/layout';
 
 export default function Home() {
   return (

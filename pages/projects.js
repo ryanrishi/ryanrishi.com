@@ -1,6 +1,6 @@
-import Layout from "../components/layout";
-import Link from "next/Link";
-import Head from "../components/head";
+import Link from 'next/Link';
+import Layout from '../components/layout';
+import Head from '../components/head';
 import { getAllProjects } from '../lib/projects';
 
 export default function ProjectsIndex({ projects }) {
@@ -11,7 +11,9 @@ export default function ProjectsIndex({ projects }) {
       <ul>
         {projects.map((project) => (
           <li key={project.permalink}>
-            <Link href={project.permalink}>{project.name}</Link>&mdash; {project.blurb}
+            <Link href={project.permalink}>{project.name}</Link>
+            &mdash;
+            {project.blurb}
           </li>
         ))}
       </ul>
@@ -23,6 +25,6 @@ export async function getStaticProps() {
   const projects = getAllProjects(['name', 'blurb', 'permalink', 'date']);
 
   return {
-    props: { projects }
+    props: { projects },
   };
 }
