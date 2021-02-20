@@ -23,6 +23,6 @@ describe('Follows redirects from previous blog format', () => {
 
   it('The Twelve Days of an a cappella Christmas Album', () => {
     cy.visit('2015/12/27/the-twelve-days-of-an-a-cappella-christmas-album.html');
-    cy.get('h1').contains('The Twelve Days of an a cappella Christmas Album');
+    cy.get('h1').contains('The Twelve Days of an A Cappella Christmas Album');
   });
 });

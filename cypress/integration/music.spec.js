@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 describe('Music', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/music');

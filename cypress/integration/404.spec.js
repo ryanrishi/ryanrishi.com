@@ -1,14 +1,11 @@
-/// <reference types="cypress" />
-
 describe('404', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/this-page-does-not-exist', { failOnStatusCode: false });
   });
 
-  it('percy', () => {
-    const title = cy.get('h1').contains('404');
-    const returnHomeLink = title.next().get('a:not(".header-link")')
-    returnHomeLink.should('have.text', 'Return home');
+  it('renders 404 page', () => {
+    cy.get('h1').contains('404');
+    cy.get('a:not(".header-link")').should('have.text', 'Return home');
     cy.percySnapshot();
   });
 });

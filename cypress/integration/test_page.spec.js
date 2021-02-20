@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 describe('Test Page', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/_test');
@@ -7,16 +5,14 @@ describe('Test Page', () => {
 
   describe('Title + Date', () => {
     it('Title + Date', () => {
-      const title = cy.get('h1').contains('test');
-      title.next().should('have.text', 'February 2, 2021'); // .should((date) => expect(date.text()).to.equal('February 2, 2021'));
+      cy.get('h1').contains('test').next().should('have.text', 'February 2, 2021');
       cy.percySnapshot();
     });
-  })
+  });
 
   describe('Viewport Tests', () => {
     beforeEach(() => {
-      const screenSizesSection = cy.get('h1').contains('Screen Sizes');
-      screenSizesSection.scrollIntoView();
+      cy.get('h1').contains('Screen Sizes').scrollIntoView();
     });
 
     it('viewport - < sm', () => {
