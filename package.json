@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 3001",
+    "cypress:open": "cypress open",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "eslint": "eslint .",
-    "test": "yarn run eslint"
+    "test": "start-server-and-test dev 3000 cypress:open"
   },
   "dependencies": {
     "@mdx-js/react": "^1.6.22",
@@ -29,6 +30,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^1.7.0"
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "start-server-and-test": "^1.12.0"
   }
 }
