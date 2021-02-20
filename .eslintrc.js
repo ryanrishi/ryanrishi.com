@@ -24,8 +24,9 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
     'react/jsx-filename-extension': 'off',
-    'comma-dangle': 'off',
+    'comma-dangle': 'warn',
     'react/destructuring-assignment': 'warn',
-    'max-len': ['warn', 120]
+    'max-len': ['warn', 120],
+    'no-plusplus': ['warn', { allowForLoopAfterthoughts: true }]
   }
 };

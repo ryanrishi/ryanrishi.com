@@ -12,7 +12,7 @@ export default function ProjectsIndex({ projects }) {
         {projects.map((project) => (
           <li key={project.permalink}>
             <Link href={project.permalink}>{project.name}</Link>
-            &mdash;
+            &mdash;&nbsp;
             {project.blurb}
           </li>
         ))}
