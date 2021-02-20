@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Home', () => {
+describe('404', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/this-page-does-not-exist', { failOnStatusCode: false });
   });
