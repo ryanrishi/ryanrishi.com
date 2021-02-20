@@ -3,7 +3,8 @@ describe('Music', () => {
     cy.visit('http://localhost:3000/music');
   });
 
-  it('should find the title of the music page', () => {
+  it('renders the music page', () => {
+    cy.title().should('eq', 'Music | Ryan Rishi');
     cy.get('h1').contains('Music');
     cy.percySnapshot();
   });

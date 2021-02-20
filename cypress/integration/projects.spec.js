@@ -4,7 +4,8 @@ describe('Projects', () => {
     cy.viewport('ipad-2'); // a tall viewport since some  of these pages are long
   });
 
-  it('should find the title of the projects page', () => {
+  it('renders the project page', () => {
+    cy.title().should('eq', 'Projects | Ryan Rishi');
     cy.get('h1').contains('Projects');
     cy.percySnapshot();
   });

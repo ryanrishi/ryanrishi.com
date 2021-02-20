@@ -15,7 +15,7 @@ export default function Head(props) {
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="google-site-verification" content="kausNF9hQubv5pYpPGZt6JjoZ45qF__IlkNNrlr-8ws" />
 
-      <title key="title">{`${props.title ? `${props.title} | ` : ''}Ryan Rishi`}</title>
+      <title key="title">{title}</title>
       <meta property="og:title" content={title} />
       <meta property="twitter:title" content={title} />
       <meta property="og:site_name" content="Ryan Rishi" />

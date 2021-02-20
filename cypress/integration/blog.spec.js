@@ -4,8 +4,8 @@ describe('Blog', () => {
     cy.viewport('ipad-2'); // a tall viewport since some  of these pages are long
   });
 
-  it('screenshot - blog index', () => {
-    cy.title().should('contain', 'Blog');
+  it('renders blog index', () => {
+    cy.title().should('eq', 'Blog | Ryan Rishi');
     cy.percySnapshot();
   });
 

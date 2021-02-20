@@ -2,10 +2,12 @@
 
 import Image from 'next/Image';
 import Layout from '../components/layout';
+import Head from '../components/head';
 
 export default function Home() {
   return (
     <Layout size="full">
+      <Head />
       <div className="home">
         <div className="intro">
           <h1>Hi, I'm Ryan 👋🏼</h1>
