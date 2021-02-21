@@ -13,6 +13,8 @@ tags:
   - travis
 ---
 
+import Image from 'next/Image';
+
 I recently migrated my personal website hosting from a [DigitalOcean VPS](https://www.digitalocean.com/products/droplets/) to [Amazon AWS S3 + CloudFront](https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/). As part of this, I wanted to use [Terraform](https://www.terraform.io/) to manage infrastructure-as-code.
 
 # Requirements
@@ -185,12 +187,12 @@ You can see the full Travis CI configuration [here](https://github.com/ryanrishi
 Moving from my own VPS in New York to a CDN shaved the load time from 1.2s to 200ms. Visitors in California used to have higher latency due to cross-country travel, but now that it is served via a CDN, geographic location plays a much smaller factor&mdash;the content will be served from the closest edge of the network topology.
 
 <figure className="image">
-  <img src="/img/waterfall-vps.png" alt="Waterfall VPS" />
+  <Image src="/img/waterfall-vps.png" alt="Waterfall VPS" height="2100" width="3360" />
   <figcaption>Waterfall when serving over VPS</figcaption>
 </figure>
 
 <figure className="image">
-  <img src="/img/waterfall-cdn.png" alt="Waterfall CDN" />
+  <Image src="/img/waterfall-cdn.png" alt="Waterfall CDN" height="2100" width="3360" />
   <figcaption>Waterfall when serving over CDN</figcaption>
 </figure>
 

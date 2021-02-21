@@ -9,6 +9,8 @@ tags:
   - edward tufte
 ---
 
+import Image from 'next/Image';
+
 In December, I attended [Edward Tufte's course on Presenting Data and Information](https://www.edwardtufte.com/tufte/courses) in San Francisco. Here are my key takeaways from the course.
 
 > Hold an open mind, but not an open head.
@@ -19,7 +21,12 @@ When presenting information, chances are the audience has already been filtered 
 
 Here is an example of an appropriate amount of data from the National Weather Service.
 <figure>
-  <img src="/img/tufte/weather.png" alt="National Weather Service" title="National Weather Service" />
+  <Image
+    src="/img/tufte/weather.png"
+    alt="National Weather Service"
+    title="National Weather Service"
+    width="1046"
+    height="432" />
   <figcaption>
     National Weather Service.&nbsp;
     <a href="https://forecast.weather.gov/MapClick.php?lat=37.796&lon=-122.4206">Source</a>
@@ -42,7 +49,12 @@ To further the damage from the pie chart without direct labeling, it may be impo
 
 On the other hand, the following scatterplot uses direct labeling to minimize content-reasoning time.
 <figure>
-  <img src="/img/tufte/iris-scatter.png" alt="Direct labeled Iris data" title="Direct labeled Iris data" />
+  <Image
+    src="/img/tufte/iris-scatter.png"
+    alt="Direct labeled Iris data"
+    title="Direct labeled Iris data"
+    width="480"
+    height="480" />
   <figcaption>
     Direct labeled <i>Iris</i> data, demonstrated from the <a href="http://directlabels.r-forge.r-project.org/"><tt>directlabels</tt> R package</a>.&nbsp;
     <a href="http://directlabels.r-forge.r-project.org/">Source</a>
@@ -53,7 +65,12 @@ On the other hand, the following scatterplot uses direct labeling to minimize co
 # It's better to be approximately right than precisely wrong
 I'll let the following excerpt from Tufte's <i>Beautiful Evidence</i> speak for itself.
 <figure>
-  <img src="/img/tufte/sparklines.jpg" alt="Sparklines: Intense, Simple, Word-Sized Graphics" title="Sparklines: Intense, Simple, Word-Sized Graphics" />
+  <Image
+    src="/img/tufte/sparklines.jpg"
+    alt="Sparklines: Intense, Simple, Word-Sized Graphics"
+    title="Sparklines: Intense, Simple, Word-Sized Graphics"
+    width="850"
+    height="1052" />
   <figcaption>
     Edward Tufte. <i>Beautiful Evidence, p.47</i>.&nbsp;
     <a href="https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR">Source</a>
