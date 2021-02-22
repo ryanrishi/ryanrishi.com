@@ -1,9 +1,9 @@
+import Link from 'next/link';
+import { MDXProvider } from '@mdx-js/react';
+import dayjs from 'dayjs'
 import Layout from '../components/layout';
 import Code from '../components/code';
-import Link from 'next/Link';
 import Head from '../components/head';
-import { MDXProvider } from "@mdx-js/react";
-import dayjs from 'dayjs'
 
 export default function Index({ children, frontMatter }) {
   const { title, date, tags, image, blurb } = frontMatter;
@@ -39,8 +39,8 @@ const components = {
   pre: (props) => <div {...props} />,
 
   code: ({ className, children }) => {
-    let props = { children };
-    let languageMatch = className && className.match("language-([^{]+)");
+    const props = { children };
+    const languageMatch = className && className.match('language-([^{]+)');
     if (languageMatch) {
       props.language = languageMatch[1];
     }

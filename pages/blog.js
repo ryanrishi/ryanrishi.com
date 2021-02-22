@@ -1,6 +1,6 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import Link from 'next/Link';
+import Link from 'next/link';
 import Layout from '../components/layout';
 import Head from '../components/head';
 import { getAllPosts } from '../lib/posts';

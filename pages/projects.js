@@ -1,4 +1,4 @@
-import Link from 'next/Link';
+import Link from 'next/link';
 import Layout from '../components/layout';
 import Head from '../components/head';
 import { getAllProjects } from '../lib/projects';

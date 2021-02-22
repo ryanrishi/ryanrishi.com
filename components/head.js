@@ -1,4 +1,4 @@
-import NextHead from 'next/Head';
+import NextHead from 'next/head';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 
