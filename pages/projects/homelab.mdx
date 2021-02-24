@@ -6,6 +6,15 @@ permalink:  /projects/homelab/
 date:       2020-02-25 00:00:00 -0000
 ---
 
-An ongoing project for services I run at home. Services include [ddclient](https://sourceforge.net/p/ddclient/wiki/Home/), [Wireguard](https://wiki.archlinux.org/index.php/WireGuard), [Pi-Hole](https://pi-hole.net/), a Synology NAS with some NFS shares, and [Grafana](https://grafana.com/)/[Telegraf](https://www.influxdata.com/time-series-platform/telegraf/)/[InfluxDB](https://www.influxdata.com/products/influxdb-overview/) to monitor it all. Everything is provisioned via [Ansible](https://www.ansible.com/).
+An ongoing project for services I run at home. I have a few Intel NUCs running [Proxmox](https://www.proxmox.com/), a few Synology NAS for persistent storage and backups, and a handful of Raspberry Pis for ad-hoc projects.
 
-As of June 2020, I'm in the process of migrating services from a handful Raspberry Pis to an Intel NUC, with everything in Docker containers running on Proxmox VMs. Future improvements include a separate VLAN for the lab, offsite backups, and improved monitoring for Docker containers.
+Services include:
+- [Pi-Hole](https://pi-hole.net) for network-wide ad blocking and DNS resolution
+- [ddclient](https://sourceforge.net/p/ddclient/wiki/Home) for dynamic DNS
+- [WireGuard](https://wiki.archlinux.org/index.php/WireGuard) for VPN
+- [Grafana](https://grafana.com) + [InfluxDB](https://www.influxdata.com/products/influxdb-overview) for storing and visualizing metrics
+- Telegraf on every host, plus some extra SNMP metrics for Synology NASs
+
+All of these are running as LXCs or via Docker on VMs. Everything is provisioned with [Ansible](https://www.ansible.com) so that changes are reliable and repeatable.
+
+Future improvements include a separate VLAN for the lab, offsite backups, and improved monitoring for Docker containers.
