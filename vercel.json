@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/covid-19-dashboard",
+      "destination": "https://ryanrishi.com/covid-19-dashboard"
+    }
+  ]
+}
