@@ -41,20 +41,20 @@ export default function Music() {
       <p>
         I've produced two albums.
         The first is Christmas In Claradise, which was a joint effort with the five <em>a cappella</em> groups at Santa Clara University. You can read about it <a href="{% post_url 2015-12-27-the-twelve-days-of-an-a-cappella-christmas-album %}">here</a>.
-        <p>
-          The second is <a href="https://open.spotify.com/album/5Tbpm70sMQ2aUwdsEieHn5?si=pucr00KFSq-X_hMGfvNRrA">Bellomy</a>, an album of songs written by my band from college.
-        </p>
-
-        <iframe
-          src="https://open.spotify.com/embed/album/5Tbpm70sMQ2aUwdsEieHn5"
-          title="Jagged Light - Bellomy"
-          width="100%"
-          height="380"
-          frameBorder="0"
-          allowtransparency="true"
-          allow="encrypted-media"
-        />
       </p>
+      <p>
+        The second is <a href="https://open.spotify.com/album/5Tbpm70sMQ2aUwdsEieHn5?si=pucr00KFSq-X_hMGfvNRrA">Bellomy</a>, an album of songs written by my band from college.
+      </p>
+
+      <iframe
+        src="https://open.spotify.com/embed/album/5Tbpm70sMQ2aUwdsEieHn5"
+        title="Jagged Light - Bellomy"
+        width="100%"
+        height="380"
+        frameBorder="0"
+        allowtransparency="true"
+        allow="encrypted-media"
+      />
     </Layout>
   );
 }
