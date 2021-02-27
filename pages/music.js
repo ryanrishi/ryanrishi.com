@@ -16,8 +16,8 @@ export default function Music() {
       </p>
       <div className="video-container">
         <iframe
-          src="https://www.youtube-nocookie.com/embed/v_Dzb1uit8k"
-          title="Opening - Philip Glass [arr. for Marimba & Ableton Live by Ryan Rishi]"
+          src="https://www.youtube-nocookie.com/embed/QEQ5AZ_LAlQ"
+          title='Ryan Rishi - "8 on Three and 9 on Two"'
           frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
