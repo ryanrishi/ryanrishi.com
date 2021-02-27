@@ -8,7 +8,7 @@ export default function Header() {
     { title: 'Music', href: '/music' },
     { title: 'Projects', href: '/projects' },
     { title: 'Blog', href: '/blog' },
-    { title: 'Github', href: 'https://github.com/ryanrishi' },
+    { title: 'Github', href: 'https://github.com/ryanrishi' }
   ];
 
   return (

@@ -25,6 +25,6 @@ export async function getStaticProps() {
   const projects = getAllProjects(['name', 'blurb', 'permalink', 'date']);
 
   return {
-    props: { projects },
+    props: { projects }
   };
 }

@@ -1,22 +1,23 @@
 import Link from 'next/link';
 import { MDXProvider } from '@mdx-js/react';
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 import Layout from '../components/layout';
 import Code from '../components/code';
 import Head from '../components/head';
 
 export default function Index({ children, frontMatter }) {
-  const { title, date, tags, image, blurb } = frontMatter;
+  const { title, date, tags, image, description, blurb } = frontMatter;
 
   return (
     <Layout>
       <Head
         title={title}
         date={date}
-        blurb={blurb}
+        description={description || blurb}
         image={image}
         tags={tags}
-        isArticle={true} />
+        isArticle
+      />
       <div>
         <h1>{title}</h1>
         <p>{dayjs(date).format('MMMM D, YYYY')}</p>
@@ -24,9 +25,7 @@ export default function Index({ children, frontMatter }) {
         <MDXProvider components={components}>{children}</MDXProvider>
         <div className="back-to-blog">
           <Link href="/blog">
-            <a>
-              &larr; Back to Blog
-            </a>
+            &larr; Back to Blog
           </Link>
         </div>
       </div>
@@ -51,5 +50,5 @@ const components = {
       </div>
     );
   }
-}
+};
 /* eslint-enable react/display-name */

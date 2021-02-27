@@ -4,8 +4,14 @@ describe('Blog', () => {
     cy.viewport('ipad-2'); // a tall viewport since some  of these pages are long
   });
 
+  it('meta tags', () => {
+    const title = 'Blog | Ryan Rishi';
+    cy.title().should('eq', title);
+    cy.get('head meta[name="og:title"]').should('have.attr', 'content', title);
+    cy.get('head meta[name="twitter:title"]').should('have.attr', 'content', title);
+  });
+
   it('renders blog index', () => {
-    cy.title().should('eq', 'Blog | Ryan Rishi');
     cy.percySnapshot();
   });
 
@@ -27,6 +33,7 @@ describe('Blog', () => {
         cy.get('h1').first().scrollIntoView();
         cy.percySnapshot();
         cy.go('back');
+        cy.url().should('match', /\/blog$/);
       }
     });
   });

@@ -1,10 +1,10 @@
 import NextHead from 'next/head';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 
-export default function Head(props) {
-  const title = props.title ? `${props.title} | Ryan Rishi` : 'Ryan Rishi';
-  const description = props.description || 'Full-stack software engineer and musician who loves cooking, camping, and flying.';
+function Head({ title: titleFromProps, description, isArticle, date, image, tags }) {
+  const title = titleFromProps ? `${titleFromProps} | Ryan Rishi` : 'Ryan Rishi';
 
   const router = useRouter();
 
@@ -16,43 +16,29 @@ export default function Head(props) {
       <meta name="google-site-verification" content="kausNF9hQubv5pYpPGZt6JjoZ45qF__IlkNNrlr-8ws" />
 
       <title key="title">{title}</title>
-      <meta property="og:title" content={title} />
-      <meta property="twitter:title" content={title} />
-      <meta property="og:site_name" content="Ryan Rishi" />
-      <meta property="og:url" key="og:url" content={`https://ryanrishi.com${router.pathname === '/' ? '' : router.pathname}`} />
+      <meta name="og:title" content={title} />
+      <meta name="twitter:title" content={title} />
+      <meta name="og:site_name" content="Ryan Rishi" />
+      <meta name="og:url" key="og:url" content={`https://ryanrishi.com${router.pathname === '/' ? '' : router.pathname}`} />
 
-      {props.isArticle ? (
-        <meta property="og:type" content="article" />
-      ) : (
-        <meta property="og:type" content="website" />
-      )}
+      <meta name="og:type" content={isArticle ? 'article' : 'website'} />
 
-      {props.date && (
+      {date && (
         <>
-          <meta property="article:published_time" content={dayjs(props.date).toISOString()} />
-          <meta property="article:author" content="Ryan Rishi" />
+          <meta name="article:published_time" content={dayjs(date).toISOString()} />
+          <meta name="article:author" content="Ryan Rishi" />
         </>
       )}
 
-      <meta property="og:description" content={description} />
-      <meta property="twitter:description" content={description} />
+      <meta name="og:description" content={description} />
+      <meta name="twitter:description" content={description} />
 
-      {props.image ? (
-        <>
-          <meta property="og:image" content={`https://ryanrishi.com${props.image}`} />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:image" content={`https://ryanrishi.com${props.image}`} />
-        </>
-      ) : (
-        <>
-          <meta property="og:image" content="https://ryanrishi.com/img/ryan-sitting.jpg" />
-          <meta name="twitter:card" content="summary" />
-          <meta name="twitter:image" content="https://ryanrishi.com/img/ryan-sitting.jpg" />
-        </>
-      )}
+      <meta name="og:image" content={image} />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:image" content={image} />
 
-      {props.tags && props.tags.length && props.tags.map((tag) => (
-        <meta property="article:tag" key={tag} content={tag} />
+      {tags.map((tag) => (
+        <meta name="article:tag" key={tag} content={tag} />
       ))}
 
       <meta name="twitter:site" content="ryanrishi" />
@@ -67,3 +53,20 @@ export default function Head(props) {
     </NextHead>
   );
 }
+
+Head.propTypes = {
+  title: PropTypes.string, // eslint-disable-line react/require-default-props
+  description: PropTypes.string,
+  isArticle: PropTypes.bool,
+  image: PropTypes.string,
+  tags: PropTypes.arrayOf(PropTypes.string)
+};
+
+Head.defaultProps = {
+  description: 'Full-stack software engineer and musician who loves cooking, camping, and flying.',
+  isArticle: false,
+  image: '/img/ryan-sitting.jpg',
+  tags: []
+};
+
+export default Head;

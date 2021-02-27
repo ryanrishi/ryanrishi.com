@@ -3,8 +3,16 @@ describe('Music', () => {
     cy.visit('http://localhost:3000/music');
   });
 
+  describe('meta tags', () => {
+    it('title', () => {
+      const title = 'Music | Ryan Rishi';
+      cy.title().should('eq', title);
+      cy.get('head meta[name="og:title"]').should('have.attr', 'content', title);
+      cy.get('head meta[name="twitter:title"]').should('have.attr', 'content', title);
+    });
+  });
+
   it('renders the music page', () => {
-    cy.title().should('eq', 'Music | Ryan Rishi');
     cy.get('h1').contains('Music');
     cy.percySnapshot();
   });
