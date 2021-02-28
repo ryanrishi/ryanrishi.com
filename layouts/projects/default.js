@@ -2,13 +2,13 @@ import Head from '../../components/head';
 import Layout from '../../components/layout';
 
 export default function Index({ children, frontMatter }) {
-  const { name, blurb, image, date } = frontMatter;
+  const { name, description, image, date } = frontMatter;
 
   return (
     <Layout>
       <Head
         title={name}
-        description={blurb}
+        description={description}
         image={image}
         date={date}
         isArticle

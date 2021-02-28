@@ -13,7 +13,7 @@ export default function ProjectsIndex({ projects }) {
           <li key={project.permalink}>
             <Link href={project.permalink}>{project.name}</Link>
             &mdash;&nbsp;
-            {project.blurb}
+            {project.description}
           </li>
         ))}
       </ul>
@@ -22,7 +22,7 @@ export default function ProjectsIndex({ projects }) {
 }
 
 export async function getStaticProps() {
-  const projects = getAllProjects(['name', 'blurb', 'permalink', 'date']);
+  const projects = getAllProjects(['name', 'description', 'permalink', 'date']);
 
   return {
     props: { projects }

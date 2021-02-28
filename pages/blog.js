@@ -21,7 +21,7 @@ export default function BlogIndex({ allPosts }) {
           <p className="post-meta">{dayjs(post.date).format('MMMM D, YYYY')}</p>
 
           <div className="post-preview">
-            <p>{post.blurb}</p>
+            <p>{post.description}</p>
             <a className="post-read-more" href={`/blog/${post.slug}`}>Read more &raquo;</a>
           </div>
         </div>
@@ -31,7 +31,7 @@ export default function BlogIndex({ allPosts }) {
 }
 
 export async function getStaticProps() {
-  const allPosts = getAllPosts(['title', 'date', 'slug', 'blurb', 'image', 'tags']);
+  const allPosts = getAllPosts(['title', 'date', 'slug', 'description', 'image', 'tags']);
 
   return {
     props: { allPosts }

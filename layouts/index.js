@@ -31,14 +31,14 @@ const components = {
 /* eslint-enable react/jsx-props-no-spreading */
 
 export default function Index({ children, frontMatter }) {
-  const { title, date, tags, image, description, blurb } = frontMatter;
+  const { title, date, tags, image, description } = frontMatter;
 
   return (
     <Layout>
       <Head
         title={title}
         date={date}
-        description={description || blurb}
+        description={description}
         image={image}
         tags={tags}
         isArticle
