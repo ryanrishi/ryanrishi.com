@@ -1,10 +1,14 @@
 import NextHead from 'next/head';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 
+dayjs.extend(utc);
+
 function Head({ title: titleFromProps, description, isArticle, date, image, tags }) {
   const title = titleFromProps ? `${titleFromProps} | Ryan Rishi` : 'Ryan Rishi';
+  const publishedTime = date ? dayjs.utc(date).toISOString() : dayjs.utc().toISOString();
 
   const router = useRouter();
 
@@ -20,12 +24,13 @@ function Head({ title: titleFromProps, description, isArticle, date, image, tags
       <meta name="twitter:title" content={title} />
       <meta name="og:site_name" content="Ryan Rishi" />
       <meta name="og:url" key="og:url" content={`https://ryanrishi.com${router.pathname === '/' ? '' : router.pathname}`} />
+      <meta name="author" content="Ryan Rishi" />
 
       <meta name="og:type" content={isArticle ? 'article' : 'website'} />
 
-      {date && (
+      {isArticle && (
         <>
-          <meta name="article:published_time" content={dayjs(date).toISOString()} />
+          <meta name="article:published_time" content={publishedTime} />
           <meta name="article:author" content="Ryan Rishi" />
         </>
       )}

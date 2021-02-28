@@ -4,8 +4,16 @@ describe('Projects', () => {
     cy.viewport('ipad-2'); // a tall viewport since some  of these pages are long
   });
 
+  describe('meta tags', () => {
+    it('title', () => {
+      const title = 'Projects | Ryan Rishi';
+      cy.title().should('eq', 'Projects | Ryan Rishi');
+      cy.get('head meta[name="og:title"]').should('have.attr', 'content', title);
+      cy.get('head meta[name="twitter:title"]').should('have.attr', 'content', title);
+    });
+  });
+
   it('renders the project page', () => {
-    cy.title().should('eq', 'Projects | Ryan Rishi');
     cy.get('h1').contains('Projects');
     cy.percySnapshot();
   });
