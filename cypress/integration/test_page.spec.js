@@ -33,7 +33,7 @@ describe('Test Page', () => {
 
   describe('Title + Date', () => {
     it('Title + Date', () => {
-      cy.get('h1').contains('test').next().should('have.text', 'February 2, 2021');
+      cy.get('h1').contains('test').next().should('have.text', 'February 3, 2021');
       cy.percySnapshot();
     });
   });
