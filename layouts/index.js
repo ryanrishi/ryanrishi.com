@@ -8,6 +8,28 @@ import Head from '../components/head';
 
 dayjs.extend(utc);
 
+/* eslint-disable react/display-name */
+/* eslint-disable react/jsx-props-no-spreading */
+const components = {
+  pre: (props) => <div {...props} />,
+
+  code: ({ className, children }) => {
+    const props = { children };
+    const languageMatch = className && className.match('language-([^{]+)');
+    if (languageMatch) {
+      props.language = languageMatch[1]; // eslint-disable-line prefer-destructuring
+    }
+
+    return (
+      <div>
+        <Code {...props} />
+      </div>
+    );
+  }
+};
+/* eslint-enable react/display-name */
+/* eslint-enable react/jsx-props-no-spreading */
+
 export default function Index({ children, frontMatter }) {
   const { title, date, tags, image, description, blurb } = frontMatter;
 
@@ -35,23 +57,3 @@ export default function Index({ children, frontMatter }) {
     </Layout>
   );
 }
-
-/* eslint-disable react/display-name */
-const components = {
-  pre: (props) => <div {...props} />,
-
-  code: ({ className, children }) => {
-    const props = { children };
-    const languageMatch = className && className.match('language-([^{]+)');
-    if (languageMatch) {
-      props.language = languageMatch[1];
-    }
-
-    return (
-      <div>
-        <Code {...props} />
-      </div>
-    );
-  }
-};
-/* eslint-enable react/display-name */
