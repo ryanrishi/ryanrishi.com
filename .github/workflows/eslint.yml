@@ -9,5 +9,4 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.5
       - run: yarn install
-      - name: ESLint
-        uses: yarn eslint
+      - run: yarn eslint
