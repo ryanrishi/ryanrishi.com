@@ -8,7 +8,10 @@ dayjs.extend(utc);
 
 function Head({ title: titleFromProps, description, isArticle, date, image, tags }) {
   const title = titleFromProps ? `${titleFromProps} | Ryan Rishi` : 'Ryan Rishi';
-  const publishedTime = date ? dayjs.utc(date).toISOString() : dayjs.utc().toISOString();
+  let publishedTime;
+  if (isArticle) {
+    publishedTime = date ? dayjs.utc(date).toISOString() : dayjs.utc().toISOString();
+  }
 
   const router = useRouter();
 

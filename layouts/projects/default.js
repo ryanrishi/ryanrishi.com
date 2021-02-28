@@ -2,7 +2,7 @@ import Head from '../../components/head';
 import Layout from '../../components/layout';
 
 export default function Index({ children, frontMatter }) {
-  const { name, blurb, image } = frontMatter;
+  const { name, blurb, image, date } = frontMatter;
 
   return (
     <Layout>
@@ -10,6 +10,8 @@ export default function Index({ children, frontMatter }) {
         title={name}
         description={blurb}
         image={image}
+        date={date}
+        isArticle
       />
       <div>
         <h1>{name}</h1>
