@@ -13,6 +13,17 @@ function Head({ title: titleFromProps, description, isArticle, date, image, tags
     publishedTime = date ? dayjs.utc(date).toISOString() : dayjs.utc().toISOString();
   }
 
+  // validate image is a relative path
+  if (image) {
+    if (image.indexOf('://') > 0 || image.indexOf('//') === 0) {
+      throw new Error('Image URL must be a relative path');
+    }
+
+    if (image.indexOf('/') !== 0) {
+      throw new Error('Image URL must start with a "/"');
+    }
+  }
+
   const router = useRouter();
 
   return (
@@ -29,7 +40,7 @@ function Head({ title: titleFromProps, description, isArticle, date, image, tags
       <meta property="og:description" content={description} />
       <meta property="og:url" key="og:url" content={`https://ryanrishi.com${router.pathname === '/' ? '' : router.pathname}`} />
       <meta name="author" content="Ryan Rishi" />
-      <meta name="image" property="og:image" content={image} />
+      <meta name="image" property="og:image" content={`https://ryanrishi.com${image}`} />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:creator" content="@ryanrishi" />
 
