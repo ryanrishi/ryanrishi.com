@@ -8,9 +8,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup Node.js environment
         uses: actions/setup-node@v2.1.5
-      - run: yarn install
       - name: Cypress
         uses: cypress-io/github-action@v2
         with:
-          build: npm build
-          start: npm start
+          build: yarn build
+          start: yarn start
