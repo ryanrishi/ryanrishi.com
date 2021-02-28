@@ -1,6 +1,27 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+[ryanrishi.com](ryanrishi.com)
+===
 
-# Inspiration
-This website's design and patterns was influenced by others' portfolios:
-- https://leerob.io/
-- https://samselikoff.com/
+Code for my personal website. Built using [Next.js](https://nextjs.org/).
+
+# Development
+Install dependencies:
+```sh
+$ yarn install
+```
+
+Start the development server:
+```sh
+$ yarn dev
+```
+
+Visit [localhost:3000](http://localhost:3000).
+
+# Testing
+Tests are run via [Cypress](https://www.cypress.io/);
+
+Run tests:
+```sh
+$ yarn test
+```
+
+This will open up Cypress, and from there you can select which tests to run.
