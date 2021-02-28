@@ -16,8 +16,7 @@ describe('Test Page', () => {
     });
 
     it('image', () => {
-      const url = '/img/nope.png';
-      cy.get('head meta[property="og:image"]').should('have.attr', 'content', url);
+      cy.get('head meta[property="og:image"]').should('have.attr', 'content', 'https://ryanrishi.com/img/nope.png');
     });
 
     it('tags', () => {
