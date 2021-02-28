@@ -7,8 +7,7 @@ describe('Home', () => {
     it('title', () => {
       const title = 'Ryan Rishi';
       cy.title().should('eq', title);
-      cy.get('head meta[name="og:title"]').should('have.attr', 'content', title);
-      cy.get('head meta[name="twitter:title"]').should('have.attr', 'content', title);
+      cy.get('head meta[property="og:title"]').should('have.attr', 'content', title);
     });
 
     it('author', () => {

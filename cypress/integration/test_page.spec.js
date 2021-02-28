@@ -7,26 +7,23 @@ describe('Test Page', () => {
     it('title', () => {
       const title = 'test | Ryan Rishi';
       cy.title().should('eq', title);
-      cy.get('head meta[name="og:title"]').should('have.attr', 'content', title);
-      cy.get('head meta[name="twitter:title"]').should('have.attr', 'content', title);
+      cy.get('head meta[property="og:title"]').should('have.attr', 'content', title);
     });
 
     it('description', () => {
       const description = 'this is only a test';
-      cy.get('head meta[name="og:description"]').should('have.attr', 'content', description);
-      cy.get('head meta[name="twitter:description"]').should('have.attr', 'content', description);
+      cy.get('head meta[property="og:description"]').should('have.attr', 'content', description);
     });
 
     it('image', () => {
       const url = '/img/nope.png';
-      cy.get('head meta[name="og:image"]').should('have.attr', 'content', url);
-      cy.get('head meta[name="twitter:image"]').should('have.attr', 'content', url);
+      cy.get('head meta[property="og:image"]').should('have.attr', 'content', url);
     });
 
     it('tags', () => {
       const tags = ['test', 'second tag'];
       tags.forEach((tag, index) => {
-        cy.get('head meta[name="article:tag"]').eq(index).should('have.attr', 'content', tag);
+        cy.get('head meta[property="article:tag"]').eq(index).should('have.attr', 'content', tag);
       });
     });
   });

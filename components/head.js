@@ -20,34 +20,26 @@ function Head({ title: titleFromProps, description, isArticle, date, image, tags
       <meta name="google-site-verification" content="kausNF9hQubv5pYpPGZt6JjoZ45qF__IlkNNrlr-8ws" />
 
       <title key="title">{title}</title>
-      <meta name="og:title" content={title} />
-      <meta name="twitter:title" content={title} />
-      <meta name="og:site_name" content="Ryan Rishi" />
-      <meta name="og:url" key="og:url" content={`https://ryanrishi.com${router.pathname === '/' ? '' : router.pathname}`} />
+      <meta property="og:title" content={title} />
+      <meta property="og:type" content={isArticle ? 'article' : 'website'} />
+      <meta property="og:site_name" content="Ryan Rishi" />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" key="og:url" content={`https://ryanrishi.com${router.pathname === '/' ? '' : router.pathname}`} />
       <meta name="author" content="Ryan Rishi" />
-
-      <meta name="og:type" content={isArticle ? 'article' : 'website'} />
+      <meta name="image" property="og:image" content={image} />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:creator" content="@ryanrishi" />
 
       {isArticle && (
         <>
-          <meta name="article:published_time" content={publishedTime} />
-          <meta name="article:author" content="Ryan Rishi" />
+          <meta property="article:published_time" content={publishedTime} />
+          <meta property="article:author" content="Ryan Rishi" />
         </>
       )}
 
-      <meta name="og:description" content={description} />
-      <meta name="twitter:description" content={description} />
-
-      <meta name="og:image" content={image} />
-      <meta name="twitter:card" content="summary" />
-      <meta name="twitter:image" content={image} />
-
       {tags.map((tag) => (
-        <meta name="article:tag" key={tag} content={tag} />
+        <meta property="article:tag" key={tag} content={tag} />
       ))}
-
-      <meta name="twitter:site" content="ryanrishi" />
-      <meta name="twitter:creator" content="ryanrishi" />
 
       <link rel="icon" href="/img/favicon.ico?v=1.1" />
       <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
