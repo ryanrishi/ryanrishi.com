@@ -62,7 +62,7 @@ Head.propTypes = {
 Head.defaultProps = {
   description: 'Full-stack software engineer and musician who loves cooking, camping, and flying.',
   isArticle: false,
-  image: '/img/ryan-sitting.jpg',
+  image: '/img/ryan-landscape.jpg',
   tags: []
 };
 
