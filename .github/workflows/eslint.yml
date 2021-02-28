@@ -1,0 +1,12 @@
+name: ESLint
+on: [push]
+jobs:
+  eslint:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.5
+      - run: yarn install
+      - run: yarn eslint

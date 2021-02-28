@@ -1,27 +1,27 @@
-website
+[ryanrishi.com](ryanrishi.com)
 ===
-Repository for my personal website, [ryanrishi.com](https://ryanrishi.com).
 
-Built using [Jekyll](https://jekyllrb.com/).
+Code for my personal website. Built using [Next.js](https://nextjs.org/).
 
-### Install Dependencies
-- `npm install`
-- `bundle install`
+# Development
+Install dependencies:
+```sh
+$ yarn install
+```
 
-### Building
-- `$(npm bin)/webpack`
-- `bundle exec jekyll build`
+Start the development server:
+```sh
+$ yarn dev
+```
 
+Visit [localhost:3000](http://localhost:3000).
 
-### Local Development
-- `$(npm bin)/webpack` &larr; TODO watch/rebuild on changes
-- `bundle exec jekyll serve`
+# Testing
+Tests are run via [Cypress](https://www.cypress.io/);
 
-License
-===
-The following directories and their contents are Copyright Ryan Rishi. You may not reuse anything therein without my permission:
-- `src/_posts/`
-- `src/files/`
-- `src/_projects`
+Run tests:
+```sh
+$ yarn test
+```
 
-All other directories and files are MIT Licensed.
+This will open up Cypress, and from there you can select which tests to run.

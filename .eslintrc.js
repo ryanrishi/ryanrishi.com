@@ -1,27 +1,33 @@
+/* eslint-env node */
+
 module.exports = {
   env: {
-    es6: true,
-    node: true,
-    browser: true
+    browser: true,
+    es2021: true
   },
-  extends: 'eslint:recommended',
+  extends: [
+    'eslint:recommended',
+    'airbnb',
+    'plugin:react/recommended'
+  ],
   parserOptions: {
-    ecmaVersion: 2018,
+    ecmaFeatures: {
+      jsx: true
+    },
+    ecmaVersion: 12,
     sourceType: 'module'
   },
-  ignorePatterns: ['webpack/base/analytics.js'],
+  plugins: [
+    'react'
+  ],
   rules: {
-    'linebreak-style': [
-      'error',
-      'unix'
-    ],
-    quotes: [
-      'error',
-      'single'
-    ],
-    semi: [
-      'error',
-      'always'
-    ]
+    'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+    'react/jsx-filename-extension': 'off',
+    'comma-dangle': ['error', 'never'],
+    'object-curly-newline': 'off',
+    'react/destructuring-assignment': 'warn',
+    'max-len': ['warn', 120],
+    'no-plusplus': ['warn', { allowForLoopAfterthoughts: true }]
   }
 };

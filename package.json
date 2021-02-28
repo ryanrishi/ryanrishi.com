@@ -1,37 +1,43 @@
 {
   "name": "ryanrishi-com",
-  "version": "1.0.0",
-  "description": "Repo for my personal website, ryanrishi.com",
-  "main": "index.js",
-  "scripts": {
-    "start": "NODE_ENV=development concurrently -c green,cyan \"webpack --config webpack.dev.js\" \"bundle exec jekyll serve -D\"",
-    "build": "NODE_ENV=production webpack --config webpack.production.js && bundle exec jekyll build",
-    "test": "eslint webpack"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ryanrishi/website.git"
-  },
+  "version": "0.1.0",
+  "private": true,
   "author": "Ryan Rishi <ryan@ryanrishi.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ryanrishi/website/issues"
+  "scripts": {
+    "cypress:ci": "start-server-and-test start 3000 cypress:run",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "eslint": "eslint .",
+    "test": "start-server-and-test dev 3000 cypress:open",
+    "ci": "percy exec -- yarn cypress:ci"
   },
-  "homepage": "https://github.com/ryanrishi/website#readme",
+  "dependencies": {
+    "@mdx-js/react": "^1.6.22",
+    "dayjs": "^1.10.4",
+    "gray-matter": "^4.0.2",
+    "next": "~10.0.5",
+    "next-mdx-enhanced": "^5.0.0",
+    "prism-react-renderer": "^1.1.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-syntax-highlighter": "^15.3.0",
+    "sass": "^1.32.6"
+  },
   "devDependencies": {
-    "@babel/core": "~7.8.4",
-    "babel-core": "~6.26.3",
-    "babel-loader": "~8.0.6",
-    "babel-preset-env": "~1.7.0",
-    "concurrently": "~5.1.0",
-    "css-loader": "~3.6.0",
-    "d3": "~5.15.0",
-    "eslint": "~6.8.0",
-    "highlight.js": "~10.1.1",
-    "mapbox-gl": "~1.9.1",
-    "style-loader": "~1.2.1",
-    "webpack": "~4.41.5",
-    "webpack-cli": "~3.3.10",
-    "webpack-merge": "~4.2.2"
+    "@fullhuman/postcss-purgecss": "^3.0.0",
+    "@percy/cypress": "^2.3.4",
+    "cypress": "^6.5.0",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-plugin-cypress": "^2.11.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "start-server-and-test": "^1.12.0"
   }
 }
