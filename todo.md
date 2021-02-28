@@ -7,22 +7,14 @@ todo
   - LinkedIn
   - Twitter
   - disclaimer?
-- [ ] projects
-  - mosaic (see https://tobiasahlin.com/blog/common-flexbox-patterns)
-  - project images
+- [x] projects
+  - [ ] mosaic (see https://tobiasahlin.com/blog/common-flexbox-patterns)
+  - [ ] project images
+
+# mobile nav
+### inspiration
+- https://codesandbox.io/s/react-hamburger-menu-r7cxn?resolutionWidth=320&resolutionHeight=675&file=/src/components/Menu/Menu.styles.js
+- https://codesandbox.io/s/react-and-css-animated-responsive-navigation-bar-5h3v8?resolutionWidth=320&resolutionHeight=675&file=/src/index.js:387-398
 
 # tags
 see tags.md
-
-# infra
-- [ ] Percy
-  - initial build
-  - run on PR into master
-- [ ] cache CI dependencies
-  - bundle install is currently taking ~160s
-  - also cache npm and pip packages
-
-# ui
-- [x] explore using tailwindcss
-- [ ] remove tailwindcss
-

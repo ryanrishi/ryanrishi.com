@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import Image from 'next/image';
+import Link from 'next/link';
 import Layout from '../components/layout';
 import Head from '../components/head';
 
@@ -15,8 +16,10 @@ export default function Home() {
             <h3>I'm currently:</h3>
             <ul>
               <li>👨🏻‍💻 working as a backend-leaning-full-stack engineer&mdash; mostly Java, Spring, MySQL, Kafka, Kubernetes, with a sprinkle of Ember.js</li>
-              {/* TODO link to lab */}
-              <li>🔬 building out my homelab</li>
+              <li>
+                🔬 building out my&nbsp;
+                <Link href="/projects/homelab">homelab</Link>
+              </li>
             </ul>
           </div>
 

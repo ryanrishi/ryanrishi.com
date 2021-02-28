@@ -1,8 +1,5 @@
 import Link from 'next/link';
 
-// see https://codesandbox.io/s/react-hamburger-menu-r7cxn?resolutionWidth=320&resolutionHeight=675&file=/src/components/Menu/Menu.styles.js
-// see https://codesandbox.io/s/react-and-css-animated-responsive-navigation-bar-5h3v8?resolutionWidth=320&resolutionHeight=675&file=/src/index.js:387-398
-
 export default function Header() {
   const items = [
     { title: 'Music', href: '/music' },
