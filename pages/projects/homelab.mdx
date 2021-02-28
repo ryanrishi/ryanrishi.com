@@ -13,7 +13,7 @@ Services include:
 - [ddclient](https://sourceforge.net/p/ddclient/wiki/Home) for dynamic DNS
 - [WireGuard](https://wiki.archlinux.org/index.php/WireGuard) for VPN
 - [Grafana](https://grafana.com) + [InfluxDB](https://www.influxdata.com/products/influxdb-overview) for storing and visualizing metrics
-- Telegraf on every host, plus some extra SNMP metrics for Synology NASs
+- [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) on every host, plus some extra SNMP metrics for Synology NASs
 
 All of these are running as LXCs or via Docker on VMs. Everything is provisioned with [Ansible](https://www.ansible.com) so that changes are reliable and repeatable.
 
