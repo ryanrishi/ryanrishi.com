@@ -12,4 +12,4 @@ jobs:
       - name: Cypress
         uses: cypress-io/github-action@v2
         with:
-          start: start-server-and-test dev 3000
+          start: "$(npm bin)/start-server-and-test start 3000"
