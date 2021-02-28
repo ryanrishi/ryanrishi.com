@@ -11,3 +11,5 @@ jobs:
       - run: yarn install
       - name: Cypress
         uses: cypress-io/github-action@v2
+        with:
+          start: start-server-and-test dev 3000
