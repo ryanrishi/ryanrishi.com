@@ -6,7 +6,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: yarn install
-        uses: yarn install
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.5
+      - run: yarn install
       - name: ESLint
         uses: yarn eslint
