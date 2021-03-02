@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/no-unescaped-entities */
 
+import Link from 'next/link';
 import Layout from '../components/layout';
 import Head from '../components/head';
 
@@ -40,7 +41,7 @@ export default function Music() {
       <h3>Recording</h3>
       <p>
         I've produced two albums.
-        The first is Christmas In Claradise, which was a joint effort with the five <em>a cappella</em> groups at Santa Clara University. You can read about it <a href="{% post_url 2015-12-27-the-twelve-days-of-an-a-cappella-christmas-album %}">here</a>.
+        The first is Christmas In Claradise, which was a joint effort with the five <em>a cappella</em> groups at Santa Clara University. You can read about it <Link href="/blog/2015-12-27-the-twelve-days-of-an-a-cappella-christmas-album">here</Link>.
       </p>
       <p>
         The second is <a href="https://open.spotify.com/album/5Tbpm70sMQ2aUwdsEieHn5?si=pucr00KFSq-X_hMGfvNRrA">Bellomy</a>, an album of songs written by my band from college.
