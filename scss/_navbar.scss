@@ -1,0 +1,23 @@
+nav.navbar {
+  flex: 1;
+  align-self: flex-start;
+  padding: 1rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+
+  h1.title {
+
+  }
+
+  ul.items {
+    display: flex;
+    list-style: none;
+
+    li.item {
+      padding: 0 1rem;
+      cursor: pointer;
+    }
+  }
+}

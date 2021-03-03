@@ -9,19 +9,31 @@ export default function Header() {
   ];
 
   return (
-    <header className="header">
-      <div className="header-logo">
-        <Link className="header-item" href="/">
-          <a className="header-link" href="/">Ryan Rishi</a>
-        </Link>
-      </div>
-      <nav className="header-nav">
-        {items.map(({ title, href }) => (
-          <Link key={href} href={href} className="header-item">
-            <a className="header-link" href={href}>{title}</a>
-          </Link>
+    <Navbar>
+      <NavbarLogo>Ryan Rishi</NavbarLogo>
+      <NavbarItems>
+        {items.map((item) => (
+          <NavbarItem key={item.href}>
+            <Link href={item.href}>{item.title}</Link>
+          </NavbarItem>
         ))}
-      </nav>
-    </header>
+      </NavbarItems>
+    </Navbar>
   );
+}
+
+function Navbar({ children }) {
+  return <nav className="navbar">{children}</nav>;
+}
+
+function NavbarLogo({ children }) {
+  return <h1 className="title">{children}</h1>;
+}
+
+function NavbarItems({ children }) {
+  return <ul className="items">{children}</ul>;
+}
+
+function NavbarItem({ children }) {
+  return <li className="item">{children}</li>;
 }
