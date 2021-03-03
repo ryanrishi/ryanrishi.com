@@ -1,6 +1,11 @@
+import { useState } from 'react';
 import Link from 'next/link';
+import { Fade as Hamburger } from 'hamburger-react';
+import { DialogOverlay, DialogContent } from '@reach/dialog';
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const items = [
     { title: 'Music', href: '/music' },
     { title: 'Projects', href: '/projects' },
@@ -9,15 +14,40 @@ export default function Header() {
   ];
 
   return (
+    <MobileNav
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+    >
+      {items.map((item) => (
+        <h3 key={item.href}>
+          <Link href={item.href}>{item.title}</Link>
+        </h3>
+      ))}
+    </MobileNav>
+  );
+}
+
+function MobileNav({ isOpen, setIsOpen, children }) {
+  return (
     <Navbar>
-      <NavbarLogo>Ryan Rishi</NavbarLogo>
-      <NavbarItems>
-        {items.map((item) => (
-          <NavbarItem key={item.href}>
-            <Link href={item.href}>{item.title}</Link>
-          </NavbarItem>
-        ))}
-      </NavbarItems>
+      <NavbarLogo>Ryan <b>Rishi</b></NavbarLogo>
+      <Hamburger
+        toggled={isOpen}
+        toggle={setIsOpen}
+      />
+      {isOpen && (
+        <DialogOverlay
+          style={{ background: 'white' }}
+        >
+          <DialogContent
+            style={{ width: '100vh' }}
+          >
+            <NavbarItems>
+              {children}
+            </NavbarItems>
+          </DialogContent>
+        </DialogOverlay>
+      )}
     </Navbar>
   );
 }
@@ -27,13 +57,9 @@ function Navbar({ children }) {
 }
 
 function NavbarLogo({ children }) {
-  return <h1 className="title">{children}</h1>;
+  return <p className="title">{children}</p>;
 }
 
 function NavbarItems({ children }) {
-  return <ul className="items">{children}</ul>;
-}
-
-function NavbarItem({ children }) {
-  return <li className="item">{children}</li>;
+  return <div className="items">{children}</div>;
 }
