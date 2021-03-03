@@ -41,7 +41,7 @@ describe('Blog', () => {
         cy.get('h2 a').eq(i).click({ force: true });
         cy.url().should('match', /\/blog\/\d{4}-\d{2}-\d{2}-[a-z-]*$/);
         cy.get('h1').first().scrollIntoView();
-        cy.get('h1').should(($title) => {
+        cy.get('h1').first().then(($title) => {
           cy.percySnapshot($title.text());
         });
         cy.go('back');
