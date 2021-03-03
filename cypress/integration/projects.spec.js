@@ -24,7 +24,9 @@ describe('Projects', () => {
         cy.get('li > a').eq(i).click();
         cy.url().should('include', '/projects/');
         cy.get('h1').scrollIntoView();
-        cy.percySnapshot();
+        cy.get('h1').then(($title) => {
+          cy.percySnapshot($title.text());
+        });
         cy.go('back');
       }
     });
