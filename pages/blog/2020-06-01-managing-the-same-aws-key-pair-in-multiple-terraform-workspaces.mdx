@@ -54,10 +54,10 @@ This will import the key pair, but there is a problem&mdash;running `terraform p
 Notice the "forces replacement" next to the `public_key`. Running `terraform import` imported the key pair but _not_ the `public_key` for the key pair&mdash;this is because the [AWS API does not expose the public key](https://github.com/terraform-providers/terraform-provider-aws/issues/1092).
 
 We can confirm that the Terraform state does not have the public key by running `terraform state show`:
-```shell-session
+```hcl
 $ terraform state show aws_key_pair.key_pair
 # aws_key_pair.key_pair:
-resource "aws_key_pair" "key_pair" \{
+resource "aws_key_pair" "key_pair" {
     fingerprint = "ca:0b:36:48:39:69:86:21:8a:15:da:c2:10:f0:91:a7"
     id          = "ryan"
     key_name    = "ryan"
@@ -69,7 +69,7 @@ resource "aws_key_pair" "key_pair" \{
 # The Solution
 We’re going to update `terraform.tfstate` to include public key. I *do not* recommend this approach if you’re using Terraform as a team, as editing the Terraform state file by hand can lead to unexpected behaviors if a change to the infrastructure is made while you’re doing this.
 
-```shell-session
+```hcl
 $ terraform workspace show
 staging
 # get the public key
