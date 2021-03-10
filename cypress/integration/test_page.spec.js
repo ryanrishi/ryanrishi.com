@@ -34,6 +34,13 @@ describe('Test Page', () => {
     });
   });
 
+  describe('Code', () => {
+    it('Scrolls horizontally for long lines', () => {
+      cy.get('pre code').first().scrollIntoView();
+      cy.percySnapshot('Code block - horizontal scroll');
+    });
+  });
+
   describe('Viewport Tests', () => {
     beforeEach(() => {
       cy.get('h1').contains('Screen Sizes').scrollIntoView();
