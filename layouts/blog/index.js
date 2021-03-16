@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { MDXProvider } from '@mdx-js/react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -44,7 +45,14 @@ export default function Index({ children, frontMatter }) {
       />
       <div>
         <h1>{title}</h1>
+        <p>{dayjs.utc(date).format('MMMM D, YYYY')}</p>
+        <hr />
         <MDXProvider components={components}>{children}</MDXProvider>
+        <div className="back-to-blog">
+          <Link href="/blog">
+            &larr; Back to Blog
+          </Link>
+        </div>
       </div>
     </Layout>
   );
