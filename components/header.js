@@ -2,6 +2,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Fade as Hamburger } from 'hamburger-react';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
+import { useSpring, animated } from 'react-spring';
+
+const AnimatedDialogOverlay = animated(DialogOverlay);
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +31,11 @@ export default function Header() {
 }
 
 function MobileNav({ isOpen, setIsOpen, children }) {
+  const mobileNavAnimation = useSpring({
+    transform: isOpen ? 'translateY(0)' : 'translateY(-100%)',
+    opacity: isOpen ? 1 : 0
+  });
+
   return (
     <Navbar>
       <NavbarLogo>Ryan <b>Rishi</b></NavbarLogo>
@@ -36,8 +44,8 @@ function MobileNav({ isOpen, setIsOpen, children }) {
         toggle={setIsOpen}
       />
       {isOpen && (
-        <DialogOverlay
-          style={{ background: 'white' }}
+        <AnimatedDialogOverlay
+          style={{ background: 'white', ...mobileNavAnimation }}
         >
           <DialogContent
             style={{ width: '100vh' }}
@@ -46,7 +54,7 @@ function MobileNav({ isOpen, setIsOpen, children }) {
               {children}
             </NavbarItems>
           </DialogContent>
-        </DialogOverlay>
+        </AnimatedDialogOverlay>
       )}
     </Navbar>
   );

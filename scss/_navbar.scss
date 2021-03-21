@@ -6,6 +6,10 @@ nav.navbar {
   align-items: center;
   background-color: white;
 
+  [role="button"] {
+    z-index: 40;
+  }
+
   p.title {
     text-transform: uppercase;
   }
