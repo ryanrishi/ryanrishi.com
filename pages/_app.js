@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import '../scss/styles.scss';
+import 'tailwindcss/tailwind.css';
 
 export default function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;
