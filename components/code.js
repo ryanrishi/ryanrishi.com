@@ -43,7 +43,14 @@ const theme = {
     MozHyphens: 'none',
     msHyphens: 'none',
     hyphens: 'none',
-    background: '#282c34'
+    background: '#282c34',
+    display: 'inline-block',
+    padding: '0.75rem 0.5rem',
+    marginBottom: '1rem',
+    borderRadius: '0.25rem',
+    width: '100%',
+    wordWrap: 'break-word',
+    overflowX: 'auto'
   },
   ':not(pre) > code[class*="language-"]': {
     background: '#282c34',

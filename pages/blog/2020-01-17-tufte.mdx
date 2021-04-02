@@ -8,12 +8,14 @@ tags:
   - edward tufte
 ---
 
-import Image from 'next/image';
+import Image from 'next/image'
+import Blockquote from '../../components/blockquote'
 
 In December, I attended [Edward Tufte's course on Presenting Data and Information](https://www.edwardtufte.com/tufte/courses) in San Francisco. Here are my key takeaways from the course.
 
-> Hold an open mind, but not an open head.
-> &mdash;<cite>Edward Tufte</cite>
+<Blockquote
+  quote={"Hold an open mind, but not an open head."}
+  name={"Edward Tufte"} />
 
 # The purpose of data is to make people smarter &rarr; don't dumb it down
 When presenting information, chances are the audience has already been filtered by some homogenizing process&mdash;your colleagues, people that have made a conscious decision to come to your presentation, etc.
@@ -38,8 +40,10 @@ However, more data points are available to constituents that require more inform
 
 
 # Minimize design-figuring-out time, maximize content-reasoning time
-> Diagrammatic pictures allow more focused, tighter commentary on pictures, compared to text or captions outside the picture frame.
-> &mdash;<cite>[Edward Tufte](https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001V7)</cite>
+<Blockquote
+  quote={"Diagrammatic pictures allow more focused, tighter commentary on pictures, compared to text or captions outside the picture frame."}
+  name={"Edward Tufte"}
+  citationLink={"https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001V7"} />
 
 The following pie chart has a high cognitive load, because the user has the impediment of visually encoding the chart data with the pie type.
 ![Favorite Pie](/img/tufte/pies.png "Favorite Pie")

@@ -19,7 +19,8 @@ const components = {
   h5: H5,
   h6: H6,
 
-  pre: (props) => <div className="overflow-x-auto rounded" {...props} />,
+  pre: (props) => <div className="overflow-x-auto" {...props} />,
+  blockquote: () => { throw new Error('Use the blockquote component directly'); },
 
   code: ({ className, children }) => {
     const props = { children };
