@@ -58,7 +58,7 @@ export default function Index({ children, frontMatter }) {
         <p>{dayjs.utc(date).format('MMMM D, YYYY')}</p>
         <hr />
         <MDXProvider components={components}>{children}</MDXProvider>
-        <div className="back-to-blog">
+        <div className="flex items-center justify-center my-8">
           <Link href="/blog">
             &larr; Back to Blog
           </Link>
