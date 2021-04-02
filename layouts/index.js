@@ -53,7 +53,7 @@ export default function Index({ children, frontMatter }) {
         isArticle
       />
       <div>
-        <h1>{title}</h1>
+        <H1>{title}</H1>
         <p>{dayjs.utc(date).format('MMMM D, YYYY')}</p>
         <hr />
         <MDXProvider components={components}>{children}</MDXProvider>

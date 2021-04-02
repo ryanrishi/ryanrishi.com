@@ -1,4 +1,4 @@
-const baseClassNames = 'italic uppercase font-black';
+const baseClassNames = 'italic uppercase font-black mb-4 mt-8';
 
 export function H1({ classNames, children }) {
   return <h1 className={`${baseClassNames} ${classNames ? classNames.join(' ') : ''}`.trim()}>{children}</h1>;
