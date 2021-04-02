@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const HeaderLink = ({ href, children }) => (
   <Link href={href}>
-    <a className="italic uppercase font-bold hover:text-primary mr-4">{children}</a>
+    <a className="italic uppercase font-bold hover:text-primary mr-4 hover:text-green-700 transition">{children}</a>
   </Link>
 );
 
