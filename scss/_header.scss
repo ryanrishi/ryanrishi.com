@@ -1,6 +1,6 @@
 .header {
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
 
   @include md {
     flex-direction: row;
@@ -31,13 +31,13 @@
   }
 
   .header-link {
-    margin-right: $line-height / 3;
+    // margin-right: $line-height / 3;
     color: $color-text;
     font-size: $font-size / $type-scale;
-    font-style: italic;
-    font-weight: 900;
+    // font-style: italic;
+    // font-weight: 900;
     text-decoration: none;
-    text-transform: uppercase;
+    // text-transform: uppercase;
     vertical-align: top;
 
     @include md {

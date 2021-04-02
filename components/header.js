@@ -1,5 +1,11 @@
 import Link from 'next/link';
 
+const HeaderLink = ({ href, children }) => (
+  <Link href={href}>
+    <a className="italic uppercase font-bold hover:text-primary mr-4">{children}</a>
+  </Link>
+);
+
 export default function Header() {
   const items = [
     { title: 'Music', href: '/music' },
@@ -9,17 +15,23 @@ export default function Header() {
   ];
 
   return (
-    <header className="header">
-      <div className="header-logo">
-        <Link className="header-item" href="/">
-          <a className="header-link" href="/">Ryan Rishi</a>
-        </Link>
+    <header className="flex flex-col">
+      <div>
+        <HeaderLink
+          className="font-lg"
+          href="/"
+        >
+          Ryan Rishi
+        </HeaderLink>
       </div>
       <nav className="header-nav">
         {items.map(({ title, href }) => (
-          <Link key={href} href={href} className="header-item">
-            <a className="header-link" href={href}>{title}</a>
-          </Link>
+          <HeaderLink
+            key={href}
+            href={href}
+          >
+            {title}
+          </HeaderLink>
         ))}
       </nav>
     </header>
