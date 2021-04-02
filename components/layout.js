@@ -5,8 +5,10 @@ export default function Layout({ children }) {
   return (
     <>
       <Header />
-      <div className="container">{children}</div>
-      <hr />
+      <div className="container">
+        {children}
+        <hr className="mt-16" />
+      </div>
       <Footer />
     </>
   );
