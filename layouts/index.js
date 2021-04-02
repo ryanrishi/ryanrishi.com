@@ -19,7 +19,7 @@ const components = {
   h5: H5,
   h6: H6,
 
-  pre: (props) => <div {...props} />,
+  pre: (props) => <div className="overflow-x-auto rounded" {...props} />,
 
   code: ({ className, children }) => {
     const props = { children };

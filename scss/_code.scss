@@ -1,7 +1,4 @@
 pre {
-  overflow-x: auto;
-  border-radius: 0.33rem;
-
   &[class*="language-"] {
     display: inline-block;
     line-height: $line-height / 1.5;
