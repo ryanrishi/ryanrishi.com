@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable react/no-unescaped-entities */
 
-import Link from 'next/link';
+import Link from '../components/link';
 import Layout from '../components/layout';
 import Head from '../components/head';
 
