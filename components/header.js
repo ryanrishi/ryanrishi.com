@@ -15,10 +15,9 @@ export default function Header() {
   ];
 
   return (
-    <header className="flex flex-col">
-      <div>
+    <header className="flex flex-col md:flex-row justify-between py-8 container">
+      <div className="text-lg">
         <HeaderLink
-          className="font-lg"
           href="/"
         >
           Ryan Rishi
