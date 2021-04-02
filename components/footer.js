@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="footer">
+    <footer className="container uppercase italic font-bold text-sm p-4">
       <div>
         <p>
           {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
