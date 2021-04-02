@@ -1,20 +1,28 @@
-import Link from 'next/link';
+import Link from '../components/link';
 import Layout from '../components/layout';
 import Head from '../components/head';
+import { H1 } from '../components/headings';
 import { getAllProjects } from '../lib/projects';
+
+const ProjectItem = ({ title, description, href }) => (
+  <li>
+    <Link href={href}>{title}</Link>&mdash;&nbsp;{description}
+  </li>
+)
 
 export default function ProjectsIndex({ projects }) {
   return (
     <Layout>
       <Head title="Projects" />
-      <h1>Projects</h1>
-      <ul>
+      <H1>Projects</H1>
+      <ul className="list-disc list-outside px-4">
         {projects.map((project) => (
-          <li key={project.permalink}>
-            <Link href={project.permalink}>{project.name}</Link>
-            &mdash;&nbsp;
-            {project.description}
-          </li>
+          <ProjectItem
+            key={project.permalink}
+            href={project.permalink}
+            description={project.description}
+            title={project.name}
+          />
         ))}
       </ul>
     </Layout>
