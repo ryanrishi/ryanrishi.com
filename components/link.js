@@ -1,9 +1,20 @@
 import NextLink from 'next/link';
 
-export default function Link({ href, children }) {
+export default function Link({ href, children, classNames, invert = false }) {
   const isInternalLink = href?.startsWith('/');
 
-  const className = 'transition text-green-700 hover:text-green-900';
+  let className = 'transition';
+  if (invert) {
+    className += ' text-gray-800 hover:text-green-700';
+  } else {
+    className += ' text-green-700 hover:text-gray-800';
+  }
+
+  if (Array.isArray(classNames)) {
+    className = className.split(' ').concat(...classNames).join(' ');
+  } else if (typeof classNames === 'string') {
+    className += ` ${classNames}`;
+  }
 
   if (isInternalLink) {
     return (

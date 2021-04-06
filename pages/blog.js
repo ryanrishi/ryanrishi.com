@@ -18,15 +18,18 @@ export default function BlogIndex({ allPosts }) {
       {allPosts.map((post) => (
         <div className="mb-16" key={post.slug}>
           <H2 className="post-title">
-            <Link href={`/blog/${post.slug}`}>
-              <a className="post-link" href={`/blog/${post.slug}`}>{post.title}</a>
+            <Link
+              href={`/blog/${post.slug}`}
+              invert
+            >
+              {post.title}
             </Link>
           </H2>
           <p className="py-4 text-gray-700">{dayjs.utc(post.date).format('MMMM D, YYYY')}</p>
 
           <div className="flex flex-col">
             <p>{post.description}</p>
-            <a className="flex justify-end italic uppercase font-bold" href={`/blog/${post.slug}`}>Read more &raquo;</a>
+            <Link classNames="flex justify-end italic uppercase font-bold" href={`/blog/${post.slug}`} invert>Read more &raquo;</Link>
           </div>
         </div>
       ))}

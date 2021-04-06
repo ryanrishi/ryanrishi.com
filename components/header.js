@@ -1,8 +1,12 @@
-import Link from 'next/link';
+import Link from './link';
 
 const HeaderLink = ({ href, children }) => (
-  <Link href={href}>
-    <a className="italic uppercase font-bold hover:text-primary mr-4 hover:text-green-700 transition">{children}</a>
+  <Link
+    href={href}
+    invert
+    classNames="italic uppercase font-bold mr-4"
+  >
+    {children}
   </Link>
 );
 
