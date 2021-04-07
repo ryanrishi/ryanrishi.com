@@ -24,8 +24,8 @@ const HeaderLink = ({ href, children }) => (
 );
 
 function MobileNav({ isOpen, setIsOpen }) {
-  const { top } = useSpring({
-    top: isOpen ? '0' : '-100vh'
+  const { bottom } = useSpring({
+    bottom: isOpen ? '0vh' : '100vh'
   });
 
   const itemTransitions = useTransition(items, { keys: (item) => item.href });
@@ -48,9 +48,9 @@ function MobileNav({ isOpen, setIsOpen }) {
       <div>
         <AnimatedDialogOverlay
           className="bg-white"
-          style={{ top }}
+          style={{ bottom }}
         >
-          <DialogContent>
+          <DialogContent aria-label="Menu">
             {itemTransitions((itemStyle, { title, href }) => (
               <animated.div style={itemStyle}>
                 <Link
