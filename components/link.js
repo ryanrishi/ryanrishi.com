@@ -1,27 +1,23 @@
 import NextLink from 'next/link';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
-export default function Link({ href, children, classNames, invert = false }) {
+export default function Link({ href, children, className, invert = false }) {
   const isInternalLink = href?.startsWith('/');
 
-  let className = 'transition';
-  if (invert) {
-    className += ' text-gray-800 hover:text-green-700';
-  } else {
-    className += ' text-green-700 hover:text-gray-800';
-  }
-
-  if (Array.isArray(classNames)) {
-    className = className.split(' ').concat(...classNames).join(' ');
-  } else if (typeof classNames === 'string') {
-    className += ` ${classNames}`;
-  }
+  const classes = classNames('transition', className, {
+    'text-gray-800': invert,
+    'hover:text-green-700': invert,
+    'text-green-700': !invert,
+    'hover:text-gray-800': !invert
+  });
 
   if (isInternalLink) {
     return (
       <NextLink
         href={href}
       >
-        <a className={className}>
+        <a className={classes}>
           {children}
         </a>
       </NextLink>
@@ -31,9 +27,17 @@ export default function Link({ href, children, classNames, invert = false }) {
   return (
     <a
       href={href}
-      className={className}
+      className={classes}
     >
       {children}
     </a>
   );
 }
+
+Link.propTypes = {
+  className: PropTypes.string
+};
+
+Link.defaultProps = {
+  className: ''
+};

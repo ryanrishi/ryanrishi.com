@@ -17,7 +17,7 @@ const HeaderLink = ({ href, children }) => (
   <Link
     href={href}
     invert
-    classNames="italic uppercase font-bold mr-4"
+    className="italic uppercase font-bold mr-4"
   >
     {children}
   </Link>
@@ -53,7 +53,14 @@ function MobileNav({ isOpen, setIsOpen }) {
           <DialogContent>
             {itemTransitions((itemStyle, { title, href }) => (
               <animated.div style={itemStyle}>
-                <Link href={href} key={href}>{title}</Link>
+                <Link
+                  className="uppercase italic font-bold"
+                  key={href}
+                  href={href}
+                  invert
+                >
+                  {title}
+                </Link>
               </animated.div>
             ))}
           </DialogContent>
