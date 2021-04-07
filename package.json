@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@mdx-js/react": "^1.6.22",
+    "@reach/dialog": "^0.14.0",
     "autoprefixer": "^10.2.5",
     "dayjs": "^1.10.4",
     "gray-matter": "^4.0.2",
@@ -27,6 +28,7 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-spring": "^9.0.0",
     "react-syntax-highlighter": "^15.3.0",
     "tailwindcss": "^2.0.4"
   },

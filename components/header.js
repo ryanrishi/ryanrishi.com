@@ -1,6 +1,10 @@
 import { Squash as Hamburger } from 'hamburger-react';
 import { useState } from 'react';
+import { animated, useSpring, useTransition } from 'react-spring';
+import { DialogOverlay, DialogContent } from '@reach/dialog';
 import Link from './link';
+
+const AnimatedDialogOverlay = animated(DialogOverlay);
 
 const items = [
   { title: 'Music', href: '/music' },
@@ -20,19 +24,40 @@ const HeaderLink = ({ href, children }) => (
 );
 
 function MobileNav({ isOpen, setIsOpen }) {
+  const { top } = useSpring({
+    top: isOpen ? '0' : '-100vh'
+  });
+
+  const itemTransitions = useTransition(items, { keys: (item) => item.href });
+
   return (
     <>
       <div className="flex justify-between items-center">
         <div className="uppercase">Ryan&nbsp;<b>Rishi</b></div>
-        <Hamburger
-          toggled={isOpen}
-          toggle={setIsOpen}
-        />
+        <div className="z-40">
+          {/* TODO put this on <Hamburger> but it's not picking up class name */}
+          <Hamburger
+            style={{
+              zIndex: 40
+            }}
+            toggled={isOpen}
+            toggle={setIsOpen}
+          />
+        </div>
       </div>
       <div>
-        {isOpen && items.map(({ title, href }) => (
-          <Link href={href} key={href}>{title}</Link>
-        ))}
+        <AnimatedDialogOverlay
+          className="bg-white"
+          style={{ top }}
+        >
+          <DialogContent>
+            {itemTransitions((itemStyle, { title, href }) => (
+              <animated.div style={itemStyle}>
+                <Link href={href} key={href}>{title}</Link>
+              </animated.div>
+            ))}
+          </DialogContent>
+        </AnimatedDialogOverlay>
       </div>
     </>
   );
