@@ -24,16 +24,21 @@ const HeaderLink = ({ href, children }) => (
 );
 
 function MobileNav({ isOpen, setIsOpen }) {
-  const { bottom } = useSpring({
+  const overlayStyles = useSpring({
     bottom: isOpen ? '0vh' : '100vh'
   });
 
-  const itemTransitions = useTransition(items, { keys: (item) => item.href });
+  const itemTransitions = useTransition(isOpen ? [0, 1, 2, 3] : [], {
+    trail: 30,
+    from: { opacity: 0, marginLeft: '-50vw' },
+    enter: { opacity: 1, marginLeft: '0vw' },
+    leave: { opacity: 0, marginLeft: '50vw' }
+  });
 
   return (
     <>
       <div className="flex justify-between items-center">
-        <div className="uppercase">Ryan&nbsp;<b>Rishi</b></div>
+        <div className="uppercase text-xl">Ryan&nbsp;<b>Rishi</b></div>
         <div className="z-40">
           {/* TODO put this on <Hamburger> but it's not picking up class name */}
           <Hamburger
@@ -48,18 +53,24 @@ function MobileNav({ isOpen, setIsOpen }) {
       <div>
         <AnimatedDialogOverlay
           className="bg-white"
-          style={{ bottom }}
+          style={overlayStyles}
         >
-          <DialogContent aria-label="Menu">
-            {itemTransitions((itemStyle, { title, href }) => (
-              <animated.div style={itemStyle}>
+          <DialogContent
+            aria-label="Menu"
+            className="h-4/5"
+          >
+            {itemTransitions((style, i) => (
+              <animated.div
+                key={items[i].href}
+                style={style}
+                className="my-16"
+              >
                 <Link
-                  className="uppercase italic font-bold"
-                  key={href}
-                  href={href}
+                  href={items[i].href}
+                  className="uppercase italic font-bold text-4xl my-4"
                   invert
                 >
-                  {title}
+                  {items[i].title}
                 </Link>
               </animated.div>
             ))}
