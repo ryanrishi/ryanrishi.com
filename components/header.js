@@ -51,31 +51,33 @@ function MobileNav({ isOpen, setIsOpen }) {
         </div>
       </div>
       <div>
-        <AnimatedDialogOverlay
-          className="bg-white"
-          style={overlayStyles}
-        >
-          <DialogContent
-            aria-label="Menu"
-            className="h-4/5"
+        {isOpen && (
+          <AnimatedDialogOverlay
+            className="bg-white"
+            style={overlayStyles}
           >
-            {itemTransitions((style, i) => (
-              <animated.div
-                key={items[i].href}
-                style={style}
-                className="my-16"
-              >
-                <Link
-                  href={items[i].href}
-                  className="uppercase italic font-bold text-4xl my-4"
-                  invert
+            <DialogContent
+              aria-label="Menu"
+              className="h-4/5"
+            >
+              {itemTransitions((style, i) => (
+                <animated.div
+                  key={items[i].href}
+                  style={style}
+                  className="my-16"
                 >
-                  {items[i].title}
-                </Link>
-              </animated.div>
-            ))}
-          </DialogContent>
-        </AnimatedDialogOverlay>
+                  <Link
+                    href={items[i].href}
+                    className="uppercase italic font-bold text-4xl my-4"
+                    invert
+                  >
+                    {items[i].title}
+                  </Link>
+                </animated.div>
+              ))}
+            </DialogContent>
+          </AnimatedDialogOverlay>
+        )}
       </div>
     </>
   );
