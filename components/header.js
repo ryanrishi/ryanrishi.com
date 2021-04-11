@@ -39,6 +39,8 @@ function MobileNav({ isOpen, setIsOpen }) {
     leave: { opacity: 0, marginLeft: '50vw' }
   });
 
+  // TODO this doesn't seem to do anything - perhaps a bug in react-spring v9
+  // see https://github.com/pmndrs/react-spring/issues/1388
   useChain(isOpen ? [overlayRef, itemRef] : [itemRef, overlayRef]);
 
   return (
@@ -93,14 +95,14 @@ export default function Header() {
   const [ isMobileNavOpen, setIsMobileNavOpen ] = useState(false);
 
   return (
-    <header className="flex flex-col md:flex-row justify-between p-2 md:py-8 container">
+    <header className="flex flex-col md:flex-row justify-between md:py-8 container">
       <div className="md:hidden">
         <MobileNav
           isOpen={isMobileNavOpen}
           setIsOpen={setIsMobileNavOpen}
         />
       </div>
-      <div className="hidden md:flex flex-col">
+      <div className="hidden md:flex justify-between flex-row w-full">
         <div className="text-lg">
           <HeaderLink
             href="/"
