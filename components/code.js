@@ -45,7 +45,7 @@ const theme = {
     hyphens: 'none',
     background: '#282c34',
     display: 'inline-block',
-    padding: '0.75rem 0.5rem',
+    padding: '1rem 0.5rem',
     marginBottom: '1rem',
     borderRadius: '0.25rem',
     width: '100%',
