@@ -32,7 +32,7 @@ export default function BlogIndex({ allPosts }) {
 
           <div className="flex flex-col">
             <p>{post.description}</p>
-            <Link classNames="flex justify-end italic uppercase font-bold" href={`/blog/${post.slug}`} invert>Read more &raquo;</Link>
+            <Link className="flex justify-end italic uppercase font-bold" href={`/blog/${post.slug}`} invert>Read more &raquo;</Link>
           </div>
         </div>
       ))}
