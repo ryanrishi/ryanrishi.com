@@ -5,7 +5,7 @@ import { H1 } from '../components/headings';
 import { getAllProjects } from '../lib/projects';
 
 const ProjectItem = ({ title, description, href }) => (
-  <li>
+  <li className="pb-2">
     <Link href={href}>{title}</Link>&mdash;&nbsp;{description}
   </li>
 )
