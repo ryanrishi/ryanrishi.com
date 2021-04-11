@@ -5,7 +5,7 @@ export default function Layout({ children }) {
   return (
     <>
       <Header />
-      <div className="container">
+      <div className="container p-4">
         {children}
         <hr className="mt-16" />
       </div>

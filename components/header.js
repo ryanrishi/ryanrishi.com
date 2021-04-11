@@ -95,7 +95,7 @@ export default function Header() {
   const [ isMobileNavOpen, setIsMobileNavOpen ] = useState(false);
 
   return (
-    <header className="flex flex-col md:flex-row justify-between md:py-8 container">
+    <header className="flex flex-col md:flex-row justify-between p-4 md:py-8 container">
       <div className="md:hidden">
         <MobileNav
           isOpen={isMobileNavOpen}
