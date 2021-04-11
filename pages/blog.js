@@ -16,7 +16,10 @@ export default function BlogIndex({ allPosts }) {
         title="Blog"
       />
       {allPosts.map((post) => (
-        <div className="mb-16" key={post.slug}>
+        <div
+          className="mb-8 lg:mb-16 xl:mb-32"
+          key={post.slug}
+        >
           <H2 className="post-title">
             <Link
               href={`/blog/${post.slug}`}
