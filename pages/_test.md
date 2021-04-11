@@ -37,6 +37,23 @@ $ echo $woof
 Bacon ipsum dolor amet pariatur short ribs culpa shank dolore kevin enim tenderloin sint pork loin meatloaf sirloin buffalo deserunt velit. Magna biltong pork chop porchetta turducken, adipisicing meatball officia doner dolor. Ad pig in et cupim ipsum frankfurter fatback dolore pork loin buffalo sed. Lorem hamburger elit filet mignon prosciutto ham hock corned beef aute burgdoggen jerky dolor ullamco andouille salami pig. Shankle elit pariatur occaecat.
 ```
 
+# Callouts
+<Callout type="success">
+  This is a success callout
+</Callout>
+
+<Callout type="info">
+  This is an info callout
+</Callout>
+
+<Callout type="warning">
+  This is a warning callout
+</Callout>
+
+<Callout type="error">
+  This is an error callout
+</Callout>
+
 # Lists
 This is an unordered list:
 - item one
