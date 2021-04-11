@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-const baseClassNames = 'italic uppercase font-extrabold text-gray-800 mb-4 mt-8';
+const baseClassNames = 'italic uppercase font-extrabold text-gray-800 mb-16 mt-8';
 
 export function H1({ className, children }) {
   const classes = classNames(baseClassNames, className);
