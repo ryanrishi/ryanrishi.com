@@ -22,6 +22,7 @@ const components = {
   a: Link,
   pre: (props) => <div className="overflow-x-auto" {...props} />,
   blockquote: () => { throw new Error('Use the blockquote component directly'); },
+  p: ({ children }) => <p className="mb-8">{children}</p>,
 
   code: ({ className, children }) => {
     const props = { children };
@@ -55,7 +56,7 @@ export default function Index({ children, frontMatter }) {
       />
       <div>
         <H1>{title}</H1>
-        <p>{dayjs.utc(date).format('MMMM D, YYYY')}</p>
+        <p className="mb-8">{dayjs.utc(date).format('MMMM D, YYYY')}</p>
         <hr />
         <MDXProvider components={components}>{children}</MDXProvider>
         <div className="flex items-center justify-center my-8">
