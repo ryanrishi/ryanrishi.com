@@ -1,6 +1,6 @@
 import { Squash as Hamburger } from 'hamburger-react';
 import { useState } from 'react';
-import { animated, useSpring, useTransition } from 'react-spring';
+import { animated, useChain, useSpring, useSpringRef, useTransition } from 'react-spring';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 import Link from './link';
 
@@ -24,16 +24,22 @@ const HeaderLink = ({ href, children }) => (
 );
 
 function MobileNav({ isOpen, setIsOpen }) {
+  const overlayRef = useSpringRef();
   const overlayStyles = useSpring({
+    ref: overlayRef,
     bottom: isOpen ? '0vh' : '100vh'
   });
 
+  const itemRef = useSpringRef();
   const itemTransitions = useTransition(isOpen ? [0, 1, 2, 3] : [], {
+    ref: itemRef,
     trail: 30,
     from: { opacity: 0, marginLeft: '-50vw' },
     enter: { opacity: 1, marginLeft: '0vw' },
     leave: { opacity: 0, marginLeft: '50vw' }
   });
+
+  useChain(isOpen ? [overlayRef, itemRef] : [itemRef, overlayRef]);
 
   return (
     <>
