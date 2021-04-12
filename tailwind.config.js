@@ -7,7 +7,22 @@ module.exports = {
     container: {
       center: true
     },
-    extend: {}
+    extend: {
+      colors: {
+        primary: {
+          50: '#10210b10c',
+          100: '#fcf3f2',
+          200: '#f2c4c0',
+          300: '#e89991',
+          400: '#de695f',
+          500: '#d33a2c',
+          600: '#a92e23',
+          700: '#7f231a',
+          800: '#541712',
+          900: '#2a0c09'
+        }
+      }
+    }
   },
   variants: {
     extend: {}
