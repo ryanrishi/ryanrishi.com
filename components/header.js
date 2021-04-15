@@ -27,7 +27,7 @@ function MobileNav({ isOpen, setIsOpen }) {
   const overlayRef = useSpringRef();
   const overlayStyles = useSpring({
     ref: overlayRef,
-    bottom: isOpen ? '0vh' : '100vh'
+    bottom: isOpen ? '-100vh' : '100vh'
   });
 
   const itemRef = useSpringRef();
@@ -41,7 +41,7 @@ function MobileNav({ isOpen, setIsOpen }) {
 
   // TODO this doesn't seem to do anything - perhaps a bug in react-spring v9
   // see https://github.com/pmndrs/react-spring/issues/1388
-  useChain(isOpen ? [overlayRef, itemRef] : [itemRef, overlayRef]);
+  useChain(isOpen ? [overlayRef, itemRef] : [itemRef, overlayRef], [0, isOpen ? 0.1 : 0.6]);
 
   return (
     <>
@@ -59,33 +59,31 @@ function MobileNav({ isOpen, setIsOpen }) {
         </div>
       </div>
       <div>
-        {isOpen && (
-          <AnimatedDialogOverlay
-            className="bg-white"
-            style={overlayStyles}
+        <AnimatedDialogOverlay
+          className="bg-white"
+          style={overlayStyles}
+        >
+          <DialogContent
+            aria-label="Menu"
+            className="h-4/5"
           >
-            <DialogContent
-              aria-label="Menu"
-              className="h-4/5"
-            >
-              {itemTransitions((style, i) => (
-                <animated.div
-                  key={items[i].href}
-                  style={style}
-                  className="my-16"
+            {itemTransitions((style, i) => (
+              <animated.div
+                key={items[i].href}
+                style={style}
+                className="my-16"
+              >
+                <Link
+                  href={items[i].href}
+                  className="uppercase italic font-bold text-4xl my-4"
+                  invert
                 >
-                  <Link
-                    href={items[i].href}
-                    className="uppercase italic font-bold text-4xl my-4"
-                    invert
-                  >
-                    {items[i].title}
-                  </Link>
-                </animated.div>
-              ))}
-            </DialogContent>
-          </AnimatedDialogOverlay>
-        )}
+                  {items[i].title}
+                </Link>
+              </animated.div>
+            ))}
+          </DialogContent>
+        </AnimatedDialogOverlay>
       </div>
     </>
   );
