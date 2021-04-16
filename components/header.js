@@ -43,7 +43,9 @@ function MobileNav({ isOpen, setIsOpen }) {
 
   // TODO this doesn't seem to do anything - perhaps a bug in react-spring v9
   // see https://github.com/pmndrs/react-spring/issues/1388
-  useChain(isOpen ? [overlayRef, itemRef] : [itemRef, overlayRef], [0, isOpen ? 0.1 : 0.6]);
+  // no matter what I change to this line, nothing changes in the animations
+  // digging into react-spring (v9), `ref.current` is always undefined, so the animations are never chained
+  useChain(isOpen ? [itemRef, overlayRef] : [overlayRef, itemRef], [1, isOpen ? 0.1 : 0.6]);
 
   return (
     <>
@@ -62,31 +64,31 @@ function MobileNav({ isOpen, setIsOpen }) {
       </div>
       <div>
         {overlayTransitions((overlayStyles, item) => item && (
-        <AnimatedDialogOverlay
-          className="bg-white"
-          style={overlayStyles}
-        >
-          <DialogContent
-            aria-label="Menu"
-            className="h-4/5"
+          <AnimatedDialogOverlay
+            className="bg-white"
+            style={overlayStyles}
           >
-            {itemTransitions((style, i) => (
-              <animated.div
-                key={items[i].href}
-                style={style}
-                className="my-16"
-              >
-                <Link
-                  href={items[i].href}
-                  className="uppercase italic font-bold text-4xl my-4"
-                  invert
+            <DialogContent
+              aria-label="Menu"
+              className="h-4/5"
+            >
+              {itemTransitions((style, i) => (
+                <animated.div
+                  key={items[i].href}
+                  style={style}
+                  className="my-16"
                 >
-                  {items[i].title}
-                </Link>
-              </animated.div>
-            ))}
-          </DialogContent>
-        </AnimatedDialogOverlay>
+                  <Link
+                    href={items[i].href}
+                    className="uppercase italic font-bold text-4xl my-4"
+                    invert
+                  >
+                    {items[i].title}
+                  </Link>
+                </animated.div>
+              ))}
+            </DialogContent>
+          </AnimatedDialogOverlay>
         ))}
       </div>
     </>
