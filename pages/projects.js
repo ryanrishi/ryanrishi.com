@@ -6,9 +6,12 @@ import { getAllProjects } from '../lib/projects';
 
 const ProjectItem = ({ title, description, href }) => (
   <li className="pb-2">
-    <Link href={href}>{title}</Link>&mdash;&nbsp;{description}
+    <Link href={href}>{title}</Link>
+    &mdash;
+    {' '}
+    {description}
   </li>
-)
+);
 
 export default function ProjectsIndex({ projects }) {
   return (
