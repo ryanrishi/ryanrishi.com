@@ -10,12 +10,12 @@ describe('404', () => {
 
   it('renders 404 page', () => {
     cy.get('h1').contains('404');
-    cy.get('a:not(".header-link")').should('have.text', 'Return home');
+    cy.get('a').contains('Return home');
     cy.percySnapshot();
   });
 
   it('clicking the "return home" link returns to home', () => {
-    cy.get('a:not(".header-link")').click();
+    cy.get('a').contains('Return home').click();
     cy.url().should('eq', 'http://localhost:3000/');
   });
 });
