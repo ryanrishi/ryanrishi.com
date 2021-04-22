@@ -1,6 +1,6 @@
 import { Squash as Hamburger } from 'hamburger-react';
 import { useState } from 'react';
-import { animated, useChain, useSpringRef, useTransition } from 'react-spring';
+import { animated, useTransition } from 'react-spring';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 import Link from './link';
 
@@ -24,33 +24,26 @@ const HeaderLink = ({ href, children }) => (
 );
 
 function MobileNav({ isOpen, setIsOpen }) {
-  const overlayRef = useSpringRef();
   const overlayTransitions = useTransition(isOpen, {
-    ref: overlayRef,
     from: { bottom: '100vh' },
     enter: { bottom: '0vh' },
     leave: { bottom: '100vh' }
   });
 
-  const itemRef = useSpringRef();
   const itemTransitions = useTransition(isOpen ? [0, 1, 2, 3] : [], {
-    ref: itemRef,
     trail: 30,
-    from: { opacity: 0, marginLeft: '-50vw' },
-    enter: { opacity: 1, marginLeft: '0vw' },
-    leave: { opacity: 0, marginLeft: '50vw' }
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 }
   });
-
-  // TODO this doesn't seem to do anything - perhaps a bug in react-spring v9
-  // see https://github.com/pmndrs/react-spring/issues/1388
-  // no matter what I change to this line, nothing changes in the animations
-  // digging into react-spring (v9), `ref.current` is always undefined, so the animations are never chained
-  useChain(isOpen ? [itemRef, overlayRef] : [overlayRef, itemRef], [1, isOpen ? 0.1 : 0.6]);
 
   return (
     <>
       <div className="flex justify-between items-center">
-        <div className="uppercase text-xl">Ryan&nbsp;<b>Rishi</b></div>
+        <div className="uppercase text-xl">
+          Ryan&nbsp;
+          <b>Rishi</b>
+        </div>
         <div className="z-40">
           {/* TODO put this on <Hamburger> but it's not picking up class name */}
           <Hamburger
@@ -96,7 +89,7 @@ function MobileNav({ isOpen, setIsOpen }) {
 }
 
 export default function Header() {
-  const [ isMobileNavOpen, setIsMobileNavOpen ] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   return (
     <header className="flex flex-col md:flex-row justify-between p-4 md:py-8 container">
