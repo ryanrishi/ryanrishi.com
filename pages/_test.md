@@ -20,9 +20,16 @@ tags:
 The quick brown fox jumps over the lazy dog
 
 <Blockquote
-  quote="The quick brown fox jumps over the lazy dog"
   name="Foobar Jones"
-/>
+>
+  The quick brown fox jumps over the lazy dog
+</Blockquote>
+
+<Blockquote>
+  This blockquote has multiple lines.
+
+  See?
+</Blockquote>
 
 `The quick brown fox jumps over the lazy dog`
 
