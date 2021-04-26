@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 # Hi, I'm Ryan 👋🏼
 
-<div class="flex flex-col md:flex-row">
+<div className="flex flex-col md:flex-row">
 <div className="md:w-1/2 lg:w-2/3 flex-grow flex-shrink md:mr-4">
 
   I'm a twenty-something year old software engineer in California.
@@ -17,7 +17,7 @@ import Image from 'next/image';
 
   Feel free to reach out on [LinkedIn](https://linkedin.com/in/ryanrishi) or check out my projects on [Github](https://github.com/ryanrishi).
 </div>
-<div class="md:w-1/2 lg:w-1/3 flex-grow flex-shrink">
+<div className="md:w-1/2 lg:w-1/3 flex-grow flex-shrink">
   <Image
     src="/img/ryan-sitting.jpg"
     width="3648"
