@@ -25,24 +25,30 @@ const HeaderLink = ({ href, children }) => (
 
 function MobileNav({ isOpen, setIsOpen }) {
   const overlayTransitions = useTransition(isOpen, {
-    from: { bottom: '100vh' },
-    enter: { bottom: '0vh' },
-    leave: { bottom: '100vh' }
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    leave: { opacity: 0 },
+    expires: true
   });
 
   const itemTransitions = useTransition(isOpen ? [0, 1, 2, 3] : [], {
     trail: 30,
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 }
+    from: { bottom: '-50vh' },
+    enter: { bottom: '0vh' },
+    leave: { bottom: '50vh' }
   });
 
   return (
     <>
       <div className="flex justify-between items-center">
         <div className="uppercase text-xl">
-          Ryan&nbsp;
-          <b>Rishi</b>
+          <Link
+            href="/"
+            invert
+          >
+            Ryan&nbsp;
+            <b>Rishi</b>
+          </Link>
         </div>
         <div className="z-40">
           {/* TODO put this on <Hamburger> but it's not picking up class name */}
