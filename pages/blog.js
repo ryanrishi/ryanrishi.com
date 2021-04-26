@@ -18,6 +18,7 @@ export default function BlogIndex({ allPosts }) {
       {allPosts.map((post) => (
         <div
           className="mb-8 lg:mb-16 xl:mb-32"
+          data-test-blog-post
           key={post.slug}
         >
           <H2 className="post-title">
@@ -28,7 +29,7 @@ export default function BlogIndex({ allPosts }) {
               {post.title}
             </Link>
           </H2>
-          <p className="py-4 text-gray-700">{dayjs.utc(post.date).format('MMMM D, YYYY')}</p>
+          <p className="py-4 text-gray-700" data-test-blog-post-date>{dayjs.utc(post.date).format('MMMM D, YYYY')}</p>
 
           <div className="flex flex-col">
             <p>{post.description}</p>

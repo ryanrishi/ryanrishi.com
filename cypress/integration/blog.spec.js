@@ -12,7 +12,7 @@ describe('Blog', () => {
     });
 
     it('og:article', () => {
-      cy.get('.post h2').first().click();
+      cy.get('[data-test-blog-post] h2 a').first().click();
       cy.url().should('match', /\/blog\/[0-9a-z-]*$/);
       cy.get('head meta[property="og:type"]').should('have.attr', 'content', 'article');
       cy.get('head meta[property="article:author"]').should('have.attr', 'content', 'Ryan Rishi');
@@ -27,12 +27,12 @@ describe('Blog', () => {
 
   it('each blog post', () => {
     // see https://stackoverflow.com/a/61130646/5699147
-    cy.get('.post').then((posts) => {
+    cy.get('[data-test-blog-post]').then((posts) => {
       for (let i = 0; i < posts.length; i++) {
         cy.get('h2').eq(i).scrollIntoView();
         cy.get('h2').should('not.be.empty');
 
-        cy.get('.post-meta').eq(i).then((meta) => {
+        cy.get('[data-test-blog-post-date]').eq(i).then((meta) => {
           expect(meta).to.not.be.empty; // eslint-disable-line no-unused-expressions
           expect(meta.text()).to.match(/([A-Za-z]{3,9})\s\d{1,2},\s\d{4}/g);
         });
