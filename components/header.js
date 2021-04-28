@@ -74,8 +74,11 @@ function MobileNav({ isOpen, setIsOpen }) {
               {itemTransitions((style, i) => (
                 <animated.div
                   key={items[i].href}
-                  style={style}
-                  className="my-16 focus:outline-white"
+                  style={{
+                    ...style,
+                    WebkitTapHighlightColor: 'white'
+                  }}
+                  className="my-16"
                 >
                   <Link
                     href={items[i].href}
