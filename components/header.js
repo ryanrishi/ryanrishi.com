@@ -75,7 +75,7 @@ function MobileNav({ isOpen, setIsOpen }) {
                 <animated.div
                   key={items[i].href}
                   style={style}
-                  className="my-16"
+                  className="my-16 focus:outline-white"
                 >
                   <Link
                     href={items[i].href}
