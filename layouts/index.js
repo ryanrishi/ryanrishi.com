@@ -1,7 +1,7 @@
 import { MDXProvider } from '@mdx-js/react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import MDXComponents from '../lib/mdx-components';
+import MDXComponents from '../components/mdx-components';
 import Layout from '../components/layout';
 import Head from '../components/head';
 

@@ -1,8 +1,8 @@
-import Code from '../components/code';
-import Link from '../components/link';
-import { H1, H2, H3, H4, H5, H6 } from '../components/headings';
-import Callout from '../components/callout';
-import Blockquote from '../components/blockquote';
+import Code from './code';
+import Link from './link';
+import { H1, H2, H3, H4, H5, H6 } from './headings';
+import Callout from './callout';
+import Blockquote from './blockquote';
 
 /* eslint-disable react/display-name */
 /* eslint-disable react/jsx-props-no-spreading */
