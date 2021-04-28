@@ -75,11 +75,11 @@ function MobileNav({ isOpen, setIsOpen }) {
                 <animated.div
                   key={items[i].href}
                   style={style}
-                  className="my-16 outline-white"
+                  className="my-16"
                 >
                   <Link
                     href={items[i].href}
-                    className="uppercase italic font-bold text-4xl my-4"
+                    className="uppercase italic font-bold text-4xl my-4 outline-white"
                     invert
                   >
                     {items[i].title}
