@@ -69,7 +69,7 @@ function MobileNav({ isOpen, setIsOpen }) {
           >
             <DialogContent
               aria-label="Menu"
-              className="h-4/5"
+              className="h-4/5 text-center px-0"
             >
               {itemTransitions((style, i) => (
                 <animated.div
