@@ -28,7 +28,8 @@ const theme = {
     WebkitHyphens: 'none',
     MozHyphens: 'none',
     msHyphens: 'none',
-    hyphens: 'none'
+    hyphens: 'none',
+    overflowWrap: 'normal'
   },
   'pre[class*="language-"]': {
     color: colors.gray,
@@ -186,7 +187,7 @@ export default function Code({ language = '', children }) {
     <SyntaxHighlighter
       style={theme}
       language={language}
-      className={`language-${language} break-normal`}
+      className={`language-${language}`}
     >
       {lines.join('\n')}
     </SyntaxHighlighter>
