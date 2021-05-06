@@ -9,8 +9,7 @@ const AnimatedDialogOverlay = animated(DialogOverlay);
 const items = [
   { title: 'Music', href: '/music' },
   { title: 'Projects', href: '/projects' },
-  { title: 'Blog', href: '/blog' },
-  { title: 'Github', href: 'https://github.com/ryanrishi' }
+  { title: 'Blog', href: '/blog' }
 ];
 
 const HeaderLink = ({ href, children }) => (
@@ -31,7 +30,7 @@ function MobileNav({ isOpen, setIsOpen }) {
     expires: true
   });
 
-  const itemTransitions = useTransition(isOpen ? [0, 1, 2, 3] : [], {
+  const itemTransitions = useTransition(isOpen ? [0, 1, 2] : [], {
     trail: 30,
     from: { bottom: '-50vh' },
     enter: { bottom: '0vh' },
