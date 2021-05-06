@@ -24,6 +24,7 @@ describe('Header', () => {
     describe('Open', () => {
       beforeEach(() => {
         cy.get('header [role="button"]').click();
+        cy.get('[data-reach-dialog-overlay]').should('have.css', 'opacity', '1');
       });
 
       it('opens the mobile nav when the hamburger is clicked', () => {
