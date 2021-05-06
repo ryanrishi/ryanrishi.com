@@ -4,7 +4,7 @@ export default function Footer() {
       <div>
         <p>
           {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
-          &copy; Copyright&nbsp;{ new Date().getFullYear() }&nbsp;Ryan Rishi. All rights reserved.
+          &copy; Copyright&nbsp;{ new Date().getFullYear() }&nbsp;Ryan Rishi
         </p>
       </div>
     </footer>
