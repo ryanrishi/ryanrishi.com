@@ -16,7 +16,7 @@ export default {
 
   a: Link,
   pre: (props) => <div className="overflow-x-auto" {...props} />,
-  blockquote: () => { throw new Error('Use the blockquote component directly'); },
+  blockquote: ({ children }) => <Blockquote>{children}</Blockquote>,
   p: ({ children }) => <p className="mb-8">{children}</p>,
   ul: ({ children }) => <ul className="list-disc list-outside px-4 mb-8 -mt-6">{children}</ul>,
 
