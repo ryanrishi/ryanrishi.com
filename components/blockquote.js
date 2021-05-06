@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from './link';
 
 export default function Quote({ children, name, citationLink }) {
   return (
@@ -12,7 +13,7 @@ export default function Quote({ children, name, citationLink }) {
         <cite className="flex items-center">
           <div className="flex flex-col items-start">
             <span className="mb-1 text-sm font-semibold text-gray-800">
-              {citationLink ? <a href={citationLink}>{name}</a> : name}
+              {citationLink ? <Link href={citationLink}>{name}</Link> : name}
             </span>
           </div>
         </cite>
