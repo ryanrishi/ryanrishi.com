@@ -3,9 +3,9 @@ const plugin = require('tailwindcss/plugin');
 const generatePurgeCssSafelist = () => {
   // keep these in sync with styles in components/callout.js
   const calloutColors = ['green', 'blue', 'yellow', 'red'];
-  const textStyles = calloutColors.map(color => `text-${color}-800`);
-  const borderStyles = calloutColors.map(color => `border-${color}-800`);
-  const backgroundStyles = calloutColors.map(color => `bg-${color}-100`);
+  const textStyles = calloutColors.map((color) => `text-${color}-800`);
+  const borderStyles = calloutColors.map((color) => `border-${color}-800`);
+  const backgroundStyles = calloutColors.map((color) => `bg-${color}-100`);
 
   return [...textStyles, ...borderStyles, ...backgroundStyles];
 };
