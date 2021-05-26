@@ -7,8 +7,8 @@ export default function Link({ href, children, className, invert = false }) {
 
   const classes = classNames('transition', className, {
     'text-gray-800': invert,
-    'hover:text-primary-600': invert,
-    'text-primary-600': !invert,
+    'hover:text-valencia-500': invert,
+    'text-valencia-500': !invert,
     'hover:text-gray-800': !invert
   });
 
