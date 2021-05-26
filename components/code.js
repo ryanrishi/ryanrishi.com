@@ -47,7 +47,6 @@ const theme = {
     hyphens: 'none',
     background: '#282c34',
     display: 'inline-block',
-    padding: '1rem 0.5rem',
     marginBottom: '1rem',
     borderRadius: '0.25rem',
     width: '100%',
@@ -187,7 +186,7 @@ export default function Code({ language = '', children }) {
     <SyntaxHighlighter
       style={theme}
       language={language}
-      className={`language-${language}`}
+      className={`language-${language} p-4`}
     >
       {lines.join('\n')}
     </SyntaxHighlighter>
