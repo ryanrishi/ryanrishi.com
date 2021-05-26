@@ -15,7 +15,7 @@ module.exports = {
     content: [
       'components/**/*.js',
       'layouts/**/*.js',
-      'pages/**/*.md'
+      'pages/**/*.{js,md}'
     ],
     options: {
       safelist: generatePurgeCssSafelist()
