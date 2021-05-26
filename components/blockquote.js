@@ -6,7 +6,10 @@ export default function Quote({ children, name, citationLink }) {
   return (
     <blockquote className="relative p-4 text-xl text-gray-600 quote italic mb-4 border-l-4 sm:border-l-0">
       <div
-        className="text-gray-300 text-8xl italic right-full absolute top-0 leading-none hidden sm:block font-serif"
+        className="font-serif text-8xl text-gray-200 absolute hidden sm:block top-0"
+        style={{
+          zIndex: -1
+        }}
         aria-hidden="true"
       >
         &ldquo;
