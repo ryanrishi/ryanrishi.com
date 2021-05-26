@@ -8,6 +8,9 @@ tags:
   - second tag
 ---
 
+# Test
+
+# Headings
 # The quick brown fox jumps over the lazy dog
 ## The quick brown fox jumps over the lazy dog
 ### The quick brown fox jumps over the lazy dog
@@ -15,10 +18,10 @@ tags:
 ##### The quick brown fox jumps over the lazy dog
 ###### The quick brown fox jumps over the lazy dog
 
+# Text Styles
 The quick brown fox jumps over the lazy dog
 
-> The quick brown fox jumps over the lazy dog
-
+# Code
 `The quick brown fox jumps over the lazy dog`
 
 The `quick` brown fox jumps over the `lazy` dog
@@ -32,53 +35,40 @@ $ echo $woof
 Bacon ipsum dolor amet pariatur short ribs culpa shank dolore kevin enim tenderloin sint pork loin meatloaf sirloin buffalo deserunt velit. Magna biltong pork chop porchetta turducken, adipisicing meatball officia doner dolor. Ad pig in et cupim ipsum frankfurter fatback dolore pork loin buffalo sed. Lorem hamburger elit filet mignon prosciutto ham hock corned beef aute burgdoggen jerky dolor ullamco andouille salami pig. Shankle elit pariatur occaecat.
 ```
 
-# Screen Sizes
-## Hidden
-<div className="sm:hidden">
-  <code>
-    sm:hidden
-  </code>
-</div>
+# Blockquotes
+<Blockquote
+  name="Foobar Jones"
+>
+  The quick brown fox jumps over the lazy dog
+</Blockquote>
 
-<div className="md:hidden">
-  <code>
-    md:hidden
-  </code>
-</div>
+<Blockquote>
+  This blockquote has multiple lines.
 
-<div className="lg:hidden">
-  <code>
-    lg:hidden
-  </code>
-</div>
+  See?
+</Blockquote>
 
-<div className="xl:hidden">
-  <code>
-    xl:hidden
-  </code>
-</div>
+# Callouts
+<Callout type="success">
+  This is a success callout
+</Callout>
 
-## Flex
-<div className="sm:flex">
-  <code>
-    sm:flex
-  </code>
-</div>
+<Callout type="info">
+  This is an info callout
+</Callout>
 
-<div className="md:flex">
-  <code>
-    md:flex
-  </code>
-</div>
+<Callout type="warning">
+  This is a warning callout
+</Callout>
 
-<div className="lg:flex">
-  <code>
-    lg:flex
-  </code>
-</div>
+<Callout type="error">
+  This is an error callout
+</Callout>
 
-<div className="xl:flex">
-  <code>
-    xl:flex
-  </code>
-</div>
+# Lists
+This is an unordered list:
+- item one
+- item two
+- [This is a link](/)
+
+And this is something after the list

@@ -3,6 +3,7 @@ title:        Migrating My Website to AWS Using Terraform
 description:  I recently migrated my personal website infrastructure from a VPS to AWS S3 + CloudFront, with infrastructure managed by Terraform.
 image:        /img/waterfall-cdn.png
 date:         "2020-01-06T00:00:00Z"
+layout:       blog
 tags:
   - terraform
   - aws
@@ -18,6 +19,10 @@ I recently migrated my personal website hosting from a [DigitalOcean VPS](https:
 
 # Requirements
 My website is built using [Jekyll](https://jekyllrb.com/). Jekyll is a static site generator, which makes it a perfect candidate to serve from a CDN such as CloudFront. In addition to CloudFront, I would need to store the site in S3, update my DNS to point to CloudFront, and generate a TLS certificate that CloudFront can use.
+
+<Callout type="info">
+  As of early 2021, my website is using Next.js instead of Jekyll, and no longer hosted on AWS.
+</Callout>
 
 # Building Out the Infrastructure
 I had played with Terraform a few months ago, and wanted to try it out in a real-world situation. I followed [this tutorial](https://medium.com/runatlantis/hosting-our-static-site-over-ssl-with-s3-acm-cloudfront-and-terraform-513b799aec0f) to write the Terraform code needed to accomplish this task.

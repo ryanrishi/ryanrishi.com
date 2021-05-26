@@ -1,5 +1,6 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 
+// taken from https://github.com/samselikoff/samselikoff.com/blob/d010907de8aa342131c549e9087b10e6db289b3a/components/code.js#L40
 const colors = {
   green: '#8CC570',
   purple: '#D373E3',
@@ -27,7 +28,8 @@ const theme = {
     WebkitHyphens: 'none',
     MozHyphens: 'none',
     msHyphens: 'none',
-    hyphens: 'none'
+    hyphens: 'none',
+    overflowWrap: 'normal'
   },
   'pre[class*="language-"]': {
     color: colors.gray,
@@ -43,7 +45,13 @@ const theme = {
     MozHyphens: 'none',
     msHyphens: 'none',
     hyphens: 'none',
-    background: '#282c34'
+    background: '#282c34',
+    display: 'inline-block',
+    marginBottom: '1rem',
+    borderRadius: '0.25rem',
+    width: '100%',
+    wordWrap: 'break-word',
+    overflowX: 'auto'
   },
   ':not(pre) > code[class*="language-"]': {
     background: '#282c34',
@@ -67,7 +75,7 @@ const theme = {
     color: colors.gray
   },
   block: {
-    display: 'inline' // needed to ovverride tailwind's block class
+    display: 'inline' // needed to override tailwind's block class
   },
   '.namespace': {
     Opacity: '.7'
@@ -178,7 +186,7 @@ export default function Code({ language = '', children }) {
     <SyntaxHighlighter
       style={theme}
       language={language}
-      className={`language-${language}`}
+      className={`language-${language} p-4`}
     >
       {lines.join('\n')}
     </SyntaxHighlighter>

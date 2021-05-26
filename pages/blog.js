@@ -1,10 +1,11 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import Link from 'next/link';
+import Link from '../components/link';
 import Layout from '../components/layout';
 import Head from '../components/head';
 import { getAllPosts } from '../lib/posts';
+import { H2 } from '../components/headings';
 
 dayjs.extend(utc);
 
@@ -15,17 +16,24 @@ export default function BlogIndex({ allPosts }) {
         title="Blog"
       />
       {allPosts.map((post) => (
-        <div className="post" key={post.slug}>
-          <h2 className="post-title">
-            <Link href={`/blog/${post.slug}`}>
-              <a className="post-link" href={`/blog/${post.slug}`}>{post.title}</a>
+        <div
+          className="mb-8 lg:mb-16 xl:mb-32"
+          data-test-blog-post
+          key={post.slug}
+        >
+          <H2 className="post-title">
+            <Link
+              href={`/blog/${post.slug}`}
+              invert
+            >
+              {post.title}
             </Link>
-          </h2>
-          <p className="post-meta">{dayjs.utc(post.date).format('MMMM D, YYYY')}</p>
+          </H2>
+          <p className="py-4 text-gray-700" data-test-blog-post-date>{dayjs.utc(post.date).format('MMMM D, YYYY')}</p>
 
-          <div className="post-preview">
+          <div className="flex flex-col">
             <p>{post.description}</p>
-            <a className="post-read-more" href={`/blog/${post.slug}`}>Read more &raquo;</a>
+            <Link className="flex justify-end italic uppercase font-bold" href={`/blog/${post.slug}`} invert>Read more &raquo;</Link>
           </div>
         </div>
       ))}
