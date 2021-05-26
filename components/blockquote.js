@@ -11,7 +11,7 @@ export default function Quote({ children, name, citationLink }) {
       >
         &ldquo;
       </div>
-      <p className="mb-4">{children}</p>
+      <div className="mb-4">{children}</div>
       {name && (
         <cite className="flex items-center">
           <div className="flex flex-col items-start">
