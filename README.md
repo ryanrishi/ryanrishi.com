@@ -1,4 +1,4 @@
-[ryanrishi.com](ryanrishi.com)
+[ryanrishi.com](https://ryanrishi.com)
 ===
 
 Code for my personal website. Built using [Next.js](https://nextjs.org/).
