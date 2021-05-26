@@ -2,9 +2,8 @@ import Image from 'next/image';
 
 # Hi, I'm Ryan 👋🏼
 
-<div className="flex flex-col md:flex-row">
-<div className="md:w-1/2 lg:w-2/3 flex-grow flex-shrink md:mr-4">
-
+<div className="flex flex-col lg:flex-row">
+<div className="lg:w-2/3 flex-grow flex-shrink md:mr-4">
   I'm a twenty-something year old software engineer in California.
 
   I recently joined [Envoy](https://envoy.com/), a startup in San Francisco, where I'm building out its external developer platform. Previously, I worked at [Jelli](https://www.jelli.com/), an audio ad tech startup that was acquired by [iHeartMedia](https://www.iheartmedia.com/), and before that I was at [Skybox Imaging](https://en.wikipedia.org/wiki/SkySat), a satellite imaging company which was acquired by Google in 2014.
@@ -17,7 +16,7 @@ import Image from 'next/image';
 
   Feel free to reach out on [LinkedIn](https://linkedin.com/in/ryanrishi) or check out my projects on [Github](https://github.com/ryanrishi).
 </div>
-<div className="md:w-1/2 lg:w-1/3 flex-grow flex-shrink">
+<div className="lg:w-1/3 flex-grow flex-shrink">
   <Image
     src="/img/ryan-sitting.jpg"
     width="3648"
