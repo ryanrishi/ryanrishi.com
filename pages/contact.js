@@ -8,7 +8,7 @@ export default function Contact() {
       <Head
         title="Contact"
       />
-      <div className="container w-3/4">
+      <div className="container w-full md:w-3/4">
         <H1>Contact</H1>
         <form
           className="mx-auto"
