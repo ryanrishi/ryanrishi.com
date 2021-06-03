@@ -22,14 +22,14 @@ export default function Contact() {
                 htmlFor="grid-full-name"
               >
                 Your Name
+                <input
+                  type="text"
+                  id="grid-full-name"
+                  name="name"
+                  className="appearance-none block w-full text-gray-700 border rounded py-3 px-4 mb-3 mt-2 leading-tight focus:outline-none focus:bg-white"
+                  required
+                />
               </label>
-              <input
-                type="text"
-                id="grid-full-name"
-                name="name"
-                className="appearance-none block w-full text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                required
-              />
             </div>
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
@@ -39,14 +39,14 @@ export default function Contact() {
                 htmlFor="grid-password"
               >
                 E-mail
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 mt-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  required
+                />
               </label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                required
-              />
             </div>
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
@@ -56,13 +56,13 @@ export default function Contact() {
                 htmlFor="grid-password"
               >
                 Message
+                <textarea
+                  id="message"
+                  name="message"
+                  className=" no-resize appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 mt-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
+                  required
+                />
               </label>
-              <textarea
-                id="message"
-                name="message"
-                className=" no-resize appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
-                required
-              />
             </div>
           </div>
           <div className="md:flex md:items-center">
