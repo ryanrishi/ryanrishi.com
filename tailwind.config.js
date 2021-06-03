@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss/plugin');
+const colors = require('tailwindcss/colors');
 
 const generatePurgeCssSafelist = () => {
   // keep these in sync with styles in components/callout.js
@@ -28,6 +29,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        teal: colors.teal,
         valencia: {
           DEFAULT: '#D33A2C',
           50: '#FBEBEA',
