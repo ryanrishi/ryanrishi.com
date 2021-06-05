@@ -30,6 +30,8 @@ export default function Link({ href, children, className, invert = false }) {
     <a
       href={href}
       className={classes}
+      target="_blank"
+      rel="noreferrer"
     >
       {children}
     </a>
