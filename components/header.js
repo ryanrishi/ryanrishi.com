@@ -10,7 +10,7 @@ const items = [
   { title: 'Music', href: '/music' },
   { title: 'Projects', href: '/projects' },
   { title: 'Blog', href: '/blog' },
-  { title: 'Github', href: 'https://github.com/ryanrishi' }
+  { title: 'Contact', href: '/contact' }
 ];
 
 const HeaderLink = ({ href, children }) => (
