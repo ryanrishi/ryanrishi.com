@@ -19,6 +19,8 @@ More details, methodology, and definitions can be found at the [New York Times C
 
 Built using [Grafana](https://grafana.com/), [InfluxDB](https://www.influxdata.com/), and [csv-to-influxdb](https://github.com/fabio-miranda/csv-to-influxdb). Data from [New York Times](https://github.com/nytimes/covid-19-data). Running on [AWS](https://aws.amazon.com/), managed by [Terraform](https://www.terraform.io/).
 
-Project site available [here](https://labs.ryanrishi.com/covid-19-dashboard/).
-
 Source available on [Github](https://github.com/ryanrishi/covid-19-grafana).
+
+<Callout>
+  The project site is no longer live, but there are instructions on how to run the project in the source code link above.
+</Callout>
