@@ -16,5 +16,9 @@ export default function Callout({ type, children }) {
 }
 
 Callout.propTypes = {
-  type: PropTypes.oneOf(['success', 'info', 'warning', 'error']).isRequired
+  type: PropTypes.oneOf(['success', 'info', 'warning', 'error'])
+};
+
+Callout.defaultProps = {
+  type: 'info'
 };
