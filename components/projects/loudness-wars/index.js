@@ -106,7 +106,7 @@ const drawChart = async (svgRef) => {
     .call(d3.axisBottom(x))
     .append('text')
       .attr('fill', 'black')
-      .attr('x', w - margin.left)
+      .attr('x', w - margin.left - margin.right)
       .attr('y', -2)
       .attr('text-anchor', 'end')
       .text('Year');
