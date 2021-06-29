@@ -181,7 +181,7 @@ const drawChart = async (svgRef) => {
     .transition()
     .duration(1000)
     .attr('opacity', 1)
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(y).tickValues([-24, -18, -12, -9, -6, -3, -1.5]).tickFormat(d => d));
 
   svg.selectAll('circle')
     .transition()
