@@ -11,13 +11,15 @@ const ensureD3 = async () => {
   }
 };
 
+const margin = {
+  top: 10,
+  right: 30,
+  bottom: 30,
+  left: 60
+};
+
 const drawChart = async (svgRef) => {
   await ensureD3();
-  const svg = d3.select(svgRef.current);
-
-  // TODO redraw chart on window resize
-  const h = window.innerHeight;
-  const w = window.innerWidth;
 
   const data = await d3.csv('/loudness-wars.csv').then((tracks) => tracks.map((track) => ({
     id: track.track_id,
@@ -62,42 +64,47 @@ const drawChart = async (svgRef) => {
     maxLoudness = Math.max(maxLoudness, d.loudness);
   });
 
-  console.log('data', data);
+  // TODO redraw chart on window resize
+  const h = 900 - margin.top - margin.bottom;
+  const w = 1280 - margin.left - margin.right;
+
+  const svg = d3.select(svgRef.current);
+  const g = svg.append('g');
 
   svg
-    .attr('width', w)
-    .attr('height', h)
-    .style('margin-top', 50)
-    .style('margin-left', 50);
+    .attr('width', w + margin.left + margin.right)
+    .attr('height', h + margin.top + margin.bottom);
+
+  g.attr('transform', `translate(${margin.left}, ${margin.top})`);
 
   // x and y scales
   const startDate = new Date();
-  startDate.setFullYear(1970);
+  startDate.setFullYear(1968);
   startDate.setMonth(0, 1);
   startDate.setHours(0, 0, 0, 0);
 
   const endDate = new Date();
-  endDate.setFullYear(2020);
+  endDate.setFullYear(2022);
   endDate.setMonth(0, 1);
   endDate.setHours(0, 0, 0, 0);
 
   const x = d3
     .scaleTime()
     .domain([startDate, endDate])
-    .range([0, w]);
+    .range([0, w - margin.left - margin.bottom]);
 
   const y = d3
     .scaleLog()
     .domain([minLoudness, maxLoudness])
-    .range([h, 0]);
+    .range([h - margin.top - margin.bottom, 0]);
 
   // draw x and y axes
-  svg.append('g')
+  g.append('g')
     .attr('transform', `translate(0, ${h})`)
     .call(d3.axisBottom(x));
 
-  svg.append('g')
     .call(d3.axisLeft(y));
+  g.append('g')
 
   const transitionDuration = 200;
   const r = 5;
@@ -138,7 +145,7 @@ const drawChart = async (svgRef) => {
       .style('opacity', 0);
   }
 
-  svg.append('g')
+  g.append('g')
     .selectAll('dot')
     .data(data)
     .enter()
