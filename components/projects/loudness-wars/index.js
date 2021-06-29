@@ -70,6 +70,7 @@ const drawChart = async (svgRef) => {
   const w = 1280 - margin.left - margin.right;
 
   const svg = d3.select(svgRef.current);
+  svg.selectAll('*').remove();
   const g = svg.append('g');
 
   svg
