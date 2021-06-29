@@ -126,6 +126,7 @@ const drawChart = async (svgRef) => {
   const tooltip = d3.select('body')
     .append('div')
     .style('position', 'absolute')
+    .style('background-color', 'white')
     .style('opacity', 0);
 
   // hover animations
