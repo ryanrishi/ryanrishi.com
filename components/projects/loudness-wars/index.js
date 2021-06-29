@@ -16,7 +16,6 @@ const drawChart = async (svgRef) => {
   const svg = d3.select(svgRef.current);
 
   // TODO redraw chart on window resize
-  // const data = [12, 5, 6, 6, 9, 10];
   const h = window.innerHeight;
   const w = window.innerWidth;
 
@@ -86,6 +85,7 @@ const drawChart = async (svgRef) => {
     .scaleTime()
     .domain([startDate, endDate])
     .range([0, w]);
+
   const y = d3
     .scaleLog()
     .domain([minLoudness, maxLoudness])
@@ -95,18 +95,60 @@ const drawChart = async (svgRef) => {
   svg.append('g')
     .attr('transform', `translate(0, ${h})`)
     .call(d3.axisBottom(x));
+
   svg.append('g')
     .call(d3.axisLeft(y));
+
+  const transitionDuration = 200;
+  const r = 3;
+
+  // tooltip
+  const tooltip = d3.select('body')
+    .append('div')
+    .style('position', 'absolute')
+    .style('opacity', 0);
+
+  // hover animations
+  function onMouseIn(event, d) {
+    d3.select(this)
+      .transition()
+      .duration(transitionDuration)
+      .attr('r', 2 * r);
+
+    tooltip
+      .style('opacity', 0.8)
+      .style('left', `${event.pageX + 15}px`)
+      .style('top', `${event.pageY}px`);
+
+    tooltip.html(`
+      <p>${d.name} - ${d.artist} (${d.releaseDate})</p>
+      <p>${d.loudness} dB</p>
+    `);
+  }
+
+  function onMouseOut(event, d) {
+    d3.select(this)
+      .transition()
+      .duration(transitionDuration)
+      .attr('r', r);
+
+    tooltip
+      .transition()
+      .duration(transitionDuration)
+      .style('opacity', 0);
+  }
 
   svg.append('g')
     .selectAll('dot')
     .data(data)
     .enter()
     .append('circle')
-    .attr('cx', (d) => x(d.releaseDate))
-    .attr('cy', (d) => y(d.loudness))
-    .attr('r', 1.5)
-    .attr('fill', 'blue');
+      .attr('cx', (d) => x(d.releaseDate))
+      .attr('cy', (d) => y(d.loudness))
+      .attr('r', 3)
+      .attr('fill', 'blue')
+      .on('mouseover', onMouseIn)
+      .on('mouseout', onMouseOut);
 };
 
 const Chart = () => {
@@ -117,7 +159,9 @@ const Chart = () => {
   }, [svg]);
 
   return (
-    <svg ref={svg} />
+    <svg
+      className="w-full h-full"
+      ref={svg} />
   );
 };
 
