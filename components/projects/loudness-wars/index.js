@@ -91,35 +91,34 @@ const drawChart = async (svgRef) => {
 
   const x = d3
     .scaleTime()
-    .domain([startDate, startDate]) // set [x1, x2] the same in order to animate later
-    .range([0, 0]);
+    .domain([startDate, endDate])
+    .range([0, w - margin.left - margin.right]);
 
   const y = d3
     .scaleLog()
-    .domain([minLoudness, maxLoudness])
-    .range([h - margin.top - margin.bottom, 0]);
+    .domain([minLoudness, minLoudness]) // set [y1, y2] the same in order to animate later
+    .range([h, h]);
 
   // draw x and y axes
-  const xAxis = g.append('g')
-    .attr('transform', `translate(0, ${h})`)
-    .attr('opacity', 0)
-    .call(d3.axisBottom(x));
-
-  xAxis.append('text')
-    .attr('fill', 'black')
-    .attr('x', w - margin.left)
-    .attr('y', -2)
-    .attr('text-anchor', 'end')
-    .text('Year');
-
   g.append('g')
-    .call(d3.axisLeft(y))
+    .attr('transform', `translate(0, ${h})`)
+    .call(d3.axisBottom(x))
     .append('text')
       .attr('fill', 'black')
-      .attr('transform', 'rotate(-90)')
-      .attr('y', 10)
-      .style('text-anchor', 'end')
-      .text('Loudness (dB)');
+      .attr('x', w - margin.left)
+      .attr('y', -2)
+      .attr('text-anchor', 'end')
+      .text('Year');
+
+  const yAxis = g.append('g')
+    .call(d3.axisLeft(y));
+
+  yAxis.append('text')
+    .attr('fill', 'black')
+    .attr('transform', 'rotate(-90)')
+    .attr('y', 10)
+    .style('text-anchor', 'end')
+    .text('Loudness (dB)');
 
   const transitionDuration = 200;
   const r = 5;
@@ -175,18 +174,17 @@ const drawChart = async (svgRef) => {
       .on('mouseover', onMouseIn)
       .on('mouseout', onMouseOut);
 
-  // animate the dots by modifyin x scale
-  x.domain([startDate, endDate]);
-  x.range([0, w - margin.left - margin.right]);
-  xAxis
+  y.domain([minLoudness, maxLoudness]);
+  y.range([h - margin.top - margin.bottom, 0]);
+  yAxis
     .transition()
     .duration(1000)
     .attr('opacity', 1)
-    .call(d3.axisBottom(x));
+    .call(d3.axisLeft(y));
 
   svg.selectAll('circle')
     .transition()
-    .delay((d, i) => i)
+    .delay((d, i) => i / 3)
     .duration(1000)
     .attr('cx', (d) => x(d.releaseDate))
     .attr('cy', (d) => y(d.loudness));
