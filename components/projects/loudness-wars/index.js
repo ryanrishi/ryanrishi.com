@@ -55,7 +55,7 @@ const drawChart = async (svgRef) => {
     })(),
     releaseDatePrecision: track.release_date_precision,
     loudness: track.loudness
-  })));
+  })).sort((a, b) => a.releaseDate - b.releaseDate));
 
   let minLoudness = Infinity;
   let maxLoudness = -Infinity;
@@ -91,8 +91,8 @@ const drawChart = async (svgRef) => {
 
   const x = d3
     .scaleTime()
-    .domain([startDate, endDate])
-    .range([0, w - margin.left - margin.bottom]);
+    .domain([startDate, startDate]) // set [x1, x2] the same in order to animate later
+    .range([0, 0]);
 
   const y = d3
     .scaleLog()
@@ -100,15 +100,17 @@ const drawChart = async (svgRef) => {
     .range([h - margin.top - margin.bottom, 0]);
 
   // draw x and y axes
-  g.append('g')
+  const xAxis = g.append('g')
     .attr('transform', `translate(0, ${h})`)
-    .call(d3.axisBottom(x))
-    .append('text')
-      .attr('fill', 'black')
-      .attr('x', w - margin.left)
-      .attr('y', -2)
-      .attr('text-anchor', 'end')
-      .text('Year');
+    .attr('opacity', 0)
+    .call(d3.axisBottom(x));
+
+  xAxis.append('text')
+    .attr('fill', 'black')
+    .attr('x', w - margin.left)
+    .attr('y', -2)
+    .attr('text-anchor', 'end')
+    .text('Year');
 
   g.append('g')
     .call(d3.axisLeft(y))
@@ -142,7 +144,8 @@ const drawChart = async (svgRef) => {
       .style('top', `${event.pageY}px`);
 
     tooltip.html(`
-      <p>${d.name} - ${d.artist} (${d.releaseDateForDisplay})</p>
+      <p>${d.name} (${d.releaseDateForDisplay})</p>
+      <p>${d.artist}</p>
       <p>${d.loudness} dB</p>
     `);
   }
@@ -171,6 +174,22 @@ const drawChart = async (svgRef) => {
       .attr('opacity', 0.4)
       .on('mouseover', onMouseIn)
       .on('mouseout', onMouseOut);
+
+  // animate the dots by modifyin x scale
+  x.domain([startDate, endDate]);
+  x.range([0, w - margin.left - margin.right]);
+  xAxis
+    .transition()
+    .duration(1000)
+    .attr('opacity', 1)
+    .call(d3.axisBottom(x));
+
+  svg.selectAll('circle')
+    .transition()
+    .delay((d, i) => i)
+    .duration(1000)
+    .attr('cx', (d) => x(d.releaseDate))
+    .attr('cy', (d) => y(d.loudness));
 };
 
 const Chart = () => {
