@@ -100,7 +100,7 @@ const drawChart = async (svgRef) => {
     .call(d3.axisLeft(y));
 
   const transitionDuration = 200;
-  const r = 3;
+  const r = 5;
 
   // tooltip
   const tooltip = d3.select('body')
@@ -121,7 +121,7 @@ const drawChart = async (svgRef) => {
       .style('top', `${event.pageY}px`);
 
     tooltip.html(`
-      <p>${d.name} - ${d.artist} (${d.releaseDate})</p>
+      <p>${d.name} - ${d.artist} (${d.releaseDate.toLocaleDateString()})</p>
       <p>${d.loudness} dB</p>
     `);
   }
@@ -145,8 +145,9 @@ const drawChart = async (svgRef) => {
     .append('circle')
       .attr('cx', (d) => x(d.releaseDate))
       .attr('cy', (d) => y(d.loudness))
-      .attr('r', 3)
-      .attr('fill', 'blue')
+      .attr('r', r)
+      .attr('fill', '#69b3a2')
+      .attr('opacity', 0.4)
       .on('mouseover', onMouseIn)
       .on('mouseout', onMouseOut);
 };
