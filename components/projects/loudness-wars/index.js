@@ -26,6 +26,7 @@ const drawChart = async (svgRef) => {
     name: track.track_name,
     artist: track.artist_name,
     album: track.album_name,
+    releaseDateForDisplay: track.release_date,
     releaseDate: (() => {
       switch (track.release_date_precision) {
         case 'day':
@@ -128,7 +129,7 @@ const drawChart = async (svgRef) => {
       .style('top', `${event.pageY}px`);
 
     tooltip.html(`
-      <p>${d.name} - ${d.artist} (${d.releaseDate.toLocaleDateString()})</p>
+      <p>${d.name} - ${d.artist} (${d.releaseDateForDisplay})</p>
       <p>${d.loudness} dB</p>
     `);
   }
