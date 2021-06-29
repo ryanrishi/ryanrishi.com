@@ -102,10 +102,22 @@ const drawChart = async (svgRef) => {
   // draw x and y axes
   g.append('g')
     .attr('transform', `translate(0, ${h})`)
-    .call(d3.axisBottom(x));
+    .call(d3.axisBottom(x))
+    .append('text')
+      .attr('fill', 'black')
+      .attr('x', w - margin.left)
+      .attr('y', -2)
+      .attr('text-anchor', 'end')
+      .text('Year');
 
-    .call(d3.axisLeft(y));
   g.append('g')
+    .call(d3.axisLeft(y))
+    .append('text')
+      .attr('fill', 'black')
+      .attr('transform', 'rotate(-90)')
+      .attr('y', 10)
+      .style('text-anchor', 'end')
+      .text('Loudness (dB)');
 
   const transitionDuration = 200;
   const r = 5;
