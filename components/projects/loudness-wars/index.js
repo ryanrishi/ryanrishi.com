@@ -12,9 +12,6 @@ const ensureD3 = async () => {
   }
 };
 
-const w = 1600;
-const h = 900;
-
 const margin = {
   top: 10,
   right: 30,
@@ -62,7 +59,9 @@ const drawChart = async (svgRef) => {
     maxLoudness = Math.max(maxLoudness, d.loudness);
   });
 
-  // TODO redraw chart on window resize
+  const { clientHeight, clientWidth } = svgRef.current.parentElement;
+  const h = clientHeight - margin.top - margin.bottom;
+  const w = clientWidth - margin.left - margin.right;
 
   const svg = d3.select(svgRef.current);
   svg.selectAll('*').remove();
