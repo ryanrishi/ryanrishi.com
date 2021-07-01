@@ -51,6 +51,9 @@ const drawChart = async (svgRef) => {
     loudness: track.loudness
   })).sort((a, b) => a.releaseDate - b.releaseDate));
 
+  const minDate = data[0].releaseDate;
+  const maxDate = data[data.length - 1].releaseDate;
+
   let minLoudness = Infinity;
   let maxLoudness = -Infinity;
 
@@ -70,8 +73,8 @@ const drawChart = async (svgRef) => {
   g.attr('transform', `translate(${margin.left}, ${margin.top})`);
 
   // x and y scales
-  const startDate = new Date(1968, 0, 1);
-  const endDate = new Date(2022, 0, 1);
+  const startDate = new Date(minDate.getUTCFullYear(), 0, 1);
+  const endDate = new Date(maxDate.getUTCFullYear(), 0, 1);
 
   const x = d3
     .scaleTime()
