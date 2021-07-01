@@ -139,6 +139,7 @@ const drawChart = async (svgRef) => {
       .attr('r', 2 * r);
 
     tooltip
+      .interrupt()
       .style('opacity', 0.8)
       .style('left', `${event.pageX + 15}px`)
       .style('top', `${event.pageY}px`);
