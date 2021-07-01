@@ -62,9 +62,9 @@ const drawChart = async (svgRef) => {
     maxLoudness = Math.max(maxLoudness, d.loudness);
   });
 
-  const { clientHeight, clientWidth } = svgRef.current.parentElement;
-  const h = clientHeight - margin.top - margin.bottom;
-  const w = clientWidth - margin.left - margin.right;
+  const { width, height } = svgRef.current.viewBox.baseVal;
+  const h = height - margin.top - margin.bottom;
+  const w = width - margin.left - margin.right;
 
   const svg = d3.select(svgRef.current);
   svg.selectAll('*').remove();
@@ -187,8 +187,6 @@ const drawChart = async (svgRef) => {
       year: +year,
       loudness: d3.mean(loudnessByYear[year])
     }));
-
-  console.table(meanLoudnessByYear);
 
   const drawTrendline = () => {
     const trendline = d3.line()
