@@ -140,6 +140,7 @@ const drawChart = async (svgRef) => {
 
     tooltip
       .interrupt()
+      .style('display', 'block')
       .style('opacity', 0.8)
       .style('left', `${event.pageX + 15}px`)
       .style('top', `${event.pageY}px`);
@@ -160,7 +161,10 @@ const drawChart = async (svgRef) => {
     tooltip
       .transition()
       .duration(transitionDuration)
-      .style('opacity', 0);
+      .style('opacity', 0)
+      .on('end', () => {
+        tooltip.style('display', 'none');
+      });
   }
 
   function onMouseMove(event, d) {
