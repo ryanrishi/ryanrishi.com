@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { throttle } from 'lodash';
 
 // see https://stackoverflow.com/questions/65974337/import-es-module-in-next-js-err-require-esm
 // see https://github.com/d3/d3/issues/3469
@@ -10,6 +11,9 @@ const ensureD3 = async () => {
     d3 = await import('d3');
   }
 };
+
+const w = 1600;
+const h = 900;
 
 const margin = {
   top: 10,
@@ -66,16 +70,10 @@ const drawChart = async (svgRef) => {
   });
 
   // TODO redraw chart on window resize
-  const h = 900 - margin.top - margin.bottom;
-  const w = 1280 - margin.left - margin.right;
 
   const svg = d3.select(svgRef.current);
   svg.selectAll('*').remove();
   const g = svg.append('g');
-
-  svg
-    .attr('width', w + margin.left + margin.right)
-    .attr('height', h + margin.top + margin.bottom);
 
   g.attr('transform', `translate(${margin.left}, ${margin.top})`);
 
@@ -206,14 +204,40 @@ const drawChart = async (svgRef) => {
 const Chart = () => {
   const svg = useRef(null);
 
+  const [dimensions, setDimensions] = useState({
+    // can't use winsow since it's undefined with Next.js SSR
+    height: 0,
+    width: 0
+  });
+
   useEffect(() => {
-    drawChart(svg);
+    const handleResize = throttle(() => {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth
+      });
+
+      console.table(dimensions);
+
+      drawChart(svg);
+    });
+
+    // trigger a resize once component is mounted since window is undefined with Next.js SSR
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
   }, [svg]);
 
   return (
-    <svg
-      className="w-full h-full"
-      ref={svg} />
+    <div className="w-full h-full">
+      <svg
+        viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+        preserveAspectRatio="xMidYMid meet"
+        ref={svg}
+      />
+    </div>
   );
 };
 
