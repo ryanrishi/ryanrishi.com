@@ -161,14 +161,43 @@ const drawChart = async (svgRef) => {
     .data(data)
     .enter()
     .append('circle')
-      .attr('cx', (d) => x(d.releaseDate))
-      .attr('cy', (d) => y(d.loudness))
+      .attr('cx', d => x(d.releaseDate))
+      .attr('cy', d => y(d.loudness))
       .attr('r', r)
       .attr('fill', '#69b3a2')
       .attr('opacity', 0.4)
       .on('mouseover', onMouseIn)
       .on('mousemove', onMouseMove)
       .on('mouseout', onMouseOut);
+
+  // trendline
+  const loudnessByYear = {};
+  data.forEach((track) => {
+    const year = track.releaseDate.getUTCFullYear();
+    loudnessByYear[year] = loudnessByYear[year] || [];
+    loudnessByYear[year].push(track.loudness);
+  });
+
+  const meanLoudnessByYear = Object.keys(loudnessByYear)
+    .sort()
+    .map(year => ({
+      year: +year,
+      loudness: d3.mean(loudnessByYear[year])
+    }));
+
+  console.table(meanLoudnessByYear);
+
+  const drawTrendline = () => {
+    const trendline = d3.line()
+      .x(d => x(new Date(d.year, 0, 1)))
+      .y(d => y(d.loudness));
+
+    g.append('path')
+      .datum(meanLoudnessByYear)
+      .attr('d', trendline)
+      .attr('fill', 'none')
+      .attr('stroke', '#ffab00');
+  };
 
   y.domain([minLoudness, maxLoudness]);
   y.range([h - margin.top - margin.bottom, 0]);
@@ -182,8 +211,11 @@ const drawChart = async (svgRef) => {
     .transition()
     .delay((d, i) => i / 3)
     .duration(1000)
-    .attr('cx', (d) => x(d.releaseDate))
-    .attr('cy', (d) => y(d.loudness));
+    .attr('cx', d => x(d.releaseDate))
+    .attr('cy', d => y(d.loudness))
+    .on('end', () => {
+      drawTrendline();
+    });
 };
 
 const Chart = () => {
