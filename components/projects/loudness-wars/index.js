@@ -163,6 +163,12 @@ const drawChart = async (svgRef) => {
       .style('opacity', 0);
   }
 
+  function onMouseMove(event, d) {
+    tooltip
+      .style('left', `${event.pageX + 15}px`)
+      .style('top', `${event.pageY}px`);
+  }
+
   g.append('g')
     .selectAll('dot')
     .data(data)
@@ -174,6 +180,7 @@ const drawChart = async (svgRef) => {
       .attr('fill', '#69b3a2')
       .attr('opacity', 0.4)
       .on('mouseover', onMouseIn)
+      .on('mousemove', onMouseMove)
       .on('mouseout', onMouseOut);
 
   y.domain([minLoudness, maxLoudness]);
