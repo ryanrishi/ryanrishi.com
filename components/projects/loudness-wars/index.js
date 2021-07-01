@@ -78,20 +78,13 @@ const drawChart = async (svgRef) => {
   g.attr('transform', `translate(${margin.left}, ${margin.top})`);
 
   // x and y scales
-  const startDate = new Date();
-  startDate.setFullYear(1968);
-  startDate.setMonth(0, 1);
-  startDate.setHours(0, 0, 0, 0);
-
-  const endDate = new Date();
-  endDate.setFullYear(2022);
-  endDate.setMonth(0, 1);
-  endDate.setHours(0, 0, 0, 0);
+  const startDate = new Date(1968, 0, 1);
+  const endDate = new Date(2022, 0, 1);
 
   const x = d3
     .scaleTime()
     .domain([startDate, endDate])
-    .range([0, w - margin.left - margin.right]);
+    .range([0, w]);
 
   const y = d3
     .scaleLog()
@@ -100,11 +93,11 @@ const drawChart = async (svgRef) => {
 
   // draw x and y axes
   g.append('g')
-    .attr('transform', `translate(0, ${h})`)
+    .attr('transform', `translate(0, ${h - margin.top - margin.bottom})`)
     .call(d3.axisBottom(x))
     .append('text')
       .attr('fill', 'black')
-      .attr('x', w - margin.left - margin.right)
+      .attr('x', w)
       .attr('y', -2)
       .attr('text-anchor', 'end')
       .text('Year');
