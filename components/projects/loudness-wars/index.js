@@ -38,20 +38,13 @@ const drawChart = async (svgRef) => {
 
         case 'month': {
           const [year, month] = track.release_date.split('-');
-          const date = new Date();
-          date.setFullYear(year);
-          date.setMonth(month - 1, 1);
+          const date = new Date(year, month - 1, 1);
 
           return date;
         }
 
-        case 'year': {
-          const date = new Date();
-          date.setFullYear(track.release_date);
-          date.setMonth(0, 1);
-
-          return date;
-        }
+        case 'year':
+          return new Date(track.release_date, 0, 1);
 
         default:
           throw new Error(`Unknown release date precision: ${track.release_date_precision}`);
