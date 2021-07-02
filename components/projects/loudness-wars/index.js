@@ -19,7 +19,10 @@ const margin = {
   left: 60
 };
 
-const drawChart = async (svgRef) => {
+const trackFillColor = '#69b3a2';
+const selectedTrackFillColor = '#f38f9f';
+
+const drawChart = async (svgRef, setSelectedTrack) => {
   await ensureD3();
 
   const data = await d3.csv('/loudness-wars.csv').then((tracks) => tracks.map((track) => ({
@@ -159,6 +162,17 @@ const drawChart = async (svgRef) => {
       .style('top', `${event.pageY}px`);
   }
 
+  function onClick(event, d) {
+    setSelectedTrack(d);
+
+    // TODO cache previously selected track
+    d3.select(`circle[fill="${selectedTrackFillColor}"]`)
+      .attr('fill', trackFillColor);
+
+    d3.select(this)
+      .attr('fill', selectedTrackFillColor);
+  }
+
   g.append('g')
     .selectAll('dot')
     .data(data)
@@ -167,11 +181,12 @@ const drawChart = async (svgRef) => {
       .attr('cx', d => x(d.releaseDate))
       .attr('cy', d => y(d.loudness))
       .attr('r', r)
-      .attr('fill', '#69b3a2')
+      .attr('fill', trackFillColor)
       .attr('opacity', 0.4)
       .on('mouseover', onMouseIn)
       .on('mousemove', onMouseMove)
-      .on('mouseout', onMouseOut);
+      .on('mouseout', onMouseOut)
+      .on('click', onClick);
 
   // trendline
   const loudnessByYear = {};
@@ -228,6 +243,8 @@ const Chart = () => {
     width: 0
   });
 
+  const [selectedTrack, setSelectedTrack] = useState(null);
+
   useEffect(() => {
     const handleResize = throttle(() => {
       setDimensions({
@@ -237,7 +254,7 @@ const Chart = () => {
 
       console.table(dimensions);
 
-      drawChart(svg);
+      drawChart(svg, setSelectedTrack);
     });
 
     // trigger a resize once component is mounted since window is undefined with Next.js SSR
@@ -250,6 +267,17 @@ const Chart = () => {
 
   return (
     <div className="w-full h-full">
+      <p>
+        {selectedTrack
+          ? (
+            <iframe
+              className="mx-auto"
+              src={`https://open.spotify.com/embed/track/${selectedTrack.id}`}
+              title={`${selectedTrack.name} - ${selectedTrack.artist}`}
+            />
+          )
+          : 'Click on a circle below to listen'}
+      </p>
       <svg
         viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
         preserveAspectRatio="xMidYMid meet"
