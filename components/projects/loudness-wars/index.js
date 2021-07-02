@@ -87,7 +87,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
   const y = d3
     .scaleLog()
     .domain([minLoudness, minLoudness]) // set [y1, y2] the same in order to animate later
-    .range([h, h]);
+    .range([h - margin.top - margin.bottom, h - margin.top - margin.bottom]);
 
   // draw x and y axes
   g.append('g')
