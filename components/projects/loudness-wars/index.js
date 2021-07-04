@@ -210,12 +210,14 @@ const drawChart = async (svgRef, setSelectedTrack) => {
   const drawTrendline = () => {
     const trendline = d3.line()
       .x(d => x(new Date(d.year, 0, 1)))
-      .y(d => y(d.loudness));
+      .y(d => y(d.loudness))
+      .curve(d3.curveNatural);
 
     g.append('path')
       .datum(meanLoudnessByYear)
       .attr('d', trendline)
       .attr('fill', 'none')
+      .attr('stroke-width', 2)
       .attr('stroke', '#ffab00');
   };
 
