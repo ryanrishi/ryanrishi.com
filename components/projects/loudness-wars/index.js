@@ -25,6 +25,8 @@ const selectedTrackFillColor = '#f38f9f';
 const drawChart = async (svgRef, setSelectedTrack) => {
   await ensureD3();
 
+  let $selectedTrack;
+
   const data = await d3.csv('/loudness-wars.csv').then((tracks) => tracks.map((track) => ({
     id: track.track_id,
     name: track.track_name,
@@ -165,12 +167,14 @@ const drawChart = async (svgRef, setSelectedTrack) => {
   function onClick(event, d) {
     setSelectedTrack(d);
 
-    // TODO cache previously selected track
-    d3.select(`circle[fill="${selectedTrackFillColor}"]`)
-      .attr('fill', trackFillColor);
+    if ($selectedTrack) {
+      // reset previously selected track
+      d3.select($selectedTrack).attr('fill', trackFillColor);
+    }
 
     d3.select(this)
       .attr('fill', selectedTrackFillColor);
+    $selectedTrack = event.target;
   }
 
   g.append('g')
