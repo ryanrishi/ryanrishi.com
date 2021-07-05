@@ -51,7 +51,7 @@ function Head({ title: titleFromProps, description, isArticle, date, image, tags
         </>
       )}
 
-      {tags.map((tag) => (
+      {tags.map(tag => (
         <meta property="article:tag" key={tag} content={tag} />
       ))}
 

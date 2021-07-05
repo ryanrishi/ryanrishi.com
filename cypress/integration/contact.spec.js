@@ -22,11 +22,11 @@ describe('Contact', () => {
     });
 
     cy.get(FormSelectors.SUBMIT).click();
-    cy.get('input:invalid').should(($el) => expect($el).to.have.length(2));
-    cy.get('textarea:invalid').should(($el) => expect($el).to.have.length(1));
+    cy.get('input:invalid').should($el => expect($el).to.have.length(2));
+    cy.get('textarea:invalid').should($el => expect($el).to.have.length(1));
 
     cy.get(FormSelectors.NAME).type('this is my name');
-    cy.get('input:invalid').should(($el) => expect($el).to.have.length(1));
+    cy.get('input:invalid').should($el => expect($el).to.have.length(1));
     cy.get(FormSelectors.SUBMIT).click();
 
     cy.get(FormSelectors.EMAIL).type('test@example.com');
