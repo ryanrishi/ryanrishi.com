@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { throttle } from 'lodash';
+import debounce from 'lodash.debounce';
 
 // see https://stackoverflow.com/questions/65974337/import-es-module-in-next-js-err-require-esm
 // see https://github.com/d3/d3/issues/3469
@@ -252,16 +252,14 @@ const Chart = () => {
   const [selectedTrack, setSelectedTrack] = useState(null);
 
   useEffect(() => {
-    const handleResize = throttle(() => {
+    const handleResize = debounce(() => {
       setDimensions({
         height: window.innerHeight,
         width: window.innerWidth
       });
 
-      console.table(dimensions);
-
       drawChart(svg, setSelectedTrack);
-    });
+    }, 250);
 
     // trigger a resize once component is mounted since window is undefined with Next.js SSR
     handleResize();

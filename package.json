@@ -23,7 +23,7 @@
     "dayjs": "^1.10.4",
     "gray-matter": "^4.0.2",
     "hamburger-react": "^2.4.0",
-    "lodash.throttle": "^4.1.1",
+    "lodash.debounce": "^4.0.8",
     "next": "~10.0.5",
     "next-mdx-enhanced": "^5.0.0",
     "postcss": "^8.2.10",
