@@ -14,8 +14,7 @@ describe('Projects | Loudness Wars', () => {
 
   describe('renders the chart', () => {
     beforeEach(() => {
-      cy.get('svg').first().scrollIntoView();
-      cy.get('svg circle'); // wait for chart to load
+      cy.get('svg [data-test-trendline="true"]').first().scrollIntoView(); // wait for chart to finish rendering
     });
 
     it('snapshot', () => {

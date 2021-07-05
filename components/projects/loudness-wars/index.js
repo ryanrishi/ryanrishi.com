@@ -216,6 +216,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
       .curve(d3.curveNatural);
 
     g.append('path')
+      .attr('data-test-trendline', true)
       .datum(meanLoudnessByYear)
       .attr('d', trendline)
       .attr('fill', 'none')
