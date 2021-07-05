@@ -1,3 +1,4 @@
+/* eslint indent: ["warn", 2] */
 import { useEffect, useRef, useState } from 'react';
 import debounce from 'lodash.debounce';
 
