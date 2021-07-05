@@ -1,6 +1,5 @@
 /* eslint-env node */
 
-// const withTM = require('next-transpile-modules')(['d3']);
 const withMdxEnhanced = require('next-mdx-enhanced');
 
 module.exports = withMdxEnhanced({
