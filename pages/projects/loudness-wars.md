@@ -1,13 +1,12 @@
 ---
 name:         Loudness Wars
+layout:       projects/default
 description:  A closer look at how recorded music has been getting increasingly louder over the past 50 years.
 permalink:    /projects/loudness-wars
-date:         "2021-06-23T00:00:00Z"
+date:         "2021-07-05T00:00:00Z"
 ---
 
 import LoudnessWars from '../../components/projects/loudness-wars';
-
-# Loudness Wars
 
 The [Loudness Wars](https://en.wikipedia.org/wiki/Loudness_war) refers to the dramatic increase in the perceived loudness of a song over the past 40 years. The loud parts haven't necessarily become louder, but instead the effecftive loudness (called the root mean square, or RMS) of recorded music has increased. This has been done by compressing the loud parts of an audio signal, and then increasing the overall loudness of the signal. The loud parts are now more or less as loud as they were before dynamic compression, but now that overall loudness has increased.
 
