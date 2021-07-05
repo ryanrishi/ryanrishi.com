@@ -138,7 +138,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
 
     tooltip.html(`
       <p>${d.name} (${d.releaseDateForDisplay})</p>
-      <p>${d.artist}</p>
+      <p>${d.artist} - ${d.album}</p>
       <p>${d.loudness} dB</p>
     `);
   }
