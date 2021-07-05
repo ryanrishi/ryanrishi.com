@@ -179,7 +179,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
 
   g.append('g')
     .selectAll('dot')
-    .data(data)
+    .data(data, d => d.id)
     .enter()
     .append('circle')
       .attr('cx', d => x(d.releaseDate))
