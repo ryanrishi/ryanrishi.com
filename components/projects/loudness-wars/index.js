@@ -28,7 +28,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
 
   let $selectedTrack;
 
-  const data = await d3.csv('/loudness-wars.csv').then((tracks) => tracks.map((track) => ({
+  const data = await d3.csv('/loudness-wars.csv').then(tracks => tracks.map(track => ({
     id: track.track_id,
     name: track.track_name,
     artist: track.artist_name,
@@ -145,7 +145,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     `);
   }
 
-  function onMouseOut(event, d) {
+  function onMouseOut() {
     d3.select(this)
       .transition()
       .duration(transitionDuration)
@@ -160,7 +160,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
       });
   }
 
-  function onMouseMove(event, d) {
+  function onMouseMove(event) {
     tooltip
       .style('left', `${event.pageX + 15}px`)
       .style('top', `${event.pageY}px`);

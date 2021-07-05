@@ -15,7 +15,7 @@ export default function BlogIndex({ allPosts }) {
       <Head
         title="Blog"
       />
-      {allPosts.map((post) => (
+      {allPosts.map(post => (
         <div
           className="mb-8 lg:mb-16 xl:mb-32"
           data-test-blog-post

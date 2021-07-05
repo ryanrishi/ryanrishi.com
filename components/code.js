@@ -177,7 +177,7 @@ const theme = {
 export default function Code({ language = '', children }) {
   // Filter out any empty lines at end
   const reversedLines = children.split('\n').reverse();
-  const firstNonEmptyIndex = reversedLines.findIndex((line) => line !== '');
+  const firstNonEmptyIndex = reversedLines.findIndex(line => line !== '');
   const lines = reversedLines
     .filter((line, index) => index >= firstNonEmptyIndex)
     .reverse();

@@ -21,6 +21,7 @@ module.exports = {
     'react'
   ],
   rules: {
+    'arrow-parens': [2, 'as-needed', { requireForBlockBody: true }],
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
     'react/jsx-filename-extension': 'off',

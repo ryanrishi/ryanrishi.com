@@ -19,7 +19,7 @@ export default function ProjectsIndex({ projects }) {
       <Head title="Projects" />
       <H1>Projects</H1>
       <ul className="list-disc list-outside px-4">
-        {projects.map((project) => (
+        {projects.map(project => (
           <ProjectItem
             key={project.permalink}
             href={project.permalink}
