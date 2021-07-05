@@ -118,6 +118,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
   // tooltip
   const tooltip = d3.select('body')
     .append('div')
+    .attr('data-test-tooltip', true)
     .style('position', 'absolute')
     .style('background-color', 'white')
     .style('opacity', 0);
