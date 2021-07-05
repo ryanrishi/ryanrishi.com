@@ -20,10 +20,10 @@ Why does this matter? In short, everything being loud results in listener fatigu
 This project utilized [Spotipy](https://github.com/plamere/spotipy) to pull information about tracks, and [d3](https://github.com/d3/d3) to visualize the data. Source code for this project is available [here](https://github.com/ryanrishi/loudness-wars).
 
 <Callout type="info">
-For some tracks, Spotify puts out a new version of the album with a new release date, but keeps the original loudness. For other tracks, Spotify puts out a remastered or deluxe version that is louder, but keeps the original release date. I've manually removed those entries, and if you come across a track that looks suspicious (eg. a Michael Jackson track from 2017), please <a href="/contact">contact me</a> to remove it. Thank you!
+For some tracks, Spotify puts out a new version of the album with a new release date, but keeps the original loudness. For other tracks, Spotify puts out a remastered or deluxe version that is louder, but keeps the original release date. I've manually removed those entries, and if you come across a track that looks suspicious (like a Michael Jackson track released in 2017), please <a href="/contact">contact me</a> to remove it. Thank you!
 </Callout>
 
-# Further Reading
+## Further Reading
 If you're interested in learning more about the loudness wars, here are some good resources.
 - [The Loudness Wars: Why Music Sounds Worse](https://www.npr.org/2009/12/31/122114058/the-loudness-wars-why-music-sounds-worse)
 - [Dynamic Range Day](https://dynamicrangeday.co.uk/)
