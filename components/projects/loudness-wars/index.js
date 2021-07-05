@@ -231,14 +231,18 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .attr('opacity', 1)
     .call(d3.axisLeft(y).tickValues([-24, -18, -12, -9, -6, -3, -1.5]).tickFormat(d => d));
 
+  let numTransitions = 0;
   svg.selectAll('circle')
     .transition()
     .delay((d, i) => i / 3)
     .duration(1000)
     .attr('cx', d => x(d.releaseDate))
     .attr('cy', d => y(d.loudness))
+    .on('start', () => ++numTransitions)
     .on('end', () => {
-      drawTrendline();
+      if (--numTransitions === 0) {
+        drawTrendline();
+      }
     });
 };
 
