@@ -13,12 +13,14 @@ describe('Projects | Loudness Wars', () => {
   });
 
   it('snapshot', () => {
+    cy.get('svg circle'); // wait for chart to load
     cy.percySnapshot('Projects | Loudness Wars');
   });
 
   describe('renders the chart', () => {
     beforeEach(() => {
       cy.get('svg').first().scrollIntoView();
+      cy.get('svg circle'); // wait for chart to load
     });
 
     it('snapshot', () => {
