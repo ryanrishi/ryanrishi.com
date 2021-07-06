@@ -8,7 +8,7 @@ date:         "2021-07-05T00:00:00Z"
 
 import LoudnessWars from '../../components/projects/loudness-wars';
 
-The [Loudness Wars](https://en.wikipedia.org/wiki/Loudness_war) refers to the dramatic increase in the perceived loudness of a song over the past 40 years. The loud parts haven't necessarily become louder, but instead the effecftive loudness (called the root mean square, or RMS) of recorded music has increased. This has been done by compressing the loud parts of an audio signal, and then increasing the overall loudness of the signal. The loud parts are now more or less as loud as they were before dynamic compression, but now that overall loudness has increased.
+The [Loudness Wars](https://en.wikipedia.org/wiki/Loudness_war) refers to the dramatic increase in the perceived loudness of a song over the past 40 years. The loud parts haven't necessarily become louder, but instead the effective loudness (called the root mean square, or RMS) of recorded music has increased. This has been done by compressing the loud parts of an audio signal, and then increasing the overall loudness of the signal. The loud parts are now more or less as loud as they were before dynamic compression, but now that overall loudness has increased.
 
 I wanted to quantify this notion that music is getting increasingly louder. I did so by scraping the year-end Billboard charts for the past 50 years, searching Spotify for those tracks, and using [Spotify's audio analysis API](https://developer.spotify.com/console/get-audio-analysis-track/) to get the loudness for each track, then visualized the data by plotting the loudness and release date for each track.
 
@@ -18,7 +18,7 @@ I wanted to quantify this notion that music is getting increasingly louder. I di
 
 Some notes about the data:
 - For some tracks, Spotify puts out a new version of the album with a new release date, but keeps the original loudness. For other tracks, Spotify puts out a remastered or deluxe version that is louder, but keeps the original release date. I've manually removed these entries, but if you do come across a track that looks suspicious (like a Michael Jackson track released in 2017), please <a href="/contact">contact me</a> to remove it. Thank you!
-- [Spotify applies some loudness normalization](https://artists.spotify.com/help/article/loudness-normalization), so listening to a very quiet song on Spotify versus a very loud song on Spotify won't be as noticable as listening to those two songs on another medium such as a CD
+- [Spotify applies some loudness normalization](https://artists.spotify.com/help/article/loudness-normalization), so listening to a very quiet song on Spotify versus a very loud song on Spotify won't be as noticeable as listening to those two songs on another medium such as a CD
 
 </Callout>
 
