@@ -1,6 +1,7 @@
 /* eslint indent: ["warn", 2] */
 import { useEffect, useRef, useState } from 'react';
 import debounce from 'lodash.debounce';
+import { event } from '../../../lib/ga';
 
 // see https://stackoverflow.com/questions/65974337/import-es-module-in-next-js-err-require-esm
 // see https://github.com/d3/d3/issues/3469
@@ -256,7 +257,16 @@ const Chart = () => {
     width: 0
   });
 
-  const [selectedTrack, setSelectedTrack] = useState(null);
+  const [selectedTrack, _setSelectedTrack] = useState(null);
+
+  const setSelectedTrack = (track) => {
+    event({
+      action: 'loudness wars | select track',
+      params: track
+    });
+
+    _setSelectedTrack(track);
+  };
 
   useEffect(() => {
     const handleResize = debounce(() => {
