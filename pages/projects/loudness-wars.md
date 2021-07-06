@@ -8,7 +8,7 @@ date:         "2021-07-05T00:00:00Z"
 
 import LoudnessWars from '../../components/projects/loudness-wars';
 
-The [Loudness Wars](https://en.wikipedia.org/wiki/Loudness_war) refers to the dramatic increase in the perceived loudness of a song over the past 40 years. The loud parts haven't necessarily become louder, but instead the effecftive loudness (called the root mean square, or RMS) of recorded music has increased. This has been done by compressing the loud parts of an audio signal, and then increasing the overall loudness of the signal. The loud parts are now more or less as loud as they were before dynamic compression, but now that overall loudness has increased.
+The [Loudness Wars](https://en.wikipedia.org/wiki/Loudness_war) refers to the dramatic increase in the perceived loudness of a song over the past 40 years. The loud parts haven't necessarily become louder, but instead the effective loudness (called the root mean square, or RMS) of recorded music has increased. This has been done by compressing the loud parts of an audio signal, and then increasing the overall loudness of the signal. The loud parts are now more or less as loud as they were before dynamic compression, but now that overall loudness has increased.
 
 I wanted to quantify this notion that music is getting increasingly louder. I did so by scraping the year-end Billboard charts for the past 50 years, searching Spotify for those tracks, and using [Spotify's audio analysis API](https://developer.spotify.com/console/get-audio-analysis-track/) to get the loudness for each track, then visualized the data by plotting the loudness and release date for each track.
 
