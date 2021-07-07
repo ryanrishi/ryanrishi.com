@@ -126,7 +126,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .style('opacity', 0);
 
   // hover animations
-  function onMouseIn(event, d) {
+  function onMouseIn(e, d) {
     d3.select(this)
       .transition()
       .duration(transitionDuration)
@@ -136,8 +136,8 @@ const drawChart = async (svgRef, setSelectedTrack) => {
       .interrupt()
       .style('display', 'block')
       .style('opacity', 0.8)
-      .style('left', `${event.pageX + 15}px`)
-      .style('top', `${event.pageY}px`);
+      .style('left', `${e.pageX + 15}px`)
+      .style('top', `${e.pageY}px`);
 
     tooltip.html(`
       <p>${d.name} (${d.releaseDateForDisplay})</p>
@@ -161,13 +161,13 @@ const drawChart = async (svgRef, setSelectedTrack) => {
       });
   }
 
-  function onMouseMove(event) {
+  function onMouseMove(e) {
     tooltip
-      .style('left', `${event.pageX + 15}px`)
-      .style('top', `${event.pageY}px`);
+      .style('left', `${e.pageX + 15}px`)
+      .style('top', `${e.pageY}px`);
   }
 
-  function onClick(event, d) {
+  function onClick(e, d) {
     setSelectedTrack(d);
 
     if ($selectedTrack) {
@@ -177,7 +177,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
 
     d3.select(this)
       .attr('fill', selectedTrackFillColor);
-    $selectedTrack = event.target;
+    $selectedTrack = e.target;
   }
 
   g.append('g')
