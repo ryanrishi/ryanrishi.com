@@ -1,18 +1,8 @@
 /* eslint indent: ["warn", 2] */
 import { useEffect, useRef, useState } from 'react';
 import debounce from 'lodash.debounce';
+import * as d3 from 'd3';
 import { event } from '../../../lib/ga';
-
-// see https://stackoverflow.com/questions/65974337/import-es-module-in-next-js-err-require-esm
-// see https://github.com/d3/d3/issues/3469
-let d3;
-
-// TODO there has to be a better way to use a non-ESM module here
-const ensureD3 = async () => {
-  if (!d3) {
-    d3 = await import('d3');
-  }
-};
 
 const margin = {
   top: 10,
@@ -22,11 +12,9 @@ const margin = {
 };
 
 const trackFillColor = '#69b3a2';
-const selectedTrackFillColor = '#f38f9f';
+export const selectedTrackFillColor = '#f38f9f';
 
 const drawChart = async (svgRef, setSelectedTrack) => {
-  await ensureD3();
-
   let $selectedTrack;
 
   const data = await d3.csv('/loudness-wars.csv').then(tracks => tracks.map(track => ({

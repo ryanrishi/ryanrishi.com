@@ -1,11 +1,23 @@
 /* eslint-env node */
 
+const withPlugins = require('next-compose-plugins');
 const withMdxEnhanced = require('next-mdx-enhanced');
+const withTM = require('next-transpile-modules')([
+  'd3',
 
-module.exports = withMdxEnhanced({
-  defaultLayout: true,
-  fileExtensions: ['md', 'mdx']
-})({
+  // transitive dependencies of d3
+  'delaunator',
+  'internmap',
+  'robust-predicates'
+]);
+
+module.exports = withPlugins([
+  withTM,
+  withMdxEnhanced({
+    defaultLayout: true,
+    fileExtensions: ['md', 'mdx']
+  })
+], {
   async redirects() {
     return [
       {

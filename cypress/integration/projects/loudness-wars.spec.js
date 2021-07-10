@@ -1,3 +1,5 @@
+import { selectedTrackFillColor } from '../../../components/projects/loudness-wars';
+
 describe('Projects | Loudness Wars', () => {
   beforeEach(() => {
     cy.visit('/projects/loudness-wars');
@@ -54,10 +56,11 @@ describe('Projects | Loudness Wars', () => {
       });
 
       it('changes the color of the selcted track circle', () => {
-        $circle.should('have.attr', 'fill', '#f38f9f');
+        $circle.should('have.attr', 'fill', selectedTrackFillColor);
       });
 
-      it('shows a Spotify embed', () => {
+      it.only('shows a Spotify embed', () => {
+        $circle.should('have.attr', 'fill', selectedTrackFillColor); // wait for transition to complete
         cy.get('iframe').should('be.visible');
         cy.percySnapshot('Projects | Loudness Wars | Spotify embed');
       });
