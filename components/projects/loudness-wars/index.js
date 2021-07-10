@@ -12,7 +12,7 @@ const margin = {
 };
 
 const trackFillColor = '#69b3a2';
-const selectedTrackFillColor = '#f38f9f';
+export const selectedTrackFillColor = '#f38f9f';
 
 const drawChart = async (svgRef, setSelectedTrack) => {
   let $selectedTrack;
