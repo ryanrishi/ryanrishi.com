@@ -14,7 +14,7 @@ const margin = {
 const trackFillColor = '#69b3a2';
 export const selectedTrackFillColor = '#f38f9f';
 
-const drawChart = async (svgRef, setSelectedTrack) => {
+const drawChart = async (svgRef, setSelectedTrack, x, y) => {
   let $selectedTrack;
 
   const data = await d3.csv('/loudness-wars.csv').then(tracks => tracks.map(track => ({
@@ -70,13 +70,11 @@ const drawChart = async (svgRef, setSelectedTrack) => {
   const startDate = new Date(minDate.getUTCFullYear(), 0, 1);
   const endDate = new Date(maxDate.getUTCFullYear(), 0, 1);
 
-  const x = d3
-    .scaleTime()
+  x
     .domain([startDate, endDate])
     .range([0, w]);
 
-  const y = d3
-    .scaleLog()
+  y
     .domain([minLoudness, minLoudness]) // set [y1, y2] the same in order to animate later
     .range([h - margin.top - margin.bottom, h - margin.top - margin.bottom]);
 
@@ -253,6 +251,9 @@ const Chart = () => {
     _setSelectedTrack(track);
   };
 
+  const x = d3.scaleTime();
+  const y = d3.scaleLog();
+
   useEffect(() => {
     const handleResize = debounce(() => {
       setDimensions({
@@ -260,7 +261,7 @@ const Chart = () => {
         width: window.innerWidth
       });
 
-      drawChart(svg, setSelectedTrack);
+      drawChart(svg, setSelectedTrack, x, y);
     }, 250);
 
     // trigger a resize once component is mounted since window is undefined with Next.js SSR
