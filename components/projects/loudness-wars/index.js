@@ -62,8 +62,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
   const w = width - margin.left - margin.right;
 
   const svg = d3.select(svgRef.current);
-  svg.selectAll('*').remove();
-  const g = svg.append('g');
+  const g = svg.select('g');
 
   g.attr('transform', `translate(${margin.left}, ${margin.top})`);
 
@@ -82,7 +81,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .range([h - margin.top - margin.bottom, h - margin.top - margin.bottom]);
 
   // draw x and y axes
-  g.append('g')
+  g.select('.x-axis')
     .attr('transform', `translate(0, ${h - margin.top - margin.bottom})`)
     .call(d3.axisBottom(x))
     .append('text')
@@ -92,7 +91,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
       .attr('text-anchor', 'end')
       .text('Year');
 
-  const yAxis = g.append('g')
+  const yAxis = g.select('.y-axis')
     .call(d3.axisLeft(y));
 
   yAxis.append('text')
@@ -106,8 +105,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
   const r = 5;
 
   // tooltip
-  const tooltip = d3.select('body')
-    .append('div')
+  const tooltip = d3.select('.tooltip')
     .attr('data-test-tooltip', true)
     .style('position', 'absolute')
     .style('background-color', 'white')
@@ -168,7 +166,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     $selectedTrack = e.target;
   }
 
-  g.append('g')
+  g
     .selectAll('dot')
     .data(data, d => d.id)
     .enter()
@@ -204,8 +202,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
       .y(d => y(d.loudness))
       .curve(d3.curveNatural);
 
-    g.append('path')
-      .attr('data-test-trendline', true)
+    g.select('.trendline')
       .datum(meanLoudnessByYear)
       .attr('d', trendline)
       .attr('fill', 'none')
@@ -291,7 +288,15 @@ const Chart = () => {
         viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
         preserveAspectRatio="xMidYMid meet"
         ref={svg}
-      />
+      >
+        <g>
+          <g className="x-axis" />
+          <g className="y-axis" />
+          <path className="trendline" />
+        </g>
+      </svg>
+
+      <div className="tooltip" />
     </div>
   );
 };
