@@ -43,7 +43,8 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     })(),
     releaseDatePrecision: track.release_date_precision,
     loudness: track.loudness
-  })).sort((a, b) => a.releaseDate - b.releaseDate));
+  })).filter(x => x.releaseDate.getFullYear() >= 1970) // only 2 tracks in 1969, insufficient data size
+    .sort((a, b) => a.releaseDate - b.releaseDate));
 
   const minDate = data[0].releaseDate;
   const maxDate = data[data.length - 1].releaseDate;
