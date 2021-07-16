@@ -13,6 +13,7 @@ const margin = {
 
 const trackFillColor = '#69b3a2';
 export const selectedTrackFillColor = '#f38f9f';
+const yTicks = [-24, -18, -12, -9, -6, -3, -1.5];
 
 const drawChart = async (svgRef, setSelectedTrack, x, y) => {
   let $selectedTrack;
@@ -57,11 +58,16 @@ const drawChart = async (svgRef, setSelectedTrack, x, y) => {
     maxLoudness = Math.max(maxLoudness, d.loudness);
   });
 
-  const { width, height } = svgRef.current.viewBox.baseVal;
+  debugger
+  // const { width, height } = svgRef.current.viewBox.baseVal;
+  const width = svgRef.current.clientWidth;
+  const height = svgRef.current.clientHeight;
   const h = height - margin.top - margin.bottom;
   const w = width - margin.left - margin.right;
+  console.table({ width, height, w, h });
 
   const svg = d3.select(svgRef.current);
+  // svg.selectAll('*').remove();
   const g = svg.select('g');
 
   g.attr('transform', `translate(${margin.left}, ${margin.top})`);
@@ -90,7 +96,7 @@ const drawChart = async (svgRef, setSelectedTrack, x, y) => {
       .text('Year');
 
   const yAxis = g.select('.y-axis')
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(y).tickValues(yTicks).tickFormat(d => d));
 
   yAxis.append('text')
     .attr('fill', 'black')
@@ -201,6 +207,7 @@ const drawChart = async (svgRef, setSelectedTrack, x, y) => {
       .curve(d3.curveNatural);
 
     g.select('.trendline')
+      // .attr('data-test-trendline', true)
       .datum(meanLoudnessByYear)
       .attr('d', trendline)
       .attr('fill', 'none')
@@ -214,21 +221,49 @@ const drawChart = async (svgRef, setSelectedTrack, x, y) => {
     .transition()
     .duration(1000)
     .attr('opacity', 1)
-    .call(d3.axisLeft(y).tickValues([-24, -18, -12, -9, -6, -3, -1.5]).tickFormat(d => d));
+    .call(d3.axisLeft(y).tickValues(yTicks).tickFormat(d => d));
 
-  let numTransitions = 0;
-  svg.selectAll('circle')
+  return new Promise((resolve) => {
+    let numTransitions = 0;
+    svg.selectAll('circle')
+      .transition()
+      .delay((d, i) => i / 3)
+      .duration(1000)
+      .attr('cx', d => x(d.releaseDate))
+      .attr('cy', d => y(d.loudness))
+      .on('start', () => ++numTransitions)
+      .on('end', () => {
+        if (--numTransitions === 0) {
+          drawTrendline();
+          resolve();
+        }
+      });
+  });
+};
+
+const resizeChart = (svgRef, x, y) => {
+  debugger
+  const { width, height } = svgRef.current.viewBox.baseVal;
+  const h = height - margin.top - margin.bottom;
+  const w = width - margin.left - margin.right;
+
+  x.range([0, w]);
+  y.range([h - margin.top - margin.bottom, 0]);
+
+  d3.select('.x-axis')
+    .attr('transform', `translate(0, ${h - margin.top - margin.bottom})`)
+    .call(d3.axisBottom(x));
+
+  d3.select('.y-axis')
+    .call(d3.axisLeft(y).tickValues(yTicks).tickFormat(d => d));
+
+  d3.selectAll('circle')
     .transition()
-    .delay((d, i) => i / 3)
-    .duration(1000)
     .attr('cx', d => x(d.releaseDate))
-    .attr('cy', d => y(d.loudness))
-    .on('start', () => ++numTransitions)
-    .on('end', () => {
-      if (--numTransitions === 0) {
-        drawTrendline();
-      }
-    });
+    .attr('cy', d => y(d.loudness));
+
+  // d3.select('.trendline')
+  //   .att
 };
 
 const Chart = () => {
@@ -254,6 +289,8 @@ const Chart = () => {
   const x = d3.scaleTime();
   const y = d3.scaleLog();
 
+  let hasDrawnChartOnce = false;
+
   useEffect(() => {
     const handleResize = debounce(() => {
       setDimensions({
@@ -261,16 +298,31 @@ const Chart = () => {
         width: window.innerWidth
       });
 
-      drawChart(svg, setSelectedTrack, x, y);
-    }, 250);
+      console.log(svg.current.viewBox);
+
+      if (!hasDrawnChartOnce) {
+        console.log('has not drawn chart once, not resizing');
+        return;
+      }
+
+      console.log('resize');
+      resizeChart(svg, x, y);
+    }, 100);
 
     // trigger a resize once component is mounted since window is undefined with Next.js SSR
     handleResize();
+    drawChart(svg, setSelectedTrack, x, y).then(() => {
+      hasDrawnChartOnce = true;
+      resizeChart(svg, x, y);
+    });
 
     window.addEventListener('resize', handleResize);
 
     return () => window.removeEventListener('resize', handleResize);
   }, [svg]);
+
+  // useEffect(() => {
+  // }, []);
 
   return (
     <div className="w-full h-full">
