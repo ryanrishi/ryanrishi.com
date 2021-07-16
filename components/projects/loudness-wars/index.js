@@ -1,6 +1,5 @@
 /* eslint indent: ["warn", 2] */
 import { useEffect, useRef, useState } from 'react';
-import debounce from 'lodash.debounce';
 import * as d3 from 'd3';
 import { event } from '../../../lib/ga';
 
@@ -257,21 +256,12 @@ const Chart = () => {
   };
 
   useEffect(() => {
-    const handleResize = debounce(() => {
-      setDimensions({
-        height: window.innerHeight,
-        width: window.innerWidth
-      });
+    setDimensions({
+      height: window.innerHeight,
+      width: window.innerWidth
+    });
 
-      drawChart(svg, setSelectedTrack);
-    }, 250);
-
-    // trigger a resize once component is mounted since window is undefined with Next.js SSR
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
+    drawChart(svg, setSelectedTrack);
   }, [svg]);
 
   return (
