@@ -28,7 +28,7 @@ describe('Projects | Loudness Wars', () => {
       const radius = 1.5;
 
       beforeEach(() => {
-        $circle = cy.get('svg circle').first();
+        $circle = cy.get('svg circle').eq(1); // .first() is covered by another circle
         $circle.trigger('mouseover');
       });
 
@@ -51,7 +51,7 @@ describe('Projects | Loudness Wars', () => {
       let $circle;
 
       beforeEach(() => {
-        $circle = cy.get('svg circle').first();
+        $circle = cy.get('svg circle').eq(1); // .first() is covered by another circle
         $circle.click();
       });
 
