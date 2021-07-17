@@ -1,14 +1,23 @@
 /* eslint indent: ["warn", 2] */
 import { useEffect, useRef, useState } from 'react';
-import debounce from 'lodash.debounce';
 import * as d3 from 'd3';
 import { event } from '../../../lib/ga';
 
-const margin = {
-  top: 10,
-  right: 30,
-  bottom: 30,
-  left: 60
+const getMargin = ({ width }) => {
+  const margin = {
+    top: 10,
+    right: 30,
+    bottom: 30,
+    left: 60
+  };
+
+  if (width < 768) {
+    // tablet or smaller
+    margin.left = 30;
+    margin.right = 10;
+  }
+
+  return margin;
 };
 
 const trackFillColor = '#69b3a2';
@@ -44,7 +53,8 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     })(),
     releaseDatePrecision: track.release_date_precision,
     loudness: track.loudness
-  })).sort((a, b) => a.releaseDate - b.releaseDate));
+  })).filter(x => x.releaseDate.getFullYear() >= 1970) // only 2 tracks in 1969, insufficient data size
+    .sort((a, b) => a.releaseDate - b.releaseDate));
 
   const minDate = data[0].releaseDate;
   const maxDate = data[data.length - 1].releaseDate;
@@ -58,6 +68,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
   });
 
   const { width, height } = svgRef.current.viewBox.baseVal;
+  const margin = getMargin({ width });
   const h = height - margin.top - margin.bottom;
   const w = width - margin.left - margin.right;
 
@@ -103,7 +114,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .text('Loudness (dB)');
 
   const transitionDuration = 200;
-  const r = 5;
+  const r = Math.min((width / 480) * 5, 5);
 
   // tooltip
   const tooltip = d3.select('body')
@@ -257,21 +268,12 @@ const Chart = () => {
   };
 
   useEffect(() => {
-    const handleResize = debounce(() => {
-      setDimensions({
-        height: window.innerHeight,
-        width: window.innerWidth
-      });
+    setDimensions({
+      height: window.innerHeight,
+      width: window.innerWidth
+    });
 
-      drawChart(svg, setSelectedTrack);
-    }, 250);
-
-    // trigger a resize once component is mounted since window is undefined with Next.js SSR
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
+    drawChart(svg, setSelectedTrack);
   }, [svg]);
 
   return (
