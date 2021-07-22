@@ -11,8 +11,9 @@ const ProjectItem = ({ title, description, href, style }) => (
     className="border rounded"
     style={{ ...style }}
   >
-    <div className="">
+    <div>
       <Image
+        className="transition duration-500 ease-in-out transform hover:scale-125"
         src="https://via.placeholder.com/400"
         width="400"
         height="400"
