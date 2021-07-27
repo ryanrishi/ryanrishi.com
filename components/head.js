@@ -41,7 +41,7 @@ function Head({ title: titleFromProps, description, isArticle, date, image, tags
       <meta property="og:url" key="og:url" content={`https://ryanrishi.com${router.pathname === '/' ? '' : router.pathname}`} />
       <meta name="author" content="Ryan Rishi" />
       <meta name="image" property="og:image" content={`https://ryanrishi.com${image}`} />
-      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content="@ryanrishi" />
 
       {isArticle && (
