@@ -14,6 +14,12 @@ describe('Projects', () => {
 
   it('renders the project page', () => {
     cy.get('h1').contains('Projects');
+    cy.get('li').then((projects) => {
+      for (let i = 0; i < projects.length; i++) {
+        cy.get('li').eq(i).should('have.css', 'opacity', '1'); // wait for transitions
+      }
+    });
+
     cy.percySnapshot();
   });
 
