@@ -12,7 +12,7 @@ export default function Index({ children, frontMatter }) {
       <Head
         title={name}
         description={description}
-        image={image}
+        image={image.src}
         date={date}
         isArticle
       />

@@ -3,6 +3,10 @@ name:         iHeart Hackweek 2019
 layout:       projects/default
 description:  Spent a week in a New York mansion working on a side project with some coworkers.
 permalink:    /projects/iheart-hackweek-2019/
+image:
+  src:        /img/projects/iheart-hackweek-2019/iHeartRadio_Logo_iHR_Vertical_Color.png
+  width:      1680
+  height:     1305
 date:         "2019-07-31T00:00:00Z"
 ---
 
