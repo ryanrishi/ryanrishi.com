@@ -6,33 +6,44 @@ import Head from '../components/head';
 import { H1, H3 } from '../components/headings';
 import { getAllProjects } from '../lib/projects';
 
-const ProjectItem = ({ title, description, href, style }) => (
-  <animated.li
-    className="border rounded"
-    style={{ ...style }}
-  >
-    <div>
-      <Image
-        className="transition duration-500 ease-in-out transform hover:scale-125"
-        src="https://via.placeholder.com/400"
-        width="400"
-        height="400"
-      />
-    </div>
-    <div
-      className="p-4"
+const ProjectItem = ({ project, style }) => {
+  const { name: title, description, permalink: href, image } = project;
+
+  return (
+    <animated.li
+      className="border rounded shadow"
+      style={{ ...style }}
     >
-      <H3>
+      <div
+        className="flex items-center justify-center"
+      >
         <Link
           href={href}
         >
-          {title}
+          <Image
+            className="object-cover transition duration-500 ease-in-out transform hover:scale-105 w-full h-full rounded-t"
+            src={image?.src || 'https://via.placeholder.com/400'}
+            width="1600"
+            height="1600"
+          />
         </Link>
-      </H3>
-      {description}
-    </div>
-  </animated.li>
-);
+      </div>
+      <div
+        className="p-4"
+      >
+        <H3>
+          <Link
+            href={href}
+            invert
+          >
+            {title}
+          </Link>
+        </H3>
+        {description}
+      </div>
+    </animated.li>
+  );
+};
 
 export default function ProjectsIndex({ projects }) {
   const transApi = useSpringRef();
@@ -49,13 +60,11 @@ export default function ProjectsIndex({ projects }) {
       <Head title="Projects" />
       <H1>Projects</H1>
       <ul
-        className="grid grid-cols-1 md:grid-cols-3 gap-4"
+        className="grid grid-cols-1 md:grid-cols-3 gap-8"
       >
         {transition((style, project) => (
           <ProjectItem
-            title={project.name}
-            description={project.description}
-            href={project.permalink}
+            project={project}
             style={style}
           />
         ))}
@@ -65,7 +74,7 @@ export default function ProjectsIndex({ projects }) {
 }
 
 export async function getStaticProps() {
-  const projects = getAllProjects(['name', 'description', 'permalink', 'date']);
+  const projects = getAllProjects(['name', 'description', 'permalink', 'date', 'image']);
 
   return {
     props: { projects }

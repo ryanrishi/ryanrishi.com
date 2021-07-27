@@ -3,7 +3,10 @@ name:         COVID-19 Dashboard
 layout:       projects/default
 description:  Visualize COVID-19 cases and deaths in the United States.
 permalink:    /projects/covid-19-dashboard/
-image:        /img/projects/covid-19-dashboard/covid-19-dashboard.png
+image:
+  src:        /img/projects/covid-19-dashboard/covid-19-dashboard.png
+  width:      3360
+  height:     2100
 date:         "2020-05-17T00:00:00Z"
 ---
 
