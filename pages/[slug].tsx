@@ -1,12 +1,23 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import Layout from '../layouts/index';
 
 const pagesDir = path.join(process.cwd(), 'pages');
 
-export default function Page({ source, frontMatter }) {
+interface PageProps {
+  source: MDXRemoteSerializeResult;
+  frontMatter: {
+    title: string;
+    tags?: string[]
+    image?: string;
+    description?: string;
+  }
+}
+
+export default function Page({ source, frontMatter } : PageProps) {
   return (
     <Layout
       frontMatter={frontMatter}
