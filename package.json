@@ -40,6 +40,7 @@
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^3.0.0",
     "@percy/cypress": "^2.3.4",
+    "@types/d3": "^7.1.0",
     "@types/react": "^17.0.37",
     "cypress": "^6.5.0",
     "eslint": "^8.5.0",

@@ -1,7 +1,18 @@
-/* eslint indent: ["warn", 2] */
+/* eslint indent: ["warn", 2, { "SwitchCase": 1 }] */
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { event } from '../../../lib/ga';
+
+interface Track {
+  id: string;
+  name: string;
+  artist: string;
+  album: string;
+  releaseDateForDisplay: string;
+  releaseDate: Date;
+  releaseDatePrecision: 'day' | 'month' | 'year';
+  loudness: number;
+}
 
 const getMargin = ({ width }) => {
   const margin = {
@@ -39,13 +50,13 @@ const drawChart = async (svgRef, setSelectedTrack) => {
 
         case 'month': {
           const [year, month] = track.release_date.split('-');
-          const date = new Date(year, month - 1, 1);
+          const date = new Date(+year, +month - 1, 1);
 
           return date;
         }
 
         case 'year':
-          return new Date(track.release_date, 0, 1);
+          return new Date(+track.release_date, 0, 1);
 
         default:
           throw new Error(`Unknown release date precision: ${track.release_date_precision}`);
@@ -54,7 +65,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     releaseDatePrecision: track.release_date_precision,
     loudness: track.loudness
   })).filter(x => x.releaseDate.getFullYear() >= 1970) // only 2 tracks in 1969, insufficient data size
-    .sort((a, b) => a.releaseDate - b.releaseDate));
+    .sort((a, b) => a.releaseDate.valueOf() - b.releaseDate.valueOf()));
 
   const minDate = data[0].releaseDate;
   const maxDate = data[data.length - 1].releaseDate;
@@ -63,8 +74,8 @@ const drawChart = async (svgRef, setSelectedTrack) => {
   let maxLoudness = -Infinity;
 
   data.forEach((d) => {
-    minLoudness = Math.min(minLoudness, d.loudness);
-    maxLoudness = Math.max(maxLoudness, d.loudness);
+    minLoudness = Math.min(minLoudness, +d.loudness);
+    maxLoudness = Math.max(maxLoudness, +d.loudness);
   });
 
   const { width, height } = svgRef.current.viewBox.baseVal;
@@ -181,11 +192,11 @@ const drawChart = async (svgRef, setSelectedTrack) => {
 
   g.append('g')
     .selectAll('dot')
-    .data(data, d => d.id)
+    .data(data, (d: Track) => d.id)
     .enter()
     .append('circle')
       .attr('cx', d => x(d.releaseDate))
-      .attr('cy', d => y(d.loudness))
+      .attr('cy', d => y(+d.loudness))
       .attr('r', r)
       .attr('fill', trackFillColor)
       .attr('opacity', 0.4)
@@ -210,7 +221,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     }));
 
   const drawTrendline = () => {
-    const trendline = d3.line()
+    const trendline = d3.line<{ year: number; loudness: number; }>()
       .x(d => x(new Date(d.year, 0, 1)))
       .y(d => y(d.loudness))
       .curve(d3.curveNatural);
@@ -230,15 +241,15 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .transition()
     .duration(1000)
     .attr('opacity', 1)
-    .call(d3.axisLeft(y).tickValues([-24, -18, -12, -9, -6, -3, -1.5]).tickFormat(d => d));
+    .call(d3.axisLeft(y).tickValues([-24, -18, -12, -9, -6, -3, -1.5]).tickFormat(d => String(d)));
 
   let numTransitions = 0;
   svg.selectAll('circle')
     .transition()
     .delay((d, i) => i / 3)
     .duration(1000)
-    .attr('cx', d => x(d.releaseDate))
-    .attr('cy', d => y(d.loudness))
+    .attr('cx', (d: Track) => x(d.releaseDate))
+    .attr('cy', (d: Track) => y(d.loudness))
     .on('start', () => ++numTransitions)
     .on('end', () => {
       if (--numTransitions === 0) {
