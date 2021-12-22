@@ -41,5 +41,6 @@ export default {
   Callout,
 
   Image: dynamic(() => import('next/image')),
+  LoudnessWars: dynamic(() => import('../components/projects/loudness-wars')),
   VideoContainer: dynamic(() => import('./video-container'))
 };
