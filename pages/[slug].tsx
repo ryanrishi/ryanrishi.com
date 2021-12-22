@@ -1,9 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
 import Layout from '../layouts/index';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 const pagesDir = path.join(process.cwd(), 'pages');
 
@@ -27,10 +28,11 @@ export default function Page({ source, frontMatter } : PageProps) {
   );
 }
 
-export function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = () => {
   const pages = fs.readdirSync(pagesDir)
     .filter(page => page.endsWith('.md'))
     .map(page => page.replace(/.md$/, ''));
+
 
   return {
     paths: pages.map(page => ({
@@ -42,7 +44,7 @@ export function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const pagePath = path.join(pagesDir, `${params.slug}.md`);
   const contents = fs.readFileSync(pagePath, 'utf8');
   const { data, content } = matter(contents);

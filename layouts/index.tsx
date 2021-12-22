@@ -7,7 +7,7 @@ import Head from '../components/head';
 
 dayjs.extend(utc);
 
-export default function Index({ children, frontMatter }) {
+export default function DefaultLayout({ children, frontMatter }) {
   const { title, tags, image, description } = frontMatter;
 
   return (

@@ -40,5 +40,6 @@ export default {
   Blockquote,
   Callout,
 
+  Image: dynamic(() => import('next/image')),
   VideoContainer: dynamic(() => import('./video-container'))
 };

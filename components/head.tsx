@@ -6,7 +6,16 @@ import PropTypes from 'prop-types';
 
 dayjs.extend(utc);
 
-function Head({ title: titleFromProps, description, isArticle, date, image, tags }) {
+interface HeadProps {
+  title: string;
+  description?: string;
+  isArticle?: boolean;
+  date?: Date;
+  image?: string;
+  tags?: string[];
+}
+
+function Head({ title: titleFromProps, description, isArticle, date, image, tags } : HeadProps) {
   const title = titleFromProps ? `${titleFromProps} | Ryan Rishi` : 'Ryan Rishi';
   let publishedTime;
   if (isArticle) {
