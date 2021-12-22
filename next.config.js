@@ -1,7 +1,5 @@
 /* eslint-env node */
 
-const withPlugins = require('next-compose-plugins');
-const withMdxEnhanced = require('next-mdx-enhanced');
 const withTM = require('next-transpile-modules')([
   'd3',
 
@@ -11,13 +9,7 @@ const withTM = require('next-transpile-modules')([
   'robust-predicates'
 ]);
 
-module.exports = withPlugins([
-  withTM,
-  withMdxEnhanced({
-    defaultLayout: true,
-    fileExtensions: ['md', 'mdx']
-  })
-], {
+module.exports = withTM({
   async redirects() {
     return [
       {
