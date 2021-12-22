@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import Code from './code';
 import Link from './link';
 import { H1, H2, H3, H4, H5, H6 } from './headings';
@@ -37,5 +38,7 @@ export default {
   inlineCode: ({ children }) => <code className="text-red-700 bg-gray-100 rounded p-1">{children}</code>,
 
   Blockquote,
-  Callout
+  Callout,
+
+  VideoContainer: dynamic(() => import('./video-container'))
 };
