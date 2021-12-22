@@ -1,4 +1,4 @@
-import { MDXProvider } from '@mdx-js/react';
+import { MDXRemote } from 'next-mdx-remote';
 import Head from '../../components/head';
 import Layout from '../../components/layout';
 import { H1 } from '../../components/headings';
@@ -18,7 +18,10 @@ export default function Index({ children, frontMatter }) {
       />
       <div>
         <H1>{name}</H1>
-        <MDXProvider components={MDXComponents}>{children}</MDXProvider>
+        <MDXRemote
+          {...children}
+          components={MDXComponents}
+        />
       </div>
     </Layout>
   );

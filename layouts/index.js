@@ -1,4 +1,4 @@
-import { MDXProvider } from '@mdx-js/react';
+import { MDXRemote } from 'next-mdx-remote';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import MDXComponents from '../components/mdx-components';
@@ -19,7 +19,10 @@ export default function Index({ children, frontMatter }) {
         tags={tags}
         isArticle
       />
-      <MDXProvider components={MDXComponents}>{children}</MDXProvider>
+      <MDXRemote
+        {...children}
+        components={MDXComponents}
+      />
     </Layout>
   );
 }

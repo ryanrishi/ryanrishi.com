@@ -1,21 +1,27 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
+import { serialize } from 'next-mdx-remote/serialize';
+import Layout from '../layouts/index';
 
 const pagesDir = path.join(process.cwd(), 'pages');
 
-export default function Page({ page }) {
+export default function Page({ source, frontMatter }) {
   return (
-    <p>{page.content}</p>
+    <Layout
+      frontMatter={frontMatter}
+    >
+      {source}
+    </Layout>
   );
 }
 
 export function getStaticPaths() {
   const pages = fs.readdirSync(pagesDir)
     .filter(page => page.endsWith('.md'))
-    .map(page => page.replace(/.md$/, ''))
+    .map(page => page.replace(/.md$/, ''));
 
-  const rv = {
+  return {
     paths: pages.map(page => ({
       params: {
         slug: page
@@ -23,25 +29,19 @@ export function getStaticPaths() {
     })),
     fallback: false
   };
-  console.log('getStaticPaths', JSON.stringify(rv, null, 2));
-  return rv;
 }
 
-export function getStaticProps({ params }) {
-  console.log('params', params);
-
+export async function getStaticProps({ params }) {
   const pagePath = path.join(pagesDir, `${params.slug}.md`);
   const contents = fs.readFileSync(pagePath, 'utf8');
   const { data, content } = matter(contents);
 
-  // console.log({ data, content });
+  const mdxSource = await serialize(content, { scope: data });
 
   return {
     props: {
-      page: {
-        ...data,
-        content
-      }
+      source: mdxSource,
+      frontMatter: data
     }
   };
 }

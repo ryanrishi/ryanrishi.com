@@ -1,4 +1,4 @@
-import { MDXProvider } from '@mdx-js/react';
+import { MDXRemote } from 'next-mdx-remote';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import MDXComponents from '../components/mdx-components';
@@ -26,7 +26,10 @@ export default function Index({ children, frontMatter }) {
         <H1>{title}</H1>
         <p className="-mt-4 mb-4 text-gray-500">{dayjs.utc(date).format('MMMM D, YYYY')}</p>
         <hr className="my-4" />
-        <MDXProvider components={MDXComponents}>{children}</MDXProvider>
+        <MDXRemote
+          {...children}
+          components={MDXComponents}
+        />
         <div className="flex items-center justify-center my-8">
           <Link href="/blog">
             &larr; Back to Blog
