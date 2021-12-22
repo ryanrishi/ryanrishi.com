@@ -5,9 +5,7 @@ import { H1, H2, H3, H4, H5, H6 } from './headings';
 import Callout from './callout';
 import Blockquote from './blockquote';
 
-/* eslint-disable react/display-name */
-/* eslint-disable react/jsx-props-no-spreading */
-export default {
+const MDXComponents = {
   h1: H1,
   h2: H2,
   h3: H3,
@@ -44,3 +42,5 @@ export default {
   LoudnessWars: dynamic(() => import('../components/projects/loudness-wars')),
   VideoContainer: dynamic(() => import('./video-container'))
 };
+
+export default MDXComponents
