@@ -1,18 +1,35 @@
-import { H1 } from '../components/headings';
-import Link from '../components/link';
-import Layout from '../components/layout';
-import Head from '../components/head';
+import Layout from '../layouts';
+import { GetStaticProps } from 'next';
+import matter from 'gray-matter';
+import { serialize } from 'next-mdx-remote/serialize';
 
-export default function Error404() {
+export default function Error404({ content, frontMatter }) {
   return (
-    <>
-      <Head
-        title="404"
-      />
-      <Layout>
-        <H1>404</H1>
-        <p>The page you are looking for does not exist. <Link href="/">Return home</Link>?</p>
-      </Layout>
-    </>
+    <Layout
+      frontMatter={frontMatter}
+    >
+      {content}
+    </Layout>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const source = `\
+---
+title: '404'
+---
+
+# 404
+The page you are looking for does not exist. [Return home](/)?
+`
+
+  const { data, content } = matter(source)
+  const mdxSource = await serialize(content, { scope: data })
+
+  return {
+    props: {
+      content: mdxSource,
+      frontMatter: data,
+    }
+  }
 }
