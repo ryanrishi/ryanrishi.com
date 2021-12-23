@@ -1,8 +1,16 @@
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { ReactNode } from 'react';
 
-export default function Link({ href, children, className, invert = false }) {
+interface LinkProps {
+  children: ReactNode;
+  href: string;
+  className: string;
+  invert?: boolean;
+}
+
+export default function Link({ href, children, className, invert = false } : LinkProps) {
   const isInternalLink = href?.startsWith('/');
 
   const classes = classNames('transition', className, {

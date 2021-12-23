@@ -4,7 +4,12 @@ import Link from '../components/link';
 import Layout from '../components/layout';
 import Head from '../components/head';
 import { H1, H3 } from '../components/headings';
-import { getAllProjects } from '../lib/projects';
+import { getAllProjects, Project } from '../lib/projects';
+import { GetStaticProps } from 'next';
+
+interface ProjectsProps {
+  projects: Project[];
+}
 
 const ProjectItem = ({ project, style }) => {
   const { name: title, description, permalink: href, image } = project;
@@ -45,7 +50,7 @@ const ProjectItem = ({ project, style }) => {
   );
 };
 
-export default function ProjectsIndex({ projects }) {
+export default function ProjectsIndex({ projects } : ProjectsProps) {
   const transApi = useSpringRef();
   const transition = useTransition(projects, {
     ref: transApi,
@@ -73,7 +78,7 @@ export default function ProjectsIndex({ projects }) {
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
   const projects = getAllProjects(['name', 'description', 'permalink', 'date', 'image']);
 
   return {

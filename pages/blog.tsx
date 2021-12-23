@@ -4,18 +4,23 @@ import utc from 'dayjs/plugin/utc';
 import Link from '../components/link';
 import Layout from '../components/layout';
 import Head from '../components/head';
-import { getAllPosts } from '../lib/posts';
+import { getAllPosts, Post } from '../lib/posts';
 import { H2 } from '../components/headings';
+import { GetStaticProps } from 'next';
+
+interface BlogProps {
+  posts: Post[];
+}
 
 dayjs.extend(utc);
 
-export default function BlogIndex({ allPosts }) {
+export default function BlogIndex({ posts } : BlogProps) {
   return (
     <Layout>
       <Head
         title="Blog"
       />
-      {allPosts.map(post => (
+      {posts.map(post => (
         <div
           className="mb-8 lg:mb-16 xl:mb-32"
           data-test-blog-post
@@ -41,10 +46,10 @@ export default function BlogIndex({ allPosts }) {
   );
 }
 
-export async function getStaticProps() {
-  const allPosts = getAllPosts(['title', 'date', 'slug', 'description', 'image', 'tags']);
+export const getStaticProps: GetStaticProps<BlogProps> = async () => {
+  const posts = getAllPosts(['title', 'date', 'slug', 'description', 'image', 'tags']);
 
   return {
-    props: { allPosts }
+    props: { posts }
   };
 }

@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import Link from './link';
 
-export default function Quote({ children, name, citationLink }) {
+interface BlockquoteProps {
+  children: ReactNode;
+  name: string;
+  citationLink: string;
+}
+
+export default function Quote({ children, name, citationLink } : BlockquoteProps) {
   return (
     <blockquote className="relative p-4 text-xl text-gray-600 quote italic mb-4 border-l-4 sm:border-l-0">
       <div

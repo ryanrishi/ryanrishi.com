@@ -1,4 +1,10 @@
 import PropTypes from 'prop-types';
+import { ReactNode } from 'react';
+
+interface CalloutProps {
+  children: ReactNode;
+  type: 'success' | 'info' | 'warning' | 'error';
+}
 
 const calloutTypeToColorName = {
   success: 'green',
@@ -7,7 +13,7 @@ const calloutTypeToColorName = {
   error: 'red'
 };
 
-export default function Callout({ type, children }) {
+export default function Callout({ type, children } : CalloutProps) {
   const color = calloutTypeToColorName[type];
 
   return (

@@ -20,10 +20,10 @@ const MDXComponents = {
   ul: ({ children }) => <ul className="list-disc list-outside px-4 mb-8 -mt-6">{children}</ul>,
 
   code: ({ className, children }) => {
-    const props = { children };
+    const props = { children, language: null };
     const languageMatch = className && className.match('language-([^{]+)');
     if (languageMatch) {
-      props.language = languageMatch[1]; // eslint-disable-line prefer-destructuring
+      props.language = languageMatch[1];
     }
 
     return (
@@ -39,7 +39,7 @@ const MDXComponents = {
   Callout,
 
   Image: dynamic(() => import('next/image')),
-  LoudnessWars: dynamic(() => import('../components/projects/loudness-wars')),
+  LoudnessWars: dynamic(() => import('./projects/loudness-wars')),
   VideoContainer: dynamic(() => import('./video-container'))
 };
 

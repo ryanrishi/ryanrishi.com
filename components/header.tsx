@@ -1,4 +1,4 @@
-import { Squash as Hamburger } from 'hamburger-react';
+import { CommonBurgerProps, Squash as Hamburger } from 'hamburger-react';
 import { useState } from 'react';
 import { animated, useTransition } from 'react-spring';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
@@ -52,10 +52,8 @@ function MobileNav({ isOpen, setIsOpen }) {
         </div>
         <div className="z-40">
           {/* TODO put this on <Hamburger> but it's not picking up class name */}
+          {/* check back when hamburger-react v3 is released: https://github.com/luukdv/hamburger-react/issues/45#issuecomment-902639087 */}
           <Hamburger
-            style={{
-              zIndex: 40
-            }}
             toggled={isOpen}
             toggle={setIsOpen}
           />
@@ -64,6 +62,7 @@ function MobileNav({ isOpen, setIsOpen }) {
       <div>
         {overlayTransitions((overlayStyles, item) => item && (
           <AnimatedDialogOverlay
+            as={DialogOverlay}
             className="bg-white"
             style={overlayStyles}
           >
