@@ -101,6 +101,7 @@ Head.propTypes = {
 };
 
 Head.defaultProps = {
+  title: 'Ryan Rishi',
   description: 'Full-stack software engineer and musician who loves cooking, camping, and flying.',
   isArticle: false,
   image: '/img/ryan-landscape.jpg',

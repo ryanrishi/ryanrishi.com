@@ -3,7 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import { serialize } from 'next-mdx-remote/serialize';
-import Layout from '../layouts/index';
+import Layout from '../layouts';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 const pagesDir = path.join(process.cwd(), 'pages');
