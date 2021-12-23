@@ -1,5 +1,6 @@
 ---
 title:  The Twelve Days of an A Cappella Christmas Album
+description: Recording and producing a Christmas a cappella album in two weeks
 date:   "2015-12-26T17:56:07-0700"
 image:  /img/christmas_in_claradise.png
 layout: blog
