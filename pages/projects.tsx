@@ -79,7 +79,7 @@ export default function ProjectsIndex({ projects } : ProjectsProps) {
 }
 
 export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
-  const projects = getAllProjects(['name', 'description', 'permalink', 'date', 'image']);
+  const projects = getAllProjects()
 
   return {
     props: { projects }

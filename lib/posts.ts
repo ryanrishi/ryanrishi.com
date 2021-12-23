@@ -12,6 +12,16 @@ interface PostFrontMatter {
   tags: string[]
 }
 
+interface WithSlug {
+  slug: string
+}
+
+interface WithContent {
+  content: string
+}
+
+export type Post = PostFrontMatter & WithSlug & WithContent
+
 export interface Post {
   title: string;
   slug: string;
@@ -39,6 +49,7 @@ export function getPostBySlug(slug: string) : Post {
   console.log({ data })
 
   return {
+    // ...data,  // TODO add image to missing posts
     title: data.title,
     description: data.description,
     slug,
