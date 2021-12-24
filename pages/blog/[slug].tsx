@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { serialize } from 'next-mdx-remote/serialize'
 import matter from 'gray-matter'
 import PostLayout from '../../layouts/blog'
+import { getPostSlugs } from '../../lib/posts'
 
 const postsDir = path.join(process.cwd(), 'pages', 'blog')
 
@@ -18,13 +19,12 @@ export default function Post({ source, frontMatter }) {
 }
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const posts = fs.readdirSync(postsDir)
-    .filter(p => p.endsWith('.md'))
+  const slugs = getPostSlugs()
 
   return {
-    paths: posts.map((post) => ({
+    paths: slugs.map((slug) => ({
       params: {
-        slug: post.replace(/.md$/, '')
+        slug: slug.replace(/\.md$/, '')
       }
     })),
     fallback: false
@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const contents = fs.readFileSync(postPath, 'utf8')
   const { data, content } = matter(contents)
 
-  const mdxSource = await serialize(content)
+  const mdxSource = await serialize(content, { scope: data })
 
   return {
     props: {
