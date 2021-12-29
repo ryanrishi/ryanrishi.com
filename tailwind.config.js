@@ -14,9 +14,9 @@ const generatePurgeCssSafelist = () => {
 module.exports = {
   purge: {
     content: [
-      'components/**/*.js',
-      'layouts/**/*.js',
-      'pages/**/*.{js,md}'
+      'components/**/*.tsx',
+      'layouts/**/*.tsx',
+      'pages/**/*.{tsx,md}'
     ],
     options: {
       safelist: generatePurgeCssSafelist()
