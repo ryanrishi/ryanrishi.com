@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 dayjs.extend(utc);
 
 interface HeadProps {
-  title: string;
+  title?: string;
   description?: string;
   isArticle?: boolean;
   date?: Date;
@@ -101,7 +101,6 @@ Head.propTypes = {
 };
 
 Head.defaultProps = {
-  title: 'Ryan Rishi',
   description: 'Full-stack software engineer and musician who loves cooking, camping, and flying.',
   isArticle: false,
   image: '/img/ryan-landscape.jpg',

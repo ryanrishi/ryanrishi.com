@@ -16,10 +16,6 @@ export default function Index({ content, frontMatter }) {
 export const getStaticProps: GetStaticProps = async () => {
   // this is not ideal, but I could not figure out how to keep a separate `index.md` file
   const source = `\
----
-title: Ryan Rishi
----
-
 # Hi, I'm Ryan
 I'm a software engineer focused on building great user experiences. I've worked at a handful of companies, from 20 person startups to 8,000 person public companies. I've grown products from ideation to thousands of users.
 
