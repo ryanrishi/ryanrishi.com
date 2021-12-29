@@ -1,8 +1,9 @@
 import classNames from 'classnames';
+import { ReactNode } from 'react';
 
 interface HeadingsProps {
   className?: string | string[];
-  children: any;  // TODO
+  children: ReactNode;
 }
 
 const baseClassNames = 'italic uppercase font-extrabold text-gray-800 mb-4 lg:mb-8 mt-4 lg:mt-6';
