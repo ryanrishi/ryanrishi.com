@@ -51,5 +51,5 @@ Link.propTypes = {
 };
 
 Link.defaultProps = {
-  className: ''
+  className: null
 };
