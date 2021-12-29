@@ -31,7 +31,7 @@ Here are some mantras I live by:
 - Execute, or be executed
 - Make excellence a habit
 - Don't let perfection get in the way of progress
-- _Fac si facis_ (Do it if you're going to do it). Or in millenial terms, Don't let your dreams be dreams
+- _Fac si facis_ (Do it if you're going to do it). Or in millenial terms, Don't let your dreams be dreams.
 `
 
   const { data, content } = matter(source)

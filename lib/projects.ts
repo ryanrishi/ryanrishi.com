@@ -23,6 +23,7 @@ interface WithContent {
 
 interface ProjectImage {
   src: string;
+  alt: string;
   width: number;
   height: number;
 }
@@ -44,8 +45,12 @@ export function getProjectBy(slug: string) : Project {
 
   return {
     ...data,
+    image: {
+      ...data.image,
+      alt: data.image.alt || data.name,
+    },
     slug,
-    content
+    content,
   }
 }
 

@@ -28,6 +28,7 @@ const ProjectItem = ({ project, style }) => {
           <Image
             className="object-cover transition duration-500 ease-in-out transform hover:scale-105 w-full h-full rounded-t"
             src={image?.src || 'https://via.placeholder.com/400'}
+            alt={image.alt}
             width="1600"
             height="1600"
           />
@@ -82,6 +83,8 @@ export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
   const projects = getAllProjects()
 
   return {
-    props: { projects }
+    props: {
+      projects,
+    }
   };
 }
