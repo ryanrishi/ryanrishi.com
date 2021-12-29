@@ -1,8 +1,9 @@
 import fs from 'fs'
-import path from 'path'
+import matter from 'gray-matter'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { serialize } from 'next-mdx-remote/serialize'
-import matter from 'gray-matter'
+import path from 'path'
+
 import ProjectLayout from '../../layouts/projects'
 
 const projectsDir = path.join(process.cwd(), 'pages', 'projects')
@@ -24,10 +25,10 @@ export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: projectPaths.map(p => ({
       params: {
-        slug: p.replace(/.md$/, '')
-      }
+        slug: p.replace(/.md$/, ''),
+      },
     })),
-    fallback: false
+    fallback: false,
   }
 }
 
@@ -41,7 +42,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       source: mdxSource,
-      frontMatter: data
-    }
+      frontMatter: data,
+    },
   }
 }

@@ -1,17 +1,18 @@
-import { CommonBurgerProps, Squash as Hamburger } from 'hamburger-react';
-import { useState } from 'react';
-import { animated, useTransition } from 'react-spring';
-import { DialogOverlay, DialogContent } from '@reach/dialog';
-import Link from './link';
+import { DialogContent,DialogOverlay } from '@reach/dialog'
+import { CommonBurgerProps, Squash as Hamburger } from 'hamburger-react'
+import { useState } from 'react'
+import { animated, useTransition } from 'react-spring'
 
-const AnimatedDialogOverlay = animated(DialogOverlay);
+import Link from './link'
+
+const AnimatedDialogOverlay = animated(DialogOverlay)
 
 const items = [
   { title: 'Music', href: '/music' },
   { title: 'Projects', href: '/projects' },
   { title: 'Blog', href: '/blog' },
-  { title: 'Contact', href: '/contact' }
-];
+  { title: 'Contact', href: '/contact' },
+]
 
 const HeaderLink = ({ href, children }) => (
   <Link
@@ -21,22 +22,22 @@ const HeaderLink = ({ href, children }) => (
   >
     {children}
   </Link>
-);
+)
 
 function MobileNav({ isOpen, setIsOpen }) {
   const overlayTransitions = useTransition(isOpen, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
-    expires: true
-  });
+    expires: true,
+  })
 
   const itemTransitions = useTransition(isOpen ? [0, 1, 2, 3] : [], {
     trail: 30,
     from: { bottom: '-50vh' },
     enter: { bottom: '0vh' },
-    leave: { bottom: '50vh' }
-  });
+    leave: { bottom: '50vh' },
+  })
 
   return (
     <>
@@ -90,11 +91,11 @@ function MobileNav({ isOpen, setIsOpen }) {
         ))}
       </div>
     </>
-  );
+  )
 }
 
 export default function Header() {
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
   return (
     <header className="flex flex-col md:flex-row justify-between p-4 md:py-8 container">
@@ -124,5 +125,5 @@ export default function Header() {
         </nav>
       </div>
     </header>
-  );
+  )
 }

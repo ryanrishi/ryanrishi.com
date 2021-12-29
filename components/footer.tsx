@@ -1,5 +1,6 @@
-import { ImGithub, ImLinkedin, ImSoundcloud, ImYoutube } from 'react-icons/im';
-import Link from './link';
+import { ImGithub, ImLinkedin, ImSoundcloud, ImYoutube } from 'react-icons/im'
+
+import Link from './link'
 
 const FooterSocialLink = ({ children, href }) => (
   <Link
@@ -9,7 +10,7 @@ const FooterSocialLink = ({ children, href }) => (
   >
     {children}
   </Link>
-);
+)
 
 export default function Footer() {
   return (
@@ -43,5 +44,5 @@ export default function Footer() {
         </FooterSocialLink>
       </div>
     </footer>
-  );
+  )
 }

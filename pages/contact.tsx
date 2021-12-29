@@ -1,6 +1,6 @@
-import Head from '../components/head';
-import Layout from '../components/layout';
-import { H1 } from '../components/headings';
+import Head from '../components/head'
+import { H1 } from '../components/headings'
+import Layout from '../components/layout'
 
 export default function Contact() {
   return (
@@ -79,5 +79,5 @@ export default function Contact() {
         </form>
       </div>
     </Layout>
-  );
+  )
 }

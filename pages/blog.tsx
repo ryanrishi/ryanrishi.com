@@ -1,18 +1,19 @@
-import React from 'react';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import Link from '../components/link';
-import Layout from '../components/layout';
-import Head from '../components/head';
-import { getAllPosts, Post } from '../lib/posts';
-import { H2 } from '../components/headings';
-import { GetStaticProps } from 'next';
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import { GetStaticProps } from 'next'
+import React from 'react'
+
+import Head from '../components/head'
+import { H2 } from '../components/headings'
+import Layout from '../components/layout'
+import Link from '../components/link'
+import { getAllPosts, Post } from '../lib/posts'
 
 interface BlogProps {
   posts: Post[];
 }
 
-dayjs.extend(utc);
+dayjs.extend(utc)
 
 export default function BlogIndex({ posts } : BlogProps) {
   return (
@@ -43,13 +44,13 @@ export default function BlogIndex({ posts } : BlogProps) {
         </div>
       ))}
     </Layout>
-  );
+  )
 }
 
 export const getStaticProps: GetStaticProps<BlogProps> = async () => {
-  const posts = getAllPosts();
+  const posts = getAllPosts()
 
   return {
-    props: { posts }
-  };
+    props: { posts },
+  }
 }

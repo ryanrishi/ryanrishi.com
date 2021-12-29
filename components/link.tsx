@@ -1,7 +1,7 @@
-import NextLink from 'next/link';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { ReactNode } from 'react';
+import classNames from 'classnames'
+import NextLink from 'next/link'
+import PropTypes from 'prop-types'
+import { ReactNode } from 'react'
 
 interface LinkProps {
   children: ReactNode;
@@ -11,14 +11,14 @@ interface LinkProps {
 }
 
 export default function Link({ href, children, className, invert = false } : LinkProps) {
-  const isInternalLink = href?.startsWith('/');
+  const isInternalLink = href?.startsWith('/')
 
   const classes = classNames('transition', className, {
     'text-gray-800': invert,
     'hover:text-valencia-500': invert,
     'text-valencia-500': !invert,
-    'hover:text-gray-800': !invert
-  });
+    'hover:text-gray-800': !invert,
+  })
 
   if (isInternalLink) {
     return (
@@ -31,7 +31,7 @@ export default function Link({ href, children, className, invert = false } : Lin
           {children}
         </a>
       </NextLink>
-    );
+    )
   }
 
   return (
@@ -43,13 +43,13 @@ export default function Link({ href, children, className, invert = false } : Lin
     >
       {children}
     </a>
-  );
+  )
 }
 
 Link.propTypes = {
-  className: PropTypes.string
-};
+  className: PropTypes.string,
+}
 
 Link.defaultProps = {
-  className: null
-};
+  className: null,
+}

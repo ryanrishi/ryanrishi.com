@@ -1,7 +1,8 @@
+import matter from 'gray-matter'
+import { GetStaticProps } from 'next'
+import { serialize } from 'next-mdx-remote/serialize'
+
 import Layout from '../layouts'
-import { GetStaticProps } from 'next';
-import { serialize } from 'next-mdx-remote/serialize';
-import matter from 'gray-matter';
 
 export default function Index({ content, frontMatter }) {
   return (
@@ -36,7 +37,7 @@ Here are some mantras I live by:
   return {
     props: {
       content: mdxSource,
-      frontMatter: data
-    }
+      frontMatter: data,
+    },
   }
 }

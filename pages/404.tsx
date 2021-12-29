@@ -1,7 +1,8 @@
-import Layout from '../layouts';
-import { GetStaticProps } from 'next';
-import matter from 'gray-matter';
-import { serialize } from 'next-mdx-remote/serialize';
+import matter from 'gray-matter'
+import { GetStaticProps } from 'next'
+import { serialize } from 'next-mdx-remote/serialize'
+
+import Layout from '../layouts'
 
 export default function Error404({ content, frontMatter }) {
   return (
@@ -30,6 +31,6 @@ The page you are looking for does not exist. [Return home](/)?
     props: {
       content: mdxSource,
       frontMatter: data,
-    }
+    },
   }
 }

@@ -1,18 +1,19 @@
-import { animated, useSpringRef, useTransition } from 'react-spring';
-import Image from 'next/image';
-import Link from '../components/link';
-import Layout from '../components/layout';
-import Head from '../components/head';
-import { H1, H3 } from '../components/headings';
-import { getAllProjects, Project } from '../lib/projects';
-import { GetStaticProps } from 'next';
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import { animated, useSpringRef, useTransition } from 'react-spring'
+
+import Head from '../components/head'
+import { H1, H3 } from '../components/headings'
+import Layout from '../components/layout'
+import Link from '../components/link'
+import { getAllProjects, Project } from '../lib/projects'
 
 interface ProjectsProps {
   projects: Project[];
 }
 
 const ProjectItem = ({ project, style }) => {
-  const { name: title, description, permalink: href, image } = project;
+  const { name: title, description, permalink: href, image } = project
 
   return (
     <animated.li
@@ -48,18 +49,18 @@ const ProjectItem = ({ project, style }) => {
         {description}
       </div>
     </animated.li>
-  );
-};
+  )
+}
 
 export default function ProjectsIndex({ projects } : ProjectsProps) {
-  const transApi = useSpringRef();
+  const transApi = useSpringRef()
   const transition = useTransition(projects, {
     ref: transApi,
     trail: 400 / projects.length,
     from: { opacity: 0, scale: 0 },
     enter: { opacity: 1, scale: 1 },
-    leave: { opacity: 0, scale: 0 }
-  });
+    leave: { opacity: 0, scale: 0 },
+  })
 
   return (
     <Layout>
@@ -76,7 +77,7 @@ export default function ProjectsIndex({ projects } : ProjectsProps) {
         ))}
       </ul>
     </Layout>
-  );
+  )
 }
 
 export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
@@ -85,6 +86,6 @@ export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
   return {
     props: {
       projects,
-    }
-  };
+    },
+  }
 }

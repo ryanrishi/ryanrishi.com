@@ -13,5 +13,5 @@ export default function VideoContainer({ src, title }) {
         allowFullScreen
       />
     </div>
-  );
+  )
 }
