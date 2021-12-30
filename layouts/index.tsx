@@ -1,14 +1,15 @@
-import { MDXRemote } from 'next-mdx-remote';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import MDXComponents from '../components/mdx-components';
-import Layout from '../components/layout';
-import Head from '../components/head';
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import { MDXRemote } from 'next-mdx-remote'
 
-dayjs.extend(utc);
+import Head from '../components/head'
+import Layout from '../components/layout'
+import MDXComponents from '../components/mdx-components'
+
+dayjs.extend(utc)
 
 export default function DefaultLayout({ children, frontMatter }) {
-  const { title, tags, image, description } = frontMatter;
+  const { title, tags, image, description } = frontMatter
 
   return (
     <Layout>
@@ -24,5 +25,5 @@ export default function DefaultLayout({ children, frontMatter }) {
         components={MDXComponents}
       />
     </Layout>
-  );
+  )
 }

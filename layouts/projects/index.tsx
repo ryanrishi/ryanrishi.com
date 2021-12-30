@@ -1,11 +1,12 @@
-import { MDXRemote } from 'next-mdx-remote';
-import Head from '../../components/head';
-import Layout from '../../components/layout';
-import { H1 } from '../../components/headings';
-import MDXComponents from '../../components/mdx-components';
+import { MDXRemote } from 'next-mdx-remote'
+
+import Head from '../../components/head'
+import { H1 } from '../../components/headings'
+import Layout from '../../components/layout'
+import MDXComponents from '../../components/mdx-components'
 
 export default function Index({ children, frontMatter }) {
-  const { name, description, image, date } = frontMatter;
+  const { name, description, image, date } = frontMatter
 
   return (
     <Layout>
@@ -24,5 +25,5 @@ export default function Index({ children, frontMatter }) {
         />
       </div>
     </Layout>
-  );
+  )
 }

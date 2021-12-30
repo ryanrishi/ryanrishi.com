@@ -179,7 +179,7 @@ const theme = {
   },
 }
 
-export default function Code({ language = '', children } : CodeProps) {
+export default function Code({ language = '', children }: CodeProps) {
   // Filter out any empty lines at end
   const reversedLines = children.split('\n').reverse()
   const firstNonEmptyIndex = reversedLines.findIndex(line => line !== '')

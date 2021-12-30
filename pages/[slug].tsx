@@ -19,7 +19,7 @@ interface PageProps {
   }
 }
 
-export default function Page({ source, frontMatter } : PageProps) {
+export default function Page({ source, frontMatter }: PageProps) {
   return (
     <Layout
       frontMatter={frontMatter}

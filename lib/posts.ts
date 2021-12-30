@@ -29,7 +29,7 @@ export function getPostSlugs() {
     .filter(p => p.endsWith('.md'))
 }
 
-export function getPostBySlug(slug: string) : Post {
+export function getPostBySlug(slug: string): Post {
   const realSlug = slug.replace(/\.md$/, '')
   const fullPath = join(postsDirectory, `${realSlug}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
@@ -48,7 +48,7 @@ export function getPostBySlug(slug: string) : Post {
   }
 }
 
-export function getAllPosts() : Post[] {
+export function getAllPosts(): Post[] {
   const slugs = getPostSlugs()
 
   return slugs

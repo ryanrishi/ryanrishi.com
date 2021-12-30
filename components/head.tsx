@@ -15,7 +15,7 @@ interface HeadProps {
   tags?: string[];
 }
 
-function Head({ title: titleFromProps, description, isArticle, date, image, tags } : HeadProps) {
+function Head({ title: titleFromProps, description, isArticle, date, image, tags }: HeadProps) {
   const title = titleFromProps ? `${titleFromProps} | Ryan Rishi` : 'Ryan Rishi'
   let publishedTime
   if (isArticle) {

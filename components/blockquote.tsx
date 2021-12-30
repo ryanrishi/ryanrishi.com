@@ -9,7 +9,7 @@ interface BlockquoteProps {
   citationLink: string;
 }
 
-export default function Quote({ children, name, citationLink } : BlockquoteProps) {
+export default function Quote({ children, name, citationLink }: BlockquoteProps) {
   return (
     <blockquote className="relative p-4 text-xl text-gray-600 quote italic mb-4 border-l-4 sm:border-l-0">
       <div

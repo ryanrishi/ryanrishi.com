@@ -10,7 +10,7 @@ interface LinkProps {
   invert?: boolean;
 }
 
-export default function Link({ href, children, className, invert = false } : LinkProps) {
+export default function Link({ href, children, className, invert = false }: LinkProps) {
   const isInternalLink = href?.startsWith('/')
 
   const classes = classNames('transition', className, {

@@ -1,8 +1,6 @@
-/* eslint-env node */
 import fs from 'fs'
 import matter from 'gray-matter'
 import { join } from 'path'
-import { string } from 'prop-types'
 
 interface ProjectFrontMatter {
   name: string;
@@ -37,7 +35,7 @@ export function getProjectSlugs() {
     .filter(p => p.endsWith('.md'))
 }
 
-export function getProjectBy(slug: string) : Project {
+export function getProjectBy(slug: string): Project {
   const realSlug = slug.replace(/\.md$/, '')
   const fullPath = join(projectsDir, `${realSlug}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
@@ -54,7 +52,7 @@ export function getProjectBy(slug: string) : Project {
   }
 }
 
-export function getAllProjects() : Project[] {
+export function getAllProjects(): Project[] {
   const slugs = getProjectSlugs()
   return slugs
     .map(slug => getProjectBy(slug))

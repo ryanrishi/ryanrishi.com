@@ -1,5 +1,5 @@
 import { DialogContent,DialogOverlay } from '@reach/dialog'
-import { CommonBurgerProps, Squash as Hamburger } from 'hamburger-react'
+import { Squash as Hamburger } from 'hamburger-react'
 import { useState } from 'react'
 import { animated, useTransition } from 'react-spring'
 

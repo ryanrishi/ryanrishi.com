@@ -13,7 +13,7 @@ const calloutTypeToColorName = {
   error: 'red',
 }
 
-export default function Callout({ type, children } : CalloutProps) {
+export default function Callout({ type, children }: CalloutProps) {
   const color = calloutTypeToColorName[type]
 
   return (

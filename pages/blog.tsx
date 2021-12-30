@@ -15,7 +15,7 @@ interface BlogProps {
 
 dayjs.extend(utc)
 
-export default function BlogIndex({ posts } : BlogProps) {
+export default function BlogIndex({ posts }: BlogProps) {
   return (
     <Layout>
       <Head

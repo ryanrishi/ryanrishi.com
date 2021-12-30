@@ -52,7 +52,7 @@ const ProjectItem = ({ project, style }) => {
   )
 }
 
-export default function ProjectsIndex({ projects } : ProjectsProps) {
+export default function ProjectsIndex({ projects }: ProjectsProps) {
   const transApi = useSpringRef()
   const transition = useTransition(projects, {
     ref: transApi,
