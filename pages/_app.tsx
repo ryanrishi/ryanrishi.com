@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import '@reach/dialog/styles.css'
 import 'tailwindcss/tailwind.css'
 

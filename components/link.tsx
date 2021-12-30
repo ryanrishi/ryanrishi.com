@@ -25,8 +25,6 @@ export default function Link({ href, children, className, invert = false }: Link
       <NextLink
         href={href}
       >
-        {/* see https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/402 */}
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a className={classes}>
           {children}
         </a>

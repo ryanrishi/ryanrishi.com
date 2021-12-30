@@ -17,7 +17,6 @@ export default function Footer() {
     <footer className="flex flex-col md:flex-row justify-between container uppercase italic font-bold text-sm px-4 my-8 md:my-16">
       <div>
         <p>
-          {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
           &copy; Copyright&nbsp;{ new Date().getFullYear() }&nbsp;Ryan Rishi
         </p>
       </div>

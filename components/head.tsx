@@ -93,7 +93,7 @@ function Head({ title: titleFromProps, description, isArticle, date, image, tags
 }
 
 Head.propTypes = {
-  title: PropTypes.string, // eslint-disable-line react/require-default-props
+  title: PropTypes.string,
   description: PropTypes.string,
   isArticle: PropTypes.bool,
   image: PropTypes.string,

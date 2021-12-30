@@ -29,7 +29,7 @@ describe('Projects', () => {
       for (let i = 0; i < projects.length; i++) {
         if (i % 2 === 0) {
           // both project image and project title are clickable; skip over clicking the image to avoid duplicate tests
-          continue; // eslint-disable-line no-continue
+          continue;
         }
 
         cy.get('li a').eq(i).click();

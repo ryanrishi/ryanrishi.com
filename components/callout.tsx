@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types'
 import { ReactNode } from 'react'
 
+type CalloutType = 'success' | 'info' | 'warning' | 'error'
+
 interface CalloutProps {
   children: ReactNode;
-  type: 'success' | 'info' | 'warning' | 'error';
+  type: CalloutType;
 }
 
-const calloutTypeToColorName = {
+const calloutTypeToColorName: Record<CalloutType, string> = {
   success: 'green',
   info: 'blue',
   warning: 'yellow',
