@@ -1,4 +1,3 @@
-const percyHealthCheck = require('@percy/cypress/task');
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -17,7 +16,6 @@ const percyHealthCheck = require('@percy/cypress/task');
  * @type {Cypress.PluginConfig}
  */
 module.exports = (on, config) => { // eslint-disable-line no-unused-vars
-  on('task', percyHealthCheck);
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 };
