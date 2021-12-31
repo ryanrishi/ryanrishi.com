@@ -36,14 +36,9 @@ export function getPostBySlug(slug: string): Post {
   const { data, content } = matter(fileContents) as unknown as { content: string, data: PostFrontMatter }
 
   return {
-    // ...data,  // TODO add image to missing posts
-    title: data.title,
-    description: data.description,
+    ...data,
     slug: realSlug,
-    image: data.image || null,
-    date: data.date,
-    layout: data.layout,
-    tags: data.tags,
+    image: data.image,
     content,
   }
 }
