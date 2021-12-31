@@ -45,7 +45,7 @@ describe('Blog', () => {
           cy.percySnapshot($title.text());
         });
         cy.go('back');
-        cy.url().should('match', /\/blog$/);
+        cy.title().should('include', 'Blog'); // wait for router to finish transition to blog index
       }
     });
   });

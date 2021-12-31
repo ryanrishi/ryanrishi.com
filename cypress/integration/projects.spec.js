@@ -42,6 +42,7 @@ describe('Projects', () => {
           cy.percySnapshot($title.text());
         });
         cy.go('back');
+        cy.title().should('include', 'Projects'); // wait for router to finish transition to projects index
       }
     });
   });
