@@ -36,9 +36,13 @@ describe('Projects', () => {
         cy.url().should('include', '/projects/');
         cy.get('h1').scrollIntoView();
         cy.get('h1').first().then(($title) => {
+          // wait for animations to finish and images to load
+          // TODO find a better way to do this
+          cy.wait(5000);
           cy.percySnapshot($title.text());
         });
         cy.go('back');
+        cy.title().should('include', 'Projects'); // wait for router to finish transition to projects index
       }
     });
   });
