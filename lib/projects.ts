@@ -35,7 +35,7 @@ export function getProjectSlugs() {
     .filter(p => p.endsWith('.md'))
 }
 
-export function getProjectBy(slug: string): Project {
+export function getProjectBySlug(slug: string): Project {
   const realSlug = slug.replace(/\.md$/, '')
   const fullPath = join(projectsDir, `${realSlug}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
@@ -55,7 +55,7 @@ export function getProjectBy(slug: string): Project {
 export function getAllProjects(): Project[] {
   const slugs = getProjectSlugs()
   return slugs
-    .map(slug => getProjectBy(slug))
+    .map(slug => getProjectBySlug(slug))
     // sort projects by date in descending order
     .sort((project1, project2) => (project1.date > project2.date ? -1 : 1))
 }

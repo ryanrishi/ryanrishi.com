@@ -1,12 +1,8 @@
-import fs from 'fs'
-import matter from 'gray-matter'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { serialize } from 'next-mdx-remote/serialize'
-import path from 'path'
 
 import ProjectLayout from '../../layouts/projects'
-
-const projectsDir = path.join(process.cwd(), 'pages', 'projects')
+import { getProjectBySlug, getProjectSlugs } from '../../lib/projects'
 
 export default function Project({ source, frontMatter }) {
   return (
@@ -19,13 +15,12 @@ export default function Project({ source, frontMatter }) {
 }
 
 export const getStaticPaths: GetStaticPaths = () => {
-  const projectPaths = fs.readdirSync(projectsDir)
-    .filter(f => f.endsWith('.md'))
+  const slugs = getProjectSlugs()
 
   return {
-    paths: projectPaths.map(p => ({
+    paths: slugs.map((slug) => ({
       params: {
-        slug: p.replace(/.md$/, ''),
+        slug: slug.replace(/\.md$/, ''),
       },
     })),
     fallback: false,
@@ -33,16 +28,14 @@ export const getStaticPaths: GetStaticPaths = () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const projectPath = path.join(projectsDir, `${params.slug}.md`)
-  const contents = fs.readFileSync(projectPath, 'utf8')
-  const { data, content } = matter(contents)
+  const project = getProjectBySlug(params.slug as string)
 
-  const mdxSource = await serialize(content, { scope: data })
+  const mdxSource = await serialize(project.content, { scope: { ...project } })
 
   return {
     props: {
       source: mdxSource,
-      frontMatter: data,
+      frontMatter: project,
     },
   }
 }

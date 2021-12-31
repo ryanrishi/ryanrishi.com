@@ -1,13 +1,8 @@
-import fs from 'fs'
-import matter from 'gray-matter'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { serialize } from 'next-mdx-remote/serialize'
-import path from 'path'
 
 import PostLayout from '../../layouts/blog'
-import { getPostSlugs } from '../../lib/posts'
-
-const postsDir = path.join(process.cwd(), 'pages', 'blog')
+import { getPostBySlug, getPostSlugs } from '../../lib/posts'
 
 export default function Post({ source, frontMatter }) {
   return (
@@ -33,16 +28,14 @@ export const getStaticPaths: GetStaticPaths = () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postPath = path.join(postsDir, `${params.slug}.md`)
-  const contents = fs.readFileSync(postPath, 'utf8')
-  const { data, content } = matter(contents)
+  const post = getPostBySlug(params.slug as string)
 
-  const mdxSource = await serialize(content, { scope: data })
+  const mdxSource = await serialize(post.content, { scope: { ...post } })
 
   return {
     props: {
       source: mdxSource,
-      frontMatter: data,
+      frontMatter: post,
     },
   }
 }
