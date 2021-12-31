@@ -33,7 +33,7 @@ describe('Blog', () => {
         cy.get('h2').should('not.be.empty');
 
         cy.get('[data-test-blog-post-date]').eq(i).then((meta) => {
-          expect(meta).to.not.be.empty; // eslint-disable-line no-unused-expressions
+          expect(meta).to.not.be.empty;
           expect(meta.text()).to.match(/([A-Za-z]{3,9})\s\d{1,2},\s\d{4}/g);
         });
 

@@ -1,30 +1,42 @@
-/* eslint indent: ["warn", 2] */
-import { useEffect, useRef, useState } from 'react';
-import * as d3 from 'd3';
-import { event } from '../../../lib/ga';
+/* eslint indent: ["warn", 2, { "SwitchCase": 1 }] */
+import * as d3 from 'd3'
+import { useEffect, useRef, useState } from 'react'
+
+import { event } from '../../../lib/ga'
+
+interface Track {
+  id: string;
+  name: string;
+  artist: string;
+  album: string;
+  releaseDateForDisplay: string;
+  releaseDate: Date;
+  releaseDatePrecision: 'day' | 'month' | 'year';
+  loudness: number;
+}
 
 const getMargin = ({ width }) => {
   const margin = {
     top: 10,
     right: 30,
     bottom: 30,
-    left: 60
-  };
+    left: 60,
+  }
 
   if (width < 768) {
     // tablet or smaller
-    margin.left = 30;
-    margin.right = 10;
+    margin.left = 30
+    margin.right = 10
   }
 
-  return margin;
-};
+  return margin
+}
 
-const trackFillColor = '#69b3a2';
-export const selectedTrackFillColor = '#f38f9f';
+const trackFillColor = '#69b3a2'
+const selectedTrackFillColor = '#f38f9f'
 
 const drawChart = async (svgRef, setSelectedTrack) => {
-  let $selectedTrack;
+  let $selectedTrack
 
   const data = await d3.csv('/loudness-wars.csv').then(tracks => tracks.map(track => ({
     id: track.track_id,
@@ -35,86 +47,88 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     releaseDate: (() => {
       switch (track.release_date_precision) {
         case 'day':
-          return new Date(track.release_date);
+          return new Date(track.release_date)
 
         case 'month': {
-          const [year, month] = track.release_date.split('-');
-          const date = new Date(year, month - 1, 1);
+          const [year, month] = track.release_date.split('-')
+          const date = new Date(+year, +month - 1, 1)
 
-          return date;
+          return date
         }
 
         case 'year':
-          return new Date(track.release_date, 0, 1);
+          return new Date(+track.release_date, 0, 1)
 
         default:
-          throw new Error(`Unknown release date precision: ${track.release_date_precision}`);
+          throw new Error(`Unknown release date precision: ${track.release_date_precision}`)
       }
     })(),
     releaseDatePrecision: track.release_date_precision,
-    loudness: track.loudness
+    loudness: track.loudness,
   })).filter(x => x.releaseDate.getFullYear() >= 1970) // only 2 tracks in 1969, insufficient data size
-    .sort((a, b) => a.releaseDate - b.releaseDate));
+    .sort((a, b) => a.releaseDate.valueOf() - b.releaseDate.valueOf()))
 
-  const minDate = data[0].releaseDate;
-  const maxDate = data[data.length - 1].releaseDate;
+  const minDate = data[0].releaseDate
+  const maxDate = data[data.length - 1].releaseDate
 
-  let minLoudness = Infinity;
-  let maxLoudness = -Infinity;
+  let minLoudness = Infinity
+  let maxLoudness = -Infinity
 
   data.forEach((d) => {
-    minLoudness = Math.min(minLoudness, d.loudness);
-    maxLoudness = Math.max(maxLoudness, d.loudness);
-  });
+    minLoudness = Math.min(minLoudness, +d.loudness)
+    maxLoudness = Math.max(maxLoudness, +d.loudness)
+  })
 
-  const { width, height } = svgRef.current.viewBox.baseVal;
-  const margin = getMargin({ width });
-  const h = height - margin.top - margin.bottom;
-  const w = width - margin.left - margin.right;
+  const { width, height } = svgRef.current.viewBox.baseVal
+  const margin = getMargin({ width })
+  const h = height - margin.top - margin.bottom
+  const w = width - margin.left - margin.right
 
-  const svg = d3.select(svgRef.current);
-  svg.selectAll('*').remove();
-  const g = svg.append('g');
+  const svg = d3.select(svgRef.current)
+  svg.selectAll('*').remove()
+  const g = svg.append('g')
 
-  g.attr('transform', `translate(${margin.left}, ${margin.top})`);
+  g.attr('transform', `translate(${margin.left}, ${margin.top})`)
 
   // x and y scales
-  const startDate = new Date(minDate.getUTCFullYear(), 0, 1);
-  const endDate = new Date(maxDate.getUTCFullYear(), 0, 1);
+  const startDate = new Date(minDate.getUTCFullYear(), 0, 1)
+  const endDate = new Date(maxDate.getUTCFullYear(), 0, 1)
 
   const x = d3
     .scaleTime()
     .domain([startDate, endDate])
-    .range([0, w]);
+    .range([0, w])
 
   const y = d3
     .scaleLog()
     .domain([minLoudness, minLoudness]) // set [y1, y2] the same in order to animate later
-    .range([h - margin.top - margin.bottom, h - margin.top - margin.bottom]);
+    .range([h - margin.top - margin.bottom, h - margin.top - margin.bottom])
 
   // draw x and y axes
   g.append('g')
     .attr('transform', `translate(0, ${h - margin.top - margin.bottom})`)
     .call(d3.axisBottom(x))
     .append('text')
+    /* eslint-disable indent */
       .attr('fill', 'black')
       .attr('x', w)
       .attr('y', -2)
       .attr('text-anchor', 'end')
-      .text('Year');
+      .text('Year')
+    /* eslint-enable indent */
 
   const yAxis = g.append('g')
-    .call(d3.axisLeft(y));
+    .call(d3.axisLeft(y))
 
   yAxis.append('text')
     .attr('fill', 'black')
     .attr('transform', 'rotate(-90)')
     .attr('y', 10)
     .style('text-anchor', 'end')
-    .text('Loudness (dB)');
+    .text('Loudness (dB)')
 
-  const transitionDuration = 200;
-  const r = Math.min((width / 480) * 5, 5);
+  const transitionDuration = 200
+  const r = Math.min((width / 480) * 5, 5)
 
   // tooltip
   const tooltip = d3.select('body')
@@ -122,98 +136,100 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .attr('data-test-tooltip', true)
     .style('position', 'absolute')
     .style('background-color', 'white')
-    .style('opacity', 0);
+    .style('opacity', 0)
 
   // hover animations
   function onMouseIn(e, d) {
     d3.select(this)
       .transition()
       .duration(transitionDuration)
-      .attr('r', 2 * r);
+      .attr('r', 2 * r)
 
     tooltip
       .interrupt()
       .style('display', 'block')
       .style('opacity', 0.8)
       .style('left', `${e.pageX + 15}px`)
-      .style('top', `${e.pageY}px`);
+      .style('top', `${e.pageY}px`)
 
     tooltip.html(`
       <p>${d.name} (${d.releaseDateForDisplay})</p>
       <p>${d.artist} - ${d.album}</p>
       <p>${d.loudness} dB</p>
-    `);
+    `)
   }
 
   function onMouseOut() {
     d3.select(this)
       .transition()
       .duration(transitionDuration)
-      .attr('r', r);
+      .attr('r', r)
 
     tooltip
       .transition()
       .duration(transitionDuration)
       .style('opacity', 0)
       .on('end', () => {
-        tooltip.style('display', 'none');
-      });
+        tooltip.style('display', 'none')
+      })
   }
 
   function onMouseMove(e) {
     tooltip
       .style('left', `${e.pageX + 15}px`)
-      .style('top', `${e.pageY}px`);
+      .style('top', `${e.pageY}px`)
   }
 
   function onClick(e, d) {
-    setSelectedTrack(d);
+    setSelectedTrack(d)
 
     if ($selectedTrack) {
       // reset previously selected track
-      d3.select($selectedTrack).attr('fill', trackFillColor);
+      d3.select($selectedTrack).attr('fill', trackFillColor)
     }
 
     d3.select(this)
-      .attr('fill', selectedTrackFillColor);
-    $selectedTrack = e.target;
+      .attr('fill', selectedTrackFillColor)
+    $selectedTrack = e.target
   }
 
   g.append('g')
     .selectAll('dot')
-    .data(data, d => d.id)
+    .data(data, (d: Track) => d.id)
     .enter()
     .append('circle')
+    /* eslint-disable indent */
       .attr('cx', d => x(d.releaseDate))
-      .attr('cy', d => y(d.loudness))
+      .attr('cy', d => y(+d.loudness))
       .attr('r', r)
       .attr('fill', trackFillColor)
       .attr('opacity', 0.4)
       .on('mouseover', onMouseIn)
       .on('mousemove', onMouseMove)
       .on('mouseout', onMouseOut)
-      .on('click', onClick);
+      .on('click', onClick)
+    /* eslint-enable indent */
 
   // trendline
-  const loudnessByYear = {};
+  const loudnessByYear = {}
   data.forEach((track) => {
-    const year = track.releaseDate.getUTCFullYear();
-    loudnessByYear[year] = loudnessByYear[year] || [];
-    loudnessByYear[year].push(track.loudness);
-  });
+    const year = track.releaseDate.getUTCFullYear()
+    loudnessByYear[year] = loudnessByYear[year] || []
+    loudnessByYear[year].push(track.loudness)
+  })
 
   const meanLoudnessByYear = Object.keys(loudnessByYear)
     .sort()
     .map(year => ({
       year: +year,
-      loudness: d3.mean(loudnessByYear[year])
-    }));
+      loudness: d3.mean(loudnessByYear[year]),
+    }))
 
   const drawTrendline = () => {
-    const trendline = d3.line()
+    const trendline = d3.line<{ year: number; loudness: number; }>()
       .x(d => x(new Date(d.year, 0, 1)))
       .y(d => y(d.loudness))
-      .curve(d3.curveNatural);
+      .curve(d3.curveNatural)
 
     g.append('path')
       .attr('data-test-trendline', true)
@@ -221,60 +237,60 @@ const drawChart = async (svgRef, setSelectedTrack) => {
       .attr('d', trendline)
       .attr('fill', 'none')
       .attr('stroke-width', 2)
-      .attr('stroke', '#ffab00');
-  };
+      .attr('stroke', '#ffab00')
+  }
 
-  y.domain([minLoudness, maxLoudness]);
-  y.range([h - margin.top - margin.bottom, 0]);
+  y.domain([minLoudness, maxLoudness])
+  y.range([h - margin.top - margin.bottom, 0])
   yAxis
     .transition()
     .duration(1000)
     .attr('opacity', 1)
-    .call(d3.axisLeft(y).tickValues([-24, -18, -12, -9, -6, -3, -1.5]).tickFormat(d => d));
+    .call(d3.axisLeft(y).tickValues([-24, -18, -12, -9, -6, -3, -1.5]).tickFormat(d => String(d)))
 
-  let numTransitions = 0;
+  let numTransitions = 0
   svg.selectAll('circle')
     .transition()
     .delay((d, i) => i / 3)
     .duration(1000)
-    .attr('cx', d => x(d.releaseDate))
-    .attr('cy', d => y(d.loudness))
+    .attr('cx', (d: Track) => x(d.releaseDate))
+    .attr('cy', (d: Track) => y(d.loudness))
     .on('start', () => ++numTransitions)
     .on('end', () => {
       if (--numTransitions === 0) {
-        drawTrendline();
+        drawTrendline()
       }
-    });
-};
+    })
+}
 
 const Chart = () => {
-  const svg = useRef(null);
+  const svg = useRef(null)
 
   const [dimensions, setDimensions] = useState({
     // can't use winsow since it's undefined with Next.js SSR
     height: 0,
-    width: 0
-  });
+    width: 0,
+  })
 
-  const [selectedTrack, _setSelectedTrack] = useState(null);
+  const [selectedTrack, _setSelectedTrack] = useState(null)
 
   const setSelectedTrack = (track) => {
     event({
       action: 'loudness wars | select track',
-      params: track
-    });
+      params: track,
+    })
 
-    _setSelectedTrack(track);
-  };
+    _setSelectedTrack(track)
+  }
 
   useEffect(() => {
     setDimensions({
       height: window.innerHeight,
-      width: window.innerWidth
-    });
+      width: window.innerWidth,
+    })
 
-    drawChart(svg, setSelectedTrack);
-  }, [svg]);
+    drawChart(svg, setSelectedTrack)
+  }, [svg])
 
   return (
     <div className="w-full h-full">
@@ -295,7 +311,7 @@ const Chart = () => {
         ref={svg}
       />
     </div>
-  );
-};
+  )
+}
 
-export default Chart;
+export default Chart

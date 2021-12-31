@@ -1,13 +1,19 @@
-import { animated, useSpringRef, useTransition } from 'react-spring';
-import Image from 'next/image';
-import Link from '../components/link';
-import Layout from '../components/layout';
-import Head from '../components/head';
-import { H1, H3 } from '../components/headings';
-import { getAllProjects } from '../lib/projects';
+import { GetStaticProps } from 'next'
+import Image from 'next/image'
+import { animated, useSpringRef, useTransition } from 'react-spring'
+
+import Head from '../components/head'
+import { H1, H3 } from '../components/headings'
+import Layout from '../components/layout'
+import Link from '../components/link'
+import { getAllProjects, Project } from '../lib/projects'
+
+interface ProjectsProps {
+  projects: Project[];
+}
 
 const ProjectItem = ({ project, style }) => {
-  const { name: title, description, permalink: href, image } = project;
+  const { name: title, description, permalink: href, image } = project
 
   return (
     <animated.li
@@ -23,6 +29,7 @@ const ProjectItem = ({ project, style }) => {
           <Image
             className="object-cover transition duration-500 ease-in-out transform hover:scale-105 w-full h-full rounded-t"
             src={image?.src || 'https://via.placeholder.com/400'}
+            alt={image.alt}
             width="1600"
             height="1600"
           />
@@ -42,18 +49,18 @@ const ProjectItem = ({ project, style }) => {
         {description}
       </div>
     </animated.li>
-  );
-};
+  )
+}
 
-export default function ProjectsIndex({ projects }) {
-  const transApi = useSpringRef();
+export default function ProjectsIndex({ projects }: ProjectsProps) {
+  const transApi = useSpringRef()
   const transition = useTransition(projects, {
     ref: transApi,
     trail: 400 / projects.length,
     from: { opacity: 0, scale: 0 },
     enter: { opacity: 1, scale: 1 },
-    leave: { opacity: 0, scale: 0 }
-  });
+    leave: { opacity: 0, scale: 0 },
+  })
 
   return (
     <Layout>
@@ -70,13 +77,15 @@ export default function ProjectsIndex({ projects }) {
         ))}
       </ul>
     </Layout>
-  );
+  )
 }
 
-export async function getStaticProps() {
-  const projects = getAllProjects(['name', 'description', 'permalink', 'date', 'image']);
+export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
+  const projects = getAllProjects()
 
   return {
-    props: { projects }
-  };
+    props: {
+      projects,
+    },
+  }
 }

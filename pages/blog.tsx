@@ -1,21 +1,27 @@
-import React from 'react';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import Link from '../components/link';
-import Layout from '../components/layout';
-import Head from '../components/head';
-import { getAllPosts } from '../lib/posts';
-import { H2 } from '../components/headings';
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import { GetStaticProps } from 'next'
+import React from 'react'
 
-dayjs.extend(utc);
+import Head from '../components/head'
+import { H2 } from '../components/headings'
+import Layout from '../components/layout'
+import Link from '../components/link'
+import { getAllPosts, Post } from '../lib/posts'
 
-export default function BlogIndex({ allPosts }) {
+interface BlogProps {
+  posts: Post[];
+}
+
+dayjs.extend(utc)
+
+export default function BlogIndex({ posts }: BlogProps) {
   return (
     <Layout>
       <Head
         title="Blog"
       />
-      {allPosts.map(post => (
+      {posts.map(post => (
         <div
           className="mb-8 lg:mb-16 xl:mb-32"
           data-test-blog-post
@@ -38,13 +44,13 @@ export default function BlogIndex({ allPosts }) {
         </div>
       ))}
     </Layout>
-  );
+  )
 }
 
-export async function getStaticProps() {
-  const allPosts = getAllPosts(['title', 'date', 'slug', 'description', 'image', 'tags']);
+export const getStaticProps: GetStaticProps<BlogProps> = async () => {
+  const posts = getAllPosts()
 
   return {
-    props: { allPosts }
-  };
+    props: { posts },
+  }
 }

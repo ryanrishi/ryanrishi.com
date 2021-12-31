@@ -1,4 +1,5 @@
-import { selectedTrackFillColor } from '../../../components/projects/loudness-wars';
+// keep this in sync with projects/loudness-wars/index.tsx L35
+const selectedTrackFillColor = '#f38f9f';
 
 describe('Projects | Loudness Wars', () => {
   beforeEach(() => {

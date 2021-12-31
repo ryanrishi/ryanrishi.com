@@ -1,14 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Link from './link';
+import PropTypes from 'prop-types'
+import React, { ReactNode } from 'react'
 
-export default function Quote({ children, name, citationLink }) {
+import Link from './link'
+
+interface BlockquoteProps {
+  children: ReactNode;
+  name: string;
+  citationLink: string;
+}
+
+export default function Quote({ children, name, citationLink }: BlockquoteProps) {
   return (
     <blockquote className="relative p-4 text-xl text-gray-600 quote italic mb-4 border-l-4 sm:border-l-0">
       <div
         className="font-serif text-8xl text-gray-200 absolute hidden sm:block top-0"
         style={{
-          zIndex: -1
+          zIndex: -1,
         }}
         aria-hidden="true"
       >
@@ -25,15 +32,15 @@ export default function Quote({ children, name, citationLink }) {
         </cite>
       )}
     </blockquote>
-  );
+  )
 }
 
 Quote.propTypes = {
   citationLink: PropTypes.string,
-  name: PropTypes.string
-};
+  name: PropTypes.string,
+}
 
 Quote.defaultProps = {
   citationLink: '',
-  name: ''
-};
+  name: '',
+}

@@ -1,12 +1,12 @@
-import Code from './code';
-import Link from './link';
-import { H1, H2, H3, H4, H5, H6 } from './headings';
-import Callout from './callout';
-import Blockquote from './blockquote';
+import dynamic from 'next/dynamic'
 
-/* eslint-disable react/display-name */
-/* eslint-disable react/jsx-props-no-spreading */
-export default {
+import Blockquote from './blockquote'
+import Callout from './callout'
+import Code from './code'
+import { H1, H2, H3, H4, H5, H6 } from './headings'
+import Link from './link'
+
+const MDXComponents = {
   h1: H1,
   h2: H2,
   h3: H3,
@@ -21,21 +21,27 @@ export default {
   ul: ({ children }) => <ul className="list-disc list-outside px-4 mb-8 -mt-6">{children}</ul>,
 
   code: ({ className, children }) => {
-    const props = { children };
-    const languageMatch = className && className.match('language-([^{]+)');
+    const props = { children, language: null }
+    const languageMatch = className && className.match('language-([^{]+)')
     if (languageMatch) {
-      props.language = languageMatch[1]; // eslint-disable-line prefer-destructuring
+      props.language = languageMatch[1]
     }
 
     return (
       <div>
         <Code {...props} />
       </div>
-    );
+    )
   },
 
   inlineCode: ({ children }) => <code className="text-red-700 bg-gray-100 rounded p-1">{children}</code>,
 
   Blockquote,
-  Callout
-};
+  Callout,
+
+  Image: dynamic(() => import('next/image')),
+  LoudnessWars: dynamic(() => import('./projects/loudness-wars')),
+  VideoContainer: dynamic(() => import('./video-container')),
+}
+
+export default MDXComponents

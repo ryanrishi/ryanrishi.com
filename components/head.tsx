@@ -1,30 +1,39 @@
-import NextHead from 'next/head';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import NextHead from 'next/head'
+import { useRouter } from 'next/router'
+import PropTypes from 'prop-types'
 
-dayjs.extend(utc);
+dayjs.extend(utc)
 
-function Head({ title: titleFromProps, description, isArticle, date, image, tags }) {
-  const title = titleFromProps ? `${titleFromProps} | Ryan Rishi` : 'Ryan Rishi';
-  let publishedTime;
+interface HeadProps {
+  title?: string;
+  description?: string;
+  isArticle?: boolean;
+  date?: Date;
+  image?: string;
+  tags?: string[];
+}
+
+function Head({ title: titleFromProps, description, isArticle, date, image, tags }: HeadProps) {
+  const title = titleFromProps ? `${titleFromProps} | Ryan Rishi` : 'Ryan Rishi'
+  let publishedTime
   if (isArticle) {
-    publishedTime = date ? dayjs.utc(date).toISOString() : dayjs.utc().toISOString();
+    publishedTime = date ? dayjs.utc(date).toISOString() : dayjs.utc().toISOString()
   }
 
   // validate image is a relative path
   if (image) {
     if (image.indexOf('://') > 0 || image.indexOf('//') === 0) {
-      throw new Error('Image URL must be a relative path');
+      throw new Error('Image URL must be a relative path')
     }
 
     if (image.indexOf('/') !== 0) {
-      throw new Error('Image URL must start with a "/"');
+      throw new Error('Image URL must start with a "/"')
     }
   }
 
-  const router = useRouter();
+  const router = useRouter()
 
   return (
     <NextHead>
@@ -76,26 +85,26 @@ function Head({ title: titleFromProps, description, isArticle, date, image, tags
           gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
             page_path: window.location.pathname,
           });
-          `
+          `,
         }}
       />
     </NextHead>
-  );
+  )
 }
 
 Head.propTypes = {
-  title: PropTypes.string, // eslint-disable-line react/require-default-props
+  title: PropTypes.string,
   description: PropTypes.string,
   isArticle: PropTypes.bool,
   image: PropTypes.string,
-  tags: PropTypes.arrayOf(PropTypes.string)
-};
+  tags: PropTypes.arrayOf(PropTypes.string),
+}
 
 Head.defaultProps = {
   description: 'Full-stack software engineer and musician who loves cooking, camping, and flying.',
   isArticle: false,
   image: '/img/ryan-landscape.jpg',
-  tags: []
-};
+  tags: [],
+}
 
-export default Head;
+export default Head

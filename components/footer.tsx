@@ -1,5 +1,6 @@
-import { ImGithub, ImLinkedin, ImSoundcloud, ImYoutube } from 'react-icons/im';
-import Link from './link';
+import { ImGithub, ImLinkedin, ImSoundcloud, ImYoutube } from 'react-icons/im'
+
+import Link from './link'
 
 const FooterSocialLink = ({ children, href }) => (
   <Link
@@ -9,14 +10,13 @@ const FooterSocialLink = ({ children, href }) => (
   >
     {children}
   </Link>
-);
+)
 
 export default function Footer() {
   return (
     <footer className="flex flex-col md:flex-row justify-between container uppercase italic font-bold text-sm px-4 my-8 md:my-16">
       <div>
         <p>
-          {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
           &copy; Copyright&nbsp;{ new Date().getFullYear() }&nbsp;Ryan Rishi
         </p>
       </div>
@@ -43,5 +43,5 @@ export default function Footer() {
         </FooterSocialLink>
       </div>
     </footer>
-  );
+  )
 }
