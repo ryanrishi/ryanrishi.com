@@ -6,7 +6,7 @@ interface HeadingsProps {
   children: ReactNode;
 }
 
-const baseClassNames = 'italic uppercase font-extrabold text-gray-800 mb-4 lg:mb-8 mt-4 lg:mt-6'
+const baseClassNames = 'italic uppercase font-bold text-gray-800 mb-2 lg:mb-6 mt-2 lg:mt-8'
 
 export function H1({ className, children }: HeadingsProps) {
   const classes = classNames(baseClassNames, className)
