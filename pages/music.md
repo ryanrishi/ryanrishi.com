@@ -7,7 +7,7 @@ import VideoContainer from '../components/video-container';
 # Music
 
 ### Senior Recital
-As a music major, I was awarded the opportunity to put on a recital in my senior year. It composed of various musical elements including live looping marimba with [Ablteon Live](https://www.ableton.com/), percussion ensemble, _a cappella_, gamelan, and mallet solos.
+As a music major, I was awarded the opportunity to put on a recital in my senior year. It composed of various musical elements including live looping marimba with [Ableton Live](https://www.ableton.com/), percussion ensemble, _a cappella_, gamelan, and mallet solos.
 
 <VideoContainer
   src="https://www.youtube-nocookie.com/embed/QEQ5AZ_LAlQ"
