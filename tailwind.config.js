@@ -1,31 +1,27 @@
-const plugin = require('tailwindcss/plugin');
-const colors = require('tailwindcss/colors');
+const plugin = require('tailwindcss/plugin')
+const colors = require('tailwindcss/colors')
 
 const generatePurgeCssSafelist = () => {
   // keep these in sync with styles in components/callout.js
-  const calloutColors = ['green', 'blue', 'yellow', 'red'];
-  const textStyles = calloutColors.map(color => `text-${color}-800`);
-  const borderStyles = calloutColors.map(color => `border-${color}-800`);
-  const backgroundStyles = calloutColors.map(color => `bg-${color}-100`);
+  const calloutColors = ['green', 'blue', 'yellow', 'red']
+  const textStyles = calloutColors.map(color => `text-${color}-800`)
+  const borderStyles = calloutColors.map(color => `border-${color}-800`)
+  const backgroundStyles = calloutColors.map(color => `bg-${color}-100`)
 
-  return [...textStyles, ...borderStyles, ...backgroundStyles];
-};
+  return [...textStyles, ...borderStyles, ...backgroundStyles]
+}
 
 module.exports = {
-  purge: {
-    content: [
-      'components/**/*.tsx',
-      'layouts/**/*.tsx',
-      'pages/**/*.{tsx,md}'
-    ],
-    options: {
-      safelist: generatePurgeCssSafelist()
-    }
-  },
-  darkMode: false, // or 'media' or 'class'
+  content: [
+    'components/**/*.tsx',
+    'layouts/**/*.tsx',
+    'pages/**/*.{tsx,md}',
+  ],
+  safelist: generatePurgeCssSafelist(),
+  darkMode: 'media',
   theme: {
     container: {
-      center: true
+      center: true,
     },
     extend: {
       colors: {
@@ -41,13 +37,13 @@ module.exports = {
           600: '#A92E23',
           700: '#7F231A',
           800: '#541712',
-          900: '#2A0C09'
-        }
-      }
-    }
+          900: '#2A0C09',
+        },
+      },
+    },
   },
   variants: {
-    extend: {}
+    extend: {},
   },
   plugins: [
     plugin(({ addBase, theme }) => {
@@ -57,8 +53,8 @@ module.exports = {
         h3: { fontSize: theme('fontSize.2xl') },
         h4: { fontSize: theme('fontSize.xl') },
         h5: { fontSize: theme('fontSize.lg') },
-        h6: { fontSize: theme('fontSize.xs') }
-      });
-    })
-  ]
-};
+        h6: { fontSize: theme('fontSize.xs') },
+      })
+    }),
+  ],
+}
