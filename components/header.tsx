@@ -1,5 +1,6 @@
 import { DialogContent,DialogOverlay } from '@reach/dialog'
 import { Squash as Hamburger } from 'hamburger-react'
+import { useTheme } from 'next-themes'
 import { useState } from 'react'
 import { animated, useTransition } from 'react-spring'
 
@@ -96,6 +97,7 @@ function MobileNav({ isOpen, setIsOpen }) {
 
 export default function Header() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+  const { theme, setTheme } = useTheme()
 
   return (
     <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:p-8 container">
@@ -122,6 +124,13 @@ export default function Header() {
               {title}
             </HeaderLink>
           ))}
+          <button
+            aria-label="Toggle Dark Mode"
+            role="button"
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          >
+            Toggle
+          </button>
         </nav>
       </div>
     </header>

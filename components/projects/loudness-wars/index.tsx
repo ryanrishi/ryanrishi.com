@@ -110,7 +110,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .call(d3.axisBottom(x))
     .append('text')
     /* eslint-disable indent */
-      .attr('fill', 'black')
+      .attr('fill', 'currentColor')
       .attr('x', w)
       .attr('y', -2)
       .attr('text-anchor', 'end')
@@ -121,7 +121,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .call(d3.axisLeft(y))
 
   yAxis.append('text')
-    .attr('fill', 'black')
+    .attr('fill', 'currentColor')
     .attr('transform', 'rotate(-90)')
     .attr('y', 10)
     .style('text-anchor', 'end')

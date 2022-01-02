@@ -5,10 +5,14 @@ const generatePurgeCssSafelist = () => {
   // keep these in sync with styles in components/callout.js
   const calloutColors = ['green', 'blue', 'yellow', 'red']
   const textStyles = calloutColors.map(color => `text-${color}-800`)
-  const borderStyles = calloutColors.map(color => `border-${color}-800`)
   const backgroundStyles = calloutColors.map(color => `bg-${color}-100`)
+  const borderStyles = calloutColors.map(color => `border-${color}-800`)
 
-  return [...textStyles, ...borderStyles, ...backgroundStyles]
+  const darkModeBackgroundStyles = calloutColors.map(color => `dark:bg-${color}-800`)
+  const darkModeTextStyles = calloutColors.map(color => `dark:text-${color}-100`)
+  const darkModeBorderStyles = calloutColors.map(color => `dark:border-${color}-300`)
+
+  return [...textStyles, ...borderStyles, ...backgroundStyles, ...darkModeBackgroundStyles, ...darkModeTextStyles, ...darkModeBorderStyles]
 }
 
 module.exports = {
@@ -18,7 +22,7 @@ module.exports = {
     'pages/**/*.{tsx,md}',
   ],
   safelist: generatePurgeCssSafelist(),
-  darkMode: 'media',
+  darkMode: 'class',
   theme: {
     container: {
       center: true,

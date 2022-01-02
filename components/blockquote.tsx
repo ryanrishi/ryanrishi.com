@@ -11,9 +11,9 @@ interface BlockquoteProps {
 
 export default function Quote({ children, name, citationLink }: BlockquoteProps) {
   return (
-    <blockquote className="relative p-4 text-xl text-gray-600 quote italic mb-4 border-l-4 sm:border-l-0">
+    <blockquote className="relative p-4 text-xl text-gray-600 quote italic mb-4 border-l-4 sm:border-l-0 dark:text-gray-200">
       <div
-        className="font-serif text-8xl text-gray-200 absolute hidden sm:block top-0"
+        className="font-serif text-8xl text-gray-200 absolute hidden sm:block top-0 dark:text-gray-600"
         style={{
           zIndex: -1,
         }}
@@ -25,7 +25,7 @@ export default function Quote({ children, name, citationLink }: BlockquoteProps)
       {name && (
         <cite className="flex items-center">
           <div className="flex flex-col items-start">
-            <span className="mb-1 text-sm font-semibold text-gray-800">
+            <span className="mb-1 text-sm font-semibold text-gray-800 dark:text-gray-400">
               {citationLink ? <Link href={citationLink}>{name}</Link> : name}
             </span>
           </div>
