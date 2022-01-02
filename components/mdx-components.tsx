@@ -34,7 +34,7 @@ const MDXComponents = {
     )
   },
 
-  inlineCode: ({ children }) => <code className="text-red-700 bg-gray-100 rounded p-1">{children}</code>,
+  inlineCode: ({ children }) => <code className="font-bold p-1">{`\`${children}\``}</code>,
 
   Blockquote,
   Callout,
