@@ -17,17 +17,17 @@ import Image from 'next/image';
 
 I recently migrated my personal website hosting from a [DigitalOcean VPS](https://www.digitalocean.com/products/droplets/) to [Amazon AWS S3 + CloudFront](https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/). As part of this, I wanted to use [Terraform](https://www.terraform.io/) to manage infrastructure-as-code.
 
-# Requirements
+### Requirements
 My website is built using [Jekyll](https://jekyllrb.com/). Jekyll is a static site generator, which makes it a perfect candidate to serve from a CDN such as CloudFront. In addition to CloudFront, I would need to store the site in S3, update my DNS to point to CloudFront, and generate a TLS certificate that CloudFront can use.
 
 <Callout type="info">
   As of early 2021, my website is using Next.js instead of Jekyll, and no longer hosted on AWS.
 </Callout>
 
-# Building Out the Infrastructure
+### Building Out the Infrastructure
 I had played with Terraform a few months ago, and wanted to try it out in a real-world situation. I followed [this tutorial](https://medium.com/runatlantis/hosting-our-static-site-over-ssl-with-s3-acm-cloudfront-and-terraform-513b799aec0f) to write the Terraform code needed to accomplish this task.
 
-## S3 Bucket
+#### S3 Bucket
 The generated static site needs to be stored somewhere. S3 is an object storage service designed with 99.999999999% (11 9’s) of data durability and relatively cheap prices.
 
 The Terraform code blow creates a S3 bucket that allows anyone to read objects from the bucket:
@@ -57,7 +57,7 @@ POLICY
 }
 ```
 
-## ACM Certificate
+#### ACM Certificate
 To serve my website over HTTPS, I need a TLS certificate for my domain. [AWS ACM](https://aws.amazon.com/certificate-manager/) provides free public TLS certificates.
 ```hcl
 resource "aws_acm_certificate" "certificate" {
@@ -67,7 +67,7 @@ resource "aws_acm_certificate" "certificate" {
 }
 ```
 
-## CloudFront CDN
+#### CloudFront CDN
 A CDN caches content at the edges of a network, which helps reduce load on the origin server and reduce and latency due to geographic location. When somebody visits my website, the CDN checks if has the file they are requesting, and if not, will fetch it from the S3 bucket.
 ```hcl
 resource "aws_cloudfront_distribution" "www_distribution" {
@@ -120,7 +120,7 @@ resource "aws_cloudfront_distribution" "www_distribution" {
 }
 ```
 
-## Domain Name
+#### Domain Name
 I use [Google Domains](https://domains.google/) as my DNS provider. In order to route traffic from `www.ryanrishi.com` to the CloudFront distribution, I created a [AWS Route 53](https://aws.amazon.com/route53/) zone and record:
 ```hcl
 resource "aws_route53_zone" "zone" {
@@ -160,7 +160,7 @@ resource "aws_route53_zone" "zone" {
 }
 ```
 
-# Deploying the Website
+### Deploying the Website
 The final step is to deploy the website to the S3 bucket. I use [Travis CI](https://travis-ci.org/) to build and deploy my code.
 
 This snippet of code will deploy to the preconfigured S3 bucket whenever a change is pushed to my `master` branch:
@@ -187,7 +187,7 @@ after_deploy:
 
 You can see the full Travis CI configuration [here](https://github.com/ryanrishi/website/commit/fcc70801ece6d09b494f6026476213696eb59e65#diff-354f30a63fb0907d4ad57269548329e3).
 
-# Benchmark
+### Benchmark
 Moving from my own VPS in New York to a CDN shaved the load time from 1.2s to 200ms. Visitors in California used to have higher latency due to cross-country travel, but now that it is served via a CDN, geographic location plays a much smaller factor&mdash;the content will be served from the closest edge of the network topology.
 
 <figure className="image">
@@ -200,7 +200,7 @@ Moving from my own VPS in New York to a CDN shaved the load time from 1.2s to 20
   <figcaption>Waterfall when serving over CDN</figcaption>
 </figure>
 
-# Next Steps
+### Next Steps
 I'm currently running `terraform apply` on my laptop&mdash; I'd rather run that in a continuous integration pipeline.
 
 Using Terraform was challenging at first, but in the end it seems like a great way to track infrastructure changes. I'd like to continue learning how to manage infrastructure using Terraform, including migrating some other VPSs to EC2/Kubernetes.

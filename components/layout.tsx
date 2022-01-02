@@ -7,7 +7,6 @@ export default function Layout({ children }) {
       <Header />
       <div className="container max-w-4xl p-4 lg:p-8 leading-8">
         {children}
-        <hr className="mt-16" />
       </div>
       <Footer />
     </>
