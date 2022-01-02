@@ -13,18 +13,11 @@ interface LinkProps {
 export default function Link({ href, children, className, invert = false }: LinkProps) {
   const isInternalLink = href?.startsWith('/')
 
-  const classes = classNames('transition', className, {
-    'text-gray-800': invert,
-    'hover:text-valencia-500': invert,
-    'text-valencia-500': !invert,
-    'hover:text-gray-800': !invert,
-  })
+  const classes = classNames('transition text-green-800 hover:text-green-900 border-b border-b-green-400 bg-green-200 hover:bg-green-300 rounded-sm', className)
 
   if (isInternalLink) {
     return (
-      <NextLink
-        href={href}
-      >
+      <NextLink href={href}>
         <a className={classes}>
           {children}
         </a>
