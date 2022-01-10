@@ -15,7 +15,7 @@ function Label({ htmlFor, children }) {
   )
 }
 
-const sharedInputClassNames = "block w-full border rounded py-3 px-4 mb-3 mt-2 leading-tight appearance-none text-gray-800 dark:text-gray-100 dark:bg-gray-800 border-gray-300 hover:border-gray-400 transition transition-color transition-background transition-border"
+const sharedInputClassNames = "block w-full border rounded py-3 px-4 mb-3 mt-2 leading-tight appearance-none text-gray-800 dark:text-gray-100 dark:bg-gray-800 border-gray-300 hover:border-gray-400 transition"
 
 export default function Contact() {
   return (

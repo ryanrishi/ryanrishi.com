@@ -48,9 +48,9 @@ export default function BlogIndex({ posts }: BlogProps) {
           <p className="pb-4 text-gray-700 dark:text-gray-400 transition" data-test-blog-post-date>{dayjs.utc(posts[i].date).format('MMMM D, YYYY')}</p>
 
           <div className="flex flex-col">
-            <p className="transition transition-color">{posts[i].description}</p>
+            <p className="transition">{posts[i].description}</p>
             <Link href={`/blog/${posts[i].slug}`}>
-              <a className="flex justify-end pt-4 italic uppercase font-bold dark:text-gray-100 transition transition-color">
+              <a className="flex justify-end pt-4 italic uppercase font-bold dark:text-gray-100 transition">
                 Read more &raquo;
               </a>
             </Link>

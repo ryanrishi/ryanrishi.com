@@ -20,10 +20,10 @@ function DarkModeButton({ theme, setTheme }) {
   return (
     <button
       aria-label="Dark mode toggle"
-      className="rounded h-8 w-8 flex flex-row justify-center items-center bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 transition transition-bg"
+      className="rounded h-8 w-8 flex flex-row justify-center items-center bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 transition"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
-      <IconContext.Provider  value={{ size: 16, className: 'transition transition-fill' }}>
+      <IconContext.Provider  value={{ size: 16, className: 'transition' }}>
         {theme === 'dark' ? <HiOutlineSun /> : <HiOutlineMoon />}
       </IconContext.Provider>
     </button>
@@ -82,7 +82,7 @@ function MobileNav({ isOpen, setIsOpen, theme, setTheme }) {
           >
             <DialogContent
               aria-label="Menu"
-              className="h-4/5 text-center px-0 dark:bg-gray-900 transition transition-background flex flex-col"
+              className="h-4/5 text-center px-0 dark:bg-gray-900 transition flex flex-col"
             >
               {itemTransitions((style, i) => (
                 <animated.div
@@ -114,7 +114,7 @@ export default function Header() {
   const { theme, setTheme } = useTheme()
 
   return (
-    <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:p-8 container dark:text-gray-50 transition transition-color">
+    <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:p-8 container dark:text-gray-50 transition">
       <div className="md:hidden">
         <MobileNav
           isOpen={isMobileNavOpen}

@@ -17,7 +17,7 @@ const MDXComponents = {
   a: Link,
   pre: props => <div className="overflow-x-auto" {...props} />,
   blockquote: ({ children }) => <Blockquote>{children}</Blockquote>,
-  p: ({ children }) => <p className="mb-8 text-black dark:text-white transition transition-color">{children}</p>,
+  p: ({ children }) => <p className="mb-8 text-black dark:text-white transition">{children}</p>,
   ul: ({ children }) => <ul className="list-disc list-outside px-4 mb-8 -mt-6">{children}</ul>,
   img: (props) => <img className="mx-auto" {...props} />,
   table: (props) => <table className="w-full" {...props}></table>,
