@@ -1,0 +1,4 @@
+/* see http://aaronshaf.github.io/react-toggle/ */
+.toggle.react-toggle--checked .react-toggle-track {
+  background-color: #ab199f;
+}

@@ -3,8 +3,10 @@ import { Squash as Hamburger } from 'hamburger-react'
 import { useTheme } from 'next-themes'
 import { useState } from 'react'
 import { animated, useTransition } from 'react-spring'
+import { HiMoon, HiOutlineSun } from 'react-icons/hi'
 
 import Link from './link'
+import Toggle from '../components/Toggle'
 
 const AnimatedDialogOverlay = animated(DialogOverlay)
 
@@ -14,6 +16,27 @@ const items = [
   { title: 'Blog', href: '/blog' },
   { title: 'Contact', href: '/contact' },
 ]
+
+function DarkModeToggle({ theme, setTheme }) {
+  const [mounted, setMounted] = useState(false)
+
+  // fix SSR hydration issues by returning early if not in client context
+  // see https://github.com/pacocoursey/next-themes#avoid-hydration-mismatch
+  useEffect(() => setMounted(true), [])
+
+  if (!mounted) return null
+
+  return (
+    <Toggle
+      defaultChecked={theme === 'dark'}
+      icons={{
+        checked: <HiOutlineSun size={10} />,
+        unchecked: <HiMoon color="white" size={10} />,
+      }}
+      onChange={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+    />
+  )
+}
 
 const HeaderLink = ({ href, children }) => (
   <Link
@@ -124,13 +147,10 @@ export default function Header() {
               {title}
             </HeaderLink>
           ))}
-          <button
-            aria-label="Toggle Dark Mode"
-            role="button"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-          >
-            Toggle
-          </button>
+          <DarkModeToggle
+            theme={theme}
+            setTheme={setTheme}
+          />
         </nav>
       </div>
     </header>

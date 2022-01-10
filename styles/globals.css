@@ -1,0 +1,8 @@
+/* see http://aaronshaf.github.io/react-toggle/ */
+.react-toggle--checked .react-toggle-track {
+  background-color: #ab199f;
+}
+
+.react-toggle--checked:hover .react-toggle-track {
+  background-color: azure;
+}
