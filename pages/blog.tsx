@@ -3,6 +3,7 @@ import utc from 'dayjs/plugin/utc'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import React from 'react'
+import { a, useTrail } from 'react-spring'
 
 import Head from '../components/head'
 import { H2 } from '../components/headings'
@@ -16,22 +17,32 @@ interface BlogProps {
 dayjs.extend(utc)
 
 export default function BlogIndex({ posts }: BlogProps) {
+  const trail = useTrail(posts.length, {
+    opacity: 1,
+    y: 0,
+    from: {
+      opacity: 0,
+      y: -50,
+    },
+  })
+
   return (
     <Layout>
       <Head
         title="Blog"
       />
-      {posts.map(post => (
-        <div
+      {trail.map((style, i) => (
+        <a.div
           className="mb-16 lg:mb-16 xl:mb-32"
           data-test-blog-post
-          key={post.slug}
+          style={style}
+          key={i}
         >
           <H2 className="hover:text-gray-900 dark:hover:text-gray-300">
             <Link
-              href={`/blog/${post.slug}`}
+              href={`/blog/${posts[i].slug}`}
             >
-              {post.title}
+              {posts[i].title}
             </Link>
           </H2>
           <p className="pb-4 text-gray-700 dark:text-gray-400 transition" data-test-blog-post-date>{dayjs.utc(posts[i].date).format('MMMM D, YYYY')}</p>
@@ -44,7 +55,7 @@ export default function BlogIndex({ posts }: BlogProps) {
               </a>
             </Link>
           </div>
-        </div>
+        </a.div>
       ))}
     </Layout>
   )
