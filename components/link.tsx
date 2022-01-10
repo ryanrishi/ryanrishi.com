@@ -7,13 +7,12 @@ interface LinkProps {
   children: ReactNode;
   href: string;
   className: string;
-  invert?: boolean;
 }
 
-export default function Link({ href, children, className, invert = false }: LinkProps) {
+export default function Link({ href, children, className }: LinkProps) {
   const isInternalLink = href?.startsWith('/')
 
-  const classes = classNames('transition text-green-800 hover:text-green-900 border-b border-b-green-400 bg-green-200 hover:bg-green-300 rounded-sm', className)
+  const classes = classNames('transition text-green-800 hover:text-green-900 border-b border-b-green-400 bg-green-200/50 hover:bg-green-200/80 dark:bg-green-800/50 dark:text-green-200 dark:hover:text-green-300 rounded-sm transition transition-color transition-background', className)
 
   if (isInternalLink) {
     return (

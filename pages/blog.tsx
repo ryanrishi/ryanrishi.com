@@ -23,23 +23,23 @@ export default function BlogIndex({ posts }: BlogProps) {
       />
       {posts.map(post => (
         <div
-          className="mb-8 lg:mb-16 xl:mb-32"
+          className="mb-16 lg:mb-16 xl:mb-32"
           data-test-blog-post
           key={post.slug}
         >
-          <H2 className="post-title">
+          <H2 className="hover:text-gray-900 dark:hover:text-gray-300">
             <Link
               href={`/blog/${post.slug}`}
             >
               {post.title}
             </Link>
           </H2>
-          <p className="pb-4 text-gray-700" data-test-blog-post-date>{dayjs.utc(post.date).format('MMMM D, YYYY')}</p>
+          <p className="pb-4 text-gray-700 dark:text-gray-400 transition" data-test-blog-post-date>{dayjs.utc(posts[i].date).format('MMMM D, YYYY')}</p>
 
           <div className="flex flex-col">
-            <p>{post.description}</p>
-            <Link href={`/blog/${post.slug}`}>
-              <a className="flex justify-end pt-4 italic uppercase font-bold">
+            <p className="transition transition-color">{posts[i].description}</p>
+            <Link href={`/blog/${posts[i].slug}`}>
+              <a className="flex justify-end pt-4 italic uppercase font-bold dark:text-gray-100 transition transition-color">
                 Read more &raquo;
               </a>
             </Link>

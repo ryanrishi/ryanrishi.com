@@ -25,7 +25,7 @@ export default function Index({ children, frontMatter }) {
       />
       <div>
         <H1>{title}</H1>
-        <p className="-mt-4 mb-4 text-gray-500">{dayjs.utc(date).format('MMMM D, YYYY')}</p>
+        <p className="-mt-4 mb-4 text-gray-600 dark:text-gray-300 transition transition-color">{dayjs.utc(date).format('MMMM D, YYYY')}</p>
         <hr className="my-4" />
         <MDXRemote
           {...children}
