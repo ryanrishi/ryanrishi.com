@@ -19,10 +19,6 @@ module.exports = withTM({
     ],
   },
 
-  experimental: {
-    styledComponents: false,
-  },
-
   async redirects() {
     return [
       {

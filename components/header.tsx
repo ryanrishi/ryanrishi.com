@@ -6,7 +6,7 @@ import { animated, useTransition } from 'react-spring'
 import { HiMoon, HiOutlineSun } from 'react-icons/hi'
 
 import Link from './link'
-import Toggle from '../components/Toggle'
+import { IconContext } from 'react-icons/lib'
 
 const AnimatedDialogOverlay = animated(DialogOverlay)
 
@@ -17,24 +17,17 @@ const items = [
   { title: 'Contact', href: '/contact' },
 ]
 
-function DarkModeToggle({ theme, setTheme }) {
-  const [mounted, setMounted] = useState(false)
-
-  // fix SSR hydration issues by returning early if not in client context
-  // see https://github.com/pacocoursey/next-themes#avoid-hydration-mismatch
-  useEffect(() => setMounted(true), [])
-
-  if (!mounted) return null
-
+function DarkModeButton({ theme, setTheme }) {
   return (
-    <Toggle
-      defaultChecked={theme === 'dark'}
-      icons={{
-        checked: <HiOutlineSun size={10} />,
-        unchecked: <HiMoon color="white" size={10} />,
-      }}
-      onChange={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-    />
+    <button
+      aria-label="Dark mode toggle"
+      className="focus:outline focus:outline-2 rounded"
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+    >
+      <IconContext.Provider  value={{ size: 16 }}>
+        {theme === 'dark' ? <HiOutlineSun /> : <HiMoon />}
+      </IconContext.Provider>
+    </button>
   )
 }
 
@@ -147,7 +140,7 @@ export default function Header() {
               {title}
             </HeaderLink>
           ))}
-          <DarkModeToggle
+          <DarkModeButton
             theme={theme}
             setTheme={setTheme}
           />
