@@ -3,24 +3,16 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import { join } from 'path'
 
-interface PostFrontMatter {
+export interface Post {
   title: string;
+  slug: string;
   description: string;
+  content: string;
   image?: string;
   date: Date;
   layout: string;
-  tags: string[]
+  tags: string[];
 }
-
-interface WithSlug {
-  slug: string
-}
-
-interface WithContent {
-  content: string
-}
-
-export type Post = PostFrontMatter & WithSlug & WithContent
 
 const postsDirectory = join(process.cwd(), 'pages', 'blog')
 
@@ -33,7 +25,7 @@ export function getPostBySlug(slug: string): Post {
   const realSlug = slug.replace(/\.md$/, '')
   const fullPath = join(postsDirectory, `${realSlug}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
-  const { data, content } = matter(fileContents) as unknown as { content: string, data: PostFrontMatter }
+  const { data, content } = matter(fileContents) as unknown as { content: string, data: Omit<Post, "content"> }
 
   return {
     ...data,

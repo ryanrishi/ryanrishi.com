@@ -2,20 +2,13 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import { join } from 'path'
 
-interface ProjectFrontMatter {
+export interface Project {
   name: string;
   slug: string;
   description: string;
   image: ProjectImage;
   permalink: string;
   date: string;
-}
-
-interface WithSlug {
-  slug: string;
-}
-
-interface WithContent {
   content: string;
 }
 
@@ -26,7 +19,6 @@ interface ProjectImage {
   height: number;
 }
 
-export type Project = ProjectFrontMatter & WithSlug & WithContent
 
 const projectsDir = join(process.cwd(), 'pages/projects')
 
@@ -39,7 +31,7 @@ export function getProjectBySlug(slug: string): Project {
   const realSlug = slug.replace(/\.md$/, '')
   const fullPath = join(projectsDir, `${realSlug}.md`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
-  const { data, content } = matter(fileContents) as unknown as { content: string, data: ProjectFrontMatter }
+  const { data, content } = matter(fileContents) as unknown as { content: string, data: Omit<Project, "content"> }
 
   return {
     ...data,
@@ -47,7 +39,6 @@ export function getProjectBySlug(slug: string): Project {
       ...data.image,
       alt: data.image.alt || data.name,
     },
-    slug,
     content,
   }
 }
