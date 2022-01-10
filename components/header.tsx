@@ -77,7 +77,7 @@ function MobileNav({ isOpen, setIsOpen, theme, setTheme }) {
         {overlayTransitions((overlayStyles, item) => item && (
           <AnimatedDialogOverlay
             as={DialogOverlay}
-            className="bg-white dark:bg-gray-900 transition"
+            className="bg-white dark:bg-gray-900 transition-colors"
             style={overlayStyles}
           >
             <DialogContent
