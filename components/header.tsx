@@ -17,6 +17,14 @@ const items = [
 ]
 
 function DarkModeButton({ theme, setTheme }) {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), [])
+
+  // avoid mismatch between SSR and CSR
+  // see https://github.com/pacocoursey/next-themes#avoid-hydration-mismatch
+  if (!mounted) return null;
+
   return (
     <button
       aria-label="Dark mode toggle"
