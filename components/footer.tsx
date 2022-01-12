@@ -26,7 +26,7 @@ interface FooterLinkProps {
 }
 
 const FooterLink = ({ children, href, className }: FooterLinkProps) => {
-  const classes = classNames('flex flex-row hover:text-gray-600 transition py-2', className)
+  const classes = classNames('flex flex-row hover:text-gray-600 transition py-2 items-center', className)
 
   return (
     <NextLink href={href}>
@@ -46,26 +46,31 @@ const FooterSocialLink = ({ children, href }) => (
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-500">
-      <div className="container max-w-4xl p-4 lg:p-8 flex flex-row">
-        <div className="flex flex-col w-1/2">
+    <footer className="text-gray-500 dark:bg-gray-900 transition">
+      <div className="container max-w-4xl p-4 lg:p-8 flex flex-row justify-around">
+        <div className="flex flex-col">
           <FooterLink href="/">Home</FooterLink>
           <FooterLink href="/about">About</FooterLink>
           <FooterLink href="/blog">Blog</FooterLink>
           <FooterLink href="/projects">Projects</FooterLink>
         </div>
-        <div className="flex flex-col w-1/2">
+        <div className="flex flex-col">
           <FooterSocialLink href="https://github.com/ryanrishi">
             <ImGithub />
+            <span>Github</span>
+          </FooterSocialLink>
           </FooterSocialLink>
           <FooterSocialLink href="https://linkedin.com/in/ryanrishi">
             <ImLinkedin />
+            <span>LinkedIn</span>
           </FooterSocialLink>
           <FooterSocialLink href="https://soundcloud.com/ryanrishi">
             <ImSoundcloud />
+            <span>SoundCloud</span>
           </FooterSocialLink>
           <FooterSocialLink href="https://youtube.com/RyanRishiPercussion">
             <ImYoutube />
+            <span>YouTube</span>
           </FooterSocialLink>
         </div>
       </div>
