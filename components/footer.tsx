@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import NextLink from 'next/link'
 import { ReactNode } from 'react'
-import { ImGithub, ImLinkedin, ImSoundcloud, ImYoutube } from 'react-icons/im'
+import { ImGithub, ImLinkedin, ImSoundcloud, ImTwitter, ImYoutube } from 'react-icons/im'
 
 /*
 - dark gray background
@@ -59,6 +59,9 @@ export default function Footer() {
             <ImGithub />
             <span>Github</span>
           </FooterSocialLink>
+          <FooterSocialLink href="https://twitter.com/ryanrishi">
+            <ImTwitter />
+            <span>Twitter</span>
           </FooterSocialLink>
           <FooterSocialLink href="https://linkedin.com/in/ryanrishi">
             <ImLinkedin />
