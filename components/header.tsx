@@ -23,7 +23,7 @@ function DarkModeButton({ theme, setTheme }) {
 
   // avoid mismatch between SSR and CSR
   // see https://github.com/pacocoursey/next-themes#avoid-hydration-mismatch
-  if (!mounted) return null;
+  if (!mounted) return null
 
   return (
     <button
@@ -89,7 +89,6 @@ function MobileNav({ isOpen, setIsOpen, theme, setTheme }) {
       <div>
         {overlayTransitions((overlayStyles, item) => item && (
           <AnimatedDialogOverlay
-            as={DialogOverlay}
             className="bg-white dark:bg-gray-900 transition-colors"
             style={overlayStyles}
           >
