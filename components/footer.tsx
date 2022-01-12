@@ -30,7 +30,7 @@ const FooterLink = ({ children, href, className }: FooterLinkProps) => {
 
   return (
     <NextLink href={href}>
-      <a className={classes}>{children}</a>
+      <a className={classes} target="_blank">{children}</a>
     </NextLink>
   )
 }
