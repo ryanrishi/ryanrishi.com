@@ -31,7 +31,7 @@ function DarkModeButton({ theme, setTheme }) {
       className="rounded h-8 w-8 flex flex-row justify-center items-center bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 transition"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
-      <IconContext.Provider  value={{ size: 16, className: 'transition' }}>
+      <IconContext.Provider  value={{ size: '16', className: 'transition' }}>
         {theme === 'dark' ? <HiOutlineSun /> : <HiOutlineMoon />}
       </IconContext.Provider>
     </button>
@@ -72,7 +72,12 @@ function MobileNav({ isOpen, setIsOpen, theme, setTheme }) {
             </>
           </Link>
         </div>
-        <div className="z-40">
+        <div className="z-40 flex flex-row items-center">
+          <DarkModeButton
+            theme={theme}
+            setTheme={setTheme}
+          />
+
           {/* TODO put this on <Hamburger> but it's not picking up class name */}
           {/* check back when hamburger-react v3 is released: https://github.com/luukdv/hamburger-react/issues/45#issuecomment-902639087 */}
           <Hamburger
@@ -105,10 +110,6 @@ function MobileNav({ isOpen, setIsOpen, theme, setTheme }) {
                   </Link>
                 </animated.div>
               ))}
-              <DarkModeButton
-                theme={theme}
-                setTheme={setTheme}
-              />
             </DialogContent>
           </AnimatedDialogOverlay>
         ))}
