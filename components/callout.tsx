@@ -19,7 +19,7 @@ export default function Callout({ type, children }: CalloutProps) {
   const color = calloutTypeToColorName[type]
 
   return (
-    <div className={`text-${color}-800 border-l-4 border-${color}-800 bg-${color}-100 pl-2 py-4 mb-4 dark:bg-${color}-800 dark:text-${color}-100 dark:border-${color}-300`}>{children}</div>
+    <div className={`text-${color}-800 border-l-4 border-${color}-800 bg-${color}-100 pl-2 py-4 mb-4 dark:bg-${color}-800 dark:text-${color}-100 dark:border-${color}-300 rounded`}>{children}</div>
   )
 }
 
