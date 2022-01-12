@@ -1,5 +1,6 @@
 import '@reach/dialog/styles.css'
 import 'tailwindcss/tailwind.css'
+import '../styles/globals.css'
 
 import { useRouter } from 'next/router'
 import { ThemeProvider } from 'next-themes'
