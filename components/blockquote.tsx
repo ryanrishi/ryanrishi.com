@@ -18,7 +18,8 @@ export default function Quote({ children, name, citationLink }: BlockquoteProps)
           zIndex: -1,
         }}
         aria-hidden="true"
-      >
+        >
+        {/* TODO the quotation marks aren't showing up in dark mode— probz due to z-index? Might need to do :before */}
         &ldquo;
       </div>
       <div className="mb-4">{children}</div>
