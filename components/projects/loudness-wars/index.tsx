@@ -135,8 +135,11 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .append('div')
     .attr('data-test-tooltip', true)
     .style('position', 'absolute')
-    .style('background-color', 'white')
+    .style('backdrop-filter', 'blur(10px)')
+    .style('border-radius', '0.25rem')
+    .style('padding', '0.25rem')
     .style('opacity', 0)
+    .style('font-family', 'monospace')
 
   // hover animations
   function onMouseIn(e, d) {
@@ -153,10 +156,23 @@ const drawChart = async (svgRef, setSelectedTrack) => {
       .style('top', `${e.pageY}px`)
 
     tooltip.html(`
-      <p>${d.name} (${d.releaseDateForDisplay})</p>
-      <p>${d.artist} - ${d.album}</p>
-      <p>${d.loudness} dB</p>
-    `)
+      <div class="flex flex-row">
+        <div class="flex flex-col mr-4 font-bold">
+          <span>Name</span>
+          <span>Artist</span>
+          <span>Album</span>
+          <span>Release Date</span>
+          <span>Loudness</span>
+        </div>
+        <div class="flex flex-col">
+          <span>${d.name}</span>
+          <span>${d.artist}</span>
+          <span>${d.album}</span>
+          <span>${d.releaseDateForDisplay}</span>
+          <span>${d.loudness}</span>
+        </div>
+      </div>
+      `)
   }
 
   function onMouseOut() {
@@ -199,6 +215,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .enter()
     .append('circle')
     /* eslint-disable indent */
+      .style('cursor', 'pointer')
       .attr('cx', d => x(d.releaseDate))
       .attr('cy', d => y(+d.loudness))
       .attr('r', r)
