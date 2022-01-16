@@ -48,7 +48,7 @@ const ProjectItem = ({ project, style }) => {
             {title}
           </Link>
         </H3>
-        {description}
+        <p className="transition">{description}</p>
       </div>
     </animated.li>
   )
