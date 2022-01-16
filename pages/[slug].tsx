@@ -22,10 +22,9 @@ interface PageProps {
 export default function Page({ source, frontMatter }: PageProps) {
   return (
     <Layout
+      mdxRemoteSerializedResult={source}
       frontMatter={frontMatter}
-    >
-      {source}
-    </Layout>
+    />
   )
 }
 
