@@ -43,3 +43,7 @@ export function getAllPosts(): Post[] {
     // sort posts by date in descending order
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
 }
+
+export function getMostRecentPosts(limit: number): Post[] {
+  return getAllPosts().slice(0, limit)
+}

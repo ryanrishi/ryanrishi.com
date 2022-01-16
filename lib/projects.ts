@@ -50,3 +50,7 @@ export function getAllProjects(): Project[] {
     // sort projects by date in descending order
     .sort((project1, project2) => (project1.date > project2.date ? -1 : 1))
 }
+
+export function getMostRecentProjects(limit: number): Project[] {
+  return getAllProjects().slice(0, limit)
+}
