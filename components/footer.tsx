@@ -26,23 +26,16 @@ interface FooterLinkProps {
 }
 
 const FooterLink = ({ children, href, className }: FooterLinkProps) => {
-  const classes = classNames('flex flex-row hover:text-gray-600 transition py-2 items-center', className)
+  const classes = classNames('flex flex-row hover:text-gray-600 transition py-2 items-center space-x-2', className)
+
+  const isInternalLink = href.startsWith('/') // doesn't handle links like '//google.com', but I generally don't use those
 
   return (
     <NextLink href={href}>
-      <a className={classes} target="_blank">{children}</a>
+      <a className={classes} target={isInternalLink ? '' : '_blank'}>{children}</a>
     </NextLink>
   )
 }
-
-const FooterSocialLink = ({ children, href }) => (
-  <FooterLink
-    href={href}
-    className="space-x-2"
-  >
-    {children}
-  </FooterLink>
-)
 
 export default function Footer() {
   return (
@@ -55,26 +48,26 @@ export default function Footer() {
           <FooterLink href="/projects">Projects</FooterLink>
         </div>
         <div className="flex flex-col">
-          <FooterSocialLink href="https://github.com/ryanrishi">
+          <FooterLink href="https://github.com/ryanrishi">
             <ImGithub />
             <span>Github</span>
-          </FooterSocialLink>
-          <FooterSocialLink href="https://twitter.com/ryanrishi">
+          </FooterLink>
+          <FooterLink href="https://twitter.com/ryanrishi">
             <ImTwitter />
             <span>Twitter</span>
-          </FooterSocialLink>
-          <FooterSocialLink href="https://linkedin.com/in/ryanrishi">
+          </FooterLink>
+          <FooterLink href="https://linkedin.com/in/ryanrishi">
             <ImLinkedin />
             <span>LinkedIn</span>
-          </FooterSocialLink>
-          <FooterSocialLink href="https://soundcloud.com/ryanrishi">
+          </FooterLink>
+          <FooterLink href="https://soundcloud.com/ryanrishi">
             <ImSoundcloud />
             <span>SoundCloud</span>
-          </FooterSocialLink>
-          <FooterSocialLink href="https://youtube.com/RyanRishiPercussion">
+          </FooterLink>
+          <FooterLink href="https://youtube.com/RyanRishiPercussion">
             <ImYoutube />
             <span>YouTube</span>
-          </FooterSocialLink>
+          </FooterLink>
         </div>
       </div>
       <div className="container flex justify-center align-middle py-4">
