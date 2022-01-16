@@ -33,20 +33,20 @@ function AnchorWrappedInHeadingTag({ originalProps, Tag }: { originalProps: any,
 
 const MDXComponents = {
   h1: props => <AnchorWrappedInHeadingTag Tag={H1} originalProps={props} />,
-  h2: (props) => <AnchorWrappedInHeadingTag Tag={H2} originalProps={props} />,
-  h3: (props) => <AnchorWrappedInHeadingTag Tag={H3} originalProps={props} />,
+  h2: props => <AnchorWrappedInHeadingTag Tag={H2} originalProps={props} />,
+  h3: props => <AnchorWrappedInHeadingTag Tag={H3} originalProps={props} />,
   // h3: (props) => <H3 id={getAnchor(props.children)} className="hover:underline"><a className="hover:before:content-['#'] before:absolute before:-ml-6" href={`#${getAnchor(props.children)}`}>{props.children}</a></H3>,
   h4: props => <AnchorWrappedInHeadingTag Tag={H4} originalProps={props} />,
-  h5: (props) => <AnchorWrappedInHeadingTag Tag={H5} originalProps={props} />,
-  h6: (props) => <AnchorWrappedInHeadingTag Tag={H6} originalProps={props} />,
+  h5: props => <AnchorWrappedInHeadingTag Tag={H5} originalProps={props} />,
+  h6: props => <AnchorWrappedInHeadingTag Tag={H6} originalProps={props} />,
 
   a: Link,
   pre: props => <div className="overflow-x-auto" {...props} />,
   blockquote: ({ children }) => <Blockquote>{children}</Blockquote>,
   p: ({ children }) => <p className="mb-8 text-black dark:text-white transition">{children}</p>,
-  ul: ({ children }) => <ul className="list-disc list-outside px-4 mb-8 -mt-6">{children}</ul>,
-  img: (props) => <img className="mx-auto" {...props} />,
-  table: (props) => <table className="w-full" {...props}></table>,
+  ul: ({ children }) => <ul className="list-disc list-outside px-4 mb-8 -mt-6 transition">{children}</ul>,
+  img: props => <img className="mx-auto" {...props} />,
+  table: props => <table className="w-full" {...props}></table>,
 
   code: ({ className, children }) => {
     const props = { children, language: null }
