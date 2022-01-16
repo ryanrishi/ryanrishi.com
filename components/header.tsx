@@ -10,6 +10,7 @@ import { animated, useTransition } from 'react-spring'
 const AnimatedDialogOverlay = animated(DialogOverlay)
 
 const items = [
+  { title: 'Home', href: '/' },
   { title: 'Music', href: '/music' },
   { title: 'Projects', href: '/projects' },
   { title: 'Blog', href: '/blog' },
@@ -28,7 +29,7 @@ function DarkModeButton({ theme, setTheme }) {
   return (
     <button
       aria-label="Dark mode toggle"
-      className="rounded h-8 w-8 flex flex-row justify-center items-center bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 transition"
+      className="rounded h-8 w-8 flex flex-row justify-center items-center bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 focus:ring-2 dark:focus:ring-gray-500 transition"
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
       <IconContext.Provider  value={{ size: '16', className: 'transition' }}>
@@ -131,13 +132,8 @@ export default function Header() {
           setTheme={setTheme}
         />
       </div>
-      <div className="hidden md:flex justify-between flex-row w-full">
-        <div className="text-lg">
-          <HeaderLink href="/">
-            Ryan Rishi
-          </HeaderLink>
-        </div>
-        <nav className="header-nav flex items-center">
+      <nav className="hidden md:flex flex-row justify-between items-center w-full">
+        <div>
           {items.map(({ title, href }) => (
             <HeaderLink
               key={href}
@@ -146,12 +142,12 @@ export default function Header() {
               {title}
             </HeaderLink>
           ))}
-          <DarkModeButton
-            theme={theme}
-            setTheme={setTheme}
-          />
-        </nav>
-      </div>
+        </div>
+        <DarkModeButton
+          theme={theme}
+          setTheme={setTheme}
+        />
+      </nav>
     </header>
   )
 }
