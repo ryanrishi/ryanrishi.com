@@ -7,3 +7,7 @@ body {
 html.dark body {
   @apply bg-gray-900;
 }
+
+html {
+  scroll-behavior: smooth;
+}
