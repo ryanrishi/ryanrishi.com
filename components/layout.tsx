@@ -6,7 +6,7 @@ export default function Layout({ children }) {
     // keep these bg-* and dark:bg-* in sync with styles/globals.css
     <div className="bg-gray-50 dark:bg-gray-900 transition">
       <Header />
-      <div className="container max-w-4xl p-4 lg:p-8 leading-8">
+      <div className="container max-w-4xl p-4">
         {children}
       </div>
       <Footer />

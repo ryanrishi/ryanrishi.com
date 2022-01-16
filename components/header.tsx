@@ -123,7 +123,7 @@ export default function Header() {
   const { theme, setTheme } = useTheme()
 
   return (
-    <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:p-8 container dark:text-gray-50 transition">
+    <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:py-8 container dark:text-gray-50 transition">
       <div className="md:hidden">
         <MobileNav
           isOpen={isMobileNavOpen}

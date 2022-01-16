@@ -40,7 +40,7 @@ const FooterLink = ({ children, href, className }: FooterLinkProps) => {
 export default function Footer() {
   return (
     <footer className="text-gray-500 dark:bg-gray-900 transition">
-      <div className="container max-w-4xl p-4 lg:p-8 flex flex-row justify-around">
+      <div className="container max-w-4xl p-4 lg:py-8 flex flex-row justify-around">
         <div className="flex flex-col">
           <FooterLink href="/">Home</FooterLink>
           <FooterLink href="/about">About</FooterLink>
