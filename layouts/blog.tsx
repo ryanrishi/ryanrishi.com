@@ -27,10 +27,12 @@ export default function Index({ children, frontMatter }) {
         <H1>{title}</H1>
         <p className="-mt-4 mb-4 text-gray-600 dark:text-gray-300 transition">{dayjs.utc(date).format('MMMM D, YYYY')}</p>
         <hr className="my-4" />
-        <MDXRemote
-          {...children}
-          components={MDXComponents}
-        />
+        <div className="leading-8">
+          <MDXRemote
+            {...children}
+            components={MDXComponents}
+          />
+        </div>
         <div className="flex items-center justify-center my-8">
           <Link href="/blog">
             &larr; Back to Blog

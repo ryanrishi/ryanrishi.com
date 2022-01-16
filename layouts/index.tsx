@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import { MDXRemote } from 'next-mdx-remote'
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import { ReactNode } from 'react'
 
 import Head from '../components/head'
 import Layout from '../components/layout'
@@ -8,7 +9,21 @@ import MDXComponents from '../components/mdx-components'
 
 dayjs.extend(utc)
 
-export default function DefaultLayout({ children, frontMatter }) {
+interface FrontMatter {
+  title?: string
+  description?: string
+  image?: string
+  tags?: string[]
+  isArticle?: boolean
+}
+
+interface LayoutProps {
+  mdxRemoteSerializedResult?: MDXRemoteSerializeResult
+  children?: ReactNode
+  frontMatter?: FrontMatter
+}
+
+export default function DefaultLayout({ children, mdxRemoteSerializedResult, frontMatter = {} }: LayoutProps) {
   const { title, tags, image, description } = frontMatter
 
   return (
@@ -20,10 +35,13 @@ export default function DefaultLayout({ children, frontMatter }) {
         tags={tags}
         isArticle
       />
-      <MDXRemote
-        {...children}
-        components={MDXComponents}
-      />
+      {mdxRemoteSerializedResult && (
+        <MDXRemote
+          {...mdxRemoteSerializedResult}
+          components={MDXComponents}
+        />
+      )}
+      {children}
     </Layout>
   )
 }
