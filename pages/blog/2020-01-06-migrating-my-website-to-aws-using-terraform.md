@@ -190,15 +190,14 @@ You can see the full Travis CI configuration [here](https://github.com/ryanrishi
 ### Benchmark
 Moving from my own VPS in New York to a CDN shaved the load time from 1.2s to 200ms. Visitors in California used to have higher latency due to cross-country travel, but now that it is served via a CDN, geographic location plays a much smaller factor&mdash;the content will be served from the closest edge of the network topology.
 
-<figure className="image">
-  <Image src="/img/waterfall-vps.png" alt="Waterfall VPS" height="2100" width="3360" />
-  <figcaption>Waterfall when serving over VPS</figcaption>
-</figure>
+| ![Waterfall when serving from a VPS](/img/waterfall-vps.png "Waterfall when serving from a VPS") |
+| :--: |
+| _Waterfall when serving from a VPS_ |
 
-<figure className="image">
-  <Image src="/img/waterfall-cdn.png" alt="Waterfall CDN" height="2100" width="3360" />
-  <figcaption>Waterfall when serving over CDN</figcaption>
-</figure>
+| ![Waterfall when serving from a CDN](/img/waterfall-cdn.png "Waterfall when serving from a CDN") |
+| :--: |
+| _Waterfall when serving from a CDN_ |
+
 
 ### Next Steps
 I'm currently running `terraform apply` on my laptop&mdash; I'd rather run that in a continuous integration pipeline.
