@@ -139,6 +139,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .style('position', 'absolute')
     .style('backdrop-filter', 'blur(10px)')
     .style('border-radius', '0.25rem')
+    .style('pointer-events', 'none')
     .style('padding', '0.25rem')
     .style('opacity', 0)
     .style('font-family', 'monospace')
