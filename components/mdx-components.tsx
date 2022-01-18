@@ -26,7 +26,7 @@ function AnchorWrappedInHeadingTag({ originalProps, Tag }: { originalProps: any,
 
   return (
     <Tag id={anchor} className="hover:underline">
-      <a className="hover:before:content-['#'] before:absolute before:-ml-[0.75em]" href={`#${anchor}`}>{originalProps.children}</a>
+      <a className="hover:before:content-['#'] before:absolute before:-ml-[0.75em] before:text-gray-300 dark:before:text-gray-600" href={`#${anchor}`}>{originalProps.children}</a>
     </Tag>
   )
 }
@@ -35,7 +35,6 @@ const MDXComponents = {
   h1: props => <AnchorWrappedInHeadingTag Tag={H1} originalProps={props} />,
   h2: props => <AnchorWrappedInHeadingTag Tag={H2} originalProps={props} />,
   h3: props => <AnchorWrappedInHeadingTag Tag={H3} originalProps={props} />,
-  // h3: (props) => <H3 id={getAnchor(props.children)} className="hover:underline"><a className="hover:before:content-['#'] before:absolute before:-ml-6" href={`#${getAnchor(props.children)}`}>{props.children}</a></H3>,
   h4: props => <AnchorWrappedInHeadingTag Tag={H4} originalProps={props} />,
   h5: props => <AnchorWrappedInHeadingTag Tag={H5} originalProps={props} />,
   h6: props => <AnchorWrappedInHeadingTag Tag={H6} originalProps={props} />,
