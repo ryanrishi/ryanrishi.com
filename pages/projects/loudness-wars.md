@@ -16,7 +16,7 @@ The [Loudness Wars](https://en.wikipedia.org/wiki/Loudness_war) refers to the dr
 
 I wanted to quantify this notion that music is getting increasingly louder. I did so by scraping the year-end Billboard charts for the past 50 years, searching Spotify for those tracks, and using [Spotify's audio analysis API](https://developer.spotify.com/console/get-audio-analysis-track/) to get the loudness for each track, then visualized the data by plotting the loudness and release date for each track.
 
-<LoudnessWars className="w-full h-full" />
+<LoudnessWars />
 
 Some notes about the data:
 - For some tracks, Spotify puts out a new version of the album with a new release date, but keeps the original loudness. For other tracks, Spotify puts out a remastered or deluxe version that is louder, but keeps the original release date. I've manually removed these entries, but if you do come across a track that looks suspicious (like a Michael Jackson track released in 2017), please <a href="/contact">contact me</a> to remove it. Thank you!
