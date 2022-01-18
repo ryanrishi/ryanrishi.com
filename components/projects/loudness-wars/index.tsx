@@ -134,6 +134,21 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .style('font-family', 'monospace')
 
   // hover animations
+  const addHorizontalPositionalStylesToTooltip = (tooltip: d3.Selection<HTMLDivElement, unknown, HTMLElement, unknown>, e) => {
+    const tooltipWidth = tooltip.node().getBoundingClientRect().width
+    const rightSideOfTooltip = e.pageX + tooltipWidth
+    const clientWidth = document.body.clientWidth
+    const doesOverflowRightSideOfPage = rightSideOfTooltip > clientWidth
+    // console.log({ doesOverflowRightSideOfPage, rightSideOfTooltip, clientWidth })
+
+    if (e.pageX > 3/4 * clientWidth || doesOverflowRightSideOfPage) {
+      tooltip.style('left', `${e.pageX - tooltipWidth - 15}px`)
+    }
+    else {
+      tooltip.style('left', `${e.pageX + 5}px`)
+    }
+  }
+
   function onMouseIn(e, d) {
     d3.select(this)
       .transition()
@@ -144,7 +159,6 @@ const drawChart = async (svgRef, setSelectedTrack) => {
       .interrupt()
       .style('display', 'block')
       .style('opacity', 0.8)
-      .style('left', `${e.pageX + 15}px`)
       .style('top', `${e.pageY}px`)
 
     tooltip.html(`
@@ -165,6 +179,8 @@ const drawChart = async (svgRef, setSelectedTrack) => {
         </div>
       </div>
       `)
+
+    addHorizontalPositionalStylesToTooltip(tooltip, e)
   }
 
   function onMouseOut() {
@@ -184,8 +200,9 @@ const drawChart = async (svgRef, setSelectedTrack) => {
 
   function onMouseMove(e) {
     tooltip
-      .style('left', `${e.pageX + 15}px`)
       .style('top', `${e.pageY}px`)
+
+    addHorizontalPositionalStylesToTooltip(tooltip, e)
   }
 
   function onClick(e, d) {
