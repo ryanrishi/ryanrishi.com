@@ -1,6 +1,6 @@
 /* eslint indent: ["warn", 2, { "SwitchCase": 1 }] */
 import * as d3 from 'd3'
-import { useEffect, useRef, useState } from 'react'
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 
 import { event } from '../../../lib/ga'
 
@@ -25,7 +25,7 @@ const margin = {
 const trackFillColor = '#69b3a2'
 const selectedTrackFillColor = '#f38f9f'
 
-const drawChart = async (svgRef, setSelectedTrack) => {
+const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTrack) => {
   let $selectedTrack
 
   const data = await d3.csv('/loudness-wars.csv').then(tracks => tracks.map(track => ({
@@ -287,7 +287,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
 }
 
 const Chart = () => {
-  const svg = useRef(null)
+  const svg = useRef<SVGSVGElement>()
 
   const [dimensions, setDimensions] = useState({
     // can't use winsow since it's undefined with Next.js SSR
