@@ -24,9 +24,11 @@ export default function Index({ children, frontMatter }) {
         isArticle
       />
       <div>
-        <H1>{title}</H1>
-        <p className="-mt-4 mb-4 text-gray-600 dark:text-gray-300 transition">{dayjs.utc(date).format('MMMM D, YYYY')}</p>
-        <hr className="my-4" />
+        <div className="leading-tight">
+          <H1>{title}</H1>
+          <p className="mb-8 text-gray-500 dark:text-gray-400 transition">{dayjs.utc(date).format('MMMM D, YYYY')}</p>
+        </div>
+
         <div className="leading-8">
           <MDXRemote
             {...children}
