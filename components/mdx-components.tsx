@@ -56,9 +56,7 @@ const MDXComponents = {
     }
 
     return (
-      <div>
-        <Code {...props} />
-      </div>
+      <Code {...props} />
     )
   },
 
