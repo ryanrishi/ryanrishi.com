@@ -15,21 +15,11 @@ interface Track {
   loudness: number;
 }
 
-const getMargin = ({ width }) => {
-  const margin = {
-    top: 10,
-    right: 30,
-    bottom: 30,
-    left: 60,
-  }
-
-  if (width < 768) {
-    // tablet or smaller
-    margin.left = 30
-    margin.right = 10
-  }
-
-  return margin
+const margin = {
+  top: 10,
+  right: 25,
+  bottom: 30,
+  left: 28,
 }
 
 const trackFillColor = '#69b3a2'
@@ -80,7 +70,6 @@ const drawChart = async (svgRef, setSelectedTrack) => {
   })
 
   const { width, height } = svgRef.current.viewBox.baseVal
-  const margin = getMargin({ width })
   const h = height - margin.top - margin.bottom
   const w = width - margin.left - margin.right
 
