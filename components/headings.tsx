@@ -38,3 +38,8 @@ export function H6({ className, children, ...props }: HeadingsProps) {
   const classes = classNames(baseClassNames, className)
   return <h6 className={classes} {...props}>{children}</h6>
 }
+
+export function FancyH1({ children }) {
+  console.log('children', children)
+  return <h1 className="text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#00cc99] to-[#6600ff] pb-4">{`${children?.replace(/\.$/, '')}.`}</h1>
+}

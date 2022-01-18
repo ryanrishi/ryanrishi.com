@@ -2,7 +2,7 @@ import { GetStaticProps } from 'next'
 import NextLink from 'next/link'
 import { ReactNode } from 'react'
 
-import { H3 } from '../components/headings'
+import { FancyH1, H3 } from '../components/headings'
 import Link from '../components/link'
 import Layout from '../layouts'
 import { getMostRecentPosts, Post } from '../lib/posts'
@@ -15,7 +15,7 @@ interface HomepageProps {
 
 interface SectionProps {
   title: { text: string; url?: string; }
-  description: string
+  description?: string
   children: ReactNode
 }
 
@@ -26,9 +26,9 @@ function Section({ title, description, children }: SectionProps) {
     <section className="leading-8 mt-16">
       <div className="flex flex-col md:flex-row items-start md:items-center md:justify-between">
         <MaybeWrapInLink href={title.url}>
-          <h1 className="text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#00cc99] to-[#6600ff] pb-4">{title.text.endsWith('.') ? title.text : `${title.text}.`}</h1>
+          <FancyH1>{title.text}</FancyH1>
         </MaybeWrapInLink>
-        <p className="text-gray-400 dark:text-gray-500">{description}</p>
+        {description && <p className="text-gray-400 dark:text-gray-500">{description}</p>}
       </div>
       {children}
     </section>
@@ -61,7 +61,7 @@ export default function Index({ recentPosts, recentProjects }: HomepageProps) {
       >
         {recentPosts.map((post, i) => (
           <div key={i} className="bg-">
-            <Link href={`/blog/${post.slug}`} passHref>
+            <Link href={`/blog/${post.slug}`}>
               <a>
                 <H3>{post.title}</H3>
               </a>

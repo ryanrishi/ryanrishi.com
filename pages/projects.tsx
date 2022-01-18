@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { animated, useSpringRef, useTransition } from 'react-spring'
 
 import Head from '../components/head'
-import { H1, H3 } from '../components/headings'
+import { FancyH1, H3 } from '../components/headings'
 import Layout from '../components/layout'
 import { getAllProjects, Project } from '../lib/projects'
 
@@ -67,7 +67,7 @@ export default function ProjectsIndex({ projects }: ProjectsProps) {
   return (
     <Layout>
       <Head title="Projects" />
-      <H1>Projects</H1>
+      <FancyH1>Projects</FancyH1>
       <ul
         className="grid grid-cols-1 md:grid-cols-3 gap-8"
       >

@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 
 import Head from '../components/head'
-import { H1 } from '../components/headings'
+import { FancyH1 } from '../components/headings'
 import Layout from '../components/layout'
 
 function Label({ htmlFor, children }) {
@@ -24,7 +24,7 @@ export default function Contact() {
         title="Contact"
       />
       <div className="container w-full md:w-3/4">
-        <H1>Contact</H1>
+        <FancyH1>Contact</FancyH1>
         <form
           className="mx-auto"
           action="https://formspree.io/f/mleppawq"
