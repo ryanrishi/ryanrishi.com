@@ -64,15 +64,7 @@ function MobileNav({ isOpen, setIsOpen, theme, setTheme }) {
 
   return (
     <>
-      <div className="flex justify-between items-center">
-        <div className="uppercase text-xl">
-          <Link href="/">
-            <>
-              Ryan&nbsp;
-              <b>Rishi</b>
-            </>
-          </Link>
-        </div>
+      <div className="flex justify-end">
         <div className="z-40 flex flex-row items-center">
           <DarkModeButton
             theme={theme}
