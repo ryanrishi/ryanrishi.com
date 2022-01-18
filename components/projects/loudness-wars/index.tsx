@@ -112,8 +112,9 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     /* eslint-disable indent */
       .attr('fill', 'currentColor')
       .attr('x', w)
-      .attr('y', -2)
+      .attr('y', '-0.25rem')
       .attr('text-anchor', 'end')
+      .attr('font-size', '1rem')
       .text('Year')
     /* eslint-enable indent */
 
@@ -123,8 +124,9 @@ const drawChart = async (svgRef, setSelectedTrack) => {
   yAxis.append('text')
     .attr('fill', 'currentColor')
     .attr('transform', 'rotate(-90)')
-    .attr('y', 10)
+    .attr('y', '1rem')
     .style('text-anchor', 'end')
+    .style('font-size', '1rem')
     .text('Loudness (dB)')
 
   const transitionDuration = 200
