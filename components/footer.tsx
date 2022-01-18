@@ -69,7 +69,7 @@ export default function Footer() {
           </FooterLink>
         </div>
       </div>
-      <div className="container flex justify-center align-middle py-4">
+      <div className="container flex justify-center align-middle py-4 text-gray-400 dark:text-gray-700">
         <p>&copy; Copyright&nbsp;{ new Date().getFullYear() }&nbsp;Ryan Rishi</p>
       </div>
     </footer>
