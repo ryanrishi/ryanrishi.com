@@ -326,7 +326,7 @@ const Chart = () => {
               title={`${selectedTrack.name} - ${selectedTrack.artist}`}
             />
           )
-          : 'Click on a circle below to listen'}
+          : ''}
       </p>
       <svg
         viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
