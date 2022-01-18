@@ -304,8 +304,8 @@ const Chart = () => {
 
   useEffect(() => {
     setDimensions({
-      height: window.innerHeight,
-      width: window.innerWidth,
+      height: Math.min(window.innerHeight, 1024 * 3/4),
+      width: Math.min(window.innerWidth, 1024),
     })
 
     drawChart(svg, setSelectedTrack)
