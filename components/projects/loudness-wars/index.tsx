@@ -162,22 +162,19 @@ const drawChart = async (svgRef, setSelectedTrack) => {
       .style('top', `${e.pageY + 5}px`)
 
     tooltip.html(`
-      <div class="flex flex-row">
-        <div class="flex flex-col mr-4 font-bold">
-          <span>Name</span>
-          <span>Artist</span>
-          <span>Album</span>
-          <span>Release Date</span>
-          <span>Loudness</span>
-        </div>
-        <div class="flex flex-col">
-          <span>${d.name}</span>
-          <span>${d.artist}</span>
-          <span>${d.album}</span>
-          <span>${d.releaseDateForDisplay}</span>
-          <span>${d.loudness}</span>
-        </div>
-      </div>
+        <table style="white-space: nowrap">
+          <tr>
+            <td class="font-bold">Name</td><td>${d.name}</td>
+          </tr>
+            <td class="font-bold">Artist</td><td>${d.artist}</td>
+          </tr>
+            <td class="font-bold">Album</td><td>${d.album}</td>
+          </tr>
+            <td class="font-bold">Release Date</td><td>${d.releaseDateForDisplay}</td>
+          </tr>
+            <td class="font-bold">Loudness</td><td>${d.loudness}</td>
+          </tr>
+        </table>
       `)
 
     addHorizontalPositionalStylesToTooltip(tooltip, e)
