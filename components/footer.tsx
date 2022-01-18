@@ -44,7 +44,9 @@ export default function Footer() {
         <div className="flex flex-col">
           <FooterLink href="/">Home</FooterLink>
           <FooterLink href="/blog">Blog</FooterLink>
+          <FooterLink href="/music">Music</FooterLink>
           <FooterLink href="/projects">Projects</FooterLink>
+          <FooterLink href="/contact">Contact</FooterLink>
         </div>
         <div className="flex flex-col">
           <FooterLink href="https://github.com/ryanrishi">
