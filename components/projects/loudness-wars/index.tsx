@@ -159,7 +159,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
       .interrupt()
       .style('display', 'block')
       .style('opacity', 0.8)
-      .style('top', `${e.pageY}px`)
+      .style('top', `${e.pageY + 5}px`)
 
     tooltip.html(`
       <div class="flex flex-row">
@@ -200,7 +200,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
 
   function onMouseMove(e) {
     tooltip
-      .style('top', `${e.pageY}px`)
+      .style('top', `${e.pageY + 5}px`)
 
     addHorizontalPositionalStylesToTooltip(tooltip, e)
   }
