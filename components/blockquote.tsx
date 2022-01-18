@@ -11,17 +11,7 @@ interface BlockquoteProps {
 
 export default function Quote({ children, name, citationLink }: BlockquoteProps) {
   return (
-    <blockquote className="relative p-4 text-xl text-gray-600 quote italic mb-4 border-l-4 sm:border-l-0 dark:text-gray-200">
-      <div
-        className="font-serif text-8xl text-gray-200 absolute hidden sm:block top-0 dark:text-gray-600"
-        style={{
-          zIndex: -1,
-        }}
-        aria-hidden="true"
-        >
-        {/* TODO the quotation marks aren't showing up in dark mode— probz due to z-index? Might need to do :before */}
-        &ldquo;
-      </div>
+    <blockquote className="relative p-4 text-xl text-gray-600 quote italic mb-4 border-l-4 border-gray-200 dark:border-gray-700 dark:text-gray-200">
       <div className="mb-4">{children}</div>
       {name && (
         <cite className="flex items-center">
