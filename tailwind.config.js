@@ -9,7 +9,7 @@ const generatePurgeCssSafelist = () => {
   const borderStyles = calloutColors.map(color => `border-${color}-800`)
 
   const darkModeBackgroundStyles = calloutColors.map(color => `dark:bg-${color}-800`)
-  const darkModeTextStyles = calloutColors.map(color => `dark:text-${color}-100`)
+  const darkModeTextStyles = calloutColors.map(color => `dark:text-${color}-50`)
   const darkModeBorderStyles = calloutColors.map(color => `dark:border-${color}-300`)
 
   return [...textStyles, ...borderStyles, ...backgroundStyles, ...darkModeBackgroundStyles, ...darkModeTextStyles, ...darkModeBorderStyles]
