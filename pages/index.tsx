@@ -23,7 +23,7 @@ const MaybeWrapInLink = ({ children, href }) => href ? <NextLink href={href}>{ch
 
 function Section({ title, description, children }: SectionProps) {
   return (
-    <section className="leading-8 mt-16">
+    <section className="leading-8 mb-16">
       <div className="flex flex-col md:flex-row items-start md:items-center md:justify-between">
         <MaybeWrapInLink href={title.url}>
           <FancyH1>{title.text}</FancyH1>
@@ -39,10 +39,10 @@ export default function Index({ recentPosts, recentProjects }: HomepageProps) {
   return (
     <Layout>
       <Section title={{ text: 'Ryan Rishi' }}>
-        <p className="pb-8">I'm a software engineer focused on building <b>great user experiences</b>.</p>
-        <p className="pb-8">Over the course of my career, I'm grateful to have had the opportunity to work across multiple focus areas including frontend development, backend development, infrastructure, and operations.</p>
-        <p className="pb-8">Fast-forward to today, and I've had the privilege on working at <Link href="https://jelli.com">an audio ad tech startup</Link>, <Link href="https://envoy.com">a workplace platform startup</Link>, and <Link href="https://twilio.com">a customer engagement platform</Link>. My main focus these days is leading product-focused engineering teams to deliver highly available backend services in order to deliver great experiences to the end-user.</p>
-        <p className="pb-8">Here are a few technologies I've enjoyed working with recently:
+        <p className="pb-8">I&apos;m a software engineer focused on building <b>great user experiences</b>.</p>
+        <p className="pb-8">Over the course of my career, I&apos;m grateful to have had the opportunity to work across multiple focus areas including frontend development, backend development, infrastructure, and operations.</p>
+        <p className="pb-8">Fast-forward to today, and I&apos;ve had the privilege on working at <Link href="https://jelli.com">an audio ad tech startup</Link>, <Link href="https://envoy.com">a workplace platform startup</Link>, and <Link href="https://twilio.com">a customer engagement platform</Link>. My main focus these days is leading product-focused engineering teams to deliver highly available backend services in order to deliver great experiences to the end-user.</p>
+        <p className="pb-8">Here are a few technologies I&apos;ve enjoyed working with recently:
           <ul className="list-disc list-inside">
             <li><Link href="https://nextjs.com">Next.js</Link></li>
             <li><Link href="https://tailwindcss.com">Tailwindcss</Link></li>
