@@ -43,7 +43,6 @@ export default function Footer() {
       <div className="container max-w-4xl p-4 lg:py-8 flex flex-row justify-around">
         <div className="flex flex-col">
           <FooterLink href="/">Home</FooterLink>
-          <FooterLink href="/about">About</FooterLink>
           <FooterLink href="/blog">Blog</FooterLink>
           <FooterLink href="/projects">Projects</FooterLink>
         </div>
