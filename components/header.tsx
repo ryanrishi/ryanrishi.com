@@ -55,7 +55,7 @@ function MobileNav({ isOpen, setIsOpen, theme, setTheme }) {
     expires: true,
   })
 
-  const itemTransitions = useTransition(isOpen ? [0, 1, 2, 3] : [], {
+  const itemTransitions = useTransition(isOpen ? items.map((_, i) => i) : [], {
     trail: 30,
     from: { bottom: '-50vh' },
     enter: { bottom: '0vh' },
