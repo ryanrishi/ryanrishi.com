@@ -190,7 +190,7 @@ export default function Code({ language = '', children }: CodeProps) {
     <SyntaxHighlighter
       style={theme}
       language={language}
-      className={`language-${language} p-4 shadow-md shadow-gray-500 dark:shadow-gray-800`}
+      className={`language-${language} p-4 mb-8 -mt-4 shadow-md shadow-gray-500 dark:shadow-gray-800`}
     >
       {lines.join('\n')}
     </SyntaxHighlighter>
