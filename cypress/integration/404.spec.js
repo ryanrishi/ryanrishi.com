@@ -1,21 +1,21 @@
 describe('404', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/this-page-does-not-exist', { failOnStatusCode: false });
-  });
+    cy.visit('http://localhost:3000/this-page-does-not-exist', { failOnStatusCode: false })
+  })
 
   it('meta', () => {
-    const title = '404 | Ryan Rishi';
-    cy.title().should('eq', title);
-  });
+    const title = '404 | Ryan Rishi'
+    cy.title().should('eq', title)
+  })
 
   it('renders 404 page', () => {
-    cy.get('h1').contains('404');
-    cy.get('a').contains('Return home');
-    cy.percySnapshot();
-  });
+    cy.get('h1').contains('404')
+    cy.get('a').contains('Return home')
+    cy.percySnapshot()
+  })
 
   it('clicking the "return home" link returns to home', () => {
-    cy.get('a').contains('Return home').click();
-    cy.url().should('eq', 'http://localhost:3000/');
-  });
-});
+    cy.get('a').contains('Return home').click()
+    cy.url().should('eq', 'http://localhost:3000/')
+  })
+})
