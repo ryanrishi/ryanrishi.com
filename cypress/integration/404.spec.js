@@ -11,7 +11,7 @@ describe('404', () => {
   it('renders 404 page', () => {
     cy.get('h1').contains('404')
     cy.get('a').contains('Return home')
-    cy.percySnapshot()
+    cy.percySnapshot('404')
   })
 
   it('clicking the "return home" link returns to home', () => {

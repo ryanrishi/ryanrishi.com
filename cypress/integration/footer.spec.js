@@ -6,7 +6,7 @@ describe('Footer', () => {
   it('renders the footer', () => {
     cy.get('footer').scrollIntoView()
 
-    cy.percySnapshot()
+    cy.percySnapshot('Footer')
   })
 
   it('has valid links', () => {

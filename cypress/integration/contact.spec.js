@@ -10,7 +10,7 @@ describe('Contact', () => {
 
   it('renders contact page', () => {
     cy.get('h1').contains('Contact')
-    cy.percySnapshot()
+    cy.percySnapshot('Contact')
   })
 
   it('form validation', () => {

@@ -5,7 +5,7 @@ describe('Header', () => {
 
   it('renders the header', () => {
     cy.viewport('macbook-15')
-    cy.percySnapshot()
+    cy.percySnapshot('Header')
   })
 
   describe('Mobile Nav', () => {

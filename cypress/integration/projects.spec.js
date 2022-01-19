@@ -20,7 +20,7 @@ describe('Projects', () => {
       }
     })
 
-    cy.percySnapshot()
+    cy.percySnapshot('Projects')
   })
 
   it('each project', () => {

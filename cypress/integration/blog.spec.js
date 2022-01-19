@@ -22,7 +22,7 @@ describe('Blog', () => {
   })
 
   it('renders blog index', () => {
-    cy.percySnapshot()
+    cy.percySnapshot('Blog')
   })
 
   it('each blog post', () => {
