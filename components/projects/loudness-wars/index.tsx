@@ -127,6 +127,7 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
     .attr('data-test-tooltip', true)
     .style('position', 'absolute')
     .style('backdrop-filter', 'blur(10px)')
+    .style('-webkit-backdrop-filter', 'blur(10px)')
     .style('border-radius', '0.25rem')
     .style('pointer-events', 'none')
     .style('padding', '0.25rem')
