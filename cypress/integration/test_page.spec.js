@@ -1,6 +1,6 @@
 describe('Test Page', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/_test')
+    cy.visit('/_test')
   })
 
   describe('meta tags', () => {
@@ -101,9 +101,16 @@ describe('Test Page', () => {
 
     // TODO get this working in CI
     // Cypress recording looks like it's working on laptop, but not in CI (headless Electron)
-    describe.skip('Anchors', () => {
-      it('shows octothorpe before heading on hover', () => {
-        const quickBrownFox = 'The quick brown fox'
+    describe('Anchors', () => {
+      const quickBrownFox = 'The quick brown fox'
+
+      it('clicking a heading adds the anchor to the url and scrolls to that anchor', () => {
+        cy.contains('h1', quickBrownFox).click()
+        cy.url().should('contain', '#the-quick-brown-fox')
+        cy.contains('h1', quickBrownFox).then(([h1]) => h1.getBoundingClientRect()).should('have.property', 'top', 0)
+      })
+
+      it.skip('shows octothorpe before heading on hover', () => {
         for (let i = 1; i <= 6; i++) {
           cy.get(`h${i}`).contains(quickBrownFox).then((heading) => {
             cy.get(heading).realHover()
