@@ -143,7 +143,9 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
     // console.log({ doesOverflowRightSideOfPage, rightSideOfTooltip, clientWidth })
 
     if (e.pageX > 3/4 * clientWidth || doesOverflowRightSideOfPage) {
-      tooltip.style('left', `${e.pageX - tooltipWidth - 15}px`)
+      let left = e.pageX - tooltipWidth
+      left = Math.max(left, 2)  // don't push the tooltip off the left side of the screen
+      tooltip.style('left', `${left}px`)
     }
     else {
       tooltip.style('left', `${e.pageX + 5}px`)
