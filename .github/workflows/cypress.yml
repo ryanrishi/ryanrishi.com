@@ -1,7 +1,13 @@
 name: Cypress
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 jobs:
-  cypress-run:
+  cypress:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,6 +21,9 @@ jobs:
           start: yarn start
           browser: chrome
           spec: cypress/integration/test_page.spec.js # DON'T COMMIT TO MAIN
+          command-prefix: 'percy exec -- npx'
+        env:
+          PERCY_TOKEN: "${{ secrets.PERCY_TOKEN }}"
       - uses: actions/upload-artifact@v2
         if: always()
         with:
