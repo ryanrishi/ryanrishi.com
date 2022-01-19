@@ -54,6 +54,35 @@ describe('Test Page', () => {
       cy.get('html').should('have.class', 'dark')
       cy.percySnapshot('Dark Mode - after toggling back to dark mode')
     })
+
+    describe('Dark mode styles', () => {
+      it('Headings', () => {
+        cy.get('h1').contains('Headings').scrollIntoView()
+        cy.percySnapshot('Dark mode - Headings')
+      })
+
+      it('Text Styles', () => {
+        cy.get('h1').contains('Text Styles').scrollIntoView()
+        cy.percySnapshot('Dark mode - Text Styles')
+      })
+
+      // skipping code since it's the same in dark mode
+
+      it('Blockquotes', () => {
+        cy.get('h1').contains('Blockquotes').scrollIntoView()
+        cy.percySnapshot('Dark mode - Blockquotes')
+      })
+
+      it('Callouts', () => {
+        cy.get('h1').contains('Callouts').scrollIntoView()
+        cy.percySnapshot('Dark mode - Callouts')
+      })
+
+      it('Lists', () => {
+        cy.get('h1').contains('Lists').scrollIntoView()
+        cy.percySnapshot('Dark mode - Lists')
+      })
+    })
   })
 
   describe('Headings', () => {
