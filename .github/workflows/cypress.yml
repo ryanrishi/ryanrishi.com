@@ -14,8 +14,15 @@ jobs:
           build: yarn build
           start: yarn start
           spec: cypress/integration/test_page.spec.js # 🚨 DON'T COMMIT TO MAIN 🚨
-      - uses: actions/upload-artifact@v2
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v2
         if: always()
         with:
           name: cypress-videos
           path: cypress/videos
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
