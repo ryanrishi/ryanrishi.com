@@ -104,7 +104,7 @@ describe('Test Page', () => {
     describe('Anchors', () => {
       const quickBrownFox = 'The quick brown fox'
 
-      it('clicking a heading adds the anchor to the url and scrolls to that anchor', () => {
+      it.only('clicking a heading adds the anchor to the url and scrolls to that anchor', () => {
         cy.contains('h1', quickBrownFox).click()
         cy.url().should('contain', '#the-quick-brown-fox')
         cy.contains('h1', quickBrownFox).then(([h1]) => h1.getBoundingClientRect()).should('have.property', 'top', 0)
