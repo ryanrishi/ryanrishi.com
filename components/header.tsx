@@ -17,7 +17,8 @@ const items = [
   { title: 'Contact', href: '/contact' },
 ]
 
-function DarkModeButton({ theme, setTheme }) {
+function DarkModeButton() {
+  const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => setMounted(true), [])
@@ -30,10 +31,10 @@ function DarkModeButton({ theme, setTheme }) {
     <button
       aria-label="Dark mode toggle"
       className="rounded h-8 w-8 flex flex-row justify-center items-center bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 focus:ring-2 dark:focus:ring-gray-500 transition"
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >
       <IconContext.Provider  value={{ size: '16', className: 'transition' }}>
-        {theme === 'dark' ? <HiOutlineSun /> : <HiOutlineMoon />}
+        {resolvedTheme === 'dark' ? <HiOutlineSun /> : <HiOutlineMoon />}
       </IconContext.Provider>
     </button>
   )
@@ -47,7 +48,7 @@ const HeaderLink = ({ href, children }) => (
   </Link>
 )
 
-function MobileNav({ isOpen, setIsOpen, theme, setTheme }) {
+function MobileNav({ isOpen, setIsOpen }) {
   const overlayTransitions = useTransition(isOpen, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
@@ -66,10 +67,7 @@ function MobileNav({ isOpen, setIsOpen, theme, setTheme }) {
     <>
       <div className="flex justify-end">
         <div className="z-40 flex flex-row items-center">
-          <DarkModeButton
-            theme={theme}
-            setTheme={setTheme}
-          />
+          <DarkModeButton />
 
           {/* TODO put this on <Hamburger> but it's not picking up class name */}
           {/* check back when hamburger-react v3 is released: https://github.com/luukdv/hamburger-react/issues/45#issuecomment-902639087 */}
@@ -112,7 +110,6 @@ function MobileNav({ isOpen, setIsOpen, theme, setTheme }) {
 
 export default function Header() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
-  const { resolvedTheme, setTheme } = useTheme()
 
   return (
     <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:py-8 container dark:text-gray-50 transition">
@@ -120,8 +117,6 @@ export default function Header() {
         <MobileNav
           isOpen={isMobileNavOpen}
           setIsOpen={setIsMobileNavOpen}
-          theme={resolvedTheme}
-          setTheme={setTheme}
         />
       </div>
       <nav className="hidden md:flex flex-row justify-between items-center w-full">
@@ -135,10 +130,7 @@ export default function Header() {
             </HeaderLink>
           ))}
         </div>
-        <DarkModeButton
-          theme={resolvedTheme}
-          setTheme={setTheme}
-        />
+        <DarkModeButton />
       </nav>
     </header>
   )
