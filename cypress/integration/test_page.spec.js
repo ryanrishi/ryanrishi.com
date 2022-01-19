@@ -35,6 +35,19 @@ describe('Test Page', () => {
     it('Snapshot', () => {
       cy.percySnapshot('Headings')
     })
+
+    describe('Anchors', () => {
+      it.only('shows octothorpe before heading on hover', () => {
+        const quickBrownFox = 'The quick brown fox'
+        for (let i = 1; i <= 6; i++) {
+          cy.get(`h${i}`).contains(quickBrownFox).then((heading) => {
+            cy.get(heading).realHover()
+            cy.percySnapshot(`Test - Headings - h${i} - hover`)
+            cy.pause()
+          })
+        }
+      })
+    })
   })
 
   describe('Text Styles', () => {
