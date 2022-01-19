@@ -1,6 +1,6 @@
 /* eslint indent: ["warn", 2, { "SwitchCase": 1 }] */
 import * as d3 from 'd3'
-import { useEffect, useRef, useState } from 'react'
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 
 import { event } from '../../../lib/ga'
 
@@ -15,27 +15,17 @@ interface Track {
   loudness: number;
 }
 
-const getMargin = ({ width }) => {
-  const margin = {
-    top: 10,
-    right: 30,
-    bottom: 30,
-    left: 60,
-  }
-
-  if (width < 768) {
-    // tablet or smaller
-    margin.left = 30
-    margin.right = 10
-  }
-
-  return margin
+const margin = {
+  top: 10,
+  right: 25,
+  bottom: 30,
+  left: 28,
 }
 
 const trackFillColor = '#69b3a2'
 const selectedTrackFillColor = '#f38f9f'
 
-const drawChart = async (svgRef, setSelectedTrack) => {
+const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTrack) => {
   let $selectedTrack
 
   const data = await d3.csv('/loudness-wars.csv').then(tracks => tracks.map(track => ({
@@ -80,7 +70,6 @@ const drawChart = async (svgRef, setSelectedTrack) => {
   })
 
   const { width, height } = svgRef.current.viewBox.baseVal
-  const margin = getMargin({ width })
   const h = height - margin.top - margin.bottom
   const w = width - margin.left - margin.right
 
@@ -110,10 +99,11 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .call(d3.axisBottom(x))
     .append('text')
     /* eslint-disable indent */
-      .attr('fill', 'black')
+      .attr('fill', 'currentColor')
       .attr('x', w)
-      .attr('y', -2)
+      .attr('y', '-0.25em')
       .attr('text-anchor', 'end')
+      .attr('font-size', '1rem')
       .text('Year')
     /* eslint-enable indent */
 
@@ -121,10 +111,11 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .call(d3.axisLeft(y))
 
   yAxis.append('text')
-    .attr('fill', 'black')
+    .attr('fill', 'currentColor')
     .attr('transform', 'rotate(-90)')
-    .attr('y', 10)
+    .attr('y', '1em')
     .style('text-anchor', 'end')
+    .style('font-size', '1rem')
     .text('Loudness (dB)')
 
   const transitionDuration = 200
@@ -135,10 +126,32 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .append('div')
     .attr('data-test-tooltip', true)
     .style('position', 'absolute')
-    .style('background-color', 'white')
+    .style('backdrop-filter', 'blur(10px)')
+    .style('-webkit-backdrop-filter', 'blur(10px)')
+    .style('border-radius', '0.25rem')
+    .style('pointer-events', 'none')
+    .style('padding', '0.25rem')
     .style('opacity', 0)
+    .style('font-family', 'monospace')
 
   // hover animations
+  const addHorizontalPositionalStylesToTooltip = (tooltip: d3.Selection<HTMLDivElement, unknown, HTMLElement, unknown>, e) => {
+    const tooltipWidth = tooltip.node().getBoundingClientRect().width
+    const rightSideOfTooltip = e.pageX + tooltipWidth
+    const clientWidth = document.body.clientWidth
+    const doesOverflowRightSideOfPage = rightSideOfTooltip > clientWidth
+    // console.log({ doesOverflowRightSideOfPage, rightSideOfTooltip, clientWidth })
+
+    if (e.pageX > 3/4 * clientWidth || doesOverflowRightSideOfPage) {
+      let left = e.pageX - tooltipWidth
+      left = Math.max(left, 2)  // don't push the tooltip off the left side of the screen
+      tooltip.style('left', `${left}px`)
+    }
+    else {
+      tooltip.style('left', `${e.pageX + 5}px`)
+    }
+  }
+
   function onMouseIn(e, d) {
     d3.select(this)
       .transition()
@@ -149,14 +162,25 @@ const drawChart = async (svgRef, setSelectedTrack) => {
       .interrupt()
       .style('display', 'block')
       .style('opacity', 0.8)
-      .style('left', `${e.pageX + 15}px`)
-      .style('top', `${e.pageY}px`)
+      .style('top', `${e.pageY + 5}px`)
 
     tooltip.html(`
-      <p>${d.name} (${d.releaseDateForDisplay})</p>
-      <p>${d.artist} - ${d.album}</p>
-      <p>${d.loudness} dB</p>
-    `)
+        <table style="white-space: nowrap">
+          <tr>
+            <td class="font-bold">Name</td><td>${d.name}</td>
+          </tr>
+            <td class="font-bold">Artist</td><td>${d.artist}</td>
+          </tr>
+            <td class="font-bold">Album</td><td>${d.album}</td>
+          </tr>
+            <td class="font-bold">Release Date</td><td>${d.releaseDateForDisplay}</td>
+          </tr>
+            <td class="font-bold">Loudness</td><td>${d.loudness}</td>
+          </tr>
+        </table>
+      `)
+
+    addHorizontalPositionalStylesToTooltip(tooltip, e)
   }
 
   function onMouseOut() {
@@ -176,8 +200,9 @@ const drawChart = async (svgRef, setSelectedTrack) => {
 
   function onMouseMove(e) {
     tooltip
-      .style('left', `${e.pageX + 15}px`)
-      .style('top', `${e.pageY}px`)
+      .style('top', `${e.pageY + 5}px`)
+
+    addHorizontalPositionalStylesToTooltip(tooltip, e)
   }
 
   function onClick(e, d) {
@@ -199,6 +224,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
     .enter()
     .append('circle')
     /* eslint-disable indent */
+      .style('cursor', 'pointer')
       .attr('cx', d => x(d.releaseDate))
       .attr('cy', d => y(+d.loudness))
       .attr('r', r)
@@ -264,7 +290,7 @@ const drawChart = async (svgRef, setSelectedTrack) => {
 }
 
 const Chart = () => {
-  const svg = useRef(null)
+  const svg = useRef<SVGSVGElement>()
 
   const [dimensions, setDimensions] = useState({
     // can't use winsow since it's undefined with Next.js SSR
@@ -285,8 +311,8 @@ const Chart = () => {
 
   useEffect(() => {
     setDimensions({
-      height: window.innerHeight,
-      width: window.innerWidth,
+      height: Math.min(window.innerHeight, 1024 * 3/4),
+      width: Math.min(window.innerWidth, 1024),
     })
 
     drawChart(svg, setSelectedTrack)
@@ -303,7 +329,7 @@ const Chart = () => {
               title={`${selectedTrack.name} - ${selectedTrack.artist}`}
             />
           )
-          : 'Click on a circle below to listen'}
+          : ''}
       </p>
       <svg
         viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}

@@ -1,46 +1,62 @@
-import { ImGithub, ImLinkedin, ImSoundcloud, ImYoutube } from 'react-icons/im'
+import classNames from 'classnames'
+import NextLink from 'next/link'
+import { ReactNode } from 'react'
+import { ImGithub, ImLinkedin, ImSoundcloud, ImTwitter, ImYoutube } from 'react-icons/im'
 
-import Link from './link'
+interface FooterLinkProps {
+  children: ReactNode;
+  href: string;
+  className?: string;
+}
 
-const FooterSocialLink = ({ children, href }) => (
-  <Link
-    href={href}
-    className="px-4 text-2xl"
-    invert
-  >
-    {children}
-  </Link>
-)
+const FooterLink = ({ children, href, className }: FooterLinkProps) => {
+  const classes = classNames('flex flex-row hover:text-gray-600 transition py-2 items-center space-x-2', className)
+
+  const isInternalLink = href.startsWith('/') // doesn't handle links like '//google.com', but I generally don't use those
+
+  return (
+    <NextLink href={href}>
+      <a className={classes} target={isInternalLink ? '' : '_blank'}>{children}</a>
+    </NextLink>
+  )
+}
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col md:flex-row justify-between container uppercase italic font-bold text-sm px-4 my-8 md:my-16">
-      <div>
-        <p>
-          &copy; Copyright&nbsp;{ new Date().getFullYear() }&nbsp;Ryan Rishi
-        </p>
+    <footer className="text-gray-500 dark:bg-gray-900 transition">
+      <div className="container max-w-4xl p-4 lg:py-8 flex flex-row justify-around">
+        <div className="flex flex-col">
+          <FooterLink href="/">Home</FooterLink>
+          <FooterLink href="/blog">Blog</FooterLink>
+          <FooterLink href="/music">Music</FooterLink>
+          <FooterLink href="/projects">Projects</FooterLink>
+          <FooterLink href="/contact">Contact</FooterLink>
+        </div>
+        <div className="flex flex-col">
+          <FooterLink href="https://github.com/ryanrishi">
+            <ImGithub />
+            <span>Github</span>
+          </FooterLink>
+          <FooterLink href="https://twitter.com/ryanrishi">
+            <ImTwitter />
+            <span>Twitter</span>
+          </FooterLink>
+          <FooterLink href="https://linkedin.com/in/ryanrishi">
+            <ImLinkedin />
+            <span>LinkedIn</span>
+          </FooterLink>
+          <FooterLink href="https://soundcloud.com/ryanrishi">
+            <ImSoundcloud />
+            <span>SoundCloud</span>
+          </FooterLink>
+          <FooterLink href="https://youtube.com/RyanRishiPercussion">
+            <ImYoutube />
+            <span>YouTube</span>
+          </FooterLink>
+        </div>
       </div>
-      <div className="flex flex-row justify-center pt-4 md:pt-0">
-        <FooterSocialLink
-          href="https://github.com/ryanrishi"
-        >
-          <ImGithub />
-        </FooterSocialLink>
-        <FooterSocialLink
-          href="https://linkedin.com/in/ryanrishi"
-        >
-          <ImLinkedin />
-        </FooterSocialLink>
-        <FooterSocialLink
-          href="https://soundcloud.com/ryanrishi"
-        >
-          <ImSoundcloud />
-        </FooterSocialLink>
-        <FooterSocialLink
-          href="https://youtube.com/RyanRishiPercussion"
-        >
-          <ImYoutube />
-        </FooterSocialLink>
+      <div className="container flex justify-center align-middle py-4 text-gray-400 dark:text-gray-700">
+        <p>&copy; Copyright&nbsp;{ new Date().getFullYear() }&nbsp;Ryan Rishi</p>
       </div>
     </footer>
   )

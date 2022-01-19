@@ -1,7 +1,9 @@
 import '@reach/dialog/styles.css'
 import 'tailwindcss/tailwind.css'
+import '../styles/globals.css'
 
 import { useRouter } from 'next/router'
+import { ThemeProvider } from 'next-themes'
 import { useEffect } from 'react'
 
 import { pageview } from '../lib/ga'
@@ -19,5 +21,9 @@ export default function MyApp({ Component, pageProps }) {
     }
   }, [router.events])
 
-  return <Component {...pageProps} />
+  return (
+    <ThemeProvider attribute="class">
+      <Component {...pageProps} />
+    </ThemeProvider>
+  )
 }

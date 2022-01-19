@@ -16,15 +16,11 @@ The [Loudness Wars](https://en.wikipedia.org/wiki/Loudness_war) refers to the dr
 
 I wanted to quantify this notion that music is getting increasingly louder. I did so by scraping the year-end Billboard charts for the past 50 years, searching Spotify for those tracks, and using [Spotify's audio analysis API](https://developer.spotify.com/console/get-audio-analysis-track/) to get the loudness for each track, then visualized the data by plotting the loudness and release date for each track.
 
-<LoudnessWars className="w-full h-full" />
-
-<Callout type="info">
+<LoudnessWars />
 
 Some notes about the data:
 - For some tracks, Spotify puts out a new version of the album with a new release date, but keeps the original loudness. For other tracks, Spotify puts out a remastered or deluxe version that is louder, but keeps the original release date. I've manually removed these entries, but if you do come across a track that looks suspicious (like a Michael Jackson track released in 2017), please <a href="/contact">contact me</a> to remove it. Thank you!
-- [Spotify applies some loudness normalization](https://artists.spotify.com/help/article/loudness-normalization), so listening to a very quiet song on Spotify versus a very loud song on Spotify won't be as noticeable as listening to those two songs on another medium such as a CD
-
-</Callout>
+- [Spotify applies some loudness normalization](https://artists.spotify.com/help/article/loudness-normalization), so listening to a very quiet song on Spotify versus a very loud song on Spotify won't be as noticeable as listening to those two songs on another medium such as a CD.
 
 Why does this matter? In short, everything being loud results in listener fatigue. It's kind of like eating the same meal every single day&mdash; you will (hopefully) get tired of eating the same thing. The same is true with our ears&mdash; if everything is loud, we get tired and nothing really sounds loud anymore.
 

@@ -1,11 +1,11 @@
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import { animated, useSpringRef, useTransition } from 'react-spring'
 
 import Head from '../components/head'
-import { H1, H3 } from '../components/headings'
+import { FancyH1, H3 } from '../components/headings'
 import Layout from '../components/layout'
-import Link from '../components/link'
 import { getAllProjects, Project } from '../lib/projects'
 
 interface ProjectsProps {
@@ -25,14 +25,17 @@ const ProjectItem = ({ project, style }) => {
       >
         <Link
           href={href}
+          passHref
         >
-          <Image
-            className="object-cover transition duration-500 ease-in-out transform hover:scale-105 w-full h-full rounded-t"
-            src={image?.src || 'https://via.placeholder.com/400'}
-            alt={image.alt}
-            width="1600"
-            height="1600"
-          />
+          <a>
+            <Image
+              className="object-cover transition duration-500 ease-in-out transform hover:scale-105 w-full h-full rounded-t"
+              src={image?.src || 'https://via.placeholder.com/400'}
+              alt={image.alt}
+              width="1600"
+              height="1600"
+            />
+          </a>
         </Link>
       </div>
       <div
@@ -41,12 +44,11 @@ const ProjectItem = ({ project, style }) => {
         <H3>
           <Link
             href={href}
-            invert
           >
             {title}
           </Link>
         </H3>
-        {description}
+        <p className="transition">{description}</p>
       </div>
     </animated.li>
   )
@@ -65,7 +67,7 @@ export default function ProjectsIndex({ projects }: ProjectsProps) {
   return (
     <Layout>
       <Head title="Projects" />
-      <H1>Projects</H1>
+      <FancyH1>Projects</FancyH1>
       <ul
         className="grid grid-cols-1 md:grid-cols-3 gap-8"
       >

@@ -19,10 +19,12 @@ export default function Index({ children, frontMatter }) {
       />
       <div>
         <H1>{name}</H1>
-        <MDXRemote
-          {...children}
-          components={MDXComponents}
-        />
+        <div className="leading-8">
+          <MDXRemote
+            {...children}
+            components={MDXComponents}
+          />
+        </div>
       </div>
     </Layout>
   )

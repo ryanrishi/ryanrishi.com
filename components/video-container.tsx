@@ -1,9 +1,6 @@
 export default function VideoContainer({ src, title }) {
   return (
-    <div
-      className="relative pt-8"
-      style={{ paddingBottom: '50%' }}
-    >
+    <div className="relative mb-8 aspect-video">
       <iframe
         src={src}
         title={title}

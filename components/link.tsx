@@ -7,24 +7,16 @@ interface LinkProps {
   children: ReactNode;
   href: string;
   className: string;
-  invert?: boolean;
 }
 
-export default function Link({ href, children, className, invert = false }: LinkProps) {
+export default function Link({ href, children, className }: LinkProps) {
   const isInternalLink = href?.startsWith('/')
 
-  const classes = classNames('transition', className, {
-    'text-gray-800': invert,
-    'hover:text-valencia-500': invert,
-    'text-valencia-500': !invert,
-    'hover:text-gray-800': !invert,
-  })
+  const classes = classNames('transition text-green-800 hover:text-green-900 border-b border-b-green-400 bg-green-200/50 hover:bg-green-200/80 dark:bg-green-800/50 dark:text-green-200 dark:hover:text-green-300 rounded-sm transition', className)
 
   if (isInternalLink) {
     return (
-      <NextLink
-        href={href}
-      >
+      <NextLink href={href}>
         <a className={classes}>
           {children}
         </a>

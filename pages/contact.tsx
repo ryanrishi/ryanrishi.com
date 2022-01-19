@@ -1,6 +1,21 @@
+import classNames from 'classnames'
+
 import Head from '../components/head'
-import { H1 } from '../components/headings'
+import { FancyH1 } from '../components/headings'
 import Layout from '../components/layout'
+
+function Label({ htmlFor, children }) {
+  return (
+    <label
+      className="block uppercase tracking-wide text-gray-600 dark:text-gray-300 text-xs font-bold mb-2"
+      htmlFor={htmlFor}
+    >
+      {children}
+    </label>
+  )
+}
+
+const sharedInputClassNames = "block w-full border rounded py-3 px-4 mb-3 mt-2 leading-tight appearance-none text-gray-800 dark:text-gray-100 dark:bg-gray-800 border-gray-300 hover:border-gray-400 transition"
 
 export default function Contact() {
   return (
@@ -9,7 +24,7 @@ export default function Contact() {
         title="Contact"
       />
       <div className="container w-full md:w-3/4">
-        <H1>Contact</H1>
+        <FancyH1>Contact</FancyH1>
         <form
           className="mx-auto"
           action="https://formspree.io/f/mleppawq"
@@ -17,59 +32,50 @@ export default function Contact() {
         >
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
-              <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="grid-full-name"
-              >
+              <Label htmlFor="grid-full-name">
                 Your Name
                 <input
                   type="text"
                   id="grid-full-name"
                   name="name"
-                  className="appearance-none block w-full text-gray-700 border rounded py-3 px-4 mb-3 mt-2 leading-tight focus:outline-none focus:bg-white"
+                  className={sharedInputClassNames}
                   required
                 />
-              </label>
+              </Label>
             </div>
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
-              <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="grid-password"
-              >
+              <Label htmlFor="grid-password">
                 E-mail
                 <input
                   id="email"
                   type="email"
                   name="email"
-                  className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 mt-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                  className={sharedInputClassNames}
                   required
                 />
-              </label>
+              </Label>
             </div>
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
-              <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="grid-password"
-              >
+              <Label htmlFor="grid-password">
                 Message
                 <textarea
                   id="message"
                   name="message"
-                  className=" no-resize appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 mt-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
+                  className={classNames(sharedInputClassNames, "h-48 resize-none")}
                   required
                 />
-              </label>
+              </Label>
             </div>
           </div>
           <div className="md:flex md:items-center">
             <div className="md:w-1/3">
               <button
                 type="submit"
-                className="shadow bg-teal-400 hover:bg-teal-500 transition focus:shadow-outline focus:outline-none text-white font-semibold py-2 px-4 rounded"
+                className="shadow bg-teal-500 hover:bg-teal-600 dark:bg-teal-700 dark:hover:bg-teal-800 transition focus:shadow-outline text-teal-50 dark:text-teal-50 font-semibold py-2 px-4 uppercase italic rounded"
               >
                 Send
               </button>
