@@ -191,7 +191,7 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
 
     tooltip
       .transition()
-      .duration(transitionDuration * 2)
+      .duration(transitionDuration)
       .style('opacity', 0)
       .on('end', () => {
         tooltip.style('display', 'none')
