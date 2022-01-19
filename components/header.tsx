@@ -112,7 +112,7 @@ function MobileNav({ isOpen, setIsOpen, theme, setTheme }) {
 
 export default function Header() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
 
   return (
     <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:py-8 container dark:text-gray-50 transition">
@@ -120,7 +120,7 @@ export default function Header() {
         <MobileNav
           isOpen={isMobileNavOpen}
           setIsOpen={setIsMobileNavOpen}
-          theme={theme}
+          theme={resolvedTheme}
           setTheme={setTheme}
         />
       </div>
@@ -136,7 +136,7 @@ export default function Header() {
           ))}
         </div>
         <DarkModeButton
-          theme={theme}
+          theme={resolvedTheme}
           setTheme={setTheme}
         />
       </nav>

@@ -27,6 +27,35 @@ describe('Test Page', () => {
     })
   })
 
+  describe('Dark Mode 🌚', () => {
+    before(() => {
+      cy.visit('/_test', {
+        onBeforeLoad(win) {
+          cy.stub(win, 'matchMedia')
+            .withArgs('(prefers-color-scheme: dark)')
+            .returns({
+              matches: true,
+            })
+        },
+      })
+    })
+
+    it('shows dark mode if `prefers-color-scheme: dark`', () => {
+      cy.get('html').should('have.class', 'dark')
+      cy.percySnapshot('Dark Mode - with `prefers-color-scheme: dark`')
+    })
+
+    it('toggles between light and dark mode', () => {
+      cy.get('button[aria-label="Dark mode toggle"]:visible').click()
+      cy.get('html').should('not.have.class', 'dark')
+      cy.percySnapshot('Dark Mode - after toggling to light')
+
+      cy.get('button[aria-label="Dark mode toggle"]:visible').click()
+      cy.get('html').should('have.class', 'dark')
+      cy.percySnapshot('Dark Mode - after toggling back to dark mode')
+    })
+  })
+
   describe('Headings', () => {
     beforeEach(() => {
       cy.get('h1').contains('Headings').scrollIntoView()
@@ -37,13 +66,12 @@ describe('Test Page', () => {
     })
 
     describe('Anchors', () => {
-      it.only('shows octothorpe before heading on hover', () => {
+      it('shows octothorpe before heading on hover', () => {
         const quickBrownFox = 'The quick brown fox'
         for (let i = 1; i <= 6; i++) {
           cy.get(`h${i}`).contains(quickBrownFox).then((heading) => {
             cy.get(heading).realHover()
             cy.percySnapshot(`Test - Headings - h${i} - hover`)
-            cy.pause()
           })
         }
       })
