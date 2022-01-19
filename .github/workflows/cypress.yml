@@ -14,3 +14,8 @@ jobs:
           build: yarn build
           start: yarn start
           browser: chrome
+      - uses: actions/upload-artifacts@v2
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos
