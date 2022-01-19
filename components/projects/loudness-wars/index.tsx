@@ -101,7 +101,7 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
     /* eslint-disable indent */
       .attr('fill', 'currentColor')
       .attr('x', w)
-      .attr('y', '-0.25rem')
+      .attr('y', '-0.25em')
       .attr('text-anchor', 'end')
       .attr('font-size', '1rem')
       .text('Year')
@@ -113,7 +113,7 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
   yAxis.append('text')
     .attr('fill', 'currentColor')
     .attr('transform', 'rotate(-90)')
-    .attr('y', '1rem')
+    .attr('y', '1em')
     .style('text-anchor', 'end')
     .style('font-size', '1rem')
     .text('Loudness (dB)')
