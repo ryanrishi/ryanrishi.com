@@ -6,7 +6,6 @@ import Code from './code'
 import { H1, H2, H3, H4, H5, H6 } from './headings'
 import Link from './link'
 
-
 /**
  * @see https://tomekdev.com/posts/anchors-for-headings-in-mdx
  * @param text

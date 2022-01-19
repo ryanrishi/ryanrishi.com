@@ -3,22 +3,6 @@ import NextLink from 'next/link'
 import { ReactNode } from 'react'
 import { ImGithub, ImLinkedin, ImSoundcloud, ImTwitter, ImYoutube } from 'react-icons/im'
 
-/*
-- dark gray background
-  - dark mode: same color as rest of page
-
-Content:
-2 columns:
-Home                      Github
-About                     LinkedIn
-Blog                      Twitter
-Projects                  Contact
-
-      (c) 2022 Ryan Rishi. All Right Reserved
-      Unless explicitly expressed, all views are my own.
-
- */
-
 interface FooterLinkProps {
   children: ReactNode;
   href: string;
