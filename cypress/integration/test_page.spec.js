@@ -31,10 +31,12 @@ describe('Test Page', () => {
     before(() => {
       cy.visit('/_test', {
         onBeforeLoad(win) {
+          console.log('onBeforeLoad')
           cy.stub(win, 'matchMedia')
             .withArgs('(prefers-color-scheme: dark)')
             .returns({
               matches: true,
+              addEventListener: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
             })
         },
       })
