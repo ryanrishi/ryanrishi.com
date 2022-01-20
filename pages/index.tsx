@@ -49,7 +49,7 @@ export default function Index({ recentPosts, recentProjects }: HomepageProps) {
             <li><Link href="https://graphql.com">GraphQL</Link> (specifically <Link href="https://apollographql.com">Apollo</Link>)</li>
             <li><Link href="https://spring.io">Spring / Spring Boot</Link></li>
             <li><Link href="https://typescriptlang.org">TypeScript</Link></li>
-            <li><Link href="https://d3js.com">d3</Link> (check out my project on the <Link href="/projects/loudness-wars">Loudness Wars</Link>)</li>
+            <li><Link href="https://d3js.org">d3</Link> (check out my project on the <Link href="/projects/loudness-wars">Loudness Wars</Link>)</li>
           </ul>
         </p>
         <p className="pb-8">Outside of work, I enjoy listening to and playing music, cooking, traveling, and saying hi to dogs I pass on the street.</p>
