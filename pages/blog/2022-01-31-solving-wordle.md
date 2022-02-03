@@ -434,113 +434,73 @@ We don't care how often a word occurs, but do care about which words occur more 
 
 Let's modify our iterative approach to try more common words first.
 ```java
-@NoArgsConstructor
 class IterativeApproachWithWordFrequency implements Solver {
   private Collection<String> seeds = Collections.emptySet();
   private LinkedHashSet<String> futureGuesses = new LinkedHashSet<>();
 
-  public IterativeApproachWithWordFrequency(Collection<String> seeds) {
-    this.seeds = seeds;
-  }
-
-  @Override
-  String solve(Wordle wordle) {
-    Set<Character> lettersNotInSolution = new HashSet<>();
-    List<Character> lettersInSolution = new ArrayList<>();
+  public IterativeSolverWithWordFrequency(Collection<String> seeds) {
     futureGuesses.addAll(seeds);
-
-    while (!wordle.isSolved() && !futureGuesses.isEmpty()) {
-      String guess = futureGuesses.iterator().next();
-      futureGuesses.remove(guess);
-
-      List<LetterGuess> result = wordle.guess(guess);
-
-      if (wordle.isSolved()) {
-        return guess;
+    try (InputStream is = IterativeSolverWithWordFrequency.class.getResourceAsStream("/ngrams_count_1w.txt")) {
+      if (is == null) {
+        throw new RuntimeException("Could not load file");
       }
 
-      Set<Character> lettersInSolutionAndInCorrectLocation = result.stream()
-              .filter(LetterGuess::isInWordAndInCorrectLocation)
-              .map(lg -> lg.letter)
-              .collect(Collectors.toSet());
-
-      for (int i = 0; i < 5; i++) {
-        LetterGuess letter = result.get(i);
-        final int finalI = i;
-
-        if (letter.isInWordAndInCorrectLocation) {
-          // 🟩
-          lettersInSolution.add(letter.letter);
-          futureGuesses.removeIf(word -> word.charAt(finalI) != letter.letter);
-        } else if (letter.isInWord) {
-          // 🟨
-          lettersInSolution.add(letter.letter);
-          futureGuesses.removeIf(word -> word.charAt(finalI) == letter.letter); // since this letter is in the wrong spot
-        } else {
-          // ⬜️
-          if (!lettersInSolution.contains(letter.letter)) {
-            lettersNotInSolution.add(letter.letter);
-          }
+      Scanner scanner = new Scanner(is);
+      while (scanner.hasNext()) {
+        String word = scanner.next().split("\\s+")[0];
+        if (word.length() != 5) {
+          continue;
         }
-      }
 
-      // if solution is "feeds" and guess is "guess", the first "s" will return ⬜️, but there is still an "s" in the answer and in correct location
-      lettersNotInSolution.removeAll(lettersInSolutionAndInCorrectLocation);
-
-      if (!lettersInSolution.isEmpty() || !lettersNotInSolution.isEmpty()) {
-        futureGuesses.removeIf(word -> {
-          Set<Character> lettersInWord = word.chars().mapToObj(i -> (char) i).collect(Collectors.toSet());
-
-          if (lettersInWord.parallelStream().anyMatch(lettersNotInSolution::contains)) {
-            return true;
-          }
-
-          if (!lettersInWord.containsAll(lettersInSolution)) {
-            return true;
-          }
-
-          return false;
-        });
+        futureGuesses.add(word);
       }
     }
-
-    // couldn't solve the puzzle
-    return null;
+    catch (IOException ioe) {
+      ioe.printStackTrace();
+      throw new RuntimeException("Error loading ngrams");
+    }
   }
+
+  // `solve` method is same as iterative approach
 }
 ```
 
-I used a `LinkedHashSet` to store future guesses because ____
-- Big O? add, removeIf, iterator
+I use a `LinkedHashSet` to store future guesses because it provides predictable iteration order; that is, elements are iterated over in the same order in which they were inserted. `LinkedHashSet` also provides constant lookup time for `add(element)`, `contains(element)`, and `remove(element)` methods, meaning that those methods will take the same amount of time whether the collection has 10 elements or 10 million elements.
 
 Let's test it out.
 ```java
 @Test
-void test226_iterativeFrequency() {
-  String answer = "light";
+void testTight_iterativeFrequency_badSeed() {
+  String answer = "tight";
   Wordle wordle = new Wordle(answer);
   wordle.setDebug(true);
-  Solver solver = new IterativeSolverWithWordFrequency();
+  Solver solver = new IterativeSolverWithWordFrequency(Collections.singletonList("bight"));
   assertEquals(answer, solver.solve(wordle));
-  System.out.println("226 (iterative + frequency): " + wordle.getNumGuesses());
+  System.out.println("tight (iterative + frequency, bad seed): " + wordle.getNumGuesses());
 }
 ```
 ```
-about
-⬜️⬜️⬜️⬜️🟩
-first
-⬜️🟩⬜️⬜️🟩
+light
+⬜️🟩🟩🟩🟩
+right
+⬜️🟩🟩🟩🟩
 night
 ⬜️🟩🟩🟩🟩
-light
+might
+⬜️🟩🟩🟩🟩
+eight
+⬜️🟩🟩🟩🟩
+fight
+⬜️🟩🟩🟩🟩
+tight
 🟩🟩🟩🟩🟩
+tight (iterative + frequency, bad seed): 7
 ```
 
-Not bad&mdash; taking word frequency into account, we were able to improve a worst-case scenario
+Not bad&mdash; taking word frequency into account, we were able to improve a worst-case scenario by almost 50%. It's not enough to win the game in 6 turns, but it's enough to efficiently beat the game for most words.
+
 
 # Elimination Approach
 There's another approach that I haven't coded but have thought about. Some people use their second guess to guess a word that has none of the same characters as their first guess in order to get a better sense of what letters are in the answer. If the answer is "about" and their first guess is "tough" (⬜️🟨🟨⬜️⬜️), they would ignore the fact that there's an `ou` in the answer and instead guess something like "races" in order to see if there are common letters like `r` or `s` in the answer.
 
 I'm curious how this approach stacks up against an iterative approach. [Reach out to me](https://twitter.com/ryanrishi) if you or someone else ends up writing a program that uses this approach.
-
-# Importance of a Good Seed
