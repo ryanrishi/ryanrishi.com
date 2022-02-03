@@ -380,7 +380,7 @@ void testTight_iterative_badSeed() {
   String answer = "tight";
   Wordle wordle = new Wordle(answer);
   wordle.setDebug(true);
-  Solver solver = new IterativeSolver(Collections.singletonList("light"));
+  Solver solver = new IterativeSolver(Collections.singletonList("bight"));
   assertEquals(answer, solver.solve(wordle));
   System.out.println("tight (iterative, bad seed): " + wordle.getNumGuesses());
 }
@@ -388,8 +388,6 @@ void testTight_iterative_badSeed() {
 
 I've added some code to print the guess and result to emphasize the problem with this approach.
 ```
-light
-⬜️🟩🟩🟩🟩
 bight
 ⬜️🟩🟩🟩🟩
 dight
@@ -399,6 +397,8 @@ eight
 fight
 ⬜️🟩🟩🟩🟩
 hight
+⬜️🟩🟩🟩🟩
+light
 ⬜️🟩🟩🟩🟩
 might
 ⬜️🟩🟩🟩🟩
