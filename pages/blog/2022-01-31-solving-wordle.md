@@ -310,6 +310,9 @@ class IterativeSolver implements Solver {
   }
 }
 ```
+
+I use a `LinkedHashSet` to store future guesses because it provides predictable iteration order; that is, elements are iterated over in the same order in which they were inserted. `LinkedHashSet` also provides [constant-time performance](https://en.wikipedia.org/wiki/Time_complexity) for `add(element)`, `contains(element)`, and `remove(element)` methods, meaning that those methods will take the same amount of time whether the collection has 10 elements or 10 million elements.
+
 ```java
 @Test
 void test20220127_iterative_goodSeed() {
@@ -464,8 +467,6 @@ class IterativeApproachWithWordFrequency implements Solver {
   // `solve` method is same as iterative approach
 }
 ```
-
-I use a `LinkedHashSet` to store future guesses because it provides predictable iteration order; that is, elements are iterated over in the same order in which they were inserted. `LinkedHashSet` also provides constant lookup time for `add(element)`, `contains(element)`, and `remove(element)` methods, meaning that those methods will take the same amount of time whether the collection has 10 elements or 10 million elements.
 
 Let's test it out.
 ```java
