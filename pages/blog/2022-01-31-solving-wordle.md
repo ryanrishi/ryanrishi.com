@@ -418,16 +418,16 @@ We can improve on the above solution by guessing more common words first. Peter 
 
 Here is what the beginning of the list looks like:
 ```
-the	23135851162
-of	13151942776
-and	12997637966
-to	12136980858
-a	9081174698
-in	8469404971
-for	5933321709
-is	4705743816
-on	3750423199
-that	3400031103
+about	1226734006
+other	978481319
+which	810514085
+their	782849411
+there	701170205
+first	578161543
+would	572644147
+these	541003982
+click	536746424
+price	501651226
 ```
 
 We don't care how often a word occurs, but do care about which words occur more frequently than others.
