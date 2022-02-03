@@ -42,7 +42,7 @@ const MDXComponents = {
   pre: props => <div className="overflow-x-auto" {...props} />,
   blockquote: ({ children }) => <Blockquote>{children}</Blockquote>,
   p: ({ children }) => <p className="mb-8 transition">{children}</p>,
-  ul: ({ children }) => <ul className="list-disc list-outside px-4 mb-8 -mt-6 transition">{children}</ul>,
+  ul: ({ children }) => <ul className="list-disc list-outside px-4 mb-8 transition">{children}</ul>,
   img: props => <img className="mx-auto" {...props} />,
   table: props => <table className="w-full" {...props}></table>,
 
