@@ -234,11 +234,11 @@ Thinking back to the rules of the game, we can improve our solution by doing the
 - If the letter is not in the word (⬜️), filter out any words that _do_ have that letter
 
 For example, if the answer is `light` and our first guess is `grout` (🟨⬜️⬜️⬜️🟩), we would do the following:
-- Filter out any words that don't end in `t` (🟩). This eliminates words like `horse` and `biker` but keeps words like `blast` and `pleat`.
+- Filter out any words that don't end in `t` (🟩). This eliminates words like `horse` and `biker` but keeps words like `blast` and `pleat`
 - Filter out any words that don't have a `g` (🟨). This eliminates words like `built` and `bulbs` but keeps words like `egret` and `ought`
-- Filter out any words that contain letters that aren't in the solution (⬜️). In this example, eliminate any words that contain a `r`, `o`, or `u`.
-- Guess the first word in the set of remaining words.
-- Continue using the result of each guess to filter out.
+- Filter out any words that contain letters that aren't in the solution (⬜️). In this example, eliminate any words that contain a `r`, `o`, or `u`
+- Guess the first word in the set of remaining words
+- Continue using the result of each guess to filter out future guesses
 
 Let's put this into code.
 ```java
