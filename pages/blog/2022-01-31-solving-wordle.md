@@ -20,7 +20,7 @@ class LetterGuess {
 
 The rules behind the game are straightforward. For each letter in the guess, the following rules apply:
 - if the letter is in the correct spot, show a 🟩
-- if the letter is in the word but not int he correct spot, show a 🟨
+- if the letter is in the word but not in the correct spot, show a 🟨
 - if the letter is not in the word, show a ⬜️
 
 ```java
@@ -229,13 +229,13 @@ Guessing `about` took 60 guesses since it was at the start of the dictionary, bu
 To improve, we can leverage the result from each guess in order to inform our future guesses.
 
 Thinking back to the rules of the game, we can improve our solution by doing the following:
-- If the letter is in the word and and in the correct location (🟩), filter out any words that don't have that letter in that location
+- If the letter is in the word and in the correct location (🟩), filter out any words that don't have that letter in that location
 - If the letter is in the word but _not_ in the correct location (🟨), filter out any words that don't have that letter in the word
 - If the letter is not in the word (⬜️), filter out any words that _do_ have that letter
 
 For example, if the answer is `light` and our first guess is `grout` (🟨⬜️⬜️⬜️🟩), we would do the following:
-- Filter out any words that don't end in `t` (🟩). This eliminates words like `horse` and `biker`, but keeps words like `blast` and `pleat`.
-- Filter out any words that don't have a `g` (🟨). This eliminates words like `built` and `bulbs`, but keeps words like `egret` and `ought`
+- Filter out any words that don't end in `t` (🟩). This eliminates words like `horse` and `biker` but keeps words like `blast` and `pleat`.
+- Filter out any words that don't have a `g` (🟨). This eliminates words like `built` and `bulbs` but keeps words like `egret` and `ought`
 - Filter out any words that contain letters that aren't in the solution (⬜️). In this example, eliminate any words that contain a `r`, `o`, or `u`.
 - Guess the first word in the set of remaining words.
 - Continue using the result of each guess to filter out.
@@ -354,7 +354,7 @@ void test20220128_iterative_goodSeed() {
 2022-01-28 (iterative, bad seed): 7
 ```
 
-This approach is definitely an improvement from the brute force approach, but there's still an issue&mdash; it will still guess the words in dictionary order If the solution is `tight`, this will guess the following words in this order after determing the answer ends in `ight`:
+This approach is an improvement from the brute force approach, but there's still an issue&mdash; it will still guess the words in dictionary order If the solution is `tight`, this will guess the following words in this order after determining the answer ends in `ight`:
 - `bight` (a bend in the coast or a loop in a rope)
 - `dight` (archaic, past tense of dress?)
 - `eight`
@@ -370,7 +370,7 @@ This approach is definitely an improvement from the brute force approach, but th
 
 Some of those are reasonable guesses (`light` was the answer in Wordle #226), but some words in there are archaic words that are unlikely to be a Wordle answer.
 
-Here is a test case for that worse-case scenario.
+Here is a test case for that worst-case scenario.
 ```java
 @Test
 void testTight_iterative_badSeed() {
