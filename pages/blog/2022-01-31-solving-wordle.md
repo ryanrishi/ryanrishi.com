@@ -205,7 +205,7 @@ void testBruteForce_about() {
   Wordle wordle = new Wordle(answer);
   Solver solver = new BruteForceSolver();
   assertEquals(answer, solver.solve(wordle));
-  System.out.println("brute force: " + wordle.getNumGuesses());
+  System.out.println("brute force - about: " + wordle.getNumGuesses());
 }
 
 @Test
@@ -214,8 +214,12 @@ void testBruteForce_zorro() {
   Wordle wordle = new Wordle(answer);
   Solver solver = new BruteForceSolver();
   assertEquals(answer, solver.solve(wordle));
-  System.out.println("brute force: " + wordle.getNumGuesses());
+  System.out.println("brute force - zorro: " + wordle.getNumGuesses());
 }
+```
+```
+brute force - about: 60
+brute force - zorro: 15907
 ```
 
 Guessing `about` took 60 guesses since it was at the start of the dictionary, but guessing `zorro` required 15,907 guesses because this program has to guess almost every word in the dictionary before finding the solution.
