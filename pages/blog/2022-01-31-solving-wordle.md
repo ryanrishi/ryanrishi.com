@@ -310,6 +310,49 @@ class IterativeSolver implements Solver {
   }
 }
 ```
+```java
+@Test
+void test20220127_iterative_goodSeed() {
+  String answer = "mount";
+  Wordle wordle = new Wordle(answer);
+  Solver solver = new IterativeSolver(Collections.singletonList("about"));
+  assertEquals(answer, solver.solve(wordle));
+  System.out.println("2022-01-27 (iterative, good seed): " + wordle.getNumGuesses());
+}
+
+@Test
+void test20220127_iterative_badSeed() {
+  String answer = "mount";
+  Wordle wordle = new Wordle(answer);
+  Solver solver = new IterativeSolver(Collections.singletonList("adieu"));
+  assertEquals(answer, solver.solve(wordle));
+  System.out.println("2022-01-27 (iterative, bad seed): " + wordle.getNumGuesses());
+}
+
+@Test
+void test20220128_iterative_badSeed() {
+  String answer = "perky";
+  Wordle wordle = new Wordle(answer);
+  Solver solver = new IterativeSolver(Collections.singletonList("about"));
+  assertEquals(answer, solver.solve(wordle));
+  System.out.println("2022-01-28 (iterative, bad seed): " + wordle.getNumGuesses());
+}
+
+@Test
+void test20220128_iterative_goodSeed() {
+  String answer = "perky";
+  Wordle wordle = new Wordle(answer);
+  Solver solver = new IterativeSolver(Collections.singletonList("pesky"));
+  assertEquals(answer, solver.solve(wordle));
+  System.out.println("2022-01-28 (iterative, good seed): " + wordle.getNumGuesses());
+}
+```
+```
+2022-01-27 (iterative, good seed): 4
+2022-01-27 (iterative, bad seed): 5
+2022-01-28 (iterative, good seed): 4
+2022-01-28 (iterative, bad seed): 7
+```
 
 This approach is definitely an improvement from the brute force approach, but there's still an issue&mdash; it will still guess the words in dictionary order If the solution is `tight`, this will guess the following words in this order after determing the answer ends in `ight`:
 - `bight` (a bend in the coast or a loop in a rope)
@@ -326,6 +369,48 @@ This approach is definitely an improvement from the brute force approach, but th
 - `tight`
 
 Some of those are reasonable guesses (`light` was the answer in Wordle #226), but some words in there are archaic words that are unlikely to be a Wordle answer.
+
+Here is a test case for that worse-case scenario.
+```java
+@Test
+void testTight_iterative_badSeed() {
+  String answer = "tight";
+  Wordle wordle = new Wordle(answer);
+  wordle.setDebug(true);
+  Solver solver = new IterativeSolver(Collections.singletonList("light"));
+  assertEquals(answer, solver.solve(wordle));
+  System.out.println("tight (iterative, bad seed): " + wordle.getNumGuesses());
+}
+```
+
+I've added some code to print the guess and result to emphasize the problem with this approach.
+```
+light
+⬜️🟩🟩🟩🟩
+bight
+⬜️🟩🟩🟩🟩
+dight
+⬜️🟩🟩🟩🟩
+eight
+⬜️🟩🟩🟩🟩
+fight
+⬜️🟩🟩🟩🟩
+hight
+⬜️🟩🟩🟩🟩
+might
+⬜️🟩🟩🟩🟩
+night
+⬜️🟩🟩🟩🟩
+pight
+⬜️🟩🟩🟩🟩
+right
+⬜️🟩🟩🟩🟩
+sight
+⬜️🟩🟩🟩🟩
+tight
+🟩🟩🟩🟩🟩
+tight (iterative, bad seed): 12
+```
 
 
 # Iterative Approach Using Word Frequency
