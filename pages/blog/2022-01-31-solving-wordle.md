@@ -160,14 +160,14 @@ class BruteForceSolver implements Solver {
 
   public BruteForceSolver() {
     // load the dictionary
-  try (InputStream is = BruteForceSolver.class.getResourceAsStream("/words_alpha.txt")) {
-    if (is == null) {
-      throw new RuntimeException("Could not load file");
-    }
+    try (InputStream is = BruteForceSolver.class.getResourceAsStream("/words_alpha.txt")) {
+      if (is == null) {
+        throw new RuntimeException("Could not load file");
+      }
 
-    Scanner scanner = new Scanner(is);
-    while (scanner.hasNext()) {
-      String word = scanner.next();
+      Scanner scanner = new Scanner(is);
+      while (scanner.hasNext()) {
+        String word = scanner.next();
         if (word.length() != 5) {
           // skip over words that aren't 5 letters long
           continue;
