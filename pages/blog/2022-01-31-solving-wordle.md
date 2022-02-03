@@ -12,9 +12,9 @@ Here's a class to hold the result of each letter in the guess
 @Getter
 @RequiredArgsConstructor
 class LetterGuess {
-    private @NonNull char letter;
-    private boolean isInWord;
-    private boolean isInWordAndInCorrectLocation;
+  private @NonNull char letter;
+  private boolean isInWord;
+  private boolean isInWordAndInCorrectLocation;
 }
 ```
 
@@ -184,11 +184,11 @@ class BruteForceSolver implements Solver {
   @Override
   String solve(Wordle wordle) {
     for (String word : dictionary) {
-        wordle.guess(word);
+      wordle.guess(word);
 
-        if (wordle.isSolved()) {
-            return word;
-        }
+      if (wordle.isSolved()) {
+        return word;
+      }
     }
 
     // couldn't solve the game
@@ -253,7 +253,7 @@ class IterativeSolver implements Solver {
       List<LetterGuess> result = wordle.guess(guess);
 
       if (wordle.isSolved()) {
-          return guess;
+        return guess;
       }
 
       Set<Character> lettersInSolutionAndInCorrectLocation = result.stream()
