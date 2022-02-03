@@ -6,8 +6,19 @@ date:         "2022-01-31T00:00:00Z"
 layout:       blog
 ---
 
+[Wordle](https://www.powerlanguage.co.uk/wordle/) has taken the world by storm. Here's a program to solve it efficiently.
+
+The rules behind the game are straightforward. For each letter in the guess, the following rules apply:
+- if the letter is in the correct spot, show a 🟩
+- if the letter is in the word but not in the correct spot, show a 🟨
+- if the letter is not in the word, show a ⬜️
+
+For example, <span className="font-mono font-black tracking-widest"><span className="bg-green-400 text-green-900 dark:bg-green-700 dark:text-green-100">W</span>EARY</span> means that `W` is in the word and in the correct spot. <span className="font-mono font-black tracking-widest">P<span className="bg-yellow-300 text-yellow-900 dark:bg-yellow-600 dark:text-yellow-100">I</span>LLS</span> means that `I` is in the word but in the wrong spot. <span className="font-mono font-black tracking-widest">VAG<span className="bg-gray-300 text-gray-800 dark:bg-gray-600 dark:text-gray-100">U</span>E</span> means that `U` is not in the word.
+
+The examples below are available on [Github](https://github.com/ryanrishi/wordle-solver).
+
 # Recreating Wordle For Testing
-Here's a class to hold the result of each letter in the guess
+Here's a class to hold the result of each letter in the guess.
 ```java
 @Getter
 @RequiredArgsConstructor
@@ -18,11 +29,7 @@ class LetterGuess {
 }
 ```
 
-The rules behind the game are straightforward. For each letter in the guess, the following rules apply:
-- if the letter is in the correct spot, show a 🟩
-- if the letter is in the word but not in the correct spot, show a 🟨
-- if the letter is not in the word, show a ⬜️
-
+Here's a representation of the game. Each game has an answer and provides a way to guess that answer.
 ```java
 class Wordle {
   public static final int WORD_LENGTH = 5;
@@ -160,14 +167,14 @@ class BruteForceSolver implements Solver {
 
   public BruteForceSolver() {
     // load the dictionary
-  try (InputStream is = BruteForceSolver.class.getResourceAsStream("/words_alpha.txt")) {
-    if (is == null) {
-      throw new RuntimeException("Could not load file");
-    }
+    try (InputStream is = BruteForceSolver.class.getResourceAsStream("/words_alpha.txt")) {
+      if (is == null) {
+        throw new RuntimeException("Could not load file");
+      }
 
-    Scanner scanner = new Scanner(is);
-    while (scanner.hasNext()) {
-      String word = scanner.next();
+      Scanner scanner = new Scanner(is);
+      while (scanner.hasNext()) {
+        String word = scanner.next();
         if (word.length() != 5) {
           // skip over words that aren't 5 letters long
           continue;
@@ -234,11 +241,11 @@ Thinking back to the rules of the game, we can improve our solution by doing the
 - If the letter is not in the word (⬜️), filter out any words that _do_ have that letter
 
 For example, if the answer is `light` and our first guess is `grout` (🟨⬜️⬜️⬜️🟩), we would do the following:
-- Filter out any words that don't end in `t` (🟩). This eliminates words like `horse` and `biker` but keeps words like `blast` and `pleat`.
+- Filter out any words that don't end in `t` (🟩). This eliminates words like `horse` and `biker` but keeps words like `blast` and `pleat`
 - Filter out any words that don't have a `g` (🟨). This eliminates words like `built` and `bulbs` but keeps words like `egret` and `ought`
-- Filter out any words that contain letters that aren't in the solution (⬜️). In this example, eliminate any words that contain a `r`, `o`, or `u`.
-- Guess the first word in the set of remaining words.
-- Continue using the result of each guess to filter out.
+- Filter out any words that contain letters that aren't in the solution (⬜️). In this example, eliminate any words that contain a `r`, `o`, or `u`
+- Guess the first word in the set of remaining words
+- Continue using the result of each guess to filter out future guesses
 
 Let's put this into code.
 ```java
@@ -310,6 +317,9 @@ class IterativeSolver implements Solver {
   }
 }
 ```
+
+I use a `LinkedHashSet` to store future guesses because it provides predictable iteration order; that is, elements are iterated over in the same order in which they were inserted. `LinkedHashSet` also provides [constant-time performance](https://en.wikipedia.org/wiki/Time_complexity) for `add(element)`, `contains(element)`, and `remove(element)` methods, meaning that those methods will take the same amount of time whether the collection has 10 elements or 10 million elements.
+
 ```java
 @Test
 void test20220127_iterative_goodSeed() {
@@ -368,16 +378,14 @@ This approach is an improvement from the brute force approach, but there's still
 - `sight`
 - `tight`
 
-Some of those are reasonable guesses (`light` was the answer in Wordle #226), but some words in there are archaic words that are unlikely to be a Wordle answer.
-
-Here is a test case for that worst-case scenario.
+Here is a test case to demonstrate that worst-case scenario.
 ```java
 @Test
 void testTight_iterative_badSeed() {
   String answer = "tight";
   Wordle wordle = new Wordle(answer);
   wordle.setDebug(true);
-  Solver solver = new IterativeSolver(Collections.singletonList("light"));
+  Solver solver = new IterativeSolver(Collections.singletonList("bight"));
   assertEquals(answer, solver.solve(wordle));
   System.out.println("tight (iterative, bad seed): " + wordle.getNumGuesses());
 }
@@ -385,8 +393,6 @@ void testTight_iterative_badSeed() {
 
 I've added some code to print the guess and result to emphasize the problem with this approach.
 ```
-light
-⬜️🟩🟩🟩🟩
 bight
 ⬜️🟩🟩🟩🟩
 dight
@@ -396,6 +402,8 @@ eight
 fight
 ⬜️🟩🟩🟩🟩
 hight
+⬜️🟩🟩🟩🟩
+light
 ⬜️🟩🟩🟩🟩
 might
 ⬜️🟩🟩🟩🟩
@@ -411,6 +419,8 @@ tight
 🟩🟩🟩🟩🟩
 tight (iterative, bad seed): 12
 ```
+
+Some of those are reasonable guesses (`light` was the answer in Wordle #226), but some words in there are archaic words that are unlikely to be a Wordle answer.
 
 
 # Iterative Approach Using Word Frequency
@@ -430,7 +440,7 @@ click	536746424
 price	501651226
 ```
 
-We don't care how often a word occurs, but do care about which words occur more frequently than others.
+We don't care how often a word occurs, but do care about the order in which each word occurs.
 
 Let's modify our iterative approach to try more common words first.
 ```java
@@ -447,7 +457,7 @@ class IterativeApproachWithWordFrequency implements Solver {
 
       Scanner scanner = new Scanner(is);
       while (scanner.hasNext()) {
-        String word = scanner.next().split("\\s+")[0];
+        String word = scanner.next().split("\\s+")[0];  // extract just the word from each line
         if (word.length() != 5) {
           continue;
         }
@@ -464,8 +474,6 @@ class IterativeApproachWithWordFrequency implements Solver {
   // `solve` method is same as iterative approach
 }
 ```
-
-I use a `LinkedHashSet` to store future guesses because it provides predictable iteration order; that is, elements are iterated over in the same order in which they were inserted. `LinkedHashSet` also provides constant lookup time for `add(element)`, `contains(element)`, and `remove(element)` methods, meaning that those methods will take the same amount of time whether the collection has 10 elements or 10 million elements.
 
 Let's test it out.
 ```java
@@ -501,6 +509,6 @@ Not bad&mdash; taking word frequency into account, we were able to improve a wor
 
 
 # Elimination Approach
-There's another approach that I haven't coded but have thought about. Some people use their second guess to guess a word that has none of the same characters as their first guess in order to get a better sense of what letters are in the answer. If the answer is "about" and their first guess is "tough" (⬜️🟨🟨⬜️⬜️), they would ignore the fact that there's an `ou` in the answer and instead guess something like "races" in order to see if there are common letters like `r` or `s` in the answer.
+There's another approach that I haven't coded but have thought about. Some people use their second guess to guess a word that has none of the same characters as their first guess in order to get a better sense of what letters are in the answer. If the answer is `about` and their first guess is `tough` (⬜️🟨🟨⬜️⬜️), they would ignore the fact that there's an `ou` in the answer and instead guess something like `races` in order to see if there are common letters like `r` or `s` in the answer.
 
 I'm curious how this approach stacks up against an iterative approach. [Reach out to me](https://twitter.com/ryanrishi) if you or someone else ends up writing a program that uses this approach.
