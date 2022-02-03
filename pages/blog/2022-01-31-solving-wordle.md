@@ -23,6 +23,7 @@ The rules behind the game are straightforward. For each letter in the guess, the
 - if the letter is in the word but not in the correct spot, show a 🟨
 - if the letter is not in the word, show a ⬜️
 
+Here's a representation of the game. Each game has an answer and provides a way to guess that answer.
 ```java
 class Wordle {
   public static final int WORD_LENGTH = 5;
@@ -371,9 +372,7 @@ This approach is an improvement from the brute force approach, but there's still
 - `sight`
 - `tight`
 
-Some of those are reasonable guesses (`light` was the answer in Wordle #226), but some words in there are archaic words that are unlikely to be a Wordle answer.
-
-Here is a test case for that worst-case scenario.
+Here is a test case to demonstrate that worst-case scenario.
 ```java
 @Test
 void testTight_iterative_badSeed() {
@@ -415,6 +414,8 @@ tight
 tight (iterative, bad seed): 12
 ```
 
+Some of those are reasonable guesses (`light` was the answer in Wordle #226), but some words in there are archaic words that are unlikely to be a Wordle answer.
+
 
 # Iterative Approach Using Word Frequency
 We can improve on the above solution by guessing more common words first. Peter Norvig, the Director of Research at Google, has compiled a [list](http://norvig.com/ngrams/) of the most common ~300,000 words in English. We can use this list in order to guess more common words prior to guessing obscure, archaic words.
@@ -433,7 +434,7 @@ click	536746424
 price	501651226
 ```
 
-We don't care how often a word occurs, but do care about which words occur more frequently than others.
+We don't care how often a word occurs, but do care about the order in which each word occurs.
 
 Let's modify our iterative approach to try more common words first.
 ```java
@@ -450,7 +451,7 @@ class IterativeApproachWithWordFrequency implements Solver {
 
       Scanner scanner = new Scanner(is);
       while (scanner.hasNext()) {
-        String word = scanner.next().split("\\s+")[0];
+        String word = scanner.next().split("\\s+")[0];  // extract just the word from each line
         if (word.length() != 5) {
           continue;
         }
@@ -502,6 +503,6 @@ Not bad&mdash; taking word frequency into account, we were able to improve a wor
 
 
 # Elimination Approach
-There's another approach that I haven't coded but have thought about. Some people use their second guess to guess a word that has none of the same characters as their first guess in order to get a better sense of what letters are in the answer. If the answer is "about" and their first guess is "tough" (⬜️🟨🟨⬜️⬜️), they would ignore the fact that there's an `ou` in the answer and instead guess something like "races" in order to see if there are common letters like `r` or `s` in the answer.
+There's another approach that I haven't coded but have thought about. Some people use their second guess to guess a word that has none of the same characters as their first guess in order to get a better sense of what letters are in the answer. If the answer is `about` and their first guess is `tough` (⬜️🟨🟨⬜️⬜️), they would ignore the fact that there's an `ou` in the answer and instead guess something like `races` in order to see if there are common letters like `r` or `s` in the answer.
 
 I'm curious how this approach stacks up against an iterative approach. [Reach out to me](https://twitter.com/ryanrishi) if you or someone else ends up writing a program that uses this approach.
