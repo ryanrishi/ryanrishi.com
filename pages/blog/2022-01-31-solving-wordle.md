@@ -25,40 +25,82 @@ The rules behind the game are straightforward. For each letter in the guess, the
 
 ```java
 class Wordle {
-  private String answer;
+  public static final int WORD_LENGTH = 5;
+
+  private final String answer;
 
   @Getter
-  private boolean solved = false;
+  private int numGuesses = 0;
+
+  @Getter
+  private boolean solved;
 
   public Wordle(String answer) {
-    this.answer = answer;
+    this.answer = answer.toLowerCase();
+  }
+
+  /**
+   * Something that shouldn't stop the game, just something wrong with your guess.
+   */
+  static class BadGuessException extends IllegalArgumentException {
+    public BadGuessException(String msg) {
+      super(msg);
+    }
   }
 
   public List<LetterGuess> guess(String guess) {
-    if (answer.equals(guess)) {
-      solved = true;
-      return null;
+    if (guess.length() != WORD_LENGTH) {
+      throw new BadGuessException(String.format("Guess must be %d characters long", WORD_LENGTH));
     }
 
+    guess = guess.toLowerCase();
+    ++numGuesses;
+
+    if (answer.equals(guess)) {
+      // victory
+      solved = true;
+
+      return Collections.emptyList();
+    }
+
+    // use a map of letter in answer => number of times this letter occurs in the answer
+    Map<Character, Integer> letterFrequencies = getLetterFrequencyMap();
     List<LetterGuess> result = new ArrayList<>();
 
+    // handle letters in correct location first
     for (int i = 0; i < guess.length(); i++) {
       char c = guess.charAt(i);
       LetterGuess letterGuess = new LetterGuess(c);
 
       if (c == answer.charAt(i)) {
-          letterGuess.isInWord = true;
-          letterGuess.isInWordAndInCorrectLocation = true;
-          letterFrequencies.put(c, letterFrequencies.get(c) - 1);
-      } else if (letterFrequencies.getOrDefault(c, 0) > 0) {
-          letterGuess.isInWord = true;
-          letterFrequencies.put(c, letterFrequencies.get(c) - 1);
+        letterGuess.isInWord = true;
+        letterGuess.isInWordAndInCorrectLocation = true;
+        letterFrequencies.put(c, letterFrequencies.get(c) - 1);
       }
 
       result.add(letterGuess);
     }
 
+    for (int i = 0; i < 5; i++) {
+      char c = guess.charAt(i);
+
+      if (letterFrequencies.getOrDefault(c, 0) > 0) {
+        result.get(i).isInWord = true;
+        letterFrequencies.put(c, letterFrequencies.get(c) - 1);
+      }
+    }
+
     return result;
+  }
+
+  private Map<Character, Integer> getLetterFrequencyMap() {
+    Map<Character, Integer> letterFrequencies = new HashMap<>();
+    for (char c : answer.toCharArray()) {
+      letterFrequencies.putIfAbsent(c, 0);
+      letterFrequencies.put(c, letterFrequencies.get(c) + 1);
+    }
+
+    return letterFrequencies;
   }
 }
 ```
@@ -180,22 +222,31 @@ Guessing `about` took 60 guesses since it was at the start of the dictionary, bu
 
 
 # Iterative Approach
-We can leverage the result from each guess in order to inform our future guesses.
+To improve, we can leverage the result from each guess in order to inform our future guesses.
 
 Thinking back to the rules of the game, we can improve our solution by doing the following:
 - If the letter is in the word and and in the correct location (🟩), filter out any words that don't have that letter in that location
 - If the letter is in the word but _not_ in the correct location (🟨), filter out any words that don't have that letter in the word
 - If the letter is not in the word (⬜️), filter out any words that _do_ have that letter
 
+For example, if the answer is `light` and our first guess is `grout` (🟨⬜️⬜️⬜️🟩), we would do the following:
+- Filter out any words that don't end in `t` (🟩). This eliminates words like `horse` and `biker`, but keeps words like `blast` and `pleat`.
+- Filter out any words that don't have a `g` (🟨). This eliminates words like `built` and `bulbs`, but keeps words like `egret` and `ought`
+- Filter out any words that contain letters that aren't in the solution (⬜️). In this example, eliminate any words that contain a `r`, `o`, or `u`.
+- Guess the first word in the set of remaining words.
+- Continue using the result of each guess to filter out.
+
 Let's put this into code.
 ```java
 class IterativeSolver implements Solver {
   @Override
-  String solve(Wordle wordle) {
+  public String solve(Wordle wordle) {
+    Set<String> futureGuesses = new LinkedHashSet<>(seeds);
+    futureGuesses.addAll(dictionary);
     Set<Character> lettersNotInSolution = new HashSet<>();
     List<Character> lettersInSolution = new ArrayList<>();
 
-    while (!wordle.isSolved && !futureGuesses.isEmpty()) {
+    while (!wordle.isSolved() && !futureGuesses.isEmpty()) {
       String guess = futureGuesses.iterator().next();
       futureGuesses.remove(guess);
 
@@ -204,6 +255,11 @@ class IterativeSolver implements Solver {
       if (wordle.isSolved()) {
           return guess;
       }
+
+      Set<Character> lettersInSolutionAndInCorrectLocation = result.stream()
+              .filter(LetterGuess::isInWordAndInCorrectLocation)
+              .map(lg -> lg.letter)
+              .collect(Collectors.toSet());
 
       for (int i = 0; i < 5; i++) {
         LetterGuess letter = result.get(i);
@@ -225,6 +281,9 @@ class IterativeSolver implements Solver {
         }
       }
 
+      // if solution is "feeds" and guess is "guess", the first "s" will return ⬜️, but there is still an "s" in the answer and in correct location
+      lettersNotInSolution.removeAll(lettersInSolutionAndInCorrectLocation);
+
       if (!lettersInSolution.isEmpty() || !lettersNotInSolution.isEmpty()) {
         futureGuesses.removeIf(word -> {
           Set<Character> lettersInWord = word.chars().mapToObj(i -> (char) i).collect(Collectors.toSet());
@@ -242,13 +301,13 @@ class IterativeSolver implements Solver {
       }
     }
 
-    // couldn't solve the game
+    // couldn't solve the puzzle
     return null;
   }
 }
 ```
 
-This approach is definitely an improvement from the brute force approach, but there's still an issue&mdash; for some words, like `_ight`, it will still guess in dictionary order. If the solution is `tight`, this will guess the following words after determing the answer ends in `ight`:
+This approach is definitely an improvement from the brute force approach, but there's still an issue&mdash; it will still guess the words in dictionary order If the solution is `tight`, this will guess the following words in this order after determing the answer ends in `ight`:
 - `bight` (a bend in the coast or a loop in a rope)
 - `dight` (archaic, past tense of dress?)
 - `eight`
@@ -262,7 +321,8 @@ This approach is definitely an improvement from the brute force approach, but th
 - `sight`
 - `tight`
 
-Some of those are reasonable guesses (`light` was the answer to Wordle #226), but it will still take at least 11 guesses to reach "tight" after determing that the answer looks like `_ight`.
+Some of those are reasonable guesses (`light` was the answer in Wordle #226), but some words in there are archaic words that are unlikely to be a Wordle answer.
+
 
 # Iterative Approach Using Word Frequency
 We can improve on the above solution by guessing more common words first. Peter Norvig, the Director of Research at Google, has compiled a [list](http://norvig.com/ngrams/) of the most common ~300,000 words in English. We can use this list in order to guess more common words prior to guessing obscure, archaic words.
@@ -281,6 +341,113 @@ on	3750423199
 that	3400031103
 ```
 
+We don't care how often a word occurs, but do care about which words occur more frequently than others.
+
+Let's modify our iterative approach to try more common words first.
+```java
+@NoArgsConstructor
+class IterativeApproachWithWordFrequency implements Solver {
+  private Collection<String> seeds = Collections.emptySet();
+  private LinkedHashSet<String> futureGuesses = new LinkedHashSet<>();
+
+  public IterativeApproachWithWordFrequency(Collection<String> seeds) {
+    this.seeds = seeds;
+  }
+
+  @Override
+  String solve(Wordle wordle) {
+    Set<Character> lettersNotInSolution = new HashSet<>();
+    List<Character> lettersInSolution = new ArrayList<>();
+    futureGuesses.addAll(seeds);
+
+    while (!wordle.isSolved() && !futureGuesses.isEmpty()) {
+      String guess = futureGuesses.iterator().next();
+      futureGuesses.remove(guess);
+
+      List<LetterGuess> result = wordle.guess(guess);
+
+      if (wordle.isSolved()) {
+        return guess;
+      }
+
+      Set<Character> lettersInSolutionAndInCorrectLocation = result.stream()
+              .filter(LetterGuess::isInWordAndInCorrectLocation)
+              .map(lg -> lg.letter)
+              .collect(Collectors.toSet());
+
+      for (int i = 0; i < 5; i++) {
+        LetterGuess letter = result.get(i);
+        final int finalI = i;
+
+        if (letter.isInWordAndInCorrectLocation) {
+          // 🟩
+          lettersInSolution.add(letter.letter);
+          futureGuesses.removeIf(word -> word.charAt(finalI) != letter.letter);
+        } else if (letter.isInWord) {
+          // 🟨
+          lettersInSolution.add(letter.letter);
+          futureGuesses.removeIf(word -> word.charAt(finalI) == letter.letter); // since this letter is in the wrong spot
+        } else {
+          // ⬜️
+          if (!lettersInSolution.contains(letter.letter)) {
+            lettersNotInSolution.add(letter.letter);
+          }
+        }
+      }
+
+      // if solution is "feeds" and guess is "guess", the first "s" will return ⬜️, but there is still an "s" in the answer and in correct location
+      lettersNotInSolution.removeAll(lettersInSolutionAndInCorrectLocation);
+
+      if (!lettersInSolution.isEmpty() || !lettersNotInSolution.isEmpty()) {
+        futureGuesses.removeIf(word -> {
+          Set<Character> lettersInWord = word.chars().mapToObj(i -> (char) i).collect(Collectors.toSet());
+
+          if (lettersInWord.parallelStream().anyMatch(lettersNotInSolution::contains)) {
+            return true;
+          }
+
+          if (!lettersInWord.containsAll(lettersInSolution)) {
+            return true;
+          }
+
+          return false;
+        });
+      }
+    }
+
+    // couldn't solve the puzzle
+    return null;
+  }
+}
+```
+
+I used a `LinkedHashSet` to store future guesses because ____
+- Big O? add, removeIf, iterator
+
+Let's test it out.
+```java
+@Test
+void test226_iterativeFrequency() {
+  String answer = "light";
+  Wordle wordle = new Wordle(answer);
+  wordle.setDebug(true);
+  Solver solver = new IterativeSolverWithWordFrequency();
+  assertEquals(answer, solver.solve(wordle));
+  System.out.println("226 (iterative + frequency): " + wordle.getNumGuesses());
+}
+```
+```
+about
+⬜️⬜️⬜️⬜️🟩
+first
+⬜️🟩⬜️⬜️🟩
+night
+⬜️🟩🟩🟩🟩
+light
+🟩🟩🟩🟩🟩
+```
+
+Not bad&mdash; taking word frequency into account, we were able to improve a worst-case scenario
 
 # Elimination Approach
 There's another approach that I haven't coded but have thought about. Some people use their second guess to guess a word that has none of the same characters as their first guess in order to get a better sense of what letters are in the answer. If the answer is "about" and their first guess is "tough" (⬜️🟨🟨⬜️⬜️), they would ignore the fact that there's an `ou` in the answer and instead guess something like "races" in order to see if there are common letters like `r` or `s` in the answer.
