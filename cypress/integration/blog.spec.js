@@ -2,6 +2,11 @@ describe('Blog', () => {
   beforeEach(() => {
     cy.visit('/blog')
     cy.viewport('ipad-2') // a tall viewport since some  of these pages are long
+    cy.get('[data-test-blog-post]').then((posts) => {
+      for (let i = 0; i < posts.length; i++) {
+        cy.get('[data-test-blog-post]').eq(i).should('have.css', 'opacity', '1') // wait for transitions to finish
+      }
+    })
   })
 
   describe('meta tags', () => {
