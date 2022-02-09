@@ -4,6 +4,7 @@
   "private": true,
   "author": "Ryan Rishi <ryan@ryanrishi.com>",
   "scripts": {
+    "cypress:open": "cypress open",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
