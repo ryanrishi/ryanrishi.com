@@ -78,3 +78,25 @@ resource "aws_route53_record" "ns" {
     "${aws_route53_zone.zone.name_servers.3}."
   ]
 }
+
+resource "aws_route53_record" "spf" {
+  name    = var.root_domain_name
+  type    = "SPF"
+  ttl     = 300
+  zone_id = aws_route53_zone.zone.zone_id
+
+  records = [
+    "v=spf1 include:_spf.google.com ~all"
+  ]
+}
+
+resource "aws_route53_record" "spf_txt" {
+  name    = var.root_domain_name
+  type    = "TXT"
+  ttl     = 300
+  zone_id = aws_route53_zone.zone.zone_id
+
+  records = [
+    "v=spf1 include:_spf.google.com ~all"
+  ]
+}
