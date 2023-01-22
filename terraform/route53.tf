@@ -100,3 +100,14 @@ resource "aws_route53_record" "spf_txt" {
     "v=spf1 include:_spf.google.com ~all"
   ]
 }
+
+resource "aws_route53_record" "dkim_txt" {
+  name = "google._domainkey"
+  type = "TXT"
+  ttl = 300
+  zone_id = aws_route53_zone.zone.zone_id
+
+  records = [
+"v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkhm9FqvwwlTht5WXKID63gbqyUT7Hy6Klx9rGLA4h2Jf0CdbqjLoAg0apdtNOaL58BdSv3H5gRklzjJ2zWTnlvrs+nPr966Ldoubd77YkJBn4yvHRcTVg2vvyWV4JpLaPfGzHESMg/u4UEP4PnyVLXDg93a6xlAIwCGMhiwff4nB/FtsNv1SzXAEF5RX9w\"\"VoAUnfHeNnTyyjx4Rr6tpixB9vWYuSpU29zbUMXTDAC5JFCVMFvrz6pca1qJO5lGUHZMko5PB44rYP9PFHz0RStPtbNPrCSGHN76yMRjz70zuE9F8ueYaYCnctuPqnKNO9Zuw8o8gqKqtLAgBNmJ5FdQIDAQAB"
+  ]
+}
