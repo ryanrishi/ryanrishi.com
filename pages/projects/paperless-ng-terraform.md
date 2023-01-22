@@ -1,0 +1,21 @@
+---
+name:         paperless-ng Terraform
+layout:       projects/default
+description:  Terraform module to set up paperless-ng on AWS.
+image:
+  src:        /img/projects/paperless-ng-terraform/wesley-tingey-snNHKZ-mGfE-unsplash.jpg
+  width:      6000
+  height:     4000
+permalink:    /projects/paperless-ng-terraform
+date:         "2023-01-22T00:00:00Z"
+---
+
+This module creates the necessary resources to run [paperless-ng](https://paperless-ng.readthedocs.io/en/latest/index.html) on AWS.
+
+The resources managed by this module are:
+- Aurora RDS (serverless, Postgres)
+- ElastiCache (Redis)
+- EC2
+- Security groups, EBS attachments, passwords, etc. for the above
+
+Source code available [here](https://github.com/ryanrishi/paperless-ng-terraform).
