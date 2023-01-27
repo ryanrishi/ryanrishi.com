@@ -75,7 +75,7 @@ export default function Contact() {
             <div className="md:w-1/3">
               <button
                 type="submit"
-                className="shadow bg-teal-500 hover:bg-teal-600 dark:bg-teal-700 dark:hover:bg-teal-800 transition focus:shadow-outline text-teal-50 dark:text-teal-50 font-semibold py-2 px-4 uppercase italic rounded"
+                className="shadow bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-700 transition focus:shadow-outline focus:outline-teal-300 dark:focus:outline-teal-800 text-teal-50 dark:text-teal-50 font-semibold py-2 px-4 uppercase italic rounded"
               >
                 Send
               </button>
