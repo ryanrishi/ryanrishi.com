@@ -10,7 +10,7 @@ interface FooterLinkProps {
 }
 
 const FooterLink = ({ children, href, className }: FooterLinkProps) => {
-  const classes = classNames('flex flex-row hover:text-gray-600 transition py-2 items-center space-x-2', className)
+  const classes = classNames('flex flex-row hover:text-slate-600 transition py-2 items-center space-x-2', className)
 
   const isInternalLink = href.startsWith('/') // doesn't handle links like '//google.com', but I generally don't use those
 
@@ -23,7 +23,7 @@ const FooterLink = ({ children, href, className }: FooterLinkProps) => {
 
 export default function Footer() {
   return (
-    <footer className="text-gray-500 dark:bg-gray-900 transition">
+    <footer>
       <div className="container max-w-4xl p-4 lg:py-8 flex flex-row justify-around">
         <div className="flex flex-col">
           <FooterLink href="/">Home</FooterLink>
@@ -55,7 +55,7 @@ export default function Footer() {
           </FooterLink>
         </div>
       </div>
-      <div className="container flex justify-center align-middle py-4 text-gray-400 dark:text-gray-700">
+      <div className="container flex justify-center align-middle py-4 text-slate-400 dark:text-slate-600 transition-colors">
         <p>&copy; Copyright&nbsp;{ new Date().getFullYear() }&nbsp;Ryan Rishi</p>
       </div>
     </footer>

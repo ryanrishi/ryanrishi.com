@@ -38,19 +38,19 @@ export default function BlogIndex({ posts }: BlogProps) {
           style={style}
           key={i}
         >
-          <H1 className="hover:text-gray-900 dark:hover:text-gray-300">
+          <H1 className="hover:text-slate-900 dark:hover:text-slate-300">
             <Link
               href={`/blog/${posts[i].slug}`}
             >
               {posts[i].title}
             </Link>
           </H1>
-          <p className="pb-4 text-gray-700 dark:text-gray-400 transition" data-test-blog-post-date>{dayjs.utc(posts[i].date).format('MMMM D, YYYY')}</p>
+          <p className="pb-4 text-slate-700 dark:text-slate-400 transition" data-test-blog-post-date>{dayjs.utc(posts[i].date).format('MMMM D, YYYY')}</p>
 
           <div className="flex flex-col">
             <p className="transition">{posts[i].description}</p>
             <Link href={`/blog/${posts[i].slug}`}>
-              <a className="flex justify-end pt-4 italic uppercase font-bold dark:text-gray-100 transition">
+              <a className="flex justify-end pt-4 italic uppercase font-bold dark:text-slate-100 transition">
                 Read more &raquo;
               </a>
             </Link>

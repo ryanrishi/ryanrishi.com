@@ -26,7 +26,7 @@ export default function Index({ children, frontMatter }) {
       <div>
         <div className="leading-tight">
           <H1>{title}</H1>
-          <p className="mb-8 text-gray-500 dark:text-gray-400 transition">{dayjs.utc(date).format('MMMM D, YYYY')}</p>
+          <p className="mb-8 text-slate-500 dark:text-slate-400 transition">{dayjs.utc(date).format('MMMM D, YYYY')}</p>
         </div>
 
         <div className="leading-8">
@@ -37,7 +37,7 @@ export default function Index({ children, frontMatter }) {
         </div>
         <div className="flex items-center justify-center my-8">
           <Link href="/blog">
-            <a className="text-gray-500 hover:text-gray-600 transition">
+            <a className="text-slate-500 hover:text-slate-600 transition">
               &larr; Back to Blog
             </a>
           </Link>

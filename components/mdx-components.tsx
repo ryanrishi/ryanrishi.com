@@ -25,7 +25,7 @@ function AnchorWrappedInHeadingTag({ originalProps, Tag }: { originalProps: any,
 
   return (
     <Tag id={anchor} className="hover:underline">
-      <a className="hover:before:content-['#'] before:absolute before:-ml-[0.75em] before:text-gray-300 dark:before:text-gray-600" href={`#${anchor}`}>{originalProps.children}</a>
+      <a className="hover:before:content-['#'] before:absolute before:-ml-[0.75em] before:text-slate-300 dark:before:text-slate-600" href={`#${anchor}`}>{originalProps.children}</a>
     </Tag>
   )
 }

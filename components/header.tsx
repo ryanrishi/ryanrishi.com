@@ -30,7 +30,7 @@ function DarkModeButton() {
   return (
     <button
       aria-label="Dark mode toggle"
-      className="rounded h-8 w-8 flex flex-row justify-center items-center bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 focus:ring-2 dark:focus:ring-gray-500 transition"
+      className="rounded h-8 w-8 flex flex-row justify-center items-center bg-slate-300 hover:bg-slate-400 dark:bg-slate-600 dark:hover:bg-slate-500 focus:ring-2 dark:focus:ring-slate-500 transition"
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >
       <IconContext.Provider  value={{ size: '16', className: 'transition' }}>
@@ -80,12 +80,12 @@ function MobileNav({ isOpen, setIsOpen }) {
       <div>
         {overlayTransitions((overlayStyles, item) => item && (
           <AnimatedDialogOverlay
-            className="bg-white dark:bg-gray-900 transition-colors"
+            className="bg-white dark:bg-slate-900 transition-colors"
             style={overlayStyles}
           >
             <DialogContent
               aria-label="Menu"
-              className="h-4/5 text-center px-0 dark:bg-gray-900 transition flex flex-col"
+              className="h-4/5 text-center px-0 dark:bg-slate-900 transition flex flex-col"
             >
               {itemTransitions((style, i) => (
                 <animated.div
@@ -112,7 +112,7 @@ export default function Header() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
 
   return (
-    <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:py-8 container dark:text-gray-50 transition">
+    <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:py-8 container dark:text-slate-50 transition">
       <div className="md:hidden">
         <MobileNav
           isOpen={isMobileNavOpen}

@@ -4,13 +4,18 @@ const colors = require('tailwindcss/colors')
 const generatePurgeCssSafelist = () => {
   // keep these in sync with styles in components/callout.js
   const calloutColors = ['green', 'blue', 'yellow', 'red']
-  const textStyles = calloutColors.map(color => `text-${color}-800`)
-  const backgroundStyles = calloutColors.map(color => `bg-${color}-100`)
-  const borderStyles = calloutColors.map(color => `border-${color}-800`)
+  const safelistColors = ['slate', ...calloutColors]
 
-  const darkModeBackgroundStyles = calloutColors.map(color => `dark:bg-${color}-800`)
-  const darkModeTextStyles = calloutColors.map(color => `dark:text-${color}-50`)
-  const darkModeBorderStyles = calloutColors.map(color => `dark:border-${color}-300`)
+  const textStyles = safelistColors.map(color => `text-${color}-800`)
+  const backgroundStyles = safelistColors.map(color => `bg-${color}-100`)
+  const borderStyles = safelistColors.map(color => `border-${color}-800`)
+
+  const darkModeBackgroundStyles = safelistColors.map(color => `dark:bg-${color}-800`)
+  const darkModeTextStyles = [
+    ...safelistColors.map(color => `dark:text-${color}-600`),
+    ...safelistColors.map(color => `dark:text-${color}-50`),
+  ]
+  const darkModeBorderStyles = safelistColors.map(color => `dark:border-${color}-300`)
 
   return [...textStyles, ...borderStyles, ...backgroundStyles, ...darkModeBackgroundStyles, ...darkModeTextStyles, ...darkModeBorderStyles]
 }

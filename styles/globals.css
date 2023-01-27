@@ -1,11 +1,11 @@
-/* keep these bg-* and dark:bg-* in sync with styles/globals.css */
+/* keep these bg-* and dark:bg-* in sync with components/layout.tsx */
 
 body {
-  @apply bg-gray-50;
+  @apply bg-slate-50;
 }
 
 html.dark body {
-  @apply bg-gray-900;
+  @apply bg-slate-800;
 }
 
 html {
