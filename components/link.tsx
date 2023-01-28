@@ -12,7 +12,7 @@ interface LinkProps {
 export default function Link({ href, children, className }: LinkProps) {
   const isInternalLink = href?.startsWith('/')
 
-  const classes = classNames('transition text-green-800 hover:text-green-900 border-b border-b-green-400 bg-green-200/50 hover:bg-green-200/80 dark:bg-green-800/50 dark:text-green-200 dark:hover:text-green-300 rounded-sm transition', className)
+  const classes = classNames('text-green-800 hover:text-green-900 border-b border-b-green-400 bg-green-200/50 hover:bg-green-200/80 dark:bg-green-800/50 dark:text-green-200 dark:hover:text-green-300 rounded-sm transition-colors', className)
 
   if (isInternalLink) {
     return (
