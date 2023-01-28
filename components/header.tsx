@@ -30,10 +30,10 @@ function DarkModeButton() {
   return (
     <button
       aria-label="Dark mode toggle"
-      className="rounded h-8 w-8 flex flex-row justify-center items-center bg-slate-300 hover:bg-slate-400 dark:bg-slate-600 dark:hover:bg-slate-500 focus:ring-2 dark:focus:ring-slate-500 transition"
+      className="rounded h-8 w-8 flex flex-row justify-center items-center bg-slate-200 text-slate-700 hover:bg-slate-300 dark:bg-slate-600 dark:text-slate-300 dark:hover:bg-slate-500 transition-colors"
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >
-      <IconContext.Provider  value={{ size: '16', className: 'transition' }}>
+      <IconContext.Provider  value={{ size: '16' }}>
         {resolvedTheme === 'dark' ? <HiOutlineSun /> : <HiOutlineMoon />}
       </IconContext.Provider>
     </button>
