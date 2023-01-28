@@ -28,7 +28,7 @@ function Section({ title, description, children }: SectionProps) {
         <MaybeWrapInLink href={title.url}>
           <FancyH1>{title.text}</FancyH1>
         </MaybeWrapInLink>
-        {description && <p className="text-gray-400 dark:text-gray-500">{description}</p>}
+        {description && <p className="text-slate-400 dark:text-slate-500">{description}</p>}
       </div>
       {children}
     </section>
@@ -66,7 +66,7 @@ export default function Index({ recentPosts, recentProjects }: HomepageProps) {
                 <H3>{post.title}</H3>
               </a>
             </Link>
-            <p className="transition text-gray-500 dark:text-gray-400 mb-8">{post.description}</p>
+            <p className="transition text-slate-500 dark:text-slate-400 mb-8">{post.description}</p>
           </div>
         ))}
         <Link href="/blog">Read all posts &rarr;</Link>
@@ -78,8 +78,10 @@ export default function Index({ recentPosts, recentProjects }: HomepageProps) {
       >
         {recentProjects.map((project, i) => (
           <div key={i}>
-            <H3>{project.name}</H3>
-            <p className="transition text-gray-500 dark:text-gray-400 mb-8">{project.description}</p>
+            <Link href={project.permalink}>
+              <H3>{project.name}</H3>
+            </Link>
+            <p className="transition text-slate-500 dark:text-slate-400 mb-8">{project.description}</p>
           </div>
         ))}
         <Link href="/projects">See all projects &rarr;</Link>

@@ -11,12 +11,12 @@ interface BlockquoteProps {
 
 export default function Quote({ children, name, citationLink }: BlockquoteProps) {
   return (
-    <blockquote className="relative p-4 text-xl text-gray-600 quote italic mb-4 border-l-4 border-gray-200 dark:border-gray-700 dark:text-gray-200">
+    <blockquote className="relative p-4 text-xl text-slate-600 quote italic mb-4 border-l-4 border-slate-200 dark:border-slate-700 dark:text-slate-200">
       <div className="mb-4">{children}</div>
       {name && (
         <cite className="flex items-center">
           <div className="flex flex-col items-start">
-            <span className="mb-1 text-sm text-gray-400 dark:text-gray-500">
+            <span className="mb-1 text-sm text-slate-400 dark:text-slate-500">
               {citationLink ? <Link href={citationLink}>{name}</Link> : name}
             </span>
           </div>

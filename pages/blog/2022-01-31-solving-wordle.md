@@ -13,7 +13,7 @@ The rules behind the game are straightforward. For each letter in the guess, the
 - if the letter is in the word but not in the correct spot, show a 🟨
 - if the letter is not in the word, show a ⬜️
 
-For example, <span className="font-mono font-black tracking-widest"><span className="bg-green-400 text-green-900 dark:bg-green-700 dark:text-green-100">W</span>EARY</span> means that `W` is in the word and in the correct spot. <span className="font-mono font-black tracking-widest">P<span className="bg-yellow-300 text-yellow-900 dark:bg-yellow-600 dark:text-yellow-100">I</span>LLS</span> means that `I` is in the word but in the wrong spot. <span className="font-mono font-black tracking-widest">VAG<span className="bg-gray-300 text-gray-800 dark:bg-gray-600 dark:text-gray-100">U</span>E</span> means that `U` is not in the word.
+For example, <span className="font-mono font-black tracking-widest"><span className="bg-green-400 text-green-900 dark:bg-green-700 dark:text-green-100">W</span>EARY</span> means that `W` is in the word and in the correct spot. <span className="font-mono font-black tracking-widest">P<span className="bg-yellow-300 text-yellow-900 dark:bg-yellow-600 dark:text-yellow-100">I</span>LLS</span> means that `I` is in the word but in the wrong spot. <span className="font-mono font-black tracking-widest">VAG<span className="bg-slate-300 text-slate-800 dark:bg-slate-600 dark:text-slate-100">U</span>E</span> means that `U` is not in the word.
 
 The examples below are available on [Github](https://github.com/ryanrishi/wordle-solver).
 

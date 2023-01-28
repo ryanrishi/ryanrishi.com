@@ -7,7 +7,7 @@ interface HeadingsProps {
   children: ReactNode
 }
 
-const baseClassNames = 'font-semibold text-gray-800 mb-2 lg:mb-6 mt-2 lg:mt-8 dark:text-gray-100 transition'
+const baseClassNames = 'font-semibold text-slate-800 dark:text-slate-100 mb-2 lg:mb-6 mt-2 lg:mt-8 transition-colors'
 
 export function H1({ className, children, ...props }: HeadingsProps) {
   const classes = classNames(baseClassNames, className)
