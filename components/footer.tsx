@@ -10,7 +10,7 @@ interface FooterLinkProps {
 }
 
 const FooterLink = ({ children, href, className }: FooterLinkProps) => {
-  const classes = classNames('flex flex-row hover:text-slate-600 transition py-2 items-center space-x-2', className)
+  const classes = classNames('flex flex-row text-slate-500 hover:text-slate-600 transition-colors py-2 items-center space-x-2', className)
 
   const isInternalLink = href.startsWith('/') // doesn't handle links like '//google.com', but I generally don't use those
 
