@@ -169,4 +169,14 @@ describe('Test Page', () => {
       cy.percySnapshot('Lists')
     })
   })
+
+  describe('Branding', () => {
+    beforeEach(() => {
+      cy.get('h1').contains('Branding').scrollIntoView()
+    })
+
+    it('Snapshot', () => {
+      cy.percySnapshot('Branding')
+    })
+  })
 })

@@ -97,3 +97,34 @@ This is an unordered list:
 - [This is a link](/)
 
 And this is something after the list
+
+# Branding
+### SVG
+<div className="flex">
+
+  | ![logo svg](/img/logo.svg#logo) |
+  | :--: |
+  | Logo |
+
+
+  <div className="text-green-800 dark:text-green-200">
+
+  | ![logo svg - currentColor stroke](/img/logo.svg#logo) |
+  | :--: |
+  | Inherit `currentColor` stroke |
+
+  </div>
+
+  <div className="bg-slate-800 text-green-200">
+
+  | ![logo svg - currentColor stroke](/img/logo.svg#logo) |
+  | :--: |
+  | Inherit `currentColor` stroke |
+
+  </div>
+</div>
+
+#### Favicon
+| ![logo png](/img/logo.png) |
+| :--: |
+| favicon |
