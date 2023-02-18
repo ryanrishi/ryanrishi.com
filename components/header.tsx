@@ -7,6 +7,8 @@ import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi'
 import { IconContext } from 'react-icons/lib'
 import { animated, useTransition } from 'react-spring'
 
+import Logo from './logo'
+
 const AnimatedDialogOverlay = animated(DialogOverlay)
 
 const items = [
@@ -40,9 +42,9 @@ function DarkModeButton() {
   )
 }
 
-const HeaderLink = ({ href, children }) => (
+const HeaderLink = ({ className = '', href, children }) => (
   <Link href={href}>
-    <a className="italic uppercase font-bold mr-4">
+    <a className={`italic uppercase font-bold mr-4 ${className}`}>
       {children}
     </a>
   </Link>
@@ -120,7 +122,11 @@ export default function Header() {
         />
       </div>
       <nav className="hidden md:flex flex-row justify-between items-center w-full">
-        <div>
+        <div className="flex flex-row items-center">
+          <Logo />
+          <HeaderLink href="/" className="ml-4">Ryan Rishi</HeaderLink>
+        </div>
+        <div className="flex flex-row items-center">
           {items.map(({ title, href }) => (
             <HeaderLink
               key={href}
@@ -129,8 +135,8 @@ export default function Header() {
               {title}
             </HeaderLink>
           ))}
+          <DarkModeButton />
         </div>
-        <DarkModeButton />
       </nav>
     </header>
   )
