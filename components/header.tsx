@@ -122,8 +122,8 @@ export default function Header() {
         />
       </div>
       <nav className="hidden md:flex flex-row justify-between items-center w-full">
-          <Logo />
         <div className="flex flex-row items-center dark:text-green-200">
+          <Logo width={100 / 3} />
           <HeaderLink href="/" className="ml-4">Ryan Rishi</HeaderLink>
         </div>
         <div className="flex flex-row items-center">

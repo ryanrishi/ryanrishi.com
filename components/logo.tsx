@@ -1,19 +1,21 @@
 import { motion } from 'framer-motion'
 
-export default function Logo() {
+interface LogoProps {
+  width?: number
+}
+
+export default function Logo({ width = 105 }: LogoProps) {
   const duration = 1
   const type = 'spring'
   const delay = 0.2
-  const w = 100 / 3
-  const h = 105 / 3
+  const height = width * 100 / 105
 
   return (
     <motion.svg
-      className="text-black"
       stroke="currentColor"
       strokeWidth={100 / 6}
-      width={w}
-      height={h}
+      width={width}
+      height={height}
       viewBox="0 0 105 100"
     >
       <motion.g>
