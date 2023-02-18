@@ -12,7 +12,6 @@ import Logo from './logo'
 const AnimatedDialogOverlay = animated(DialogOverlay)
 
 const items = [
-  { title: 'Home', href: '/' },
   { title: 'Music', href: '/music' },
   { title: 'Projects', href: '/projects' },
   { title: 'Blog', href: '/blog' },
