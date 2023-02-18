@@ -1,6 +1,7 @@
 describe('Header', () => {
   beforeEach(() => {
     cy.visit('/asdf', { failOnStatusCode: false }) // use a 404 page since it's the least likely to have visual diffs
+    cy.waitForLogoAnimations()
   })
 
   it('renders the header', () => {

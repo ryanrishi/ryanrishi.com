@@ -99,7 +99,7 @@ This is an unordered list:
 And this is something after the list
 
 # Branding
-#### Logo
+### Logo
 <div className="flex justify-around">
 
   <div>
@@ -128,7 +128,7 @@ And this is something after the list
 
 </div>
 
-#### Favicon
+### Favicon
 | ![favicon](/img/favicon.ico) |
 | :--: |
 | favicon |

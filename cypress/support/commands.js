@@ -24,3 +24,7 @@ import '@percy/cypress'
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+Cypress.Commands.add('waitForLogoAnimations', () => {
+  // wait for 4th (3-1) leg of logo to finish animating
+  cy.get('nav svg path').eq(3).should('have.attr', 'pathLength', 1)
+})

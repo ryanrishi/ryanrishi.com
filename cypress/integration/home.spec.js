@@ -1,6 +1,7 @@
 describe('Home', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000')
+    cy.visit('/')
+    cy.waitForLogoAnimations()
   })
 
   describe('meta tags', () => {

@@ -2,6 +2,7 @@ describe('Projects', () => {
   beforeEach(() => {
     cy.visit('/projects')
     cy.viewport('ipad-2') // a tall viewport since some  of these pages are long
+    cy.waitForLogoAnimations()
   })
 
   describe('meta tags', () => {

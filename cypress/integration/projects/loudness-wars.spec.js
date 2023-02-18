@@ -5,6 +5,7 @@ describe('Projects | Loudness Wars', () => {
   beforeEach(() => {
     cy.visit('/projects/loudness-wars')
     cy.viewport('macbook-13')
+    cy.waitForLogoAnimations()
   })
 
   describe('meta tags', () => {

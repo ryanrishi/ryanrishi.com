@@ -1,6 +1,7 @@
 describe('Contact', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/contact')
+    cy.visit('/contact')
+    cy.waitForLogoAnimations()
   })
 
   it('meta', () => {

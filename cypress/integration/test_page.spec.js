@@ -1,6 +1,7 @@
 describe('Test Page', () => {
   beforeEach(() => {
     cy.visit('/_test')
+    cy.waitForLogoAnimations()
   })
 
   describe('meta tags', () => {
