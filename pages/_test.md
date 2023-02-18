@@ -99,32 +99,36 @@ This is an unordered list:
 And this is something after the list
 
 # Branding
-### SVG
-<div className="flex">
+#### Logo
+<div className="flex justify-around">
 
-  | ![logo svg](/img/logo.svg#logo) |
+  <div>
+
+  | <Logo /> |
   | :--: |
   | Logo |
 
+  </div>
 
-  <div className="text-green-800 dark:text-green-200">
+  <div className="text-green-600 dark:text-green-200">
 
-  | ![logo svg - currentColor stroke](/img/logo.svg#logo) |
+  | <Logo /> |
   | :--: |
-  | Inherit `currentColor` stroke |
+  | Logo that inherits color |
 
   </div>
 
-  <div className="bg-slate-800 text-green-200">
+  <div>
 
-  | ![logo svg - currentColor stroke](/img/logo.svg#logo) |
+  | <Logo width={150} height={80} /> |
   | :--: |
-  | Inherit `currentColor` stroke |
+  | Logo w/ custom width
 
   </div>
+
 </div>
 
 #### Favicon
-| ![logo png](/img/logo.png) |
+| ![favicon](/img/favicon.ico) |
 | :--: |
 | favicon |

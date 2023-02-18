@@ -74,6 +74,7 @@ const MDXComponents = {
   Callout,
 
   Image: dynamic(() => import('next/image')),
+  Logo: dynamic(() => import('./logo')),
   LoudnessWars: dynamic(() => import('./projects/loudness-wars')),
   VideoContainer: dynamic(() => import('./video-container')),
 }
