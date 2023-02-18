@@ -44,7 +44,7 @@ function DarkModeButton() {
 
 const HeaderLink = ({ className = '', href, children }) => (
   <Link href={href}>
-    <a className={`italic uppercase font-bold mr-4 ${className}`}>
+    <a className={`italic uppercase font-bold mx-2 ${className}`}>
       {children}
     </a>
   </Link>
@@ -67,7 +67,11 @@ function MobileNav({ isOpen, setIsOpen }) {
 
   return (
     <>
-      <div className="flex justify-end">
+      <div className="flex justify-between items-center">
+        <div className="flex flex-row items-center dark:text-green-200">
+          <Logo width={100 / 3} />
+          <HeaderLink href="/">Ryan Rishi</HeaderLink>
+        </div>
         <div className="z-40 flex flex-row items-center">
           <DarkModeButton />
 
