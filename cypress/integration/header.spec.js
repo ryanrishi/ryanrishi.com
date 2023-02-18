@@ -33,9 +33,9 @@ describe('Header', () => {
         cy.percySnapshot('Header - Mobile Nav - Open')
       })
 
-      it('can clik a menu item', () => {
+      it('can click a menu item', () => {
         cy.get('[role="dialog"] a').first().click()
-        cy.url().should('equal', 'http://localhost:3000/')
+        cy.url().should('equal', 'http://localhost:3000/music')
       })
     })
   })
