@@ -14,13 +14,10 @@ describe('Footer', () => {
     cy.get('footer a').then((links) => {
       for (let i = 0; i < links.length; i++) {
         cy.get('footer a').eq(i).then((link) => {
-          if (
-            link.prop('href').includes('localhost') &&
-            link.prop('href') !== 'http://localhost:3000/'  // don't try to visit page we're already on, or else Cypress will throw cross-origin iframe error because it tries to go back
-          ) {
+          if (link.prop('href').includes('localhost')) {
             cy.visit(link.prop('href')) // verify it's not a 404
             cy.url().should('eq', link.prop('href'))  // wait for page to load
-            cy.go('back')
+            cy.go('back', { failOnStatusCode: false })
           }
           else {
             // external links are annoying, like LinkedIn returning 999
