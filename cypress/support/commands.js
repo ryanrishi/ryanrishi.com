@@ -1,4 +1,6 @@
 import '@percy/cypress'
+import 'cypress-wait-until'
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -24,7 +26,10 @@ import '@percy/cypress'
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
 Cypress.Commands.add('waitForLogoAnimations', () => {
   // wait for 4th (3-1) leg of logo to finish animating
-  cy.get('nav svg path').eq(3).should('have.attr', 'pathLength', 1)
+  cy.waitUntil(() => {
+    return cy.get('nav svg path').eq(3).invoke('attr', 'stroke-dasharray').should('eq', '1px 1px')
+  })
 })
