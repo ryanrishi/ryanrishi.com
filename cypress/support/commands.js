@@ -31,5 +31,5 @@ Cypress.Commands.add('waitForLogoAnimations', () => {
   // wait for 4th (3-1) leg of logo to finish animating
   cy.waitUntil(() => {
     return cy.get('nav svg path').eq(3).invoke('attr', 'stroke-dasharray').should('eq', '1px 1px')
-  })
+  }, { timeout: 5000 })
 })
