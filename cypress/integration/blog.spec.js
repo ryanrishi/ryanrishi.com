@@ -46,6 +46,7 @@ describe('Blog', () => {
         // see https://github.com/cypress-io/cypress/issues/4856#issuecomment-594906798
         cy.get('h1 a').eq(i).click({ force: true })
         cy.url().should('match', /\/blog\/\d{4}-\d{2}-\d{2}-[a-z-]*$/)
+        cy.waitForLogoAnimations()
         cy.get('h1').first().scrollIntoView()
         cy.get('h1').first().then(($title) => {
           cy.percySnapshot($title.text())

@@ -35,6 +35,7 @@ describe('Projects', () => {
 
         cy.get('li a').eq(i).click()
         cy.url().should('include', '/projects/')
+        cy.waitForLogoAnimations()
         cy.get('h1').scrollIntoView()
         cy.get('h1').first().then(($title) => {
           // wait for animations to finish and images to load
