@@ -7,10 +7,11 @@ import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi'
 import { IconContext } from 'react-icons/lib'
 import { animated, useTransition } from 'react-spring'
 
+import Logo from './logo'
+
 const AnimatedDialogOverlay = animated(DialogOverlay)
 
 const items = [
-  { title: 'Home', href: '/' },
   { title: 'Music', href: '/music' },
   { title: 'Projects', href: '/projects' },
   { title: 'Blog', href: '/blog' },
@@ -40,9 +41,9 @@ function DarkModeButton() {
   )
 }
 
-const HeaderLink = ({ href, children }) => (
+const HeaderLink = ({ className = '', href, children }) => (
   <Link href={href}>
-    <a className="italic uppercase font-bold mr-4">
+    <a className={`italic uppercase font-bold mx-2 ${className}`}>
       {children}
     </a>
   </Link>
@@ -65,7 +66,11 @@ function MobileNav({ isOpen, setIsOpen }) {
 
   return (
     <>
-      <div className="flex justify-end">
+      <div className="flex justify-between items-center">
+        <div className="flex flex-row items-center dark:text-green-200">
+          <Logo width={100 / 3} />
+          <HeaderLink href="/">Ryan Rishi</HeaderLink>
+        </div>
         <div className="z-40 flex flex-row items-center">
           <DarkModeButton />
 
@@ -120,7 +125,11 @@ export default function Header() {
         />
       </div>
       <nav className="hidden md:flex flex-row justify-between items-center w-full">
-        <div>
+        <div className="flex flex-row items-center dark:text-green-200">
+          <Logo width={100 / 3} />
+          <HeaderLink href="/" className="ml-4">Ryan Rishi</HeaderLink>
+        </div>
+        <div className="flex flex-row items-center">
           {items.map(({ title, href }) => (
             <HeaderLink
               key={href}
@@ -129,8 +138,8 @@ export default function Header() {
               {title}
             </HeaderLink>
           ))}
+          <DarkModeButton />
         </div>
-        <DarkModeButton />
       </nav>
     </header>
   )

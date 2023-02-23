@@ -97,3 +97,38 @@ This is an unordered list:
 - [This is a link](/)
 
 And this is something after the list
+
+# Branding
+### Logo
+<div className="flex justify-around">
+
+  <div>
+
+  | <Logo /> |
+  | :--: |
+  | Logo |
+
+  </div>
+
+  <div className="text-green-600 dark:text-green-200">
+
+  | <Logo /> |
+  | :--: |
+  | Logo that inherits color |
+
+  </div>
+
+  <div>
+
+  | <Logo width={150} height={80} /> |
+  | :--: |
+  | Logo w/ custom width
+
+  </div>
+
+</div>
+
+### Favicon
+| ![favicon](/img/favicon.ico) |
+| :--: |
+| favicon |

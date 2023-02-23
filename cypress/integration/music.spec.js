@@ -1,6 +1,7 @@
 describe('Music', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/music')
+    cy.waitForLogoAnimations()
   })
 
   describe('meta tags', () => {

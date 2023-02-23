@@ -2,6 +2,7 @@ describe('Projects', () => {
   beforeEach(() => {
     cy.visit('/projects')
     cy.viewport('ipad-2') // a tall viewport since some  of these pages are long
+    cy.waitForLogoAnimations()
   })
 
   describe('meta tags', () => {
@@ -34,6 +35,7 @@ describe('Projects', () => {
 
         cy.get('li a').eq(i).click()
         cy.url().should('include', '/projects/')
+        cy.waitForLogoAnimations()
         cy.get('h1').scrollIntoView()
         cy.get('h1').first().then(($title) => {
           // wait for animations to finish and images to load

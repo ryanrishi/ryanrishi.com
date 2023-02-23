@@ -1,6 +1,7 @@
 describe('Test Page', () => {
   beforeEach(() => {
     cy.visit('/_test')
+    cy.waitForLogoAnimations()
   })
 
   describe('meta tags', () => {
@@ -167,6 +168,16 @@ describe('Test Page', () => {
 
     it('Snapshot', () => {
       cy.percySnapshot('Lists')
+    })
+  })
+
+  describe('Branding', () => {
+    beforeEach(() => {
+      cy.get('h1').contains('Branding').scrollIntoView()
+    })
+
+    it('Snapshot', () => {
+      cy.percySnapshot('Branding')
     })
   })
 })

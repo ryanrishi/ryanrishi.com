@@ -43,7 +43,17 @@ const MDXComponents = {
   blockquote: ({ children }) => <Blockquote>{children}</Blockquote>,
   p: ({ children }) => <p className="leading-loose mb-4 transition">{children}</p>,
   ul: ({ children }) => <ul className="list-disc list-outside px-4 mb-8 transition">{children}</ul>,
-  img: props => <img className="mx-auto" {...props} />,
+  img: props => {
+    if (/^.*\.svg.*/.test(props.src)) {
+      return (
+        <svg>
+          <use href={props.src} />
+        </svg>
+      )
+    }
+
+    return <img className="mx-auto" {...props} />
+},
   table: props => <table className="w-full" {...props}></table>,
 
   code: ({ className, children }) => {
@@ -64,6 +74,7 @@ const MDXComponents = {
   Callout,
 
   Image: dynamic(() => import('next/image')),
+  Logo: dynamic(() => import('./logo')),
   LoudnessWars: dynamic(() => import('./projects/loudness-wars')),
   VideoContainer: dynamic(() => import('./video-container')),
 }

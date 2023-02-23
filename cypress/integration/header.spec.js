@@ -1,6 +1,7 @@
 describe('Header', () => {
   beforeEach(() => {
     cy.visit('/asdf', { failOnStatusCode: false }) // use a 404 page since it's the least likely to have visual diffs
+    cy.waitForLogoAnimations()
   })
 
   it('renders the header', () => {
@@ -33,9 +34,9 @@ describe('Header', () => {
         cy.percySnapshot('Header - Mobile Nav - Open')
       })
 
-      it('can clik a menu item', () => {
+      it('can click a menu item', () => {
         cy.get('[role="dialog"] a').first().click()
-        cy.url().should('equal', 'http://localhost:3000/')
+        cy.url().should('equal', 'http://localhost:3000/music')
       })
     })
   })

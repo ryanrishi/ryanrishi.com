@@ -2,6 +2,7 @@ describe('Blog', () => {
   beforeEach(() => {
     cy.visit('/blog')
     cy.viewport('ipad-2') // a tall viewport since some  of these pages are long
+    cy.waitForLogoAnimations()
     cy.get('[data-test-blog-post]').then((posts) => {
       for (let i = 0; i < posts.length; i++) {
         cy.get('[data-test-blog-post]').eq(i).should('have.css', 'opacity', '1') // wait for transitions to finish
@@ -45,6 +46,7 @@ describe('Blog', () => {
         // see https://github.com/cypress-io/cypress/issues/4856#issuecomment-594906798
         cy.get('h1 a').eq(i).click({ force: true })
         cy.url().should('match', /\/blog\/\d{4}-\d{2}-\d{2}-[a-z-]*$/)
+        cy.waitForLogoAnimations()
         cy.get('h1').first().scrollIntoView()
         cy.get('h1').first().then(($title) => {
           cy.percySnapshot($title.text())
