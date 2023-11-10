@@ -1,5 +1,6 @@
-const plugin = require('tailwindcss/plugin')
-const colors = require('tailwindcss/colors')
+import type { Config } from 'tailwindcss'
+import colors from 'tailwindcss/colors'
+import plugin from 'tailwindcss/plugin'
 
 const generatePurgeCssSafelist = () => {
   // keep these in sync with styles in components/callout.js
@@ -20,8 +21,9 @@ const generatePurgeCssSafelist = () => {
   return [...textStyles, ...borderStyles, ...backgroundStyles, ...darkModeBackgroundStyles, ...darkModeTextStyles, ...darkModeBorderStyles]
 }
 
-module.exports = {
+const config: Config = {
   content: [
+    'app/**/*.tsx',
     'components/**/*.tsx',
     'layouts/**/*.tsx',
     'pages/**/*.{tsx,md}',
@@ -67,3 +69,6 @@ module.exports = {
     }),
   ],
 }
+
+export default config
+

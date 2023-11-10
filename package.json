@@ -13,8 +13,8 @@
   },
   "dependencies": {
     "@next/eslint-plugin-next": "14.0.2",
-    "@reach/dialog": "^0.16.2",
-    "autoprefixer": "^10.4.1",
+    "@reach/dialog": "0.18.0",
+    "autoprefixer": "10.4.16",
     "classnames": "^2.3.1",
     "contentlayer": "^0.3.4",
     "cypress-real-events": "^1.6.0",
@@ -28,7 +28,7 @@
     "next-contentlayer": "^0.3.4",
     "next-themes": "0.2.1",
     "next-transpile-modules": "10.0.1",
-    "postcss": "^8.4.5",
+    "postcss": "8.4.31",
     "prism-react-renderer": "^1.1.1",
     "prop-types": "^15.7.2",
     "react": "18.2.0",
@@ -40,7 +40,6 @@
     "tailwindcss": "3.3.5"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^3.0.0",
     "@percy/cli": "^1.17.0",
     "@percy/cypress": "^3.1.1",
     "@types/d3": "^7.1.0",

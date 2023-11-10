@@ -9,6 +9,7 @@ const nextConfig = {
       'layouts',
       'lib',
       'pages',
+      'app',
     ],
   },
 
