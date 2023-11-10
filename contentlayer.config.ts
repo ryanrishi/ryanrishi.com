@@ -1,4 +1,4 @@
-import { defineDocumentType, makeSource } from 'contentlayer/source-files'
+import { defineDocumentType, defineNestedType, makeSource } from 'contentlayer/source-files'
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -13,6 +13,16 @@ export const Post = defineDocumentType(() => ({
   },
 }))
 
+const ProjectImage = defineNestedType(() => ({
+  name: 'ProjectImage',
+  fields: {
+    src: { type: 'string', required: true },
+    alt: { type: 'string', required: true },
+    width: { type: 'number', required: true },
+    height: { type: 'number', required: true },
+  }
+}))
+
 export const Project = defineDocumentType(() => ({
   name: 'Project',
   filePathPattern: `projects/*.md`,
@@ -20,6 +30,7 @@ export const Project = defineDocumentType(() => ({
     name: { type: 'string', required: true },
     date: { type: 'date', required: true },
     description: { type: 'string', required: true },
+    image: { type: 'nested', of: ProjectImage, required: true },
   },
   computedFields: {
     url: { type: 'string', resolve: (project) => `/projects/${project._raw.flattenedPath}` },

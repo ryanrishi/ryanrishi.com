@@ -1,20 +1,13 @@
-import { GetStaticProps } from 'next'
+'use client'
+
+import { animated, useSpringRef, useTransition } from '@react-spring/web'
+import { allProjects, Project } from 'contentlayer/generated'
 import Image from 'next/image'
 import Link from 'next/link'
-import { animated, useSpringRef, useTransition } from 'react-spring'
 
-import Head from '../components/head'
-import { FancyH1, H3 } from '../components/headings'
-import Layout from '../components/layout'
-import { getAllProjects, Project } from '../lib/projects'
+import { FancyH1, H3 } from '@/components/headings'
 
-interface ProjectsProps {
-  projects: Project[];
-}
-
-const ProjectItem = ({ project, style }) => {
-  const { name: title, description, permalink: href, image } = project
-
+const ProjectItem = ({ project, style }: { project: Project, style: any }) => {
   return (
     <animated.li
       className="border rounded shadow"
@@ -24,13 +17,13 @@ const ProjectItem = ({ project, style }) => {
         className="flex items-center justify-center"
       >
         <Link
-          href={href}
+          href={project.url}
           passHref
         >
           <Image
             className="object-cover transition duration-500 ease-in-out transform hover:scale-105 w-full h-full rounded-t"
-            src={image?.src || 'https://via.placeholder.com/400'}
-            alt={image.alt}
+            src={project.image.src || 'https://via.placeholder.com/400'}
+            alt={project.image.alt}
             width="1600"
             height="1600"
           />
@@ -41,30 +34,30 @@ const ProjectItem = ({ project, style }) => {
       >
         <H3>
           <Link
-            href={href}
+            href={project.url}
           >
-            {title}
+            {project.name}
           </Link>
         </H3>
-        <p className="transition">{description}</p>
+        <p className="transition">{project.description}</p>
       </div>
     </animated.li>
   )
 }
 
-export default function ProjectsIndex({ projects }: ProjectsProps) {
+export default function ProjectsIndex() {
   const transApi = useSpringRef()
-  const transition = useTransition(projects, {
+  const transition = useTransition(allProjects, {
     ref: transApi,
-    trail: 400 / projects.length,
+    trail: 400 / allProjects.length,
     from: { opacity: 0, scale: 0 },
     enter: { opacity: 1, scale: 1 },
     leave: { opacity: 0, scale: 0 },
   })
 
   return (
-    <Layout>
-      <Head title="Projects" />
+    // <Layout>
+    <>
       <FancyH1>Projects</FancyH1>
       <ul
         className="grid grid-cols-1 md:grid-cols-3 gap-8"
@@ -76,16 +69,7 @@ export default function ProjectsIndex({ projects }: ProjectsProps) {
           />
         ))}
       </ul>
-    </Layout>
+    </>
+    // </Layout>
   )
-}
-
-export const getStaticProps: GetStaticProps<ProjectsProps> = async () => {
-  const projects = getAllProjects()
-
-  return {
-    props: {
-      projects,
-    },
-  }
 }
