@@ -1,19 +1,12 @@
+import { allPosts } from 'contentlayer/generated'
+import { compareDesc } from 'date-fns'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import { GetStaticProps, Metadata } from 'next'
+import { Metadata } from 'next'
 import Link from 'next/link'
-import React from 'react'
-import { a, useTrail } from 'react-spring'
 
-import { H1 } from '../components/headings'
-import Layout from '../components/layout'
-import { allPosts, Post } from 'contentlayer/generated'
-import { compareDesc } from 'date-fns'
-
-
-interface BlogProps {
-  posts: Post[];
-}
+import { H1 } from '@/components/headings'
+import Layout from '@/components/layout'
 
 dayjs.extend(utc)
 
@@ -21,23 +14,25 @@ export const metadata: Metadata = {
   title: 'Blog | Ryan Rishi',
 }
 
-export default function BlogIndex({ posts }: BlogProps) {
-  const trail = useTrail(posts.length, {
-    opacity: 1,
-    y: 0,
-    from: {
-      opacity: 0,
-      y: -50,
-    },
-  })
+export default function BlogIndex() {
+  const posts = allPosts.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
+
+  // const trail = useTrail(posts.length, {
+  //   opacity: 1,
+  //   y: 0,
+  //   from: {
+  //     opacity: 0,
+  //     y: -50,
+  //   },
+  // })
 
   return (
     <Layout>
-      {trail.map((style, i) => (
-        <a.div
+      {posts.map((post, i) => (
+        <div
           className="mb-16 lg:mb-16 xl:mb-32"
           data-test-blog-post
-          style={style}
+          // style={style}
           key={i}
         >
           <H1 className="hover:text-slate-900 dark:hover:text-slate-300">
@@ -53,16 +48,8 @@ export default function BlogIndex({ posts }: BlogProps) {
               Read more &raquo;
             </Link>
           </div>
-        </a.div>
+        </div>
       ))}
     </Layout>
   );
-}
-
-export const getStaticProps: GetStaticProps<BlogProps> = async () => {
-  const posts = allPosts.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
-
-  return {
-    props: { posts },
-  }
 }

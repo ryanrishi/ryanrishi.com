@@ -1,6 +1,6 @@
 // import '@reach/dialog/styles.css'
 // import 'tailwindcss/tailwind.css'
-import './globals.css'
+// import './globals.css'
 
 import Providers from './providers'
 
