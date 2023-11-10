@@ -10,13 +10,13 @@ export default function Index({ children, frontMatter }) {
 
   return (
     <Layout>
-      <Head
+      {/* <Head
         title={name}
         description={description}
         image={image.src}
         date={date}
         isArticle
-      />
+      /> */}
       <div>
         <H1>{name}</H1>
         <div className="leading-8">

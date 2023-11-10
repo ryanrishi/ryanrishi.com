@@ -16,7 +16,7 @@ function getAnchor(text: string | string[]) {
   return (text instanceof Array ? text.join(' ') : text)  // titles with elements like `&mdash;` split the string
     .toLowerCase()
     .replace(/[^a-z0-9 -]/g, '')  // remove all non-alphanumeric/non-space characters
-    .replace(/[ ]/g, '-')        // replace spaces with dashes
+    .replace(/[ ]/g, '-');        // replace spaces with dashes
 }
 
 // TODO lol this is why I love React, but I should probz find a less hacky way to do this

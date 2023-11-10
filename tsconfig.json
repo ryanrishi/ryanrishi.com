@@ -8,7 +8,9 @@
       "esnext"
     ],
     "paths": {
-      "contentlayer/generated": ["./.contentlayer/generated"]
+      "contentlayer/generated": [
+        "./.contentlayer/generated"
+      ]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -21,13 +23,20 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".contentlayer/generated"
+    ".contentlayer/generated",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

@@ -1,3 +1,5 @@
+'use client'
+
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import { Squash as Hamburger } from 'hamburger-react'
 import Link from 'next/link'
@@ -42,10 +44,8 @@ function DarkModeButton() {
 }
 
 const HeaderLink = ({ className = '', href, children }) => (
-  <Link href={href}>
-    <a className={`italic uppercase font-bold mx-2 ${className}`}>
-      {children}
-    </a>
+  <Link href={href} className={`italic uppercase font-bold mx-2 ${className}`}>
+    {children}
   </Link>
 )
 
@@ -64,53 +64,51 @@ function MobileNav({ isOpen, setIsOpen }) {
     leave: { bottom: '50vh' },
   })
 
-  return (
-    <>
-      <div className="flex justify-between items-center">
-        <div className="flex flex-row items-center dark:text-green-200">
-          <Logo width={100 / 3} />
-          <HeaderLink href="/">Ryan Rishi</HeaderLink>
-        </div>
-        <div className="z-40 flex flex-row items-center">
-          <DarkModeButton />
+  return <>
+    <div className="flex justify-between items-center">
+      <div className="flex flex-row items-center dark:text-green-200">
+        <Logo width={100 / 3} />
+        <HeaderLink href="/">Ryan Rishi</HeaderLink>
+      </div>
+      <div className="z-40 flex flex-row items-center">
+        <DarkModeButton />
 
-          {/* TODO put this on <Hamburger> but it's not picking up class name */}
-          {/* check back when hamburger-react v3 is released: https://github.com/luukdv/hamburger-react/issues/45#issuecomment-902639087 */}
-          <Hamburger
-            toggled={isOpen}
-            toggle={setIsOpen}
-          />
-        </div>
+        {/* TODO put this on <Hamburger> but it's not picking up class name */}
+        {/* check back when hamburger-react v3 is released: https://github.com/luukdv/hamburger-react/issues/45#issuecomment-902639087 */}
+        <Hamburger
+          toggled={isOpen}
+          toggle={setIsOpen}
+        />
       </div>
-      <div>
-        {overlayTransitions((overlayStyles, item) => item && (
-          <AnimatedDialogOverlay
-            className="bg-white dark:bg-slate-900 transition-colors"
-            style={overlayStyles}
+    </div>
+    <div>
+      {overlayTransitions((overlayStyles, item) => item && (
+        <AnimatedDialogOverlay
+          className="bg-white dark:bg-slate-900 transition-colors"
+          style={overlayStyles}
+        >
+          <DialogContent
+            aria-label="Menu"
+            className="h-4/5 text-center px-0 dark:bg-slate-900 transition flex flex-col"
           >
-            <DialogContent
-              aria-label="Menu"
-              className="h-4/5 text-center px-0 dark:bg-slate-900 transition flex flex-col"
-            >
-              {itemTransitions((style, i) => (
-                <animated.div
-                  key={items[i].href}
-                  style={style}
-                  className="my-8"
-                >
-                  <Link href={items[i].href}>
-                    <a className="uppercase italic font-bold text-4xl my-4 outline-white">
-                      {items[i].title}
-                    </a>
-                  </Link>
-                </animated.div>
-              ))}
-            </DialogContent>
-          </AnimatedDialogOverlay>
-        ))}
-      </div>
-    </>
-  )
+            {itemTransitions((style, i) => (
+              <animated.div
+                key={items[i].href}
+                style={style}
+                className="my-8"
+              >
+                <Link
+                  href={items[i].href}
+                  className="uppercase italic font-bold text-4xl my-4 outline-white">
+                  {items[i].title}
+                </Link>
+              </animated.div>
+            ))}
+          </DialogContent>
+        </AnimatedDialogOverlay>
+      ))}
+    </div>
+  </>
 }
 
 export default function Header() {

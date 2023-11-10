@@ -16,10 +16,8 @@ export default function Link({ href, children, className }: LinkProps) {
 
   if (isInternalLink) {
     return (
-      <NextLink href={href}>
-        <a className={classes}>
-          {children}
-        </a>
+      <NextLink href={href} className={classes}>
+        {children}
       </NextLink>
     )
   }

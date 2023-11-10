@@ -36,10 +36,8 @@ export default function Index({ children, frontMatter }) {
           />
         </div>
         <div className="flex items-center justify-center my-8">
-          <Link href="/blog">
-            <a className="text-slate-500 hover:text-slate-600 transition">
-              &larr; Back to Blog
-            </a>
+          <Link href="/blog" className="text-slate-500 hover:text-slate-600 transition">
+            &larr; Back to Blog
           </Link>
         </div>
       </div>

@@ -1,11 +1,10 @@
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import { GetStaticProps } from 'next'
+import { GetStaticProps, Metadata } from 'next'
 import Link from 'next/link'
 import React from 'react'
 import { a, useTrail } from 'react-spring'
 
-import Head from '../components/head'
 import { H1 } from '../components/headings'
 import Layout from '../components/layout'
 import { allPosts, Post } from 'contentlayer/generated'
@@ -17,6 +16,10 @@ interface BlogProps {
 }
 
 dayjs.extend(utc)
+
+export const metadata: Metadata = {
+  title: 'Blog | Ryan Rishi',
+}
 
 export default function BlogIndex({ posts }: BlogProps) {
   const trail = useTrail(posts.length, {
@@ -30,9 +33,6 @@ export default function BlogIndex({ posts }: BlogProps) {
 
   return (
     <Layout>
-      <Head
-        title="Blog"
-      />
       {trail.map((style, i) => (
         <a.div
           className="mb-16 lg:mb-16 xl:mb-32"
@@ -41,7 +41,7 @@ export default function BlogIndex({ posts }: BlogProps) {
           key={i}
         >
           <H1 className="hover:text-slate-900 dark:hover:text-slate-300">
-            <Link href={posts[i].url}>
+            <Link href={posts[i].url} legacyBehavior>
               {posts[i].title}
             </Link>
           </H1>
@@ -56,7 +56,7 @@ export default function BlogIndex({ posts }: BlogProps) {
         </a.div>
       ))}
     </Layout>
-  )
+  );
 }
 
 export const getStaticProps: GetStaticProps<BlogProps> = async () => {

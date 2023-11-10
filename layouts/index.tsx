@@ -28,20 +28,14 @@ export default function DefaultLayout({ children, mdxRemoteSerializedResult, fro
 
   return (
     <Layout>
-      <Head
+      {/* <Head
         title={title}
         description={description}
         image={image}
         tags={tags}
         isArticle
-      />
+      /> */}
       {title && <FancyH1>{title}</FancyH1>}
-      {mdxRemoteSerializedResult && (
-        <MDXRemote
-          {...mdxRemoteSerializedResult}
-          components={MDXComponents}
-        />
-      )}
       {children}
     </Layout>
   )
