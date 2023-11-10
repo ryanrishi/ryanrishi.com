@@ -1,12 +1,12 @@
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import Link from 'next/link'
-import { MDXRemote } from 'next-mdx-remote'
 
 import Head from '../components/head'
 import { H1 } from '../components/headings'
 import Layout from '../components/layout'
 import MDXComponents from '../components/mdx-components'
+import { Post, allPosts } from 'contentlayer/generated'
 
 dayjs.extend(utc)
 

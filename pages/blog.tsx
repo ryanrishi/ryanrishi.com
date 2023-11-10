@@ -8,7 +8,9 @@ import { a, useTrail } from 'react-spring'
 import Head from '../components/head'
 import { H1 } from '../components/headings'
 import Layout from '../components/layout'
-import { getAllPosts, Post } from '../lib/posts'
+import { allPosts, Post } from 'contentlayer/generated'
+import { compareDesc } from 'date-fns'
+
 
 interface BlogProps {
   posts: Post[];
@@ -39,9 +41,7 @@ export default function BlogIndex({ posts }: BlogProps) {
           key={i}
         >
           <H1 className="hover:text-slate-900 dark:hover:text-slate-300">
-            <Link
-              href={`/blog/${posts[i].slug}`}
-            >
+            <Link href={posts[i].url}>
               {posts[i].title}
             </Link>
           </H1>
@@ -49,10 +49,8 @@ export default function BlogIndex({ posts }: BlogProps) {
 
           <div className="flex flex-col">
             <p className="transition">{posts[i].description}</p>
-            <Link href={`/blog/${posts[i].slug}`}>
-              <a className="flex justify-end pt-4 italic uppercase font-bold dark:text-slate-100 transition">
-                Read more &raquo;
-              </a>
+            <Link className="flex justify-end pt-4 italic uppercase font-bold dark:text-slate-100 transition" href={posts[i].url}>
+              Read more &raquo;
             </Link>
           </div>
         </a.div>
@@ -62,7 +60,7 @@ export default function BlogIndex({ posts }: BlogProps) {
 }
 
 export const getStaticProps: GetStaticProps<BlogProps> = async () => {
-  const posts = getAllPosts()
+  const posts = allPosts.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
 
   return {
     props: { posts },

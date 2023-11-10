@@ -1,15 +1,8 @@
 /* eslint-env node */
+const { withContentlayer } = require('next-contentlayer')
 
-const withTM = require('next-transpile-modules')([
-  'd3',
-
-  // transitive dependencies of d3
-  'delaunator',
-  'internmap',
-  'robust-predicates',
-])
-
-module.exports = withTM({
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   eslint: {
     dirs: [
       'components',
@@ -28,4 +21,15 @@ module.exports = withTM({
       },
     ]
   },
-})
+}
+
+const withTM = require('next-transpile-modules')([
+  'd3',
+
+  // transitive dependencies of d3
+  'delaunator',
+  'internmap',
+  'robust-predicates',
+])
+
+module.exports = withContentlayer(withTM(nextConfig))

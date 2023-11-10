@@ -1,6 +1,6 @@
+import { allPosts, Post } from 'contentlayer/generated'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { ReactNode } from 'react'
 
 import Head from '../components/head'
@@ -19,7 +19,6 @@ interface FrontMatter {
 }
 
 interface LayoutProps {
-  mdxRemoteSerializedResult?: MDXRemoteSerializeResult
   children?: ReactNode
   frontMatter?: FrontMatter
 }
