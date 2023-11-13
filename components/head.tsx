@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
-import NextHead from 'next/head'
+import type { Metadata } from 'next'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 
@@ -13,6 +13,18 @@ interface HeadProps {
   date?: Date;
   image?: string;
   tags?: string[];
+}
+
+export const metadata: Metadata = {
+  authors: {
+    name: 'Ryan Rishi',
+    url: 'https://ryanrishi.com',
+  },
+  openGraph: {
+    type: 'website',
+    siteName: 'Ryan Rishi',
+    url: 'https://ryanrishi.com',
+  },
 }
 
 function Head({ title: titleFromProps, description, isArticle, date, image, tags }: HeadProps) {
@@ -45,10 +57,8 @@ function Head({ title: titleFromProps, description, isArticle, date, image, tags
       <title key="title">{title}</title>
       <meta property="og:title" content={title} />
       <meta property="og:type" content={isArticle ? 'article' : 'website'} />
-      <meta property="og:site_name" content="Ryan Rishi" />
       <meta property="og:description" content={description} />
       <meta property="og:url" key="og:url" content={`https://ryanrishi.com${router.asPath === '/' ? '' : router.asPath}`} />
-      <meta name="author" content="Ryan Rishi" />
       <meta property="og:image" content={`https://ryanrishi.com${image}`} />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:creator" content="@ryanrishi" />

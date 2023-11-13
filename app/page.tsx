@@ -1,11 +1,10 @@
-import { allPosts, allProjects, Post, Project } from 'contentlayer/generated'
+import { allPosts, allProjects } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
 import NextLink from 'next/link'
 import { ReactNode } from 'react'
 
-import { FancyH1, H3 } from '../components/headings'
-import Link from '../components/link'
-import Layout from '../layouts'
+import { FancyH1, H3 } from '@/components/headings'
+import Link from '@/components/link'
 
 interface SectionProps {
   title: { text: string; url?: string; }
@@ -34,7 +33,7 @@ export default function Index() {
   const recentProjects = allProjects.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date))).slice(0, 3)
 
   return (
-    <Layout>
+    <>
       <Section title={{ text: 'Ryan Rishi' }}>
         <p className="pb-8">I&apos;m a software engineer focused on building <b>great user experiences</b>.</p>
         <p className="pb-8">Over the course of my career, I&apos;m grateful to have had the opportunity to work across multiple focus areas including frontend development, backend development, infrastructure, and operations.</p>
@@ -79,6 +78,6 @@ export default function Index() {
         ))}
         <Link href="/projects">See all projects &rarr;</Link>
       </Section>
-    </Layout>
+    </>
   )
 }
