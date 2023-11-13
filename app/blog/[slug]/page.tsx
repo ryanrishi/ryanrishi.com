@@ -9,7 +9,20 @@ export const generateStaticParams = async () => allPosts.map((post) => ({ slug: 
 export const generateMetadata = ({ params }: { params: { slug: string } }): Metadata => {
   const post = allPosts.find((post) => post._raw.flattenedPath === `blog/${params.slug}`)
   if (!post) throw new Error(`Post not found for slug: ${params.slug}`)
-  return { title: `${post.title} | Ryan Rishi` }
+
+  return {
+    title: `${post.title} | Ryan Rishi`,
+    description: post.description,
+    openGraph: {
+      type: 'article',
+      publishedTime: post.publishedAt,
+      url: `https://ryanrishi.com/blog/${params.slug}`,
+      images: [
+        { url: `https://ryanrishi.com/${post.image}` },
+      ],
+      tags: post.tags,
+    },
+  }
 }
 
 export default function Post({ params }: { params: { slug: string } }) {
@@ -20,9 +33,7 @@ export default function Post({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <h1>
-        {post.title}
-      </h1>
+      <h1>{post.title}</h1>
       <MDXContent components={mdxComponents} />
     </>
   )

@@ -6,8 +6,10 @@ export const Post = defineDocumentType(() => ({
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
-    date: { type: 'date', required: true },
     description: { type: 'string', required: true },
+    publishedAt: { type: 'string', required: true },
+    image: { type: 'string' },
+    tags: { type: 'list', of: { type: 'string' }, required: true },
   },
   computedFields: {
     url: { type: 'string', resolve: (post) => post._raw.flattenedPath },
@@ -21,7 +23,7 @@ const ProjectImage = defineNestedType(() => ({
     // alt: { type: 'string', required: true },
     width: { type: 'number', required: true },
     height: { type: 'number', required: true },
-  }
+  },
 }))
 
 export const Project = defineDocumentType(() => ({

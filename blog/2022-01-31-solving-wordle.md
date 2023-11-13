@@ -2,8 +2,9 @@
 title:        Solving Wordle
 description:  Wordle has taken the world by storm. Here's a program to solve it efficiently.
 image:        /img/Wordle_196_example.png
-date:         "2022-01-31T00:00:00Z"
-layout:       blog
+publishedAt:  "2022-01-31T00:00:00Z"
+tags:
+  - wordle
 ---
 
 [Wordle](https://www.powerlanguage.co.uk/wordle/) has taken the world by storm. Here's a program to solve it efficiently.

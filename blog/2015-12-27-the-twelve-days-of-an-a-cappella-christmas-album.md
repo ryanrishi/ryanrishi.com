@@ -1,13 +1,13 @@
 ---
-title:  The Twelve Days of an A Cappella Christmas Album
-description: Recording and producing a Christmas a cappella album in two weeks
-date:   "2015-12-26T17:56:07-0700"
-image:  /img/christmas_in_claradise.png
-layout: blog
+title:        The Twelve Days of an A Cappella Christmas Album
+description:  Recording and producing a Christmas a cappella album in two weeks
+publishedAt:  "2015-12-26T17:56:07-0700"
+image:        /img/christmas_in_claradise.png
 tags:
   - music
   - a cappella
 ---
+
 For those of you who know me well, you know that I should not be singing&mdash;I should stick to my guns, which are percussion and recording. Even though the extent of my vocal ability rarely leaves the confines of my shower, I ended up auditioning for an a cappella group at school, and to my surprise, I ended up making the cut!
 
 Five of the a cappella groups on campus decided to join forces and make the first-ever Santa Clara University A Cappella Christmas Album, and I was to produce that album.

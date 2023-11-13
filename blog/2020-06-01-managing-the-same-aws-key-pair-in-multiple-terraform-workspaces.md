@@ -2,12 +2,12 @@
 title:        Managing the Same AWS Key Pair in Multiple Terraform Workspaces
 description:  Importing key pairs into a Terraform workspace can lead to some unexpected results. This post outlines the problem and provides a solution by manipulating the Terraform state.
 image:        /img/Terraform-Logo.png
-date:         "2020-06-01T00:00:00Z"
-layout:       blog
+publishedAt:  "2020-06-01T00:00:00Z"
 tags:
   - terraform
   - aws
 ---
+
 AWS key pairs allow you to put your SSH key on EC2 instances when the are created, allowing you to SSH into an instance with a public key instead of a password. If you have multiple [Terraform workspaces](https://www.terraform.io/docs/state/workspaces.html), eg. `staging` and `production`, using the same key pair in multiple workspaces can cause some problems.
 
 ### The Problem

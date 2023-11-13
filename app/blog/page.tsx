@@ -6,7 +6,6 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 import { H1 } from '@/components/headings'
-import Layout from '@/components/layout'
 
 dayjs.extend(utc)
 
@@ -15,10 +14,10 @@ export const metadata: Metadata = {
 }
 
 export default function BlogIndex() {
-  const posts = allPosts.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
+  const posts = allPosts.sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)))
 
   return (
-    <Layout>
+    <>
       {posts.map((post, i) => (
         <div
           className="mb-16 lg:mb-16 xl:mb-32"
@@ -30,7 +29,7 @@ export default function BlogIndex() {
               {post.title}
             </Link>
           </H1>
-          <p className="pb-4 text-slate-700 dark:text-slate-400 transition" data-test-blog-post-date>{dayjs.utc(post.date).format('MMMM D, YYYY')}</p>
+          <p className="pb-4 text-slate-700 dark:text-slate-400 transition" data-test-blog-post-date>{dayjs.utc(post.publishedAt).format('MMMM D, YYYY')}</p>
 
           <div className="flex flex-col">
             <p className="transition">{post.description}</p>
@@ -40,6 +39,6 @@ export default function BlogIndex() {
           </div>
         </div>
       ))}
-    </Layout>
+    </>
   )
 }
