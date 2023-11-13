@@ -2,6 +2,9 @@
 // import 'tailwindcss/tailwind.css'
 // import './globals.css'
 
+import Footer from '@/components/footer'
+import Header from '@/components/header'
+
 import Providers from './providers'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -20,7 +23,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          <div className="bg-slate-50 dark:bg-slate-800 dark:text-slate-400">
+            <Header />
+            <div className="container max-w-4xl p-4">
+              {children}
+            </div>
+          <Footer />
+        </div>
+        </Providers>
       </body>
     </html>
   )
