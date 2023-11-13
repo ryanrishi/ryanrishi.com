@@ -27,6 +27,7 @@ const ProjectImage = defineNestedType(() => ({
 export const Project = defineDocumentType(() => ({
   name: 'Project',
   filePathPattern: `projects/*.md`,
+  contentType: 'mdx',
   fields: {
     name: { type: 'string', required: true },
     date: { type: 'date', required: true },
@@ -34,7 +35,7 @@ export const Project = defineDocumentType(() => ({
     image: { type: 'nested', of: ProjectImage, required: true },
   },
   computedFields: {
-    url: { type: 'string', resolve: (project) => `/projects/${project._raw.flattenedPath}` },
+    url: { type: 'string', resolve: (project) => project._raw.flattenedPath },
   },
 }))
 

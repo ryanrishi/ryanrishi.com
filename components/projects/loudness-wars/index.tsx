@@ -1,3 +1,5 @@
+'use client'
+
 /* eslint indent: ["warn", 2, { "SwitchCase": 1 }] */
 import * as d3 from 'd3'
 import { MutableRefObject, useEffect, useRef, useState } from 'react'

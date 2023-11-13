@@ -1,14 +1,15 @@
 import mdxComponents from 'components/mdx-components'
 import { allPosts } from 'contentlayer/generated'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { useMDXComponent } from  'next-contentlayer/hooks'
 
 export const generateStaticParams = async () => allPosts.map((post) => ({ slug: post._raw.flattenedPath }))
 
-export const generateMetadata = ({ params }: { params: { slug: string } }) => {
+export const generateMetadata = ({ params }: { params: { slug: string } }): Metadata => {
   const post = allPosts.find((post) => post._raw.flattenedPath === `blog/${params.slug}`)
   if (!post) throw new Error(`Post not found for slug: ${params.slug}`)
-  return { title: post.title }
+  return { title: `${post.title} | Ryan Rishi` }
 }
 
 export default function Post({ params }: { params: { slug: string } }) {
@@ -26,29 +27,3 @@ export default function Post({ params }: { params: { slug: string } }) {
     </>
   )
 }
-
-// export const getStaticPaths: GetStaticPaths = () => {
-//   const slugs = getPostSlugs()
-
-//   return {
-//     paths: slugs.map((slug) => ({
-//       params: {
-//         slug: slug.replace(/\.md$/, ''),
-//       },
-//     })),
-//     fallback: false,
-//   }
-// }
-
-// export const getStaticProps: GetStaticProps = async ({ params }) => {
-//   const post = getPostBySlug(params.slug as string)
-
-//   const mdxSource = await serialize(post.content, { scope: { ...post } })
-
-//   return {
-//     props: {
-//       source: mdxSource,
-//       frontMatter: post,
-//     },
-//   }
-// }

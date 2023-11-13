@@ -41,5 +41,5 @@ export default function BlogIndex() {
         </div>
       ))}
     </Layout>
-  );
+  )
 }
