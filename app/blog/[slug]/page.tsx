@@ -1,8 +1,12 @@
 import mdxComponents from 'components/mdx-components'
 import { allPosts } from 'contentlayer/generated'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { useMDXComponent } from  'next-contentlayer/hooks'
+
+dayjs.extend(utc)
 
 export const generateStaticParams = async () => allPosts.map((post) => ({ slug: post._raw.flattenedPath }))
 
@@ -34,6 +38,7 @@ export default function Post({ params }: { params: { slug: string } }) {
   return (
     <>
       <h1>{post.title}</h1>
+      <p className="mb-8 text-slate-500 dark:text-slate-400 transition">{dayjs.utc(post.publishedAt).format('MMMM D, YYYY')}</p>
       <MDXContent components={mdxComponents} />
     </>
   )

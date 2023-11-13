@@ -6,7 +6,6 @@ import Head from '../components/head'
 import { H1 } from '../components/headings'
 import Layout from '../components/layout'
 import MDXComponents from '../components/mdx-components'
-import { Post, allPosts } from 'contentlayer/generated'
 
 dayjs.extend(utc)
 
@@ -16,10 +15,6 @@ export default function Index({ children, frontMatter }) {
   return (
     <Layout>
       <Head
-        title={title}
-        date={date}
-        description={description}
-        image={image}
         tags={tags}
         isArticle
       />
@@ -29,17 +24,6 @@ export default function Index({ children, frontMatter }) {
           <p className="mb-8 text-slate-500 dark:text-slate-400 transition">{dayjs.utc(date).format('MMMM D, YYYY')}</p>
         </div>
 
-        <div className="leading-8">
-          <MDXRemote
-            {...children}
-            components={MDXComponents}
-          />
-        </div>
-        <div className="flex items-center justify-center my-8">
-          <Link href="/blog" className="text-slate-500 hover:text-slate-600 transition">
-            &larr; Back to Blog
-          </Link>
-        </div>
       </div>
     </Layout>
   )
