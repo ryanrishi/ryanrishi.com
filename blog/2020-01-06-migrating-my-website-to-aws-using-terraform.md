@@ -13,8 +13,6 @@ tags:
   - travis
 ---
 
-import Image from 'next/image';
-
 I recently migrated my personal website hosting from a [DigitalOcean VPS](https://www.digitalocean.com/products/droplets/) to [Amazon AWS S3 + CloudFront](https://aws.amazon.com/premiumsupport/knowledge-center/cloudfront-serve-static-website/). As part of this, I wanted to use [Terraform](https://www.terraform.io/) to manage infrastructure-as-code.
 
 ### Requirements

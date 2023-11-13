@@ -1,3 +1,4 @@
+import type { MDXComponents } from 'mdx/types'
 import dynamic from 'next/dynamic'
 
 import Blockquote from './blockquote'
@@ -30,7 +31,7 @@ function AnchorWrappedInHeadingTag({ originalProps, Tag }: { originalProps: any,
   )
 }
 
-const MDXComponents = {
+const mdxComponents: MDXComponents = {
   h1: props => <AnchorWrappedInHeadingTag Tag={H1} originalProps={props} />,
   h2: props => <AnchorWrappedInHeadingTag Tag={H2} originalProps={props} />,
   h3: props => <AnchorWrappedInHeadingTag Tag={H3} originalProps={props} />,
@@ -79,4 +80,4 @@ const MDXComponents = {
   VideoContainer: dynamic(() => import('./video-container')),
 }
 
-export default MDXComponents
+export default mdxComponents

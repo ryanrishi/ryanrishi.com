@@ -2,14 +2,15 @@ import { defineDocumentType, defineNestedType, makeSource } from 'contentlayer/s
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
-  filePathPattern: `posts/*.md`,
+  filePathPattern: `blog/*.md`,
+  contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
     date: { type: 'date', required: true },
     description: { type: 'string', required: true },
   },
   computedFields: {
-    url: { type: 'string', resolve: (post) => `/blog/${post._raw.flattenedPath}` },
+    url: { type: 'string', resolve: (post) => post._raw.flattenedPath },
   },
 }))
 

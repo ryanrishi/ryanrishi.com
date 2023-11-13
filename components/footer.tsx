@@ -15,10 +15,10 @@ const FooterLink = ({ children, href, className }: FooterLinkProps) => {
   const isInternalLink = href.startsWith('/') // doesn't handle links like '//google.com', but I generally don't use those
 
   return (
-    <NextLink href={href}>
-      <a className={classes} target={isInternalLink ? '' : '_blank'}>{children}</a>
+    <NextLink href={href} className={classes} target={isInternalLink ? '' : '_blank'}>
+      {children}
     </NextLink>
-  )
+  );
 }
 
 export default function Footer() {
