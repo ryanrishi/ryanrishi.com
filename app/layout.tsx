@@ -1,6 +1,6 @@
 // import '@reach/dialog/styles.css'
-// import 'tailwindcss/tailwind.css'
-// import './globals.css'
+import 'tailwindcss/tailwind.css'
+import './globals.css'
 
 import Footer from '@/components/footer'
 import Header from '@/components/header'
