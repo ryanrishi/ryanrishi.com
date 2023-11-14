@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const ProjectItem = ({ project }: { project: Project }) => {
   return (
-    <li className="border rounded shadow">
+    <li className="border border-slate-200 dark:border-slate-700 rounded shadow">
       <div className="flex items-center justify-center">
         <Link href={project.url}>
           <Image
