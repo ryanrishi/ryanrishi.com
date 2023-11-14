@@ -21,11 +21,11 @@ The second is [Bellomy](https://open.spotify.com/album/5Tbpm70sMQ2aUwdsEieHn5?si
 
 <iframe
   src="https://open.spotify.com/embed/album/5Tbpm70sMQ2aUwdsEieHn5"
-  style={{ borderRadius: '0.75rem' }}
+  style={{ borderRadius: '12px' }}
   title="Jagged Light - Bellomy"
   width="100%"
   height="380"
   frameBorder="0"
   allowTransparency
-  allow="encrypted-media"
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 />
