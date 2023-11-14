@@ -1,4 +1,5 @@
 import { allProjects, Project } from 'contentlayer/generated'
+import { compareDesc } from 'date-fns'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -40,12 +41,15 @@ export default function ProjectsIndex() {
     <>
       <FancyH1>Projects</FancyH1>
       <ul className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {allProjects.map((project, i) =>
-          <ProjectItem
-            project={project}
-            key={i}
-          />
-        )}
+        {allProjects
+          .sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)))
+          .map((project, i) =>
+            <ProjectItem
+              project={project}
+              key={i}
+            />
+          )
+        }
       </ul>
     </>
   )
