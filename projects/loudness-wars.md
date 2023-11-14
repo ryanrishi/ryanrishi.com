@@ -4,6 +4,7 @@ layout:       projects/default
 description:  A closer look at how recorded music has been getting increasingly louder over the past 50 years.
 image:
   src:        /img/projects/loudness-wars/mick-haupt-CbNBjnXXhNg-unsplash.jpg
+  alt:        A stack of records at a record store
   width:      5472
   height:     3648
 permalink:    /projects/loudness-wars

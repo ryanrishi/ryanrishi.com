@@ -5,6 +5,7 @@ description:  Ongoing project of managing servers and services at home.
 permalink:    /projects/homelab/
 image:
   src:        /img/projects/homelab/massimo-botturi-zFYUsLk_50Y-unsplash.jpg
+  alt:        Homelab
   width:      2268
   height:     4032
 date:         "2020-02-25T00:00:00Z"

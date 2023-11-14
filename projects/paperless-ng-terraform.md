@@ -4,6 +4,7 @@ layout:       projects/default
 description:  Terraform module to set up paperless-ng on AWS.
 image:
   src:        /img/projects/paperless-ng-terraform/wesley-tingey-snNHKZ-mGfE-unsplash.jpg
+  alt:        A stack of books, binders, and folders
   width:      6000
   height:     4000
 permalink:    /projects/paperless-ng-terraform

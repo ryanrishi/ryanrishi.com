@@ -1,5 +1,6 @@
 import type { MDXComponents } from 'mdx/types'
 import dynamic from 'next/dynamic'
+import type { HTMLFactory, PropsWithChildren } from 'react'
 
 import Blockquote from './blockquote'
 import Callout from './callout'
@@ -17,11 +18,11 @@ function getAnchor(text: string | string[]) {
   return (text instanceof Array ? text.join(' ') : text)  // titles with elements like `&mdash;` split the string
     .toLowerCase()
     .replace(/[^a-z0-9 -]/g, '')  // remove all non-alphanumeric/non-space characters
-    .replace(/[ ]/g, '-');        // replace spaces with dashes
+    .replace(/[ ]/g, '-')         // replace spaces with dashes
 }
 
 // TODO lol this is why I love React, but I should probz find a less hacky way to do this
-function AnchorWrappedInHeadingTag({ originalProps, Tag }: { originalProps: any, Tag: typeof H1 | typeof H2 | typeof H3 | typeof H4 | typeof H5 | typeof H6 }) {
+function AnchorWrappedInHeadingTag({ originalProps, Tag }: { originalProps: PropsWithChildren, Tag: HTMLFactory<HTMLHeadingElement> }) {
   const anchor = getAnchor(originalProps.children)
 
   return (

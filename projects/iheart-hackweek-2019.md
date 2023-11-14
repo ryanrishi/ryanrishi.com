@@ -5,6 +5,7 @@ description:  Spent a week in a New York mansion working on a side project with 
 permalink:    /projects/iheart-hackweek-2019/
 image:
   src:        /img/projects/iheart-hackweek-2019/iHeartRadio_Logo_iHR_Vertical_Color.png
+  alt:        iHeartRadio Logo
   width:      1680
   height:     1305
 date:         "2019-07-31T00:00:00Z"

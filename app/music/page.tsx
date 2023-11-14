@@ -27,7 +27,7 @@ export default function Music() {
     />
 
     <H3>Recording</H3>
-    <p>I've produced two albums. The first is Christmas In Claradise, which was a joint effort with the five <em>a cappella</em> groups at Santa Clara University. You can read about it <Link href={'/blog/2015-12-27-the-twelve-days-of-an-a-cappella-christmas-album'}>here</Link>.</p>
+    <p>I{"'"}ve produced two albums. The first is Christmas In Claradise, which was a joint effort with the five <em>a cappella</em> groups at Santa Clara University. You can read about it <Link href={'/blog/2015-12-27-the-twelve-days-of-an-a-cappella-christmas-album'}>here</Link>.</p>
 
     <p>The second is <Link href={'https://open.spotify.com/album/5Tbpm70sMQ2aUwdsEieHn5?si=pucr00KFSq-X_hMGfvNRrA'}>Bellomy</Link>, an album of songs written by my band from college.</p>
 

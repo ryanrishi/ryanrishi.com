@@ -18,7 +18,7 @@ const FooterLink = ({ children, href, className }: FooterLinkProps) => {
     <NextLink href={href} className={classes} target={isInternalLink ? '' : '_blank'}>
       {children}
     </NextLink>
-  );
+  )
 }
 
 export default function Footer() {

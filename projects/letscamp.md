@@ -4,6 +4,7 @@ layout:       projects/default
 description:  I wrote a bot that texts me when a Yosemite reservation I'm interested in becomes available.
 image:
   src:        /img/projects/letscamp/scott-goodwill-y8Ngwq34_Ak-unsplash.jpg
+  alt:        A tent
   width:      4498
   height:     3000
 permalink:    /projects/letscamp/

@@ -5,6 +5,7 @@ description:  I gave a talk on side projects and innovation at a music-meets-tec
 permalink:    /projects/treefort-2019/
 image:
   src:        /img/projects/treefort-2019/hackfort.png
+  alt:        Hackfort logo
   width:      225
   height:     225
 date:         "2019-03-27T00:00:00Z"
