@@ -1,4 +1,5 @@
 import { defineDocumentType, defineNestedType, makeSource } from 'contentlayer/source-files'
+import remarkGfm from 'remark-gfm'
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -58,4 +59,10 @@ export const Test = defineDocumentType(() => ({
   },
 }))
 
-export default makeSource({ contentDirPath: 'content', documentTypes: [Music, Post, Project, Test] })
+export default makeSource({
+  contentDirPath: 'content',
+  documentTypes: [Music, Post, Project, Test],
+  mdx: {
+    remarkPlugins: [remarkGfm],
+  },
+})
