@@ -29,7 +29,7 @@ function Section({ title, description, children }: SectionProps) {
 }
 
 export default function Index() {
-  const recentPosts = allPosts.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date))).slice(0, 3)
+  const recentPosts = allPosts.sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt))).slice(0, 3)
   const recentProjects = allProjects.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date))).slice(0, 3)
 
   return (
