@@ -2,10 +2,36 @@
 import 'tailwindcss/tailwind.css'
 import './globals.css'
 
+import type { Metadata } from 'next/types'
+
 import Footer from '@/components/footer'
 import Header from '@/components/header'
 
 import Providers from './providers'
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://ryanrishi.com'),
+  title: {
+    default: 'Ryan Rishi',
+    template: '%s | Ryan Rishi',
+  },
+  openGraph: {
+    type: 'website',
+    title: 'Ryan Rishi',
+    description: 'Full-stack software engineer and musician who loves cooking, camping, and flying.',
+    url: 'https://ryanrishi.com',
+    siteName: 'Ryan Rishi',
+    locale: 'en_US',
+  },
+  twitter: {
+    title: 'Ryan Rishi',
+    creator: '@ryanrishi',
+    card: 'summary_large_image',
+  },
+  verification: {
+    google: 'kausNF9hQubv5pYpPGZt6JjoZ45qF__IlkNNrlr',
+  },
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   // const router = useRouter()
