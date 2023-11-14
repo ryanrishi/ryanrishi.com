@@ -56,8 +56,6 @@ I am a [link](#)
 
 I am a [link with `code`](#)
 
-### I am a h3 with a [link](#)
-
 
 # Blockquotes
 <Blockquote
