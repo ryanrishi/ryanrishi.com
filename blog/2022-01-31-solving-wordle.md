@@ -136,7 +136,7 @@ public static void main(String[] args) {
 }
 ```
 
-```
+```txt
 Welcome to Wordle. Enter your guess below.
 (1/6) > asdflkjasfdbpojaerb
 Guess must be 5 characters long
@@ -225,7 +225,7 @@ void testBruteForce_zorro() {
   System.out.println("brute force - zorro: " + wordle.getNumGuesses());
 }
 ```
-```
+```txt
 brute force - about: 60
 brute force - zorro: 15907
 ```
@@ -358,7 +358,7 @@ void test20220128_iterative_goodSeed() {
   System.out.println("2022-01-28 (iterative, good seed): " + wordle.getNumGuesses());
 }
 ```
-```
+```txt
 2022-01-27 (iterative, good seed): 4
 2022-01-27 (iterative, bad seed): 5
 2022-01-28 (iterative, good seed): 4
@@ -393,7 +393,7 @@ void testTight_iterative_badSeed() {
 ```
 
 I've added some code to print the guess and result to emphasize the problem with this approach.
-```
+```txt
 bight
 ⬜️🟩🟩🟩🟩
 dight
@@ -428,7 +428,7 @@ Some of those are reasonable guesses (`light` was the answer in Wordle #226), bu
 We can improve on the above solution by guessing more common words first. Peter Norvig, the Director of Research at Google, has compiled a [list](http://norvig.com/ngrams/) of the most common ~300,000 words in English. We can use this list in order to guess more common words prior to guessing obscure, archaic words.
 
 Here is what the beginning of the list looks like:
-```
+```txt
 about	1226734006
 other	978481319
 which	810514085
@@ -488,7 +488,8 @@ void testTight_iterativeFrequency_badSeed() {
   System.out.println("tight (iterative + frequency, bad seed): " + wordle.getNumGuesses());
 }
 ```
-```
+
+```txt
 light
 ⬜️🟩🟩🟩🟩
 right

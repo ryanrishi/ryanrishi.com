@@ -1,8 +1,9 @@
+import { Children, type ReactNode } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 
-interface CodeProps {
-  children: string; // this isn't `ReactNode` because we need to filter out empty lines
-  language: string;
+export interface CodeProps {
+  children: ReactNode;
+  language: string | null;
 }
 
 // taken from https://github.com/samselikoff/samselikoff.com/blob/d010907de8aa342131c549e9087b10e6db289b3a/components/code.js#L40
@@ -180,7 +181,7 @@ const theme = {
 
 export default function Code({ language = '', children }: CodeProps) {
   // Filter out any empty lines at end
-  const reversedLines = children.split('\n').reverse()
+  const reversedLines = (Children.toArray(children) as string[]).join('').split('\n').reverse()
   const firstNonEmptyIndex = reversedLines.findIndex(line => line !== '')
   const lines = reversedLines
     .filter((line, index) => index >= firstNonEmptyIndex)

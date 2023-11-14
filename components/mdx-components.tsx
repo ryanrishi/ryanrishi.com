@@ -1,10 +1,10 @@
 import type { MDXComponents } from 'mdx/types'
 import dynamic from 'next/dynamic'
-import type { HTMLFactory, PropsWithChildren } from 'react'
+import { Children, type PropsWithChildren, type ReactNode } from 'react'
 
 import Blockquote from './blockquote'
 import Callout from './callout'
-import Code from './code'
+import Code, { CodeProps } from './code'
 import { H1, H2, H3, H4, H5, H6 } from './headings'
 import Link from './link'
 
@@ -14,7 +14,8 @@ import Link from './link'
  * @returns dasherized, lowercased, sanitized anchor link
  * @example getAnchor('I'm a teap0t') → 'im-a-teap0t'
  */
-function getAnchor(text: string | string[]) {
+function getAnchor(node: ReactNode) {
+  const text = Children.toArray(node)
   return (text instanceof Array ? text.join(' ') : text)  // titles with elements like `&mdash;` split the string
     .toLowerCase()
     .replace(/[^a-z0-9 -]/g, '')  // remove all non-alphanumeric/non-space characters
@@ -22,7 +23,7 @@ function getAnchor(text: string | string[]) {
 }
 
 // TODO lol this is why I love React, but I should probz find a less hacky way to do this
-function AnchorWrappedInHeadingTag({ originalProps, Tag }: { originalProps: PropsWithChildren, Tag: HTMLFactory<HTMLHeadingElement> }) {
+function AnchorWrappedInHeadingTag({ originalProps, Tag }: { originalProps: PropsWithChildren, Tag: React.ElementType }) {
   const anchor = getAnchor(originalProps.children)
 
   return (
@@ -41,12 +42,12 @@ const mdxComponents: MDXComponents = {
   h6: props => <AnchorWrappedInHeadingTag Tag={H6} originalProps={props} />,
 
   a: Link,
-  pre: props => <div className="overflow-x-auto" {...props} />,
+  pre: ({ children, ...props }) => <pre className="overflow-x-auto" {...props}>{children}</pre>,
   blockquote: ({ children }) => <Blockquote>{children}</Blockquote>,
   p: ({ children }) => <p className="leading-loose mb-4 transition">{children}</p>,
   ul: ({ children }) => <ul className="list-disc list-outside px-4 mb-8 transition">{children}</ul>,
   img: props => {
-    if (/^.*\.svg.*/.test(props.src)) {
+    if (/^.*\.svg.*/.test(props.src || '')) {
       return (
         <svg>
           <use href={props.src} />
@@ -55,19 +56,22 @@ const mdxComponents: MDXComponents = {
     }
 
     return <img className="mx-auto" {...props} />
-},
+  },
   table: props => <table className="w-full" {...props}></table>,
 
   code: ({ className, children }) => {
-    const props = { children, language: null }
+    // if (children?.toString().includes('1226734006')) debugger
+    const props: CodeProps = { children, language: null }
     const languageMatch = className && className.match('language-([^{]+)')
     if (languageMatch) {
       props.language = languageMatch[1]
+
+      return (
+        <Code {...props} />
+      )
     }
 
-    return (
-      <Code {...props} />
-    )
+    return <code className="font-bold p-1" {...props}>{children}</code>
   },
 
   inlineCode: ({ children }) => <code className="font-bold p-1">{`\`${children}\``}</code>,
