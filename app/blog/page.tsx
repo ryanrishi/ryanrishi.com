@@ -10,7 +10,7 @@ import { H1 } from '@/components/headings'
 dayjs.extend(utc)
 
 export const metadata: Metadata = {
-  title: 'Blog | Ryan Rishi',
+  title: 'Blog',
 }
 
 export default function BlogIndex() {

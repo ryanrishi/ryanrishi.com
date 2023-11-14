@@ -1,6 +1,5 @@
 ---
 name:         Homelab
-layout:       projects/default
 description:  Ongoing project of managing servers and services at home.
 permalink:    /projects/homelab/
 image:

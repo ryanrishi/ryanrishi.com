@@ -1,6 +1,5 @@
 ---
 name:         paperless-ng Terraform
-layout:       projects/default
 description:  Terraform module to set up paperless-ng on AWS.
 image:
   src:        /img/projects/paperless-ng-terraform/wesley-tingey-snNHKZ-mGfE-unsplash.jpg

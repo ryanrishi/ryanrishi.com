@@ -41,4 +41,10 @@ export const Project = defineDocumentType(() => ({
   },
 }))
 
-export default makeSource({ contentDirPath: '.', documentTypes: [Post, Project] })
+export const Music = defineDocumentType(() => ({
+  name: 'Music',
+  filePathPattern: 'music.md',
+  contentType: 'mdx',
+}))
+
+export default makeSource({ contentDirPath: 'content', documentTypes: [Music, Post, Project] })

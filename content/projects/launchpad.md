@@ -1,6 +1,5 @@
 ---
 name:         Launchpad
-layout:       projects/default
 description:  A side project I did at work to showcase innovation at the company as part of a new corporate website launch.
 image:
   src:        /img/projects/launchpad/launchpad.png

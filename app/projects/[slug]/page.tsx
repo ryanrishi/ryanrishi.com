@@ -12,7 +12,7 @@ dayjs.extend(utc)
 export const generateMetadata = ({ params }: { params: { slug: string } }): Metadata => {
   const project = allProjects.find((project) => project._raw.flattenedPath === `projects/${params.slug}`)
   if (!project) throw new Error(`Project not found for slug: ${params.slug}`)
-  return { title: `${project.name} | Ryan Rishi` }
+  return { title: project.name }
 }
 
 export default function Project({ params }: { params: { slug: string } }) {

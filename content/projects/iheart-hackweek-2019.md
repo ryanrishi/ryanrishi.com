@@ -1,6 +1,5 @@
 ---
 name:         iHeart Hackweek 2019
-layout:       projects/default
 description:  Spent a week in a New York mansion working on a side project with some coworkers.
 permalink:    /projects/iheart-hackweek-2019/
 image:

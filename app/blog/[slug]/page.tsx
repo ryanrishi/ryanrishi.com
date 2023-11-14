@@ -15,7 +15,7 @@ export const generateMetadata = ({ params }: { params: { slug: string } }): Meta
   if (!post) throw new Error(`Post not found for slug: ${params.slug}`)
 
   return {
-    title: `${post.title} | Ryan Rishi`,
+    title: `${post.title}`,
     description: post.description,
     openGraph: {
       type: 'article',

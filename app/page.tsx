@@ -38,8 +38,8 @@ export default function Index() {
         <p className="pb-8">I&apos;m a software engineer focused on building <b>great user experiences</b>.</p>
         <p className="pb-8">Over the course of my career, I&apos;m grateful to have had the opportunity to work across multiple focus areas including frontend development, backend development, infrastructure, and operations.</p>
         <p className="pb-8">Fast-forward to today, and I&apos;ve had the privilege on working at <Link href="https://jelli.com">an audio ad tech startup</Link>, <Link href="https://envoy.com">a workplace platform startup</Link>, and <Link href="https://twilio.com">a customer engagement platform</Link>. My main focus these days is leading product-focused engineering teams to deliver highly available backend services in order to deliver great experiences to the end-user.</p>
-        <p className="pb-8">Here are a few technologies I&apos;ve enjoyed working with recently:</p>
-        <ul className="list-disc list-inside">
+        <p>Here are a few technologies I&apos;ve enjoyed working with recently:</p>
+        <ul className="list-disc list-inside pb-8">
           <li><Link href="https://nextjs.com">Next.js</Link></li>
           <li><Link href="https://tailwindcss.com">Tailwindcss</Link></li>
           <li><Link href="https://graphql.com">GraphQL</Link> (specifically <Link href="https://apollographql.com">Apollo</Link>)</li>
@@ -47,7 +47,7 @@ export default function Index() {
           <li><Link href="https://typescriptlang.org">TypeScript</Link></li>
           <li><Link href="https://d3js.org">d3</Link> (check out my project on the <Link href="/projects/loudness-wars">Loudness Wars</Link>)</li>
         </ul>
-        <p className="pb-8">Outside of work, I enjoy listening to and playing music, cooking, traveling, and saying hi to dogs I pass on the street.</p>
+        <p>Outside of work, I enjoy listening to and playing music, cooking, traveling, and saying hi to dogs I pass on the street.</p>
       </Section>
       <Section
         title={{ text: 'Blog', url: '/blog' }}

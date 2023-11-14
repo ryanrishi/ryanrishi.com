@@ -4,7 +4,7 @@ import { Metadata } from 'next/types'
 import { FancyH1 } from '@/components/headings'
 
 export const metadata: Metadata = {
-  title: 'Contact | Ryan Rishi',
+  title: 'Contact',
 }
 
 const sharedInputClassNames = 'block w-full border rounded py-3 px-4 mb-3 mt-2 leading-tight appearance-none text-slate-800 bg-slate-100 dark:text-slate-100 dark:bg-slate-700 border-slate-300 hover:border-slate-400 transition'

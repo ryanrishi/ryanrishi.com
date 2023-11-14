@@ -24,7 +24,10 @@ export const metadata: Metadata = {
     locale: 'en_US',
   },
   twitter: {
-    title: 'Ryan Rishi',
+    title: {
+      default: 'Ryan Rishi',
+      template: '%s | Ryan Rishi',
+    },
     creator: '@ryanrishi',
     card: 'summary_large_image',
   },

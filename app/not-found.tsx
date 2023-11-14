@@ -3,7 +3,7 @@ import { Metadata } from 'next/types'
 import Link from '../components/link'
 
 export const metadata: Metadata = {
-  title: '404 | Ryan Rishi',
+  title: '404',
 }
 
 export default function Error404() {
