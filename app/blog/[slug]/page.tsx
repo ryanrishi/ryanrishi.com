@@ -8,11 +8,11 @@ import { useMDXComponent } from  'next-contentlayer/hooks'
 
 dayjs.extend(utc)
 
-export const generateStaticParams = async () => allPosts.map((post) => ({ slug: post._raw.flattenedPath }))
+export const generateStaticParams = async () => allPosts.map((post) => ({ slug: decodeURIComponent(post.slug) }))
 
 export const generateMetadata = ({ params }: { params: { slug: string } }): Metadata => {
-  const post = allPosts.find((post) => post._raw.flattenedPath === `blog/${params.slug}`)
-  if (!post) throw new Error(`Post not found for slug: ${params.slug}`)
+  const post = allPosts.find((post) => post.slug === decodeURIComponent(params.slug))
+  if (!post) throw new Error(`Post not found for slug: ${decodeURIComponent(params.slug)}`)
 
   return {
     title: `${post.title}`,
@@ -20,7 +20,7 @@ export const generateMetadata = ({ params }: { params: { slug: string } }): Meta
     openGraph: {
       type: 'article',
       publishedTime: post.publishedAt,
-      url: `https://ryanrishi.com/blog/${params.slug}`,
+      url: `https://ryanrishi.com/blog/${decodeURIComponent(params.slug)}`,
       images: [
         { url: `https://ryanrishi.com/${post.image}` },
       ],
@@ -30,7 +30,7 @@ export const generateMetadata = ({ params }: { params: { slug: string } }): Meta
 }
 
 export default function Post({ params }: { params: { slug: string } }) {
-  const post = allPosts.find((post) => post._raw.flattenedPath === `blog/${params.slug}`)
+  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug)
   if (!post) notFound()
 
   const MDXContent = useMDXComponent(post.body.code)

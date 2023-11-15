@@ -13,7 +13,7 @@ export const Post = defineDocumentType(() => ({
     tags: { type: 'list', of: { type: 'string' }, required: true },
   },
   computedFields: {
-    url: { type: 'string', resolve: (post) => post._raw.flattenedPath },
+    slug: { type: 'string', resolve: (post) => post._raw.flattenedPath }
   },
 }))
 

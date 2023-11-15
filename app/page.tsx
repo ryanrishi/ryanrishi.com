@@ -55,7 +55,7 @@ export default function Index() {
       >
         {recentPosts.map((post, i) => (
           <div key={i}>
-            <Link href={post.url}>
+            <Link href={post.slug}>
               <H3>{post.title}</H3>
             </Link>
             <p className="transition text-slate-500 dark:text-slate-400 mb-8">{post.description}</p>
