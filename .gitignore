@@ -30,6 +30,7 @@ yarn-error.log*
 .env.production.local
 
 # Cypress
+cypress/downloads
 cypress/screenshots
 cypress/videos
 
