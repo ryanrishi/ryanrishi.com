@@ -1,4 +1,4 @@
-import { Metadata } from 'next/types'
+import type { Metadata } from 'next/types'
 
 import Link from '../components/link'
 

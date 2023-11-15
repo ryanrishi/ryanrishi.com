@@ -8,7 +8,7 @@ import { useMDXComponent } from  'next-contentlayer/hooks'
 
 dayjs.extend(utc)
 
-export const generateStaticParams = async () => allPosts.map((post) => ({ slug: decodeURIComponent(post.slug) }))
+export const generateStaticParams = async () => allPosts.map((post) => ({ slug: post.slug }))
 
 export const generateMetadata = ({ params }: { params: { slug: string } }): Metadata => {
   const post = allPosts.find((post) => post.slug === decodeURIComponent(params.slug))
@@ -30,7 +30,7 @@ export const generateMetadata = ({ params }: { params: { slug: string } }): Meta
 }
 
 export default function Post({ params }: { params: { slug: string } }) {
-  const post = allPosts.find((post) => post._raw.flattenedPath === params.slug)
+  const post = allPosts.find((post) => post.slug === params.slug)
   if (!post) notFound()
 
   const MDXContent = useMDXComponent(post.body.code)

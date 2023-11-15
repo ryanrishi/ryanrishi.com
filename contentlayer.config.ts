@@ -13,7 +13,7 @@ export const Post = defineDocumentType(() => ({
     tags: { type: 'list', of: { type: 'string' }, required: true },
   },
   computedFields: {
-    slug: { type: 'string', resolve: (post) => post._raw.flattenedPath }
+    slug: { type: 'string', resolve: (post) => post._raw.flattenedPath.replace('blog/', '') }
   },
 }))
 
@@ -38,7 +38,7 @@ export const Project = defineDocumentType(() => ({
     image: { type: 'nested', of: ProjectImage, required: true },
   },
   computedFields: {
-    url: { type: 'string', resolve: (project) => project._raw.flattenedPath },
+    slug: { type: 'string', resolve: (project) => project._raw.flattenedPath.replace('projects/', '') },
   },
 }))
 

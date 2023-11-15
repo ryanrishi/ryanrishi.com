@@ -70,7 +70,7 @@ export default function Index() {
       >
         {recentProjects.map((project, i) => (
           <div key={i}>
-            <Link href={project.url}>
+            <Link href={project.slug}>
               <H3>{project.name}</H3>
             </Link>
             <p className="transition text-slate-500 dark:text-slate-400 mb-8">{project.description}</p>

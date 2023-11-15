@@ -25,7 +25,7 @@ export default function BlogIndex() {
           key={i}
         >
           <H1 className="hover:text-slate-900 dark:hover:text-slate-300">
-            <Link href={post.slug} legacyBehavior>
+            <Link href={`blog/${post.slug}`} legacyBehavior>
               {post.title}
             </Link>
           </H1>
@@ -33,7 +33,7 @@ export default function BlogIndex() {
 
           <div className="flex flex-col">
             <p className="transition">{post.description}</p>
-            <Link className="flex justify-end pt-4 italic uppercase font-bold dark:text-slate-100 transition" href={post.slug}>
+            <Link className="flex justify-end pt-4 italic uppercase font-bold dark:text-slate-100 transition" href={`blog/${post.slug}`}>
               Read more &raquo;
             </Link>
           </div>

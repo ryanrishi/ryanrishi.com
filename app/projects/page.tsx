@@ -7,7 +7,7 @@ import { FancyH1 } from '@/components/headings'
 import ProjectItem from './project-item'
 
 export const metadata: Metadata = {
-  title: 'Projects | Ryan Rishi',
+  title: 'Projects',
 }
 
 export default function ProjectsIndex() {
