@@ -24,13 +24,15 @@ const margin = {
   left: 28,
 }
 
+type Columns = 'track_id' | 'track_name' | 'artist_name' | 'album_name' | 'release_date' | 'release_date_precision' | 'loudness'
+
 const trackFillColor = '#69b3a2'
 const selectedTrackFillColor = '#f38f9f'
 
 const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTrack) => {
   let $selectedTrack
 
-  const data = await d3.csv('/loudness-wars.csv').then(tracks => tracks.map(track => ({
+  const data = await d3.csv<Columns>('/loudness-wars.csv').then(tracks => tracks.map(track => ({
     id: track.track_id,
     name: track.track_name,
     artist: track.artist_name,
@@ -39,17 +41,17 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
     releaseDate: (() => {
       switch (track.release_date_precision) {
         case 'day':
-          return new Date(track.release_date)
+          return new Date(track.release_date!)
 
         case 'month': {
-          const [year, month] = track.release_date.split('-')
+          const [year, month] = track.release_date!.split('-')
           const date = new Date(+year, +month - 1, 1)
 
           return date
         }
 
         case 'year':
-          return new Date(+track.release_date, 0, 1)
+          return new Date(+track.release_date!, 0, 1)
 
         default:
           throw new Error(`Unknown release date precision: ${track.release_date_precision}`)
@@ -67,8 +69,8 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
   let maxLoudness = -Infinity
 
   data.forEach((d) => {
-    minLoudness = Math.min(minLoudness, +d.loudness)
-    maxLoudness = Math.max(maxLoudness, +d.loudness)
+    minLoudness = Math.min(minLoudness, +d.loudness!)
+    maxLoudness = Math.max(maxLoudness, +d.loudness!)
   })
 
   const { width, height } = svgRef.current.viewBox.baseVal
@@ -137,8 +139,8 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
     .style('font-family', 'monospace')
 
   // hover animations
-  const addHorizontalPositionalStylesToTooltip = (tooltip: d3.Selection<HTMLDivElement, unknown, HTMLElement, unknown>, e) => {
-    const tooltipWidth = tooltip.node().getBoundingClientRect().width
+  const addHorizontalPositionalStylesToTooltip = (tooltip: d3.Selection<HTMLDivElement, unknown, HTMLElement, unknown>, e: MouseEvent) => {
+    const tooltipWidth = tooltip.node()!.getBoundingClientRect().width
     const rightSideOfTooltip = e.pageX + tooltipWidth
     const clientWidth = document.body.clientWidth
     const doesOverflowRightSideOfPage = rightSideOfTooltip > clientWidth
@@ -154,7 +156,7 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
     }
   }
 
-  function onMouseIn(e, d) {
+  function onMouseIn(e: MouseEvent, d) {
     d3.select(this)
       .transition()
       .duration(transitionDuration)
@@ -200,14 +202,14 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
       })
   }
 
-  function onMouseMove(e) {
+  function onMouseMove(e: MouseEvent) {
     tooltip
       .style('top', `${e.pageY + 5}px`)
 
     addHorizontalPositionalStylesToTooltip(tooltip, e)
   }
 
-  function onClick(e, d) {
+  function onClick(e: MouseEvent, d) {
     setSelectedTrack(d)
 
     if ($selectedTrack) {
@@ -228,7 +230,7 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
     /* eslint-disable indent */
       .style('cursor', 'pointer')
       .attr('cx', d => x(d.releaseDate))
-      .attr('cy', d => y(+d.loudness))
+      .attr('cy', d => y(+d.loudness!))
       .attr('r', r)
       .attr('fill', trackFillColor)
       .attr('opacity', 0.4)
@@ -250,7 +252,7 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
     .sort()
     .map(year => ({
       year: +year,
-      loudness: d3.mean(loudnessByYear[year]),
+      loudness: d3.mean(loudnessByYear[year])!,
     }))
 
   const drawTrendline = () => {
@@ -292,7 +294,7 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
 }
 
 const Chart = () => {
-  const svg = useRef<SVGSVGElement>()
+  const svg = useRef<SVGSVGElement>(null!)
 
   const [dimensions, setDimensions] = useState({
     // can't use winsow since it's undefined with Next.js SSR
@@ -300,9 +302,9 @@ const Chart = () => {
     width: 0,
   })
 
-  const [selectedTrack, _setSelectedTrack] = useState(null)
+  const [selectedTrack, _setSelectedTrack] = useState<Track | null>(null)
 
-  const setSelectedTrack = (track) => {
+  const setSelectedTrack = (track: Track) => {
     event({
       action: 'loudness wars | select track',
       params: track,
