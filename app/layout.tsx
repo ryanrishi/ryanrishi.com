@@ -8,6 +8,7 @@ import Footer from '@/components/footer'
 import Header from '@/components/header'
 
 import Providers from './providers'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ryanrishi.com'),
@@ -51,6 +52,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+              page_path: window.location.pathname,
+            });
+          `}
+        </Script>
+      </head>
       <body>
         <Providers>
           <div className="bg-slate-50 dark:bg-slate-800 dark:text-slate-400">
