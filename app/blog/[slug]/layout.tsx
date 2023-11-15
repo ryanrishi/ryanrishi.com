@@ -5,10 +5,10 @@ export default function PostLayout({ children }) {
     <>
       {children}
       <div className="flex items-center justify-center my-8">
-          <Link href="/blog" className="text-slate-500 hover:text-slate-600 transition">
-            &larr; Back to Blog
-          </Link>
-        </div>
+        <Link href="/blog" className="text-slate-500 hover:text-slate-600 transition">
+          &larr; Back to Blog
+        </Link>
+      </div>
     </>
   )
 }

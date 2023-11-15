@@ -14,7 +14,6 @@
   "dependencies": {
     "@next/eslint-plugin-next": "14.0.2",
     "@reach/dialog": "0.18.0",
-    "autoprefixer": "10.4.16",
     "classnames": "^2.3.1",
     "contentlayer": "^0.3.4",
     "cypress-real-events": "^1.6.0",
@@ -26,7 +25,6 @@
     "next": "14.0.2",
     "next-contentlayer": "^0.3.4",
     "next-themes": "0.2.1",
-    "postcss": "8.4.31",
     "prism-react-renderer": "2.2.0",
     "prop-types": "^15.7.2",
     "react": "18.2.0",
@@ -35,25 +33,27 @@
     "react-spring": "9.1.0",
     "react-syntax-highlighter": "^15.4.5",
     "remark-gfm": "3.0.1",
-    "sharp": "^0.30.5",
-    "tailwindcss": "3.3.5"
+    "sharp": "^0.30.5"
   },
   "devDependencies": {
     "@percy/cli": "^1.17.0",
     "@percy/cypress": "^3.1.1",
     "@types/d3": "^7.1.0",
     "@types/gtag.js": "^0.0.8",
-    "@types/react": "18.2.0",
-    "@types/react-syntax-highlighter": "15.5.10",
-    "@typescript-eslint/eslint-plugin": "6.10.0",
-    "@typescript-eslint/parser": "6.10.0",
+    "@types/react": "18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@typescript-eslint/eslint-plugin": "6.11.0",
+    "@typescript-eslint/parser": "6.11.0",
+    "autoprefixer": "10.4.16",
     "cypress": "9.2.0",
     "cypress-wait-until": "^1.7.2",
     "eslint": "8.53.0",
     "eslint-config-next": "14.0.2",
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-simple-import-sort": "10.0.0",
+    "postcss": "8.4.31",
     "start-server-and-test": "^1.12.0",
+    "tailwindcss": "3.3.5",
     "typescript": "5.2.2"
   }
 }
