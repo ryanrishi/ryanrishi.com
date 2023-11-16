@@ -6,6 +6,7 @@ import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi'
 import { IconContext } from 'react-icons/lib'
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 
 import Logo from './logo'
 
@@ -63,20 +64,67 @@ function MobileNav({ isOpen, setIsOpen }) {
         />
       </div>
     </div>
-    <div>
-      {items.map((item, i) => (
-        <div
-          key={item.href}
-          className="my-8"
-        >
-          <Link
-            href={item.href}
-            className="uppercase italic font-bold text-4xl my-4 outline-white">
-            {item.title}
-          </Link>
-        </div>
-      ))}
-    </div>
+
+  <AnimatePresence>
+    {isOpen && (
+      <MotionConfig
+        transition={{
+          type: 'spring',
+          bounce: 0.1,
+        }}
+      >
+        <motion.div
+          variants={{
+            open: {
+              x: '0%',
+              transition: {
+                type: 'spring',
+                bounce: 0.1,
+                staggerChildren: 0.1,
+                when: 'beforeChildren',
+              },
+            },
+            closed: {
+              x: '100%',
+              transition: {
+                type: 'spring',
+                bounce: 0.1,
+                staggerChildren: 0.1,
+                when: 'afterChildren',
+              },
+            },
+          }}
+          initial="closed"
+          animate="open"
+          exit="closed"
+          className="fixed inset-0 bg-blue-600 mx-auto flex flex-col justify-center">
+            <motion.div
+              variants={{
+                open: {
+                  y: '0%',
+                  opacity: 1,
+                },
+                closed: {
+                  y: '25%',
+                  opacity: 0,
+                },
+              }}
+            >
+              <ul className="space-y-5">
+                {items.map((item) => (
+                  <li
+                    key={item.href}
+                    className="text-4xl"
+                  >
+                    <Link href={item.href}>{item.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+        </motion.div>
+      </MotionConfig>
+    )}
+    </AnimatePresence>
   </>
 }
 
