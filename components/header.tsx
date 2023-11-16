@@ -1,17 +1,13 @@
 'use client'
 
-import { DialogContent, DialogOverlay } from '@reach/dialog'
 import { Squash as Hamburger } from 'hamburger-react'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi'
 import { IconContext } from 'react-icons/lib'
-import { animated, useTransition } from 'react-spring'
 
 import Logo from './logo'
-
-const AnimatedDialogOverlay = animated(DialogOverlay)
 
 const items = [
   { title: 'Music', href: '/music' },
@@ -50,20 +46,6 @@ const HeaderLink = ({ className = '', href, children }) => (
 )
 
 function MobileNav({ isOpen, setIsOpen }) {
-  const overlayTransitions = useTransition(isOpen, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    expires: true,
-  })
-
-  const itemTransitions = useTransition(isOpen ? items.map((_, i) => i) : [], {
-    trail: 30,
-    from: { bottom: '-50vh' },
-    enter: { bottom: '0vh' },
-    leave: { bottom: '50vh' },
-  })
-
   return <>
     <div className="flex justify-between items-center">
       <div className="flex flex-row items-center dark:text-green-200">
@@ -82,30 +64,17 @@ function MobileNav({ isOpen, setIsOpen }) {
       </div>
     </div>
     <div>
-      {overlayTransitions((overlayStyles, item) => item && (
-        <AnimatedDialogOverlay
-          className="bg-white dark:bg-slate-900 transition-colors"
-          style={overlayStyles}
+      {items.map((item, i) => (
+        <div
+          key={item.href}
+          className="my-8"
         >
-          <DialogContent
-            aria-label="Menu"
-            className="h-4/5 text-center px-0 dark:bg-slate-900 transition flex flex-col"
-          >
-            {itemTransitions((style, i) => (
-              <animated.div
-                key={items[i].href}
-                style={style}
-                className="my-8"
-              >
-                <Link
-                  href={items[i].href}
-                  className="uppercase italic font-bold text-4xl my-4 outline-white">
-                  {items[i].title}
-                </Link>
-              </animated.div>
-            ))}
-          </DialogContent>
-        </AnimatedDialogOverlay>
+          <Link
+            href={item.href}
+            className="uppercase italic font-bold text-4xl my-4 outline-white">
+            {item.title}
+          </Link>
+        </div>
       ))}
     </div>
   </>

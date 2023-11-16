@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@next/eslint-plugin-next": "14.0.2",
-    "@reach/dialog": "0.18.0",
     "classnames": "^2.3.1",
     "contentlayer": "^0.3.4",
     "cypress-real-events": "1.11.0",
@@ -30,7 +29,6 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.2.0",
-    "react-spring": "9.1.0",
     "react-syntax-highlighter": "^15.4.5",
     "remark-gfm": "3.0.1",
     "sharp": "^0.30.5"
