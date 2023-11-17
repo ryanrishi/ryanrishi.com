@@ -20,14 +20,15 @@ describe('Header', () => {
 
     it('opens the mobile nav when the hamburger is clicked', () => {
       cy.get('header [role="button"]').click()
-      cy.get('[data-reach-dialog-overlay]').should('have.css', 'opacity', '1')
-      cy.get('[role="dialog"] a').should('be.visible')
+      cy.get('[data-test-id="mobile-nav"]').should('have.css', 'opacity', '1')
+      cy.get('[role="dialog"]').should('be.visible')
     })
 
     describe('Open', () => {
       beforeEach(() => {
         cy.get('header [role="button"]').click()
-        cy.get('[data-reach-dialog-overlay]').should('have.css', 'opacity', '1')
+        cy.get('[data-test-id="mobile-nav"]').should('have.css', 'opacity', '1')
+        cy.get('[role="dialog"] a[href="https://linkedin.com/in/ryanrishi"]')
       })
 
       it('opens the mobile nav when the hamburger is clicked', () => {

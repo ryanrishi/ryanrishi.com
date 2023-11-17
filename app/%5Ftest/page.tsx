@@ -6,8 +6,22 @@ import { useMDXComponent } from 'next-contentlayer/hooks'
 import { FancyH1 } from '@/components/headings'
 import mdxComponents from '@/components/mdx-components'
 
-export const metadata: Metadata = {
-  title: 'Test',
+export const generateMetadata = (): Metadata => {
+  const testPage = allTests[0]
+
+  return {
+    title: testPage.title,
+    description: testPage.description,
+    openGraph: {
+      type: 'article',
+      title: testPage.title,
+      description: testPage.description,
+      images: {
+        url: testPage.image,
+      },
+      tags: testPage.tags,
+    },
+  }
 }
 
 export default function Test() {

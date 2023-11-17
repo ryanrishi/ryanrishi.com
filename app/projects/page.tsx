@@ -8,6 +8,9 @@ import ProjectItem from './project-item'
 
 export const metadata: Metadata = {
   title: 'Projects',
+  openGraph: {
+    title: 'Projects',
+  },
 }
 
 export default function ProjectsIndex() {

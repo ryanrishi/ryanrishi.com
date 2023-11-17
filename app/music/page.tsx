@@ -8,6 +8,9 @@ import mdxComponents from '@/components/mdx-components'
 
 export const metadata: Metadata = {
   title: 'Music',
+  openGraph: {
+    title: 'Music',
+  },
 }
 
 export default function Music() {
