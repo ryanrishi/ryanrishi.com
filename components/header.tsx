@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi'
+import { ImTwitter, ImGithub, ImLinkedin, ImSoundcloud, ImYoutube } from 'react-icons/im'
 import { IconContext } from 'react-icons/lib'
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 
@@ -80,7 +81,7 @@ function MobileNav({ isOpen, setIsOpen }) {
               transition: {
                 type: 'spring',
                 bounce: 0.1,
-                staggerChildren: 0.1,
+                staggerChildren: 0.25,
                 when: 'beforeChildren',
               },
             },
@@ -89,7 +90,7 @@ function MobileNav({ isOpen, setIsOpen }) {
               transition: {
                 type: 'spring',
                 bounce: 0.1,
-                staggerChildren: 0.1,
+                staggerChildren: 0.25,
                 when: 'afterChildren',
               },
             },
@@ -97,7 +98,7 @@ function MobileNav({ isOpen, setIsOpen }) {
           initial="closed"
           animate="open"
           exit="closed"
-          className="fixed inset-0 bg-blue-600 mx-auto flex flex-col justify-center">
+          className="fixed inset-0 bg-blue-600 mx-auto p-6 space-y-10 flex flex-col justify-center">
             <motion.div
               variants={{
                 open: {
@@ -110,7 +111,7 @@ function MobileNav({ isOpen, setIsOpen }) {
                 },
               }}
             >
-              <ul className="space-y-5">
+              <motion.ul className="space-y-5">
                 {items.map((item) => (
                   <li
                     key={item.href}
@@ -119,8 +120,63 @@ function MobileNav({ isOpen, setIsOpen }) {
                     <Link href={item.href}>{item.title}</Link>
                   </li>
                 ))}
-              </ul>
+              </motion.ul>
             </motion.div>
+
+            <motion.div
+              variants={{
+                open: {
+                  y: '0%',
+                  opacity: 1,
+                },
+                closed: {
+                  y: '25%',
+                  opacity: 0,
+                },
+              }}
+              className="w-full h-px bg-white/30"
+            >
+            </motion.div>
+
+            <motion.ul
+              variants={{
+                open: {
+                  y: '0%',
+                  opacity: 1,
+                },
+                closed: {
+                  y: '25%',
+                  opacity: 0,
+                },
+              }}
+              className="flex items-center gap-x-4 text-2xl"
+            >
+              <li>
+                <Link href="https://github.com/ryanrishi">
+                  <ImGithub />
+                </Link>
+              </li>
+              <li>
+                <Link href="https://twitter.com/ryanrishi">
+                  <ImTwitter />
+                </Link>
+              </li>
+              <li>
+                <Link href="https://linkedin.com/in/ryanrishi">
+                  <ImLinkedin />
+                </Link>
+              </li>
+              <li>
+                <Link href="https://soundcloud.com/ryanrishi">
+                  <ImSoundcloud />
+                </Link>
+              </li>
+              <li>
+                <Link href="https://youtube.com/RyanRishiPercussion">
+                  <ImYoutube />
+                </Link>
+              </li>
+            </motion.ul>
         </motion.div>
       </MotionConfig>
     )}
