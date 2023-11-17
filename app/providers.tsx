@@ -1,9 +1,10 @@
 'use client'
 
-import { pageview } from '@/lib/ga'
-import { ThemeProvider } from 'next-themes'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { ThemeProvider } from 'next-themes'
 import { useEffect } from 'react'
+
+import { pageview } from '@/lib/ga'
 
 function PageView() {
   const pathname = usePathname()

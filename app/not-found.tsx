@@ -1,7 +1,8 @@
 import type { Metadata } from 'next/types'
 
-import Link from '../components/link'
 import { H1 } from '@/components/headings'
+
+import Link from '../components/link'
 
 export const metadata: Metadata = {
   title: '404',

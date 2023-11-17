@@ -1,13 +1,13 @@
 import 'tailwindcss/tailwind.css'
 import './globals.css'
 
+import Script from 'next/script'
 import type { Metadata } from 'next/types'
 
 import Footer from '@/components/footer'
 import Header from '@/components/header'
 
 import Providers from './providers'
-import Script from 'next/script'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ryanrishi.com'),

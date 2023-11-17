@@ -23,7 +23,7 @@ export const generateMetadata = ({ params }: { params: { slug: string } }): Meta
       publishedTime: project.date,
       url: `https://ryanrishi.com/projects/${decodeURIComponent(params.slug)}`,
       images: [
-        { url: `https://ryanrishi.com/${project.image}`}
+        { url: `https://ryanrishi.com/${project.image}`},
       ],
     },
   }

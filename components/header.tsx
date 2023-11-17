@@ -1,13 +1,13 @@
 'use client'
 
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 import { Squash as Hamburger } from 'hamburger-react'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi'
-import { ImTwitter, ImGithub, ImLinkedin, ImSoundcloud, ImYoutube } from 'react-icons/im'
+import { ImGithub, ImLinkedin, ImSoundcloud, ImTwitter, ImYoutube } from 'react-icons/im'
 import { IconContext } from 'react-icons/lib'
-import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 
 import Logo from './logo'
 
