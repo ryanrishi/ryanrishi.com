@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
 import mdxComponents from '@/components/mdx-components'
+import { H1 } from '@/components/headings'
 
 dayjs.extend(utc)
 
@@ -37,10 +38,10 @@ export default function Project({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <h1>
-        {project.name}
-      </h1>
-      <MDXContent components={mdxComponents} />
+      <H1>{project.name}</H1>
+      <div className="leading-8">
+        <MDXContent components={mdxComponents} />
+      </div>
     </>
   )
 }
