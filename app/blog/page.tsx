@@ -11,6 +11,9 @@ dayjs.extend(utc)
 
 export const metadata: Metadata = {
   title: 'Blog',
+  openGraph: {
+    title: 'Blog',
+  },
 }
 
 export default function BlogIndex() {

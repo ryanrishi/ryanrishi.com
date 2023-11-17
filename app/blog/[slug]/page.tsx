@@ -20,6 +20,7 @@ export const generateMetadata = ({ params }: { params: { slug: string } }): Meta
     openGraph: {
       type: 'article',
       publishedTime: post.publishedAt,
+      authors: 'Ryan Rishi',
       url: `https://ryanrishi.com/blog/${decodeURIComponent(params.slug)}`,
       images: [
         { url: `https://ryanrishi.com/${post.image}` },

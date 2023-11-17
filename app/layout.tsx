@@ -15,9 +15,16 @@ export const metadata: Metadata = {
     default: 'Ryan Rishi',
     template: '%s | Ryan Rishi',
   },
+  authors: {
+    name: 'Ryan Rishi',
+    url: new URL('https://ryanrishi.com'),
+  },
   openGraph: {
     type: 'website',
-    title: 'Ryan Rishi',
+    title: {
+      default: 'Ryan Rishi',
+      template: '%s | Ryan Rishi',
+    },
     description: 'Full-stack software engineer and musician who loves cooking, camping, and flying.',
     url: 'https://ryanrishi.com',
     siteName: 'Ryan Rishi',

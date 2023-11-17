@@ -23,7 +23,7 @@ describe('Blog', () => {
       cy.get('head meta[property="og:type"]').should('have.attr', 'content', 'article')
       cy.get('head meta[property="article:author"]').should('have.attr', 'content', 'Ryan Rishi')
       cy.get('head meta[property="article:published_time"]').should('have.attr', 'content')
-        .and('match', /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/)
+        .and('match', /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z/)
     })
   })
 
