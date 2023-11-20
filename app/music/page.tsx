@@ -20,9 +20,9 @@ export default function Music() {
   const MDXContent = useMDXComponent(music.body.code)
 
   return (
-    <>
+    <div className="prose dark:prose-invert max-w-none">
       <FancyH1>Music</FancyH1>
       <MDXContent components={mdxComponents} />
-    </>
+    </div>
   )
 }

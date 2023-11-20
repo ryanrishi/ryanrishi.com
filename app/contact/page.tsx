@@ -22,7 +22,7 @@ function Label({ htmlFor, children }) {
 
 export default function Contact() {
   return (
-    <div className="container w-full md:w-3/4">
+    <div className="container">
     <FancyH1>Contact</FancyH1>
     <form
       className="mx-auto"
