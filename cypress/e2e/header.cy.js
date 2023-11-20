@@ -20,15 +20,14 @@ describe('Header', () => {
 
     it('opens the mobile nav when the hamburger is clicked', () => {
       cy.get('header [role="button"]').click()
-      cy.get('[data-test-id="mobile-nav"]').should('have.css', 'opacity', '1')
-      cy.get('[role="dialog"]').should('be.visible')
+      cy.get('[role="dialog"]').should('have.css', 'opacity', '1')
     })
 
     describe('Open', () => {
       beforeEach(() => {
         cy.get('header [role="button"]').click()
-        cy.get('[data-test-id="mobile-nav"]').should('have.css', 'opacity', '1')
-        cy.get('[role="dialog"] a[href="https://linkedin.com/in/ryanrishi"]')
+        cy.get('[role="dialog"]').should('have.css', 'opacity', '1')
+        cy.get('[role="dialog"] ul:has(a[href="https://linkedin.com/in/ryanrishi"])').should('have.css', 'opacity', '1')
       })
 
       it('opens the mobile nav when the hamburger is clicked', () => {
