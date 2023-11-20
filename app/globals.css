@@ -17,13 +17,17 @@ html.dark body {
   @apply font-semibold text-slate-800 dark:text-slate-100 mb-2 lg:mb-6 mt-2 lg:mt-8 transition-colors;
 }
 
+.prose a {
+  @apply no-underline;
+}
+
 .prose h1 a,
 .prose h2 a,
 .prose h3 a,
 .prose h4 a,
 .prose h5 a,
 .prose h6 a {
-  @apply hover:before:content-['#'] hover:before:absolute hover:before:-ml-[1.2ch] hover:before:inline no-underline hover:underline;
+  @apply hover:before:content-['#'] hover:before:absolute hover:before:-ml-[1.2ch] hover:before:inline hover:underline;
 }
 
 .prose :not(:is(h1, h2, h3, h4, h5, h6)) a:not(.not-prose) {
