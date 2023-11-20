@@ -18,17 +18,17 @@ describe('Music', () => {
   })
 
   it('Senior Recital', () => {
-    cy.get('h3').contains('Senior Recital').scrollIntoView()
+    cy.get('h1').contains('Senior Recital').scrollIntoView()
     cy.percySnapshot('Music - Senior Recital')
   })
 
   it('Percussion Covers', () => {
-    cy.get('h3').contains('Percussion Covers').scrollIntoView()
+    cy.get('h1').contains('Percussion Covers').scrollIntoView()
     cy.percySnapshot('Music - Percussion Covers')
   })
 
   it('Recording', () => {
-    cy.get('h3').contains('Recording').scrollIntoView()
+    cy.get('h1').contains('Recording').scrollIntoView()
     cy.percySnapshot('Music - Recording')
   })
 })
