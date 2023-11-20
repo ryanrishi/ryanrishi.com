@@ -15,7 +15,6 @@ export default function ProjectItem({ project }: { project: Project }) {
             alt={project.image.alt}
             width={project.image.width}
             height={project.image.height}
-            objectFit="cover"
           />
         </div>
         <div className="p-4">
