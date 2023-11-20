@@ -2,9 +2,10 @@ import { allProjects } from 'contentlayer/generated'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
 import { useMDXComponent } from 'next-contentlayer/hooks'
+import { notFound } from 'next/navigation'
 
+import { H1 } from '@/components/headings'
 import mdxComponents from '@/components/mdx-components'
 
 dayjs.extend(utc)
@@ -37,7 +38,7 @@ export default function Project({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <h1>{project.name}</h1>
+      <H1>{project.name}</H1>
       <MDXContent components={mdxComponents} />
     </>
   )
