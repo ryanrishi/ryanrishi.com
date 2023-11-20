@@ -7,18 +7,6 @@ import Link from './link'
 
 const mdxComponents: MDXComponents = {
   a: Link,
-  // pre: ({ children, ...props }) => <pre className="overflow-x-auto" {...props}>{children}</pre>,
-  img: props => {
-    if (/^.*\.svg.*/.test(props.src || '')) {
-      return (
-        <svg>
-          <use href={props.src} />
-        </svg>
-      )
-    }
-
-    return <img className="mx-auto" {...props} />
-  },
 
   Blockquote,
   Callout,
