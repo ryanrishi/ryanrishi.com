@@ -1,4 +1,4 @@
-import { FancyH1 } from "@/components/headings";
+import { FancyH1 } from "@/components/headings"
 
 export default function BlogLayout({ children }) {
   return (

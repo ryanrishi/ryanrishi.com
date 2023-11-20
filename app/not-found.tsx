@@ -1,7 +1,6 @@
 import type { Metadata } from 'next/types'
 
 import { FancyH1 } from '@/components/headings'
-
 import Link from '@/components/link'
 
 export const metadata: Metadata = {
