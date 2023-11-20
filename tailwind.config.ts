@@ -58,6 +58,7 @@ const config: Config = {
     extend: {},
   },
   plugins: [
+    require('@tailwindcss/typography'),
     plugin(({ addBase, theme }) => {
       addBase({
         h1: { fontSize: theme('fontSize.4xl') },

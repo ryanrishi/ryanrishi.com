@@ -12,6 +12,7 @@
     "test": "start-server-and-test start 3000 cypress:open"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "classnames": "^2.3.1",
     "contentlayer": "^0.3.4",
     "cypress-real-events": "1.11.0",
@@ -29,7 +30,11 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.2.0",
     "react-syntax-highlighter": "^15.4.5",
-    "remark-gfm": "3.0.1"
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-pretty-code": "^0.10.2",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "3.0.1",
+    "shiki": "^0.14.5"
   },
   "devDependencies": {
     "@percy/cli": "^1.17.0",

@@ -1,5 +1,8 @@
 import { defineDocumentType, defineNestedType, makeSource } from 'contentlayer/source-files'
 import remarkGfm from 'remark-gfm'
+import rehypePrettyCode from 'rehype-pretty-code'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeSlug from 'rehype-slug'
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -65,6 +68,7 @@ export default makeSource({
   contentDirPath: 'content',
   documentTypes: [Music, Post, Project, Test],
   mdx: {
+    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }], rehypePrettyCode],
     remarkPlugins: [remarkGfm],
   },
 })

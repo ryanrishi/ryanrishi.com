@@ -42,9 +42,7 @@ export default function Post({ params }: { params: { slug: string } }) {
       <H1>{post.title}</H1>
       <p className="mb-8 text-slate-500 dark:text-slate-400 transition">{dayjs.utc(post.publishedAt).format('MMMM D, YYYY')}</p>
 
-      <div className="leading-8">
-        <MDXContent components={mdxComponents} />
-      </div>
+      <MDXContent components={mdxComponents} />
     </>
   )
 }

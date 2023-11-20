@@ -75,7 +75,6 @@ function MobileNav({ isOpen, setIsOpen }) {
         }}
       >
         <motion.div
-          data-test-id="mobile-nav"
           role="dialog"
           variants={{
             open: {

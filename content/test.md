@@ -110,7 +110,7 @@ And this is something after the list
 
   <div className="text-green-600 dark:text-green-200">
 
-  | <Logo /> |
+  | <span className="text-green-600 dark:text-green-200"><Logo /></span> |
   | :--: |
   | Logo that inherits color |
 

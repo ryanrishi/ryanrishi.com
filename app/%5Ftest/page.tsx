@@ -33,7 +33,9 @@ export default function Test() {
   return (
     <>
       <FancyH1>{testPage.title}</FancyH1>
-      <MDXContent components={mdxComponents} />
+      <div className="prose prose-slate dark:prose-invert">
+        <MDXContent components={mdxComponents} />
+      </div>
     </>
   )
 }
