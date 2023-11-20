@@ -17,7 +17,7 @@ describe('Test Page', () => {
     })
 
     it('image', () => {
-      cy.get('head meta[property="og:image"]').should('have.attr', 'content', 'https://ryanrishi.com/img/nope.png')
+      cy.get('head meta[property="og:image"]').should('have.attr', 'content', 'http://localhost:3000/img/nope.png')
     })
 
     it('tags', () => {
