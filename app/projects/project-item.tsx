@@ -6,27 +6,23 @@ import { H3 } from '@/components/headings'
 
 export default function ProjectItem({ project }: { project: Project }) {
   return (
-    <li className="border border-slate-200 dark:border-slate-700 rounded shadow">
-      <div className="flex items-center justify-center">
-        <Link href={`projects/${project.slug}`}>
+    <li className="border border-slate-200 dark:border-slate-700 rounded shadow hover:scale-105 transition-transform duration-500">
+      <Link href={`projects/${project.slug}`}>
+        <div className="h-64">
           <Image
-            className="object-cover transition duration-500 ease-in-out transform hover:scale-105 max-w-full h-auto rounded-t"
+            className="object-cover w-full h-full transition transform rounded-t p-[1px]"
             src={project.image.src || 'https://via.placeholder.com/400'}
             alt={project.image.alt}
-            width="1600"
-            height="1600"
+            width={project.image.width}
+            height={project.image.height}
             objectFit="cover"
           />
-        </Link>
-      </div>
-      <div className="p-4">
-        <H3>
-          <Link href={`projects/${project.slug}`}>
-            {project.name}
-          </Link>
-        </H3>
-        <p className="transition">{project.description}</p>
-      </div>
+        </div>
+        <div className="p-4">
+          <H3>{project.name}</H3>
+          <p className="transition">{project.description}</p>
+        </div>
+      </Link>
     </li>
   )
 }
