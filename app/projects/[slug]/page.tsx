@@ -38,9 +38,7 @@ export default function Project({ params }: { params: { slug: string } }) {
   return (
     <>
       <h1>{project.name}</h1>
-      <div className="leading-8">
-        <MDXContent components={mdxComponents} />
-      </div>
+      <MDXContent components={mdxComponents} />
     </>
   )
 }
