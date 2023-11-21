@@ -17,9 +17,10 @@ export const generateMetadata = ({ params }: { params: { slug: string } }): Meta
   if (!post) throw new Error(`Post not found for slug: ${decodeURIComponent(params.slug)}`)
 
   return {
-    title: `${post.title}`,
+    title: post.title,
     description: post.description,
     openGraph: {
+      title: post.title,
       type: 'article',
       publishedTime: post.publishedAt,
       authors: 'Ryan Rishi',
@@ -28,6 +29,10 @@ export const generateMetadata = ({ params }: { params: { slug: string } }): Meta
         { url: `https://ryanrishi.com/${post.image}` },
       ],
       tags: post.tags,
+    },
+    twitter: {
+      title: post.title,
+      images: `https://ryanrishi.com/${post.image}`,
     },
   }
 }

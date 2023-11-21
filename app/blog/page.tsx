@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Blog',
   },
+  twitter: {
+    title: 'Blog',
+  },
 }
 
 export default function BlogIndex() {

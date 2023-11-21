@@ -20,12 +20,17 @@ export const generateMetadata = ({ params }: { params: { slug: string } }): Meta
     title: project.name,
     description: project.description,
     openGraph: {
+      title: project.name,
       type: 'article',
       publishedTime: project.date,
       url: `https://ryanrishi.com/projects/${decodeURIComponent(params.slug)}`,
       images: [
         { url: `https://ryanrishi.com/${project.image.src}`},
       ],
+    },
+    twitter: {
+      title: project.name,
+      images: `https://ryanrishi.com/${project.image.src}`,
     },
   }
 }

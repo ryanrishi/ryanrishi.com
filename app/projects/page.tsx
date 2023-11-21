@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Projects',
   },
+  twitter: {
+    title: 'Projects',
+  },
 }
 
 export default function ProjectsIndex() {

@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Music',
   },
+  twitter: {
+    title: 'Music',
+  },
 }
 
 export default function Music() {
