@@ -3,8 +3,9 @@
 import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 import { Squash as Hamburger } from 'hamburger-react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi'
 import { ImGithub, ImLinkedin, ImSoundcloud, ImTwitter, ImYoutube } from 'react-icons/im'
 import { IconContext } from 'react-icons/lib'
@@ -47,7 +48,13 @@ const HeaderLink = ({ className = '', href, children }) => (
   </Link>
 )
 
-function MobileNav({ isOpen, setIsOpen }) {
+function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>>}) {
+  const pathname = usePathname()
+
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname, setIsOpen])
+
   return <>
     <div className="flex justify-between items-center">
       <div className="flex flex-row items-center dark:text-green-200">
