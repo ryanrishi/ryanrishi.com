@@ -127,6 +127,6 @@ And this is something after the list
 </div>
 
 ### Favicon
-| ![favicon](/img/favicon.ico) |
+| ![favicon](/favicon.ico) |
 | :--: |
 | favicon |
