@@ -6,7 +6,6 @@ image:
   alt:        Map of radio stations
   width:      3584
   height:     2240
-permalink:    /projects/launchpad/
 date:         "2018-05-18T00:00:00Z"
 ---
 

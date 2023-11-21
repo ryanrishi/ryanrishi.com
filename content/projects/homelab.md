@@ -1,7 +1,6 @@
 ---
 name:         Homelab
 description:  Ongoing project of managing servers and services at home.
-permalink:    /projects/homelab/
 image:
   src:        /img/projects/homelab/massimo-botturi-zFYUsLk_50Y-unsplash.jpg
   alt:        Homelab

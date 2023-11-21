@@ -6,7 +6,6 @@ image:
   alt:        A tent
   width:      4498
   height:     3000
-permalink:    /projects/letscamp/
 date:         "2021-03-18T00:00:00Z"
 ---
 

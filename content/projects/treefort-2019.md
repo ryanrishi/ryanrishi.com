@@ -1,7 +1,6 @@
 ---
 name:         Hackfort 2019 - Creative Outlets Inspire Innovation
 description:  I gave a talk on side projects and innovation at a music-meets-tech festival in Boise.
-permalink:    /projects/treefort-2019/
 image:
   src:        /img/projects/treefort-2019/hackfort.png
   alt:        Hackfort logo

@@ -6,7 +6,6 @@ image:
   alt:        A stack of books, binders, and folders
   width:      6000
   height:     4000
-permalink:    /projects/paperless-ng-terraform
 date:         "2023-01-22T00:00:00Z"
 ---
 

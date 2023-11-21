@@ -1,7 +1,6 @@
 ---
 name:         COVID-19 Dashboard
 description:  Visualize COVID-19 cases and deaths in the United States.
-permalink:    /projects/covid-19-dashboard/
 image:
   src:        /img/projects/covid-19-dashboard/covid-19-dashboard.png
   alt:        COVID-19 Dashboard

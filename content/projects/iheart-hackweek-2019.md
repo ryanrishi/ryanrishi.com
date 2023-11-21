@@ -1,7 +1,6 @@
 ---
 name:         iHeart Hackweek 2019
 description:  Spent a week in a New York mansion working on a side project with some coworkers.
-permalink:    /projects/iheart-hackweek-2019/
 image:
   src:        /img/projects/iheart-hackweek-2019/iHeartRadio_Logo_iHR_Vertical_Color.png
   alt:        iHeartRadio Logo

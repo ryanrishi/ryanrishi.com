@@ -6,7 +6,6 @@ image:
   alt:        A stack of records at a record store
   width:      5472
   height:     3648
-permalink:    /projects/loudness-wars
 date:         "2021-07-05T00:00:00Z"
 ---
 
