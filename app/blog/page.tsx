@@ -5,7 +5,7 @@ import utc from 'dayjs/plugin/utc'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
-import { H1 } from '@/components/headings'
+import { FancyH1,H1 } from '@/components/headings'
 
 dayjs.extend(utc)
 
@@ -24,6 +24,7 @@ export default function BlogIndex() {
 
   return (
     <>
+      <FancyH1>Blog</FancyH1>
       {posts.map((post, i) => (
         <div
           className="mb-16 lg:mb-16 xl:mb-32"
