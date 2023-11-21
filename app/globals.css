@@ -1,0 +1,39 @@
+/* keep these bg-* and dark:bg-* in sync with app/layout.tsx */
+
+body {
+  @apply bg-slate-50;
+}
+
+html.dark body {
+  @apply bg-slate-800;
+}
+
+.prose h1::not(.not-prose),
+.prose h2::not(.not-prose),
+.prose h3::not(.not-prose),
+.prose h4::not(.not-prose),
+.prose h5::not(.not-prose),
+.prose h6::not(.not-prose) {
+  @apply font-semibold text-slate-800 dark:text-slate-100 mb-2 lg:mb-6 mt-2 lg:mt-8 transition-colors;
+}
+
+.prose a {
+  @apply no-underline;
+}
+
+.prose h1 a,
+.prose h2 a,
+.prose h3 a,
+.prose h4 a,
+.prose h5 a,
+.prose h6 a {
+  @apply hover:before:content-['#'] hover:before:absolute hover:before:-ml-[1.2ch] hover:before:inline hover:underline;
+}
+
+.prose :not(:is(h1, h2, h3, h4, h5, h6)) a:not(.not-prose) {
+  @apply text-green-800 hover:text-green-900 border-b border-b-green-400 bg-green-200/50 hover:bg-green-200/80 dark:bg-green-800/50 dark:text-green-200 dark:hover:text-green-300 rounded-sm transition-colors;
+}
+
+html {
+  scroll-behavior: smooth;
+}
