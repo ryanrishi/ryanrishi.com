@@ -135,7 +135,7 @@ function MobileNav({ isOpen, setIsOpen }) {
                   opacity: 0,
                 },
               }}
-              className="w-full h-px bg-white/30"
+              className="w-full h-px bg-slate-900/30 dark:bg-white/30"
             >
             </motion.div>
 
