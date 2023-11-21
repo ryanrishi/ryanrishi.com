@@ -1,15 +1,15 @@
-import { DialogContent, DialogOverlay } from '@reach/dialog'
+'use client'
+
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
 import { Squash as Hamburger } from 'hamburger-react'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi'
+import { ImGithub, ImLinkedin, ImSoundcloud, ImTwitter, ImYoutube } from 'react-icons/im'
 import { IconContext } from 'react-icons/lib'
-import { animated, useTransition } from 'react-spring'
 
 import Logo from './logo'
-
-const AnimatedDialogOverlay = animated(DialogOverlay)
 
 const items = [
   { title: 'Music', href: '/music' },
@@ -42,75 +42,147 @@ function DarkModeButton() {
 }
 
 const HeaderLink = ({ className = '', href, children }) => (
-  <Link href={href}>
-    <a className={`italic uppercase font-bold mx-2 ${className}`}>
-      {children}
-    </a>
+  <Link href={href} className={`italic uppercase font-bold mx-2 ${className}`}>
+    {children}
   </Link>
 )
 
 function MobileNav({ isOpen, setIsOpen }) {
-  const overlayTransitions = useTransition(isOpen, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    expires: true,
-  })
-
-  const itemTransitions = useTransition(isOpen ? items.map((_, i) => i) : [], {
-    trail: 30,
-    from: { bottom: '-50vh' },
-    enter: { bottom: '0vh' },
-    leave: { bottom: '50vh' },
-  })
-
-  return (
-    <>
-      <div className="flex justify-between items-center">
-        <div className="flex flex-row items-center dark:text-green-200">
-          <Logo width={100 / 3} />
-          <HeaderLink href="/">Ryan Rishi</HeaderLink>
-        </div>
-        <div className="z-40 flex flex-row items-center">
-          <DarkModeButton />
-
-          {/* TODO put this on <Hamburger> but it's not picking up class name */}
-          {/* check back when hamburger-react v3 is released: https://github.com/luukdv/hamburger-react/issues/45#issuecomment-902639087 */}
-          <Hamburger
-            toggled={isOpen}
-            toggle={setIsOpen}
-          />
-        </div>
+  return <>
+    <div className="flex justify-between items-center">
+      <div className="flex flex-row items-center dark:text-green-200">
+        <Logo width={100 / 3} />
+        <HeaderLink href="/">Ryan Rishi</HeaderLink>
       </div>
-      <div>
-        {overlayTransitions((overlayStyles, item) => item && (
-          <AnimatedDialogOverlay
-            className="bg-white dark:bg-slate-900 transition-colors"
-            style={overlayStyles}
-          >
-            <DialogContent
-              aria-label="Menu"
-              className="h-4/5 text-center px-0 dark:bg-slate-900 transition flex flex-col"
+      <div className="z-40 flex flex-row items-center">
+        <DarkModeButton />
+
+        {/* TODO put this on <Hamburger> but it's not picking up class name */}
+        {/* check back when hamburger-react v3 is released: https://github.com/luukdv/hamburger-react/issues/45#issuecomment-902639087 */}
+        <Hamburger
+          toggled={isOpen}
+          toggle={setIsOpen}
+        />
+      </div>
+    </div>
+
+  <AnimatePresence>
+    {isOpen && (
+      <MotionConfig
+        transition={{
+          type: 'spring',
+          bounce: 0.1,
+        }}
+      >
+        <motion.div
+          role="dialog"
+          variants={{
+            open: {
+              x: '0%',
+              transition: {
+                type: 'spring',
+                bounce: 0.1,
+                staggerChildren: 0.25,
+                when: 'beforeChildren',
+              },
+            },
+            closed: {
+              x: '100%',
+              transition: {
+                type: 'spring',
+                bounce: 0.1,
+                staggerChildren: 0.25,
+                when: 'afterChildren',
+              },
+            },
+          }}
+          initial="closed"
+          animate="open"
+          exit="closed"
+          className="fixed inset-0 bg-blue-600 mx-auto p-6 space-y-10 flex flex-col justify-center">
+            <motion.div
+              variants={{
+                open: {
+                  y: '0%',
+                  opacity: 1,
+                },
+                closed: {
+                  y: '25%',
+                  opacity: 0,
+                },
+              }}
             >
-              {itemTransitions((style, i) => (
-                <animated.div
-                  key={items[i].href}
-                  style={style}
-                  className="my-8"
-                >
-                  <Link href={items[i].href}>
-                    <a className="uppercase italic font-bold text-4xl my-4 outline-white">
-                      {items[i].title}
-                    </a>
-                  </Link>
-                </animated.div>
-              ))}
-            </DialogContent>
-          </AnimatedDialogOverlay>
-        ))}
-      </div>
-    </>
-  )
+              <motion.ul className="space-y-5">
+                {items.map((item) => (
+                  <li
+                    key={item.href}
+                    className="text-4xl"
+                  >
+                    <Link href={item.href}>{item.title}</Link>
+                  </li>
+                ))}
+              </motion.ul>
+            </motion.div>
+
+            <motion.div
+              variants={{
+                open: {
+                  y: '0%',
+                  opacity: 1,
+                },
+                closed: {
+                  y: '25%',
+                  opacity: 0,
+                },
+              }}
+              className="w-full h-px bg-slate-900/30 dark:bg-white/30"
+            >
+            </motion.div>
+
+            <motion.ul
+              variants={{
+                open: {
+                  y: '0%',
+                  opacity: 1,
+                },
+                closed: {
+                  y: '25%',
+                  opacity: 0,
+                },
+              }}
+              className="flex items-center gap-x-4 text-2xl"
+            >
+              <li>
+                <Link href="https://github.com/ryanrishi">
+                  <ImGithub />
+                </Link>
+              </li>
+              <li>
+                <Link href="https://twitter.com/ryanrishi">
+                  <ImTwitter />
+                </Link>
+              </li>
+              <li>
+                <Link href="https://linkedin.com/in/ryanrishi">
+                  <ImLinkedin />
+                </Link>
+              </li>
+              <li>
+                <Link href="https://soundcloud.com/ryanrishi">
+                  <ImSoundcloud />
+                </Link>
+              </li>
+              <li>
+                <Link href="https://youtube.com/RyanRishiPercussion">
+                  <ImYoutube />
+                </Link>
+              </li>
+            </motion.ul>
+        </motion.div>
+      </MotionConfig>
+    )}
+    </AnimatePresence>
+  </>
 }
 
 export default function Header() {

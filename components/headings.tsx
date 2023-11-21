@@ -7,7 +7,7 @@ interface HeadingsProps {
   children: ReactNode
 }
 
-const baseClassNames = 'font-semibold text-slate-800 dark:text-slate-100 mb-2 lg:mb-6 mt-2 lg:mt-8 transition-colors'
+const baseClassNames = 'font-semibold text-slate-800 dark:text-slate-100 mb-2 lg:mb-6 transition-colors'
 
 export function H1({ className, children, ...props }: HeadingsProps) {
   const classes = classNames(baseClassNames, className)
@@ -40,5 +40,5 @@ export function H6({ className, children, ...props }: HeadingsProps) {
 }
 
 export function FancyH1({ children }) {
-  return <h1 className="text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#00cc99] to-[#6600ff] pb-4">{`${children?.replace(/\.$/, '')}.`}</h1>
+  return <h1 className="not-prose text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-[#00cc99] to-[#6600ff] pb-4">{`${children?.replace(/\.$/, '')}.`}</h1>
 }
