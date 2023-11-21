@@ -37,6 +37,9 @@ describe('Header', () => {
         cy.get('header [role="button"]').click()
         cy.get('[role="dialog"]').should('have.css', 'opacity', '1')
         cy.get('[role="dialog"] ul:has(a[href="https://linkedin.com/in/ryanrishi"])').should('have.css', 'opacity', '1')
+        // opacity jumps from 0 to 1, so wait for a sec for animations to finish
+        // TODO fix this
+        cy.wait(2000)
       })
 
       it('opens the mobile nav when the hamburger is clicked', () => {
