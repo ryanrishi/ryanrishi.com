@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.10",
+    "@vercel/analytics": "^1.1.1",
     "classnames": "^2.3.1",
     "contentlayer": "^0.3.4",
     "cypress-real-events": "1.11.0",
