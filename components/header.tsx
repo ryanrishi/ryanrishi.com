@@ -202,7 +202,7 @@ export default function Header() {
   useDisableBodyScroll(isMobileNavOpen)
 
   return (
-    <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:py-8 container dark:text-slate-50 transition">
+    <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:py-8 container dark:text-slate-50 relative z-10 transition">
       <div className="md:hidden">
         <MobileNav
           isOpen={isMobileNavOpen}
