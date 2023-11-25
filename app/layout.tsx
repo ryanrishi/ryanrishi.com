@@ -1,6 +1,7 @@
 import 'tailwindcss/tailwind.css'
 import './globals.css'
 
+import { Analytics } from '@vercel/analytics/react'
 import Script from 'next/script'
 import type { Metadata } from 'next/types'
 
@@ -70,6 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
         </div>
         </Providers>
+        <Analytics />
       </body>
     </html>
   )
