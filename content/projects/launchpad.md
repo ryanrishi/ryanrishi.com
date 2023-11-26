@@ -7,6 +7,8 @@ image:
   width:      3584
   height:     2240
 date:         "2018-05-18T00:00:00Z"
+tags:
+  - data visualization
 ---
 
 A side project I did at work to showcase innovation at the company as part of a new corporate website launch.

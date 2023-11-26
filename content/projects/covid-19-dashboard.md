@@ -7,6 +7,9 @@ image:
   width:      3360
   height:     2100
 date:         "2020-05-17T00:00:00Z"
+tags:
+  - data visualization
+  - terraform
 ---
 
 ![COVID-19 Dashboard](/img/projects/covid-19-dashboard/covid-19-dashboard.png)

@@ -25,9 +25,14 @@ describe('Tags', () => {
         cy.get('[data-test-id="tags"] div').eq(i).click()
         cy.url().should('match', /\/tags\/[a-z-]+/)
         cy.waitForLogoAnimations()
+        cy.url().then((url) => {
+          const tag = url.split('/').pop()
+          cy.title().should('contain', tag)
+          cy.get('head meta[property="og:title"]').should('have.attr', 'content').should('include', tag)
+        })
         cy.get('h1').scrollIntoView()
-        cy.get('h1').first().then(($title) => {
-          cy.percySnapshot($title.text())
+        cy.title().then((title) => {
+          cy.percySnapshot(`Tagged: ${title}`)
         })
         cy.go('back')
         cy.title().should('include', 'Tags')

@@ -39,6 +39,7 @@ export const Project = defineDocumentType(() => ({
     date: { type: 'date', required: true },
     description: { type: 'string', required: true },
     image: { type: 'nested', of: ProjectImage, required: true },
+    tags: { type: 'list', of: { type: 'string' } },
   },
   computedFields: {
     slug: { type: 'string', resolve: (project) => project._raw.flattenedPath.replace('projects/', '') },
