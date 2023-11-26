@@ -34,13 +34,21 @@ export default function Tag({ params }: { params: { tag: string }}) {
   }
 
   return (
-    <div className="prose">
-      <H1>{tag}</H1>
-      {postsWithTag.map((post) => (
-        <li key={post.slug}>
-          <Link href={post.slug}>{post.title}</Link>
-        </li>
-      ))}
-    </div>
+    <>
+      <div className="prose">
+        <H1>Content tagged with <code>{tag}</code></H1>
+        {postsWithTag.map((post) => (
+          <li key={post.slug}>
+            <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+          </li>
+        ))}
+      </div>
+
+      <div className="flex items-center justify-center my-8">
+        <Link href="/tags" className="not-prose text-slate-500 hover:text-slate-600 transition">
+          &larr; View all tags
+        </Link>
+      </div>
+    </>
   )
 }
