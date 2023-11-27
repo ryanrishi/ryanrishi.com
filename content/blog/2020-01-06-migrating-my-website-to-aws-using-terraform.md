@@ -7,7 +7,6 @@ tags:
   - terraform
   - aws
   - cloudfront
-  - s3
   - jekylll
   - travis
 ---
