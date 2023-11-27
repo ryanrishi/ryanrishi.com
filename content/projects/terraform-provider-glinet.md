@@ -1,0 +1,60 @@
+---
+name:         GL.iNet Terraform Provider
+description:  A Terraform provider for interacting with GL.iNet routers
+image:
+  src:        /img/projects/terraform-provider-glinet/axt1800_scene_cabin.jpg
+  alt:        GL.iNet AXT1800 Travel Router
+  width:      1920
+  height:     1080
+date:         2023-11-26
+tags:
+  - terraform
+  - homelab
+---
+
+I have a nifty little [GL.iNet travel router](https://www.gl-inet.com/products/gl-axt1800/) that I use when traveling that. To ensure a secure connection, I've automated the process of connecting it to my VPN in my [homelab](/projects/homelab). This not only maintains a secure connection but also allows me to leverage services I run at home, such as a network-wide ad blocker.
+
+As part of this project, I'm currently developing a Terraform provider specifically tailored for configuring the GL.iNet router. This serves as a hands-on learning experience for me in both Go programming and advanced Terraform usage. The ultimate goal is to define the router's end state using Terraform, enabling the provider to configure the router accordingly.
+
+The Terraform provider will cover a range of configurations, from VPN settings to specific firewall rules and network-wide ad-blocking preferences. By encapsulating these configurations in Terraform, I aim to streamline the deployment and management of my travel router setup.
+
+That would look something like this:
+
+```hcl
+provider "glinet" {
+  username = "username"
+  password = "password"
+}
+
+resource "glinet_system_timezone_config" "timezone_config" {
+  zonename = "America/New_York"
+}
+
+resource "glinet_adguard_config" "adguard_config" {
+  enabled = true
+}
+
+resource "glinet_repeater_config" "repeater_config" {
+  auto = true   # automatically try to connect to saved networks
+}
+
+resource "glinet_wireguard_client" "wireguard_client" {
+  name        = "xyz"
+  address_v4  = "10.8.0.0/24"
+  private_key = "XVpIdr+oYjTcgDwzSZmNa1nSsk8JO+tx1NBo17LDBAI="
+  public_key  = "zv0p34WZN7p2vIgehwe33QF27ExjChrPUisk481JHU0="
+  allowed_ips = "0.0.0.0/0,::/0"
+  endpoint    = "wireguard.xyz"
+}
+
+data "glinet_clients" "clients" {}
+
+output "clients" {
+  description = "List of connected clients"
+  value = [for client in glinet_clients.clients[*]: "${client.name}\t${client.ip}"]
+}
+```
+
+During this journey, I've encountered interesting challenges, such as using JSON-RPC, which required me to delve deeper into the intricacies of remote procedure calls. Moreover, transitioning from languages like Java and TypeScript, where I extensively leverage generics, I found myself adapting to Go's unique approach, which notably lacks this feature. This shift encouraged me to explore alternative strategies for achieving similar flexibility and code reuse in the absence of generics.
+
+The provider code is [here](https://github.com/ryanrishi/terraform-provider-glinet) and its documentation is [here](https://registry.terraform.io/providers/ryanrishi/glinet/latest/docs).
