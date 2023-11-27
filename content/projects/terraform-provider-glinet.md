@@ -12,7 +12,7 @@ tags:
   - homelab
 ---
 
-I have a nifty little [GL.iNet travel router](https://www.gl-inet.com/products/gl-axt1800/) that I use when traveling that. To ensure a secure connection, I've automated the process of connecting it to my VPN in my [homelab](/projects/homelab). This not only maintains a secure connection but also allows me to leverage services I run at home, such as a network-wide ad blocker.
+I have a nifty little [GL.iNet travel router](https://www.gl-inet.com/products/gl-axt1800/) that I use when traveling. To ensure a secure connection, I've automated the process of connecting it to my VPN in my [homelab](/projects/homelab). This not only maintains a secure connection but also allows me to leverage services I run at home, such as a network-wide ad blocker.
 
 As part of this project, I'm currently developing a Terraform provider specifically tailored for configuring the GL.iNet router. This serves as a hands-on learning experience for me in both Go programming and advanced Terraform usage. The ultimate goal is to define the router's end state using Terraform, enabling the provider to configure the router accordingly.
 
