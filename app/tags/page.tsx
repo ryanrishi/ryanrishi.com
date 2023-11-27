@@ -26,7 +26,7 @@ export default function TagsIndex() {
       <H1>Tags</H1>
       <div data-test-id="tags" className="flex flex-row flex-wrap">
         {Array.from(tags).sort().map((tag) => (
-          tag && <TagPill key={tag} tag={tag} href={`/tags/${kebabCase(tag)}`} />
+          tag && <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>
         ))}
       </div>
     </>

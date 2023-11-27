@@ -1,15 +1,17 @@
+import type { ReactNode } from 'react'
+
 import Link from './link'
 
 export interface TagPillProps {
-  tag: string
+  children: ReactNode
   href: string
 }
 
-export default function TagPill({ tag, href }: TagPillProps) {
+export default function TagPill({ children, href }: TagPillProps) {
   return (
     <Link href={href} className="not-prose">
       <div className="bg-slate-300 text-slate-900 border rounded m-2 px-2">
-        #{tag}
+        #{children}
       </div>
     </Link>
   )

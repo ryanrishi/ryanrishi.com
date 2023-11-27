@@ -54,7 +54,7 @@ export default function Post({ params }: { params: { slug: string } }) {
 
       <div className="flex flex-row flex-wrap">
         {post.tags.map(tag => (
-          <TagPill key={tag} href={`/tags/${kebabCase(tag)}`} tag={tag} />
+          <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>
         ))}
       </div>
     </>
