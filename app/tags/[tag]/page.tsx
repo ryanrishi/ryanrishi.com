@@ -7,7 +7,10 @@ import { notFound } from 'next/navigation'
 import { H1, H3 } from '@/components/headings'
 import Link from '@/components/link'
 
-export const generateStaticParams = async () => Array.from(new Set([...allPosts.flatMap((post) => post.tags)]))
+export const generateStaticParams = async () => Array.from(new Set([
+  ...allPosts.flatMap(post => post.tags),
+  ...allProjects.flatMap(project => project.tags),
+]))
 
 export const generateMetadata = ({ params }: { params: { tag: string } }): Metadata => {
   const { tag } = params
@@ -17,7 +20,7 @@ export const generateMetadata = ({ params }: { params: { tag: string } }): Metad
     description: `Content tagged with "${tag}"`,
     openGraph: {
       title: tag,
-      url: `https://ryanrishi.com/tags/${tag}`,
+      url: `https://ryanrishi.com/tags/${kebabCase(tag)}`,
     },
     twitter: {
       title: tag,
@@ -37,7 +40,7 @@ export default function Tag({ params }: { params: { tag: string }}) {
   return (
     <>
       <div className="prose">
-        <H1>Content tagged with <code>{tag}</code></H1>
+        <H1>Content tagged with <code>{tag.replace('-', ' ')}</code></H1>
         {!isEmpty(postsWithTag) && <H3>Posts</H3>}
         {postsWithTag.map((post) => (
           <li key={post.slug}>
