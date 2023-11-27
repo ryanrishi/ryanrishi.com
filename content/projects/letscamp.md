@@ -7,6 +7,8 @@ image:
   width:      4498
   height:     3000
 date:         "2021-03-18T00:00:00Z"
+tags:
+  - python
 ---
 
 I built a bot that scrapes [recreation.gov](https://www.recreation.gov/) for campsite available for dates I've input. When it finds a campsite availability, it texts me so that I can hop online to book it. This project is 50% a pet project to play around with Python and related tech and 50% "hey, this is actually kinda useful".

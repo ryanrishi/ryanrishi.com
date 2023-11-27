@@ -7,6 +7,9 @@ image:
   width:      6000
   height:     4000
 date:         "2023-01-22T00:00:00Z"
+tags:
+  - aws
+  - terraform
 ---
 
 This module creates the necessary resources to run [paperless-ng](https://paperless-ng.readthedocs.io/en/latest/index.html) on AWS.

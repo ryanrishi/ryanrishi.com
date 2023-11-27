@@ -1,12 +1,14 @@
 import { allPosts } from 'contentlayer/generated'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
+import kebabCase from 'lodash.kebabcase'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
 import { H1 } from '@/components/headings'
 import mdxComponents from '@/components/mdx-components'
+import TagPill from '@/components/tag-pill'
 
 dayjs.extend(utc)
 
@@ -49,6 +51,12 @@ export default function Post({ params }: { params: { slug: string } }) {
       <p className="mb-8 text-slate-500 dark:text-slate-400 transition">{dayjs.utc(post.publishedAt).format('MMMM D, YYYY')}</p>
 
       <MDXContent components={mdxComponents} />
+
+      <div className="flex flex-row flex-wrap">
+        {post.tags.map(tag => (
+          <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>
+        ))}
+      </div>
     </>
   )
 }

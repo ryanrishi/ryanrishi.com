@@ -1,8 +1,8 @@
 import { defineDocumentType, defineNestedType, makeSource } from 'contentlayer/source-files'
-import remarkGfm from 'remark-gfm'
-import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
+import remarkGfm from 'remark-gfm'
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -16,7 +16,7 @@ export const Post = defineDocumentType(() => ({
     tags: { type: 'list', of: { type: 'string' }, required: true },
   },
   computedFields: {
-    slug: { type: 'string', resolve: (post) => post._raw.flattenedPath.replace('blog/', '') }
+    slug: { type: 'string', resolve: (post) => post._raw.flattenedPath.replace('blog/', '') },
   },
 }))
 
@@ -39,6 +39,7 @@ export const Project = defineDocumentType(() => ({
     date: { type: 'date', required: true },
     description: { type: 'string', required: true },
     image: { type: 'nested', of: ProjectImage, required: true },
+    tags: { type: 'list', of: { type: 'string' } },
   },
   computedFields: {
     slug: { type: 'string', resolve: (project) => project._raw.flattenedPath.replace('projects/', '') },
