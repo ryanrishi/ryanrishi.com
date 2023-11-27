@@ -10,7 +10,7 @@ import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi'
 import { ImGithub, ImLinkedin, ImSoundcloud, ImTwitter, ImYoutube } from 'react-icons/im'
 import { IconContext } from 'react-icons/lib'
 
-import { useDisableBodyScroll } from '@/app/hooks'
+import { useDisableBodyScroll } from '@/hooks'
 
 import Logo from './logo'
 

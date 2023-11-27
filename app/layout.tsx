@@ -63,6 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <Providers>
+          {/* keep these bg-* and dark:bg-* in sync with styles/globals.css */}
           <div className="bg-slate-50 dark:bg-slate-800 dark:text-slate-400">
             <Header />
             <div className="container max-w-4xl p-4">

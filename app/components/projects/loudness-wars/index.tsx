@@ -4,7 +4,7 @@
 import * as d3 from 'd3'
 import { MutableRefObject, useEffect, useRef, useState } from 'react'
 
-import { event } from '../../../lib/ga'
+import { event } from '@/lib/ga'
 
 interface Track {
   id: string;
