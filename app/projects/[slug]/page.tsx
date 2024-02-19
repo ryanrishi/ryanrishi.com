@@ -1,12 +1,13 @@
 import { allProjects } from 'contentlayer/generated'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
+import kebabCase from 'lodash.kebabcase'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
-import { H1 } from '@/components/headings'
 import mdxComponents from '@/components/mdx-components'
+import TagPill from '@/components/tag-pill'
 
 dayjs.extend(utc)
 
@@ -43,8 +44,15 @@ export default function Project({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <H1>{project.name}</H1>
+      <h1>{project.name}</h1>
       <MDXContent components={mdxComponents} />
+      {project.tags && (
+        <div className="flex flex-row flex-wrap my-12 gap-4">
+          {project.tags.map(tag => (
+            <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>
+          ))}
+        </div>
+      )}
     </>
   )
 }

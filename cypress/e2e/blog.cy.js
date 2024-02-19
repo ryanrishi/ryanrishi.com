@@ -18,7 +18,7 @@ describe('Blog', () => {
     })
 
     it('og:article', () => {
-      cy.get('[data-test-blog-post] h1 a').first().click()
+      cy.get('[data-test-blog-post] h2 a').first().click()
       cy.url().should('match', /\/blog\/[0-9a-z-]*$/)
       cy.get('head meta[property="og:type"]').should('have.attr', 'content', 'article')
       cy.get('head meta[property="article:author"]').should('have.attr', 'content', 'Ryan Rishi')
@@ -35,8 +35,8 @@ describe('Blog', () => {
     // see https://stackoverflow.com/a/61130646/5699147
     cy.get('[data-test-blog-post]').then((posts) => {
       for (let i = 0; i < posts.length; i++) {
-        cy.get('h1').eq(i).scrollIntoView()
-        cy.get('h1').should('not.be.empty')
+        cy.get('h2').eq(i).scrollIntoView()
+        cy.get('h2').should('not.be.empty')
 
         cy.get('[data-test-blog-post-date]').eq(i).then((meta) => {
           expect(meta).to.not.be.empty
@@ -44,7 +44,7 @@ describe('Blog', () => {
         })
 
         // see https://github.com/cypress-io/cypress/issues/4856#issuecomment-594906798
-        cy.get('h1 a').eq(i).click({ force: true })
+        cy.get('h2 a').eq(i).click({ force: true })
         cy.url().should('match', /\/blog\/\d{4}-\d{2}-\d{2}-[a-z-]*$/)
         cy.waitForLogoAnimations()
         cy.get('h1').first().scrollIntoView()

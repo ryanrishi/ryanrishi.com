@@ -6,7 +6,6 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
-import { H1 } from '@/components/headings'
 import mdxComponents from '@/components/mdx-components'
 import TagPill from '@/components/tag-pill'
 
@@ -47,12 +46,12 @@ export default function Post({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <H1>{post.title}</H1>
-      <p className="mb-8 text-slate-500 dark:text-slate-400 transition">{dayjs.utc(post.publishedAt).format('MMMM D, YYYY')}</p>
+      <h1>{post.title}</h1>
+      <p className="-mt-4 text-slate-500">{dayjs.utc(post.publishedAt).format('MMMM D, YYYY')}</p>
 
       <MDXContent components={mdxComponents} />
 
-      <div className="flex flex-row flex-wrap">
+      <div className="flex flex-row flex-wrap my-12 gap-4">
         {post.tags.map(tag => (
           <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>
         ))}
