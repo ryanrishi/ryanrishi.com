@@ -16,7 +16,7 @@ describe('Tags', () => {
   it('renders the tags page', () => {
     cy.get('h1').contains('Tags')
 
-    cy.percySnapshot('Projects')
+    cy.percySnapshot('Tags')
   })
 
   it('each tag', () => {
