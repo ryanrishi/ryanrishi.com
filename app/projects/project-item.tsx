@@ -6,7 +6,7 @@ import { H3 } from '@/components/headings'
 
 export default function ProjectItem({ project }: { project: Project }) {
   return (
-    <li className="border border-slate-200 dark:border-slate-700 rounded shadow hover:scale-105 transition-transform duration-500">
+    <li className="border border-slate-200 dark:border-slate-700 rounded shadow hover:scale-105 transition-transform">
       <Link href={`projects/${project.slug}`}>
         <div className="h-64">
           <Image
