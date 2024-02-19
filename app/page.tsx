@@ -3,7 +3,7 @@ import { compareDesc } from 'date-fns'
 import NextLink from 'next/link'
 import { ReactNode } from 'react'
 
-import { FancyH1, H3 } from '@/components/headings'
+import { FancyH1 } from '@/components/headings'
 import Link from '@/components/link'
 
 interface SectionProps {
@@ -54,7 +54,7 @@ export default function Index() {
         {recentPosts.map((post, i) => (
           <div key={i}>
             <Link href={post.slug}>
-              <H3>{post.title}</H3>
+              <h3>{post.title}</h3>
             </Link>
             <p className="transition text-slate-500 dark:text-slate-400 mb-8">{post.description}</p>
           </div>
@@ -69,7 +69,7 @@ export default function Index() {
         {recentProjects.map((project, i) => (
           <div key={i}>
             <Link href={project.slug}>
-              <H3>{project.name}</H3>
+              <h3>{project.name}</h3>
             </Link>
             <p className="transition text-slate-500 dark:text-slate-400 mb-8">{project.description}</p>
           </div>
