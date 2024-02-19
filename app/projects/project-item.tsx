@@ -10,7 +10,7 @@ export default function ProjectItem({ project }: { project: Project }) {
       <Link href={`projects/${project.slug}`}>
         <div className="h-64">
           <Image
-            className="object-cover w-full h-full transition transform rounded-t p-[1px]"
+            className="object-cover w-full h-full transition transform rounded-t"
             src={project.image.src || 'https://via.placeholder.com/400'}
             alt={project.image.alt}
             width={project.image.width}
