@@ -4,7 +4,6 @@ import kebabCase from 'lodash.kebabcase'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-import { H1, H3 } from '@/components/headings'
 import Link from '@/components/link'
 
 export const generateStaticParams = async () => Array.from(new Set([
@@ -39,16 +38,16 @@ export default function Tag({ params }: { params: { tag: string }}) {
 
   return (
     <>
-      <div className="prose">
-        <H1>Content tagged with <code>{tag.replace('-', ' ')}</code></H1>
-        {!isEmpty(postsWithTag) && <H3>Posts</H3>}
+      <div className="prose dark:prose-invert">
+        <h1>Content tagged with <code>{tag.replace('-', ' ')}</code></h1>
+        {!isEmpty(postsWithTag) && <h3>Posts</h3>}
         {postsWithTag.map((post) => (
           <li key={post.slug}>
             <Link href={`/blog/${post.slug}`}>{post.title}</Link>
           </li>
         ))}
 
-        {!isEmpty(projectsWithTag) && <H3>Projects</H3>}
+        {!isEmpty(projectsWithTag) && <h3>Projects</h3>}
         {projectsWithTag.map((project) => (
           <li key={project.slug}>
             <Link href={`/projects/${project.slug}`}>{project.name}</Link>

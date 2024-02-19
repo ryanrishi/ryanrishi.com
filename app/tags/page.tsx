@@ -2,7 +2,6 @@ import { allPosts, allProjects } from 'contentlayer/generated'
 import kebabCase from 'lodash.kebabcase'
 import type { Metadata } from 'next'
 
-import { H1 } from '@/components/headings'
 import TagPill from '@/components/tag-pill'
 
 export const metadata: Metadata = {
@@ -23,8 +22,8 @@ export default function TagsIndex() {
 
   return (
     <>
-      <H1>Tags</H1>
-      <div data-test-id="tags" className="flex flex-row flex-wrap">
+      <h1>Tags</h1>
+      <div data-test-id="tags" className="flex flex-row flex-wrap prose leading-10 gap-4">
         {Array.from(tags).sort().map((tag) => (
           tag && <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>
         ))}

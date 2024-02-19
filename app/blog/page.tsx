@@ -5,7 +5,7 @@ import utc from 'dayjs/plugin/utc'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
-import { FancyH1,H1 } from '@/components/headings'
+import { FancyH1 } from '@/components/headings'
 
 dayjs.extend(utc)
 

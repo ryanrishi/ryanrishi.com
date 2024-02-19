@@ -19,7 +19,7 @@ export default function ProjectItem({ project }: { project: Project }) {
         </div>
         <div className="p-4">
           <H3>{project.name}</H3>
-          <p className="transition">{project.description}</p>
+          <p>{project.description}</p>
         </div>
       </Link>
     </li>

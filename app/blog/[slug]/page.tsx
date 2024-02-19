@@ -51,7 +51,7 @@ export default function Post({ params }: { params: { slug: string } }) {
 
       <MDXContent components={mdxComponents} />
 
-      <div className="flex flex-row flex-wrap">
+      <div className="flex flex-row flex-wrap my-12 gap-4">
         {post.tags.map(tag => (
           <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>
         ))}
