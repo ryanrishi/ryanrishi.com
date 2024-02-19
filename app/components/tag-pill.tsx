@@ -9,8 +9,8 @@ export interface TagPillProps {
 
 export default function TagPill({ children, href }: TagPillProps) {
   return (
-    <Link href={href} className="not-prose">
-      <div className="bg-slate-300 text-slate-900 border rounded m-2 px-2">
+    <Link href={href}>
+      <div className="font-mono text-gray-500 px-2">
         #{children}
       </div>
     </Link>
