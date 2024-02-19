@@ -36,7 +36,7 @@ export default function BlogIndex() {
                 {post.title}
               </Link>
             </h2>
-            <p className="-mt-4 text-slate-500 transition" data-test-blog-post-date>{dayjs.utc(post.publishedAt).format('MMMM D, YYYY')}</p>
+            <p className="-mt-4 text-slate-500" data-test-blog-post-date>{dayjs.utc(post.publishedAt).format('MMMM D, YYYY')}</p>
             <p className="transition">{post.description}</p>
           </div>
         ))}
