@@ -16,7 +16,7 @@
     "@vercel/analytics": "^1.1.1",
     "classnames": "^2.3.1",
     "contentlayer": "^0.3.4",
-    "cypress-real-events": "1.11.0",
+    "cypress-real-events": "1.12.0",
     "d3": "^7.0.0",
     "date-fns": "^2.30.0",
     "dayjs": "^1.10.4",
