@@ -834,11 +834,11 @@
     ws "^8.0.0"
 
 "@percy/cypress@^3.1.1":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@percy/cypress/-/cypress-3.1.1.tgz#4e7c5bdeccf1240b2150fc9d608df72c2f213d4b"
-  integrity sha512-khvWmCOJW7pxwDZPB5ovvbSe11FfNtH8Iyq8PHRYLD9ibAkiAWHZVs07bLK5wju1Q9X8s7zg5uj2yWxIlB1yjA==
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/@percy/cypress/-/cypress-3.1.2.tgz#a087d3c59a6b155eab5fdb4c237526b9cfacbc22"
+  integrity sha512-JXrGDZbqwkzQd2h5T5D7PvqoucNaiMh4ChPp8cLQiEtRuLHta9nf1lEuXH+jnatGL2j+3jJFIHJ0L7XrgVnvQA==
   dependencies:
-    "@percy/sdk-utils" "^1.0.0-beta.44"
+    "@percy/sdk-utils" "^1.3.1"
 
 "@percy/dom@1.28.0":
   version "1.28.0"
@@ -852,27 +852,15 @@
   dependencies:
     "@percy/logger" "1.28.0"
 
-"@percy/logger@1.0.0-beta.71":
-  version "1.0.0-beta.71"
-  resolved "https://registry.yarnpkg.com/@percy/logger/-/logger-1.0.0-beta.71.tgz#03b458b1e43506c08c062f11b46aa2c9b1826fbf"
-  integrity sha512-09MgfGbvSFgvmQ1g0AkPnRwfkJvXluj7TLVlcgBsKEdo0cKfmctvXUtRBgiueqJFSb7jF+JwzE5i17bHnLy0ng==
-
 "@percy/logger@1.28.0":
   version "1.28.0"
   resolved "https://registry.yarnpkg.com/@percy/logger/-/logger-1.28.0.tgz#1b7ad929f2596af44eb30d3f8be20683ab6e0d67"
   integrity sha512-mRGc3hdcx5vgQ3jg3CClM6CMUPvrsvbWOi0K6GphzsjWydnyi9AYzmb6Q6gyHU5mPfdmMkjMJjE9P8QkMiXJsg==
 
-"@percy/sdk-utils@1.28.0":
+"@percy/sdk-utils@1.28.0", "@percy/sdk-utils@^1.3.1":
   version "1.28.0"
   resolved "https://registry.yarnpkg.com/@percy/sdk-utils/-/sdk-utils-1.28.0.tgz#479f5374aa34efe4a18e1fd290a2c328b670e7ed"
   integrity sha512-K4fziY+OXJJtNVfecO3jI3VQFuei2Lf8/5nlQvnx+U9v8fGFrkc0aE+gIlP3Ce5qzJbotgAlV1Dd0bZ2y7i7vw==
-
-"@percy/sdk-utils@^1.0.0-beta.44":
-  version "1.0.0-beta.71"
-  resolved "https://registry.yarnpkg.com/@percy/sdk-utils/-/sdk-utils-1.0.0-beta.71.tgz#29c6e0e9b1d81546d51bf1976383dd9e058300a6"
-  integrity sha512-PV576xwd7mBeCQjEOHT6ij1EpInEmXhz/JN3Vi2gGhDpdcjGVKkfYXXDDDz4CMsYcDrl4EtPvNtWCaGxsivzCA==
-  dependencies:
-    "@percy/logger" "1.0.0-beta.71"
 
 "@percy/webdriver-utils@1.28.0":
   version "1.28.0"
