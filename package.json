@@ -20,7 +20,7 @@
     "date-fns": "^2.30.0",
     "dayjs": "^1.10.4",
     "eslint-config-next": "^14.0.3",
-    "framer-motion": "10.16.5",
+    "framer-motion": "11.0.8",
     "hamburger-react": "^2.4.0",
     "next": "14.0.2",
     "next-contentlayer": "^0.3.4",
