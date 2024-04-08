@@ -33,19 +33,11 @@ export default function Index() {
   return (
     <>
       <Section title={{ text: 'Ryan Rishi' }}>
-        <p>I&apos;m a software engineer focused on building <b>great user experiences</b>.</p>
-        <p>Over the course of my career, I&apos;m grateful to have had the opportunity to work across multiple focus areas including frontend development, backend development, infrastructure, and operations.</p>
-        <p>Fast-forward to today, and I&apos;ve had the privilege on working at <Link href="https://jelli.com">an audio ad tech startup</Link>, <Link href="https://envoy.com">a workplace platform startup</Link>, and <Link href="https://twilio.com">a customer engagement platform</Link>. My main focus these days is leading product-focused engineering teams to deliver highly available backend services in order to deliver great experiences to the end-user.</p>
-        <p>Here are a few technologies I&apos;ve enjoyed working with recently:</p>
-        <ul>
-          <li><Link href="https://nextjs.com">Next.js</Link></li>
-          <li><Link href="https://tailwindcss.com">Tailwindcss</Link></li>
-          <li><Link href="https://graphql.com">GraphQL</Link> (specifically <Link href="https://apollographql.com">Apollo</Link>)</li>
-          <li><Link href="https://spring.io">Spring / Spring Boot</Link></li>
-          <li><Link href="https://typescriptlang.org">TypeScript</Link></li>
-          <li><Link href="https://d3js.org">d3</Link> (check out my project on the <Link href="/projects/loudness-wars">Loudness Wars</Link>)</li>
-        </ul>
-        <p>Outside of work, I enjoy listening to and playing music, cooking, traveling, and saying hi to dogs I pass on the street.</p>
+        <p>I&apos;m a software engineer focused on building <b>great user experiences</b>. I&apos;m currently working as a Staff Software Engineer at <Link href="https://twilio.com">Twilio</Link>, working on <Link href="https://www.twilio.com/en-us/customer-ai">Customer AI</Link>.</p>
+        <p>My tech journey spans frontend, backend, infrastructure, and operations. My passion is in building&mdash;focusing on thoughtful, functional digital experiences that prioritize the user. I&apos;ve contributed to startups in <Link href="https://jelli.com">audio ad tech</Link>, <Link href="https://envoy.com">workplace platforms</Link>, and <Link href="https://en.wikipedia.org/wiki/SkySat">satellite imaging</Link>. Now, I'm leading teams to engineer reliable backend services that enhance user interactions.</p>
+        <p>My recent toolkit includes <Link href="https://nextjs.com">Next.js</Link>, <Link href="https://tailwindcss.com">Tailwindcss</Link>, <Link href="https://spring.io">Spring / Spring Boot</Link>, and <Link href="https://d3js.org">d3</Link> (check out my project on the <Link href="/projects/loudness-wars">Loudness Wars</Link>).</p>
+        <p>When not coding, I&apos;m likely enjoying music, whipping up something in the kitchen, playing backgammon, or running.</p>
+        <p>If you&apos;re interested in tech discussions or music recommendations, feel free to <Link href="/contact">reach out</Link>. Let&apos;s create something exciting or exchange some favorite tunes.</p>
       </Section>
       <Section
         title={{ text: 'Blog', url: '/blog' }}
