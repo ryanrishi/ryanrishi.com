@@ -40,7 +40,7 @@ export default function Index() {
         </p>
         <p>My go-to tools lately are <Link href="https://nextjs.com">Next.js</Link>, <Link href="https://tailwindcss.com">TailwindCSS</Link>, <Link href="https://spring.io">Spring / Spring Boot</Link>, and <Link href="https://d3js.org">d3</Link>&mdash; don&apos;t miss my take on the <Link href="/projects/loudness-wars">Loudness Wars</Link>.</p>
         <p>Off the clock, my world revolves around <Link href="/music">music</Link>, culinary experiments, backgammon, and running.</p>
-        <p>If you&apos;re interested in a tech chat or swapping music, freel free to <Link href="/contact">reach out</Link>. Let&apos;s make something cool or share some tunes.</p>
+        <p>If you&apos;re interested in a tech chat or swapping music, feel free to <Link href="/contact">reach out</Link>. Let&apos;s make something cool or share some tunes.</p>
       </Section>
       <Section
         title={{ text: 'Blog', url: '/blog' }}
