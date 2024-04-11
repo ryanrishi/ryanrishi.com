@@ -7,12 +7,14 @@ interface LinkProps {
   className?: string;
 }
 
+const className = 'underline-offset-4 decoration-neutral-600 dark:decoration-neutral-200'
+
 export default function Link({ href, children, ...props }: LinkProps) {
   const isInternalLink = href?.startsWith('/') || href?.startsWith('#')
 
   if (isInternalLink) {
     return (
-      <NextLink href={href} {...props}>
+      <NextLink className={className} href={href} {...props}>
         {children}
       </NextLink>
     )
@@ -22,6 +24,7 @@ export default function Link({ href, children, ...props }: LinkProps) {
     <a
       href={href}
       {...props}
+      className={className}
       target="_blank"
       rel="noreferrer"
     >
