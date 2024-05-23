@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }) {
   const isLinksPage = children?.props?.childProp?.segment === 'links'
 
   return (
