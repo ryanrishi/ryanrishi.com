@@ -6,7 +6,6 @@ import Script from 'next/script'
 import type { Metadata } from 'next/types'
 
 import Footer from '@/components/footer'
-import Header from '@/components/header'
 
 import Providers from './providers'
 
