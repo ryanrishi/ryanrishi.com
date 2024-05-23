@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { FaGlassWhiskey } from 'react-icons/fa'
 import { GrMail } from 'react-icons/gr'
 import { ImGithub, ImLab, ImLinkedin } from 'react-icons/im'
 import { IoMdGlobe } from 'react-icons/io'
 import { SiTwilio } from 'react-icons/si'
-import { FaGlassWhiskey } from 'react-icons/fa'
 
 import headshot from '../../public/img/ryan.jpeg'
 
