@@ -6,6 +6,7 @@ import Script from 'next/script'
 import type { Metadata } from 'next/types'
 
 import Footer from '@/components/footer'
+import Header from '@/components/header'
 
 import Providers from './providers'
 
@@ -67,6 +68,7 @@ export default function RootLayout({ children }) {
           {isLinksPage ? children : (
             // keep these bg-* and dark:bg-* in sync with styles/globals.css
             <div className="bg-slate-50 dark:bg-slate-800 dark:text-slate-400">
+              <Header />
               <div className="container max-w-4xl p-4">
                 {children}
               </div>
