@@ -2,7 +2,7 @@
 
 import { usePathname, useSearchParams } from 'next/navigation'
 import { ThemeProvider } from 'next-themes'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 
 import { pageview } from '@/lib/ga'
 
@@ -30,7 +30,9 @@ export default function Providers({ children }) {
       <ThemeProvider attribute="class">
         {children}
       </ThemeProvider>
-      <PageView />
+      <Suspense>
+        <PageView />
+      </Suspense>
     </>
   )
 }
