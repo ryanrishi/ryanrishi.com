@@ -198,8 +198,16 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
 
 export default function Header() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
+  const pathname = usePathname()
+
 
   useDisableBodyScroll(isMobileNavOpen)
+
+  // hide this page on links page
+  // this is yet another hack around server components since usePathname is a client-side hook
+  if (pathname === '/links') {
+    return null
+  }
 
   return (
     <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:py-8 container dark:text-slate-50 relative z-10 transition">
