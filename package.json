@@ -34,14 +34,14 @@
     "rehype-pretty-code": "^0.10.2",
     "rehype-slug": "^6.0.0",
     "remark-gfm": "3.0.1",
-    "sharp": "^0.32.6",
+    "sharp": "^0.33.4",
     "shiki": "^0.14.5"
   },
   "devDependencies": {
     "@percy/cli": "^1.28.7",
     "@percy/cypress": "^3.1.1",
     "@types/d3": "^7.1.0",
-    "@types/gtag.js": "0.0.19",
+    "@types/gtag.js": "0.0.20",
     "@types/react": "18.2.37",
     "@types/react-dom": "^18.2.25",
     "@typescript-eslint/eslint-plugin": "6.11.0",
