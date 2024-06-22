@@ -3,6 +3,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode, { type Options } from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
+import { type Pluggable } from 'unified'
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -73,7 +74,11 @@ export default makeSource({
   contentDirPath: 'content',
   documentTypes: [Music, Post, Project, Test],
   mdx: {
-    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }], [rehypePrettyCode, options]],
+    rehypePlugins: [
+      rehypeSlug,
+      [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+      // @ts-expect-error: Type error
+      [rehypePrettyCode, options]],
     remarkPlugins: [remarkGfm],
   },
 })
