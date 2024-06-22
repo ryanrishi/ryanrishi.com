@@ -1,6 +1,6 @@
 import { defineDocumentType, defineNestedType, makeSource } from 'contentlayer/source-files'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypePrettyCode from 'rehype-pretty-code'
+import rehypePrettyCode, { type Options } from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 
@@ -65,11 +65,15 @@ export const Test = defineDocumentType(() => ({
   },
 }))
 
+const options: Options = {
+  theme: 'material-theme',
+}
+
 export default makeSource({
   contentDirPath: 'content',
   documentTypes: [Music, Post, Project, Test],
   mdx: {
-    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }], rehypePrettyCode],
+    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }], [rehypePrettyCode, options]],
     remarkPlugins: [remarkGfm],
   },
 })
