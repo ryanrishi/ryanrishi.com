@@ -3,7 +3,6 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode, { type Options } from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
-import { type Pluggable } from 'unified'
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
