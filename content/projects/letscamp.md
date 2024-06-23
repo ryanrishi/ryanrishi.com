@@ -4,8 +4,6 @@ description:  I wrote a bot that texts me when a Yosemite reservation I'm intere
 image:
   src:        /img/projects/letscamp/scott-goodwill-y8Ngwq34_Ak-unsplash.jpg
   alt:        A tent
-  width:      4498
-  height:     3000
 date:         "2021-03-18T00:00:00Z"
 tags:
   - python

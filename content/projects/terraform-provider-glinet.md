@@ -4,8 +4,6 @@ description:  A Terraform provider for interacting with GL.iNet routers
 image:
   src:        /img/projects/terraform-provider-glinet/axt1800_scene_cabin.jpg
   alt:        GL.iNet AXT1800 Travel Router
-  width:      1920
-  height:     1080
 date:         2023-11-26
 tags:
   - terraform

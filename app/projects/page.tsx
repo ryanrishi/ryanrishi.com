@@ -1,10 +1,11 @@
 import { allProjects } from 'contentlayer/generated'
+import { Project } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
 import { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 
 import { FancyH1 } from '@/components/headings'
-
-import ProjectItem from './project-item'
 
 export const metadata: Metadata = {
   title: 'Projects',
@@ -14,6 +15,31 @@ export const metadata: Metadata = {
   twitter: {
     title: 'Projects',
   },
+}
+
+function ProjectItem({ project }: { project: Project }) {
+  return (
+    <li>
+      <Link
+        href={`projects/${project.slug}`}
+        className="space-y-3"
+      >
+        <div className="overflow-hidden rounded-md">
+          <Image
+            className="object-cover w-auto h-auto transition-all hover:scale-105 aspect-[3/4]"
+            src={project.image.src}
+            alt={project.image.alt}
+            width="250"
+            height="330"
+          />
+        </div>
+        <div className="space-y-1">
+          <h3 className="font-medium leading-none">{project.name}</h3>
+          <p className="text-gray-600 dark:text-gray-500">{project.description}</p>
+        </div>
+      </Link>
+    </li>
+  )
 }
 
 export default function ProjectsIndex() {

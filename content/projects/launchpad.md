@@ -4,8 +4,6 @@ description:  A side project I did at work to showcase innovation at the company
 image:
   src:        /img/projects/launchpad/launchpad.png
   alt:        Map of radio stations
-  width:      3584
-  height:     2240
 date:         "2018-05-18T00:00:00Z"
 tags:
   - data visualization

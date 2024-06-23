@@ -4,8 +4,6 @@ description:  A closer look at how recorded music has been getting increasingly 
 image:
   src:        /img/projects/loudness-wars/mick-haupt-CbNBjnXXhNg-unsplash.jpg
   alt:        A stack of records at a record store
-  width:      5472
-  height:     3648
 date:         "2021-07-05T00:00:00Z"
 tags:
   - data visualization

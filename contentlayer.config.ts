@@ -25,8 +25,6 @@ const ProjectImage = defineNestedType(() => ({
   fields: {
     src: { type: 'string', required: true },
     alt: { type: 'string', required: true },
-    width: { type: 'number', required: true },
-    height: { type: 'number', required: true },
   },
 }))
 
