@@ -11,3 +11,23 @@ html.dark body {
 html {
   scroll-behavior: smooth;
 }
+
+.prose .anchor {
+  @apply invisible no-underline;
+
+  margin-left: -1em;
+  padding-right: 0.38em;
+  width: 80%;
+  max-width: 700px;
+  position: absolute;
+  cursor: pointer;
+
+  ::before {
+    @apply text-neutral-300 dark:text-neutral-600;
+    content: '#';
+  }
+}
+
+.prose *:hover > .anchor {
+  @apply visible;
+}

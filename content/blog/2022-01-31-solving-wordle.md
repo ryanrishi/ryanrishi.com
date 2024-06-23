@@ -18,7 +18,7 @@ For example, <span className="font-mono font-black tracking-widest"><span classN
 
 The examples below are available on [Github](https://github.com/ryanrishi/wordle-solver).
 
-# Recreating Wordle For Testing
+## Recreating Wordle For Testing
 Here's a class to hold the result of each letter in the guess.
 ```java
 @Getter
@@ -159,7 +159,7 @@ interface Solver {
 }
 ```
 
-# Brute Force Approach
+## Brute Force Approach
 A naive approach is to check every single 5-letter word in the dictionary until the game is solved. In order to implement this, I've pulled in a dictionary from [dwyl/english-words](https://github.com/dwyl/english-words/blob/master/words_alpha.txt).
 
 ```java
@@ -233,7 +233,7 @@ brute force - zorro: 15907
 Guessing `about` took 60 guesses since it was at the start of the dictionary, but guessing `zorro` required 15,907 guesses because this program has to guess almost every word in the dictionary before finding the solution.
 
 
-# Iterative Approach
+## Iterative Approach
 To improve, we can leverage the result from each guess in order to inform our future guesses.
 
 Thinking back to the rules of the game, we can improve our solution by doing the following:
@@ -424,7 +424,7 @@ tight (iterative, bad seed): 12
 Some of those are reasonable guesses (`light` was the answer in Wordle #226), but some words in there are archaic words that are unlikely to be a Wordle answer.
 
 
-# Iterative Approach Using Word Frequency
+## Iterative Approach Using Word Frequency
 We can improve on the above solution by guessing more common words first. Peter Norvig, the Director of Research at Google, has compiled a [list](http://norvig.com/ngrams/) of the most common ~300,000 words in English. We can use this list in order to guess more common words prior to guessing obscure, archaic words.
 
 Here is what the beginning of the list looks like:
@@ -510,7 +510,7 @@ tight (iterative + frequency, bad seed): 7
 Not bad&mdash; taking word frequency into account, we were able to improve a worst-case scenario by almost 50%. It's not enough to win the game in 6 turns, but it's enough to efficiently beat the game for most words.
 
 
-# Elimination Approach
+## Elimination Approach
 There's another approach that I haven't coded but have thought about. Some people use their second guess to guess a word that has none of the same characters as their first guess in order to get a better sense of what letters are in the answer. If the answer is `about` and their first guess is `tough` (⬜️🟨🟨⬜️⬜️), they would ignore the fact that there's an `ou` in the answer and instead guess something like `races` in order to see if there are common letters like `r` or `s` in the answer.
 
 I'm curious how this approach stacks up against an iterative approach. [Reach out to me](https://twitter.com/ryanrishi) if you or someone else ends up writing a program that uses this approach.

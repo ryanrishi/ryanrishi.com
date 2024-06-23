@@ -10,7 +10,7 @@ tags:
 
 AWS key pairs allow you to put your SSH key on EC2 instances when the are created, allowing you to SSH into an instance with a public key instead of a password. If you have multiple [Terraform workspaces](https://www.terraform.io/docs/state/workspaces.html), eg. `staging` and `production`, using the same key pair in multiple workspaces can cause some problems.
 
-### The Problem
+## The Problem
 Consider the following Terraform block in the `staging` workspace:
 ```hcl
 resource "aws_key_pair" "key_pair" {
@@ -68,7 +68,7 @@ resource "aws_key_pair" "key_pair" {
 }
 ```
 
-### The Solution
+## The Solution
 We’re going to update `terraform.tfstate` to include public key. I *do not* recommend this approach if you’re using Terraform as a team, as editing the Terraform state file by hand can lead to unexpected behaviors if a change to the infrastructure is made while you’re doing this.
 
 ```hcl
@@ -93,7 +93,7 @@ Make a note of the `public_key` from above, and then switch to the production wo
 $ terraform workspace select production
 ```
 
-#### Edit Terraform state file
+### Edit Terraform state file
 The next step is to get the Terraform state file. Your mileage may vary depending on which [Terraform backend](https://www.terraform.io/docs/backends/index.html) you're using. In my case, I use the S3 backend, so I need to copy the production state file so I can edit it:
 ```sh
 $ aws s3 cp s3://terraform/env:/production/terraform.tfstate production.tfstate
@@ -158,7 +158,7 @@ configuration and real physical resources that exist. As a result, no
 actions need to be performed.
 ```
 
-### Conclusion
+## Conclusion
 That's it! Even though importing the AWS key pair didn't import the public key, we can manipulate the Terraform state to include the public key so that the resource is not recreated.
 
 While I went with the above solution for my use case, there are other solutions to this problem:
