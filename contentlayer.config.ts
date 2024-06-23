@@ -75,7 +75,7 @@ export default makeSource({
   mdx: {
     rehypePlugins: [
       rehypeSlug,
-      [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+      [rehypeAutolinkHeadings, { properties: { class: ['anchor'] } } ],
       // @ts-expect-error: Type error
       [rehypePrettyCode, options]],
     remarkPlugins: [remarkGfm],
