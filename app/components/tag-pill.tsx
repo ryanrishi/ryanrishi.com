@@ -10,7 +10,7 @@ export interface TagPillProps {
 export default function TagPill({ children, href }: TagPillProps) {
   return (
     <Link href={href}>
-      <div className="font-mono text-gray-500">
+      <div className="font-mono text-neutral-500 hover:text-neutral-700">
         #{children}
       </div>
     </Link>

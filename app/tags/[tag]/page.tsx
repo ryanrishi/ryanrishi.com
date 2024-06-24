@@ -56,7 +56,7 @@ export default function Tag({ params }: { params: { tag: string }}) {
       </div>
 
       <div className="flex items-center justify-center my-8">
-        <Link href="/tags" className="not-prose text-slate-500 hover:text-slate-600 transition">
+        <Link href="/tags" className="not-prose text-slate-500 hover:text-slate-700 transition">
           &larr; View all tags
         </Link>
       </div>
