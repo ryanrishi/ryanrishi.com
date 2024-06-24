@@ -21,13 +21,13 @@ export default function TagsIndex() {
   ])
 
   return (
-    <>
+    <div className="prose">
       <h1>Tags</h1>
       <div data-test-id="tags" className="flex flex-row flex-wrap prose leading-10 gap-4">
         {Array.from(tags).sort().map((tag) => (
           tag && <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>
         ))}
       </div>
-    </>
+    </div>
   )
 }
