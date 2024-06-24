@@ -34,7 +34,7 @@ function ProjectItem({ project }: { project: Project }) {
           />
         </div>
         <div className="space-y-1">
-          <h3 className="font-medium leading-none">{project.name}</h3>
+          <h2 className="font-medium leading-none">{project.name}</h2>
           <p className="text-gray-600 dark:text-gray-500">{project.description}</p>
         </div>
       </Link>

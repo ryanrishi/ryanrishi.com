@@ -40,14 +40,14 @@ export default function Tag({ params }: { params: { tag: string }}) {
     <>
       <div className="prose dark:prose-invert">
         <h1>Content tagged with <code>{tag.replace('-', ' ')}</code></h1>
-        {!isEmpty(postsWithTag) && <h3>Posts</h3>}
+        {!isEmpty(postsWithTag) && <h2>Posts</h2>}
         {postsWithTag.map((post) => (
           <li key={post.slug}>
             <Link href={`/blog/${post.slug}`}>{post.title}</Link>
           </li>
         ))}
 
-        {!isEmpty(projectsWithTag) && <h3>Projects</h3>}
+        {!isEmpty(projectsWithTag) && <h2>Projects</h2>}
         {projectsWithTag.map((project) => (
           <li key={project.slug}>
             <Link href={`/projects/${project.slug}`}>{project.name}</Link>
