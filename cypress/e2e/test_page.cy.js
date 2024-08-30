@@ -28,6 +28,10 @@ describe('Test Page', () => {
     })
   })
 
+  it('Snapshot', () => {
+    cy.percySnapshot('Test Page')
+  })
+
   // TODO get this working in CI
   // works headless + headful (?) on my laptop
   // fails in Github Actions on Chrome and Electron
@@ -46,9 +50,12 @@ describe('Test Page', () => {
       })
     })
 
+    it('Snapshot', () => {
+      cy.percySnapshot('Test Page | Dark Mode')
+    })
+
     it('shows dark mode if `prefers-color-scheme: dark`', () => {
       cy.get('html').should('have.class', 'dark')
-      cy.percySnapshot('Dark Mode - with `prefers-color-scheme: dark`')
     })
 
     it('toggles between light and dark mode', () => {
@@ -64,29 +71,24 @@ describe('Test Page', () => {
     describe('Dark mode styles', () => {
       it('Headings', () => {
         cy.get('h1').contains('Headings').scrollIntoView()
-        cy.percySnapshot('Dark mode - Headings')
       })
 
       it('Text Styles', () => {
         cy.get('h1').contains('Text Styles').scrollIntoView()
-        cy.percySnapshot('Dark mode - Text Styles')
       })
 
       // skipping code since it's the same in dark mode
 
       it('Blockquotes', () => {
         cy.get('h1').contains('Blockquotes').scrollIntoView()
-        cy.percySnapshot('Dark mode - Blockquotes')
       })
 
       it('Callouts', () => {
         cy.get('h1').contains('Callouts').scrollIntoView()
-        cy.percySnapshot('Dark mode - Callouts')
       })
 
       it('Lists', () => {
         cy.get('h1').contains('Lists').scrollIntoView()
-        cy.percySnapshot('Dark mode - Lists')
       })
     })
   })
@@ -94,10 +96,6 @@ describe('Test Page', () => {
   describe('Headings', () => {
     beforeEach(() => {
       cy.get('h1').contains('Headings').scrollIntoView()
-    })
-
-    it('Snapshot', () => {
-      cy.percySnapshot('Headings')
     })
 
     // TODO get this working in CI
@@ -128,16 +126,12 @@ describe('Test Page', () => {
     beforeEach(() => {
       cy.get('h1').contains('Text Styles').scrollIntoView()
     })
-
-    it('Snapshot', () => {
-      cy.percySnapshot('Paragraph')
-    })
   })
 
   describe('Code', () => {
     it('Scrolls horizontally for long lines', () => {
       cy.get('pre code').first().scrollIntoView()
-      cy.percySnapshot('Code block - horizontal scroll')
+      // TODO test this better
     })
   })
 
@@ -145,19 +139,11 @@ describe('Test Page', () => {
     beforeEach(() => {
       cy.get('h1').contains('Blockquotes').scrollIntoView()
     })
-
-    it('Snapshot', () => {
-      cy.percySnapshot('Blockquotes')
-    })
   })
 
   describe('Callouts', () => {
     beforeEach(() => {
       cy.get('h1').contains('Callouts').scrollIntoView()
-    })
-
-    it('Snapshot', () => {
-      cy.percySnapshot('Callouts')
     })
   })
 
@@ -165,19 +151,11 @@ describe('Test Page', () => {
     beforeEach(() => {
       cy.get('h1').contains('Lists').scrollIntoView()
     })
-
-    it('Snapshot', () => {
-      cy.percySnapshot('Lists')
-    })
   })
 
   describe('Branding', () => {
     beforeEach(() => {
       cy.get('h1').contains('Branding').scrollIntoView()
-    })
-
-    it('Snapshot', () => {
-      cy.percySnapshot('Branding')
     })
   })
 })
