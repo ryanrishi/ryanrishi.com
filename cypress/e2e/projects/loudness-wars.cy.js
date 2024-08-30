@@ -22,7 +22,7 @@ describe('Projects | Loudness Wars', () => {
     })
 
     it('snapshot', () => {
-      cy.percySnapshot('Projects | Loudness Wars | chart')
+      cy.percySnapshot('Projects | Loudness Wars')
     })
 
     describe('mouseover', () => {
