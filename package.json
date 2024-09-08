@@ -19,7 +19,7 @@
     "d3": "^7.0.0",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.13",
-    "eslint-config-next": "^14.2.4",
+    "eslint-config-next": "^14.2.8",
     "framer-motion": "11.3.8",
     "hamburger-react": "^2.5.1",
     "next": "14.2.5",
