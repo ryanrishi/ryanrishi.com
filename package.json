@@ -22,7 +22,7 @@
     "eslint-config-next": "^14.2.4",
     "framer-motion": "11.3.8",
     "hamburger-react": "^2.5.1",
-    "next": "14.2.5",
+    "next": "14.2.8",
     "next-contentlayer": "^0.3.4",
     "next-themes": "0.3.0",
     "prop-types": "^15.7.2",
