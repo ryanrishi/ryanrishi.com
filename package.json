@@ -52,7 +52,7 @@
     "cypress-wait-until": "^3.0.2",
     "eslint": "^8.57.0",
     "eslint-plugin-cypress": "^2.11.2",
-    "eslint-plugin-simple-import-sort": "12.1.0",
+    "eslint-plugin-simple-import-sort": "12.1.1",
     "lodash.isempty": "^4.4.0",
     "lodash.kebabcase": "^4.1.1",
     "postcss": "8.4.47",
