@@ -42,7 +42,7 @@
     "@percy/cypress": "^3.1.1",
     "@types/d3": "^7.1.0",
     "@types/gtag.js": "0.0.20",
-    "@types/react": "18.3.5",
+    "@types/react": "18.3.8",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "7.0.0",
     "@typescript-eslint/parser": "6.21.0",
