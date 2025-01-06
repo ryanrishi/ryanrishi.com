@@ -3935,10 +3935,10 @@ gray-matter@^4.0.3:
     section-matter "^1.0.0"
     strip-bom-string "^1.0.0"
 
-hamburger-react@^2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/hamburger-react/-/hamburger-react-2.5.1.tgz#a15973cacabbc414f490ab0aa13340e260fc6ec1"
-  integrity sha512-XlTIinYeYzLu76q4Vd9olwOJP0hFgAeZfJFX6tTT/ufTLhmOjI77CGFYIwGc6gcDeeT86660ZoKx3/L67vdZEw==
+hamburger-react@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/hamburger-react/-/hamburger-react-2.5.2.tgz#6224277593a03904b315d32a18a5fba0c04d8dc1"
+  integrity sha512-xsv/I7wQX1RDaulDnvMVCXMMRXnkwnUnkE8seD5eNVZJ4nIrjtK5LLA20l5x/pJ+mPWOzlFxW32VJ86Gbo2Njw==
 
 has-bigints@^1.0.1, has-bigints@^1.0.2:
   version "1.0.2"
