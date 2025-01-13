@@ -12,7 +12,7 @@
     "test": "start-server-and-test start 3000 cypress:open"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
     "@vercel/analytics": "^1.4.1",
     "classnames": "^2.3.1",
     "contentlayer": "^0.3.4",
