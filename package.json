@@ -34,7 +34,7 @@
     "rehype-slug": "^6.0.0",
     "remark-gfm": "3.0.1",
     "sharp": "^0.33.5",
-    "shiki": "^1.24.4",
+    "shiki": "^1.27.2",
     "unified": "^11.0.5"
   },
   "devDependencies": {
