@@ -32,7 +32,7 @@ export default function BlogIndex() {
             data-test-blog-post
           >
             <h2>
-              <Link href={`blog/${post.slug}`}>
+              <Link href={`/blog/${post.slug}`}>
                 {post.title}
               </Link>
             </h2>

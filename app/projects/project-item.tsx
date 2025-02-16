@@ -5,7 +5,7 @@ import Link from 'next/link'
 export default function ProjectItem({ project }: { project: Project }) {
   return (
     <li className="border border-slate-200 dark:border-slate-700 rounded shadow hover:scale-105 transition-transform">
-      <Link href={`projects/${project.slug}`}>
+      <Link href={`/projects/${project.slug}`}>
         <div className="h-64">
           <Image
             className="object-cover w-full h-full transition transform rounded-t"

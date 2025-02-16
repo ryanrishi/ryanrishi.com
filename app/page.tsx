@@ -48,7 +48,7 @@ export default function Index() {
       >
         {recentPosts.map((post, i) => (
           <div key={i}>
-            <Link href={post.slug}>
+            <Link href={`/blog/${post.slug}`}>
               <h3>{post.title}</h3>
             </Link>
             <p className="transition text-slate-500 dark:text-slate-400 mb-8">{post.description}</p>
@@ -63,7 +63,7 @@ export default function Index() {
       >
         {recentProjects.map((project, i) => (
           <div key={i}>
-            <Link href={project.slug}>
+            <Link href={`/projects/${project.slug}`}>
               <h3>{project.name}</h3>
             </Link>
             <p className="transition text-slate-500 dark:text-slate-400 mb-8">{project.description}</p>
