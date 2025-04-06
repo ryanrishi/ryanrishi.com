@@ -25,9 +25,9 @@ describe('Home', () => {
 
   it('navigates to each blog post', () => {
     cy.get('h1').contains('Blog').scrollIntoView()
-    cy.get('h1').contains('Blog').nextAll().find('a').then((links) => {
+    cy.get('h1').contains('Blog').parent().parent().find('a[href^="/blog/"]').not(':contains("Read all posts")').then((links) => {
       for (let i = 0; i < links.length; i++) {
-        cy.get('h1').contains('Blog').nextAll().find('a').eq(i).click()
+        cy.get('h1').contains('Blog').parent().parent().find('a[href^="/blog/"]').not(':contains("Read all posts")').eq(i).click()
         cy.url().should('match', /\/blog\/.+$/)
         cy.go('back')
       }
@@ -36,9 +36,9 @@ describe('Home', () => {
 
   it('navigates to each project', () => {
     cy.get('h1').contains('Projects').scrollIntoView()
-    cy.get('h1').contains('Projects').nextAll().find('a').then((links) => {
+    cy.get('h1').contains('Projects').parent().parent().find('a[href^="/projects/"]').not(':contains("See all projects")').then((links) => {
       for (let i = 0; i < links.length; i++) {
-        cy.get('h1').contains('Projects').nextAll().find('a').eq(i).click()
+        cy.get('h1').contains('Projects').parent().parent().find('a[href^="/projects/"]').not(':contains("See all projects")').eq(i).click()
         cy.url().should('match', /\/projects\/.+$/)
         cy.go('back')
       }
