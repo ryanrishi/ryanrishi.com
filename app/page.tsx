@@ -47,8 +47,8 @@ export default function Index() {
         description="Writing about technology, music, and life."
       >
         {recentPosts.map((post, i) => (
-          <Link 
-            href={`/blog/${post.slug}`} 
+          <Link
+            href={`/blog/${post.slug}`}
             key={i}
             className="block p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors mb-4"
           >
@@ -64,8 +64,8 @@ export default function Index() {
         description="Data visualization, conference talks, and web scrapers."
       >
         {recentProjects.map((project, i) => (
-          <Link 
-            href={`/projects/${project.slug}`} 
+          <Link
+            href={`/projects/${project.slug}`}
             key={i}
             className="block p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors mb-4"
           >
