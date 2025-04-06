@@ -16,7 +16,7 @@ const MaybeWrapInLink = ({ children, href }) => href ? <NextLink href={href} leg
 
 function Section({ title, description, children }: SectionProps) {
   return (
-    <section className="prose dark:prose-invert mb-16 max-w-none">
+    <section className="prose dark:prose-invert prose-a:no-underline mb-16 max-w-none">
       <MaybeWrapInLink href={title.url}>
         <FancyH1>{title.text}</FancyH1>
       </MaybeWrapInLink>
@@ -47,12 +47,14 @@ export default function Index() {
         description="Writing about technology, music, and life."
       >
         {recentPosts.map((post, i) => (
-          <div key={i}>
-            <Link href={`/blog/${post.slug}`}>
-              <h3>{post.title}</h3>
-            </Link>
-            <p className="transition text-slate-500 dark:text-slate-400 mb-8">{post.description}</p>
-          </div>
+          <Link 
+            href={`/blog/${post.slug}`} 
+            key={i}
+            className="block p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors mb-4"
+          >
+            <h3 className="mb-2">{post.title}</h3>
+            <p className="transition text-slate-500 dark:text-slate-400 no-underline">{post.description}</p>
+          </Link>
         ))}
         <Link href="/blog" className="no-underline">Read all posts &rarr;</Link>
       </Section>
@@ -62,12 +64,14 @@ export default function Index() {
         description="Data visualization, conference talks, and web scrapers."
       >
         {recentProjects.map((project, i) => (
-          <div key={i}>
-            <Link href={`/projects/${project.slug}`}>
-              <h3>{project.name}</h3>
-            </Link>
-            <p className="transition text-slate-500 dark:text-slate-400 mb-8">{project.description}</p>
-          </div>
+          <Link 
+            href={`/projects/${project.slug}`} 
+            key={i}
+            className="block p-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors mb-4"
+          >
+            <h3 className="mb-2">{project.name}</h3>
+            <p className="transition text-slate-500 dark:text-slate-400 no-underline">{project.description}</p>
+          </Link>
         ))}
         <Link href="/projects" className="no-underline">See all projects &rarr;</Link>
       </Section>
