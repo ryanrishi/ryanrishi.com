@@ -18,6 +18,7 @@ jobs:
         env:
           PERCY_TOKEN: "${{ secrets.PERCY_TOKEN }}"
           CYPRESS_DEFAULT_COMMAND_TIMEOUT: 10000
+          PERCY_PAGE_LOAD_TIMEOUT: 60000
       - name: Upload Cypress videos
         uses: actions/upload-artifact@v4
         if: always()
