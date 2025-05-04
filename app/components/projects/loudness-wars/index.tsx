@@ -30,16 +30,6 @@ const trackFillColor = '#69b3a2'
 const selectedTrackFillColor = '#f38f9f'
 
 const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTrack) => {
-  // Ensure svg element exists and has dimensions
-  if (!svgRef.current) {
-    console.warn('SVG reference is not available');
-    return;
-  }
-
-  // Create default dimensions for testing environments
-  const width = 800;
-  const height = 600;
-
   let $selectedTrack
 
   const data = await d3.csv<Columns>('/loudness-wars.csv').then(tracks => tracks.map(track => ({
@@ -83,7 +73,7 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
     maxLoudness = Math.max(maxLoudness, +d.loudness!)
   })
 
-  // Use fixed dimensions for testing environments or try to get from viewBox
+  const { width, height } = svgRef.current.viewBox.baseVal
   const h = height - margin.top - margin.bottom
   const w = width - margin.left - margin.right
 
@@ -307,8 +297,9 @@ const Chart = () => {
   const svg = useRef<SVGSVGElement>(null!)
 
   const [dimensions, setDimensions] = useState({
-    height: 800, // Default fallback values
-    width: 600
+    // can't use winsow since it's undefined with Next.js SSR
+    height: 0,
+    width: 0,
   })
 
   const [selectedTrack, _setSelectedTrack] = useState<Track | null>(null)
@@ -322,27 +313,14 @@ const Chart = () => {
     _setSelectedTrack(track)
   }
 
-  // Effect to handle window resizing and initial dimension setting
   useEffect(() => {
-    // Check if we're in a browser environment
-    if (typeof window !== 'undefined') {
-      setDimensions({
-        height: Math.min(window.innerHeight, 1024 * 3/4),
-        width: Math.min(window.innerWidth, 1024)
-      })
-    }
-  }, [])
+    setDimensions({
+      height: Math.min(window.innerHeight, 1024 * 3/4),
+      width: Math.min(window.innerWidth, 1024),
+    })
 
-  // Draw chart once when component mounts
-  useEffect(() => {
-    if (svg.current) {
-      try {
-        drawChart(svg, setSelectedTrack);
-      } catch (err) {
-        console.error('Error drawing chart:', err);
-      }
-    }
-  }, []);
+    drawChart(svg, setSelectedTrack)
+  }, [svg])
 
   return (
     <div className="w-full h-full">
@@ -358,12 +336,9 @@ const Chart = () => {
           : ''}
       </p>
       <svg
-        width={dimensions.width}
-        height={dimensions.height}
         viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
         preserveAspectRatio="xMidYMid meet"
         ref={svg}
-        style={{ maxWidth: '100%' }}
       />
     </div>
   )
