@@ -2,7 +2,7 @@
 
 /* eslint indent: ["warn", 2, { "SwitchCase": 1 }] */
 import * as d3 from 'd3'
-import { MutableRefObject, useEffect, useRef, useState } from 'react'
+import { type RefObject, useEffect, useRef, useState } from 'react'
 
 import { event } from '@/lib/ga'
 
@@ -29,7 +29,7 @@ type Columns = 'track_id' | 'track_name' | 'artist_name' | 'album_name' | 'relea
 const trackFillColor = '#69b3a2'
 const selectedTrackFillColor = '#f38f9f'
 
-const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTrack) => {
+const drawChart = async (svgRef: RefObject<SVGSVGElement>, setSelectedTrack, isMounted: () => boolean) => {
   let $selectedTrack
 
   const data = await d3.csv<Columns>('/loudness-wars.csv').then(tracks => tracks.map(track => ({
@@ -61,6 +61,10 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
     loudness: track.loudness,
   })).filter(x => x.releaseDate.getFullYear() >= 1970) // only 2 tracks in 1969, insufficient data size
     .sort((a, b) => a.releaseDate.valueOf() - b.releaseDate.valueOf()))
+
+  if (!isMounted()) {
+    return
+  }
 
   const minDate = data[0].releaseDate
   const maxDate = data[data.length - 1].releaseDate
@@ -294,7 +298,7 @@ const drawChart = async (svgRef: MutableRefObject<SVGSVGElement>, setSelectedTra
 }
 
 const Chart = () => {
-  const svg = useRef<SVGSVGElement>(null!)
+  const svg = useRef<SVGSVGElement>(null)
 
   const [dimensions, setDimensions] = useState({
     // can't use winsow since it's undefined with Next.js SSR
@@ -314,12 +318,21 @@ const Chart = () => {
   }
 
   useEffect(() => {
+    let isMounted = true
+
+    const checkIsMounted = () => isMounted
+
     setDimensions({
       height: Math.min(window.innerHeight, 1024 * 3/4),
       width: Math.min(window.innerWidth, 1024),
     })
 
-    drawChart(svg, setSelectedTrack)
+
+    drawChart(svg, setSelectedTrack, checkIsMounted)
+
+    return () => {
+      isMounted = false
+    }
   }, [svg])
 
   return (
