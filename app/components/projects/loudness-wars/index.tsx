@@ -77,6 +77,10 @@ const drawChart = async (svgRef: RefObject<SVGSVGElement>, setSelectedTrack, isM
     maxLoudness = Math.max(maxLoudness, +d.loudness!)
   })
 
+  if (!svgRef.current) {
+    return
+  }
+
   const { width, height } = svgRef.current.viewBox.baseVal
   const h = height - margin.top - margin.bottom
   const w = width - margin.left - margin.right
