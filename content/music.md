@@ -26,6 +26,6 @@ The second is [Bellomy](https://open.spotify.com/album/5Tbpm70sMQ2aUwdsEieHn5?si
   width="100%"
   height="380"
   frameBorder="0"
-  allowtransparency
+  allowtransparency="true"
   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
 />
