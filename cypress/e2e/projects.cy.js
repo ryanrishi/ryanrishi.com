@@ -15,20 +15,13 @@ describe('Projects', () => {
 
   it('renders the project page', () => {
     cy.get('h1').contains('Projects')
+    cy.get('li').then((projects) => {
+      for (let i = 0; i < projects.length; i++) {
+        cy.get('li').eq(i).should('have.css', 'opacity', '1') // wait for transitions
+      }
+    })
 
-    // Wait for all project items to be visible and fully rendered
-    cy.get('li').should('be.visible')
-      .then((projects) => {
-        // Instead of checking each item individually, we'll check just the last one
-        // This ensures all animations have completed (assuming they happen in sequence)
-        if (projects.length > 0) {
-          cy.get('li').last().should('have.css', 'opacity', '1', { timeout: 10000 })
-        }
-      })
-
-    // Add a small delay to ensure everything is settled before snapshot
-    cy.wait(1000)
-    cy.percySnapshot('Projects', { timeout: 15000 })
+    cy.percySnapshot('Projects')
   })
 
   it('each project', () => {
@@ -40,10 +33,10 @@ describe('Projects', () => {
         cy.waitForLogoAnimations()
         cy.get('h1').scrollIntoView()
         cy.get('h1').first().then(($title) => {
-          // Reduce the arbitrary wait time
-          cy.wait(2000)
-          // Add timeout to Percy snapshot
-          cy.percySnapshot($title.text(), { timeout: 15000 })
+          // wait for animations to finish and images to load
+          // TODO find a better way to do this
+          cy.wait(5000)
+          cy.percySnapshot($title.text())
         })
         cy.go('back')
         cy.title().should('include', 'Projects') // wait for router to finish transition to projects index
