@@ -10,5 +10,8 @@ export default defineConfig({
       return require('./cypress/plugins/index.js')(on, config)
     },
     baseUrl: 'http://localhost:3000',
+    // increase timeouts to accommodate slower page loads and Percy snapshots
+    defaultCommandTimeout: 20000,
+    pageLoadTimeout: 60000,
   },
 })

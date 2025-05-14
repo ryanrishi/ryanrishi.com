@@ -20,7 +20,8 @@ describe('Projects', () => {
         cy.get('li').eq(i).should('have.css', 'opacity', '1') // wait for transitions
       }
     })
-
+    // wait for project images to load before snapshot
+    cy.get('img', { timeout: 20000 }).should('be.visible')
     cy.percySnapshot('Projects')
   })
 
