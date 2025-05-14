@@ -304,11 +304,9 @@ const drawChart = async (svgRef: RefObject<SVGSVGElement>, setSelectedTrack, isM
 const Chart = () => {
   const svg = useRef<SVGSVGElement>(null)
 
-  const [dimensions, setDimensions] = useState({
-    // can't use winsow since it's undefined with Next.js SSR
-    height: 0,
-    width: 0,
-  })
+  // Fixed internal SVG coordinate system for responsive, deterministic sizing
+  const VB_WIDTH = 800
+  const VB_HEIGHT = 400
 
   const [selectedTrack, _setSelectedTrack] = useState<Track | null>(null)
 
@@ -326,10 +324,6 @@ const Chart = () => {
 
     const checkIsMounted = () => isMounted
 
-    setDimensions({
-      height: Math.min(window.innerHeight, 1024 * 3/4),
-      width: Math.min(window.innerWidth, 1024),
-    })
 
 
     drawChart(svg, setSelectedTrack, checkIsMounted)
@@ -340,7 +334,7 @@ const Chart = () => {
   }, [svg])
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full">
       <p>
         {selectedTrack
           ? (
@@ -353,8 +347,9 @@ const Chart = () => {
           : ''}
       </p>
       <svg
-        viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
-        preserveAspectRatio="xMidYMid meet"
+        viewBox={`0 0 ${VB_WIDTH} ${VB_HEIGHT}`}
+        preserveAspectRatio="xMinYMin meet"
+        className="w-full h-auto"
         ref={svg}
       />
     </div>
