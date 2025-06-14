@@ -1,8 +1,9 @@
 /* eslint-env node */
-const { withContentlayer } = require('next-contentlayer')
+const createMDX = require('@next/mdx')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  pageExtensions: ['md', 'mdx', 'ts', 'tsx'],
   async redirects() {
     return [
       {
@@ -22,4 +23,6 @@ const nextConfig = {
   ],
 }
 
-module.exports = withContentlayer(nextConfig)
+const withMdx = createMDX()
+
+module.exports = withMdx(nextConfig)

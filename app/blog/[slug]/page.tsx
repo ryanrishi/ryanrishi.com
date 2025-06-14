@@ -6,7 +6,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
-import mdxComponents from '@/components/mdx-components'
+import mdxComponents from 'mdx-components'
 import TagPill from '@/components/tag-pill'
 
 dayjs.extend(utc)

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
 import { FancyH1 } from '@/components/headings'
-import mdxComponents from '@/components/mdx-components'
+import mdxComponents from 'mdx-components'
 
 export const metadata: Metadata = {
   title: 'Music',
