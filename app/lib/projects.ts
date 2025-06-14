@@ -2,7 +2,7 @@ import fs from 'fs/promises'
 import path from 'path'
 
 export async function getAllProjects(): Promise<any[]> {
-  const dir = path.join(process.cwd(), 'app/projects')
+  const dir = path.join(process.cwd(), 'app', 'projects')
   const files = await fs.readdir(dir)
   const mdxFiles = files.filter((f) => f.endsWith('.mdx'))
   const projects = await Promise.all(

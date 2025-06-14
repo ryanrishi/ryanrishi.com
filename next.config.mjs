@@ -6,6 +6,8 @@ import remarkGfm from 'remark-gfm'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enable the Rust-based MDX compiler
+  experimental: { mdxRs: true },
   pageExtensions: ['md', 'mdx', 'ts', 'tsx'],
   async redirects() {
     return [

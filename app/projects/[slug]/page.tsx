@@ -16,6 +16,7 @@ export async function generateStaticParams () {
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const slug = decodeURIComponent(params.slug)
   const { metadata } = await import(`@/projects/${slug}.mdx`)
+
   return {
     title: metadata.name,
     description: metadata.description,
