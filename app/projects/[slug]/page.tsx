@@ -1,12 +1,9 @@
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
 import kebabCase from 'lodash.kebabcase'
 import { Metadata } from 'next'
 
 import TagPill from '@/components/tag-pill'
-import { getAllProjects, getProjectBySlug } from '@/lib/projects'
+import { getAllProjects } from '@/lib/projects'
 
-dayjs.extend(utc)
 
 export const dynamicParams = false
 
@@ -16,24 +13,24 @@ export async function generateStaticParams () {
   return projects.map((project) => ({ slug: project.slug }))
 }
 
-export async function generateMetadata ({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const project = await getProjectBySlug(decodeURIComponent(params.slug))
-
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const slug = decodeURIComponent(params.slug)
+  const { metadata } = await import(`@/projects/${slug}.mdx`)
   return {
-    title: project.name,
-    description: project.description,
+    title: metadata.name,
+    description: metadata.description,
     openGraph: {
-      title: project.name,
+      title: metadata.name,
       type: 'article',
-      publishedTime: project.date,
-      url: `https://ryanrishi.com/projects/${decodeURIComponent(params.slug)}`,
+      publishedTime: metadata.date,
+      url: `https://ryanrishi.com/projects/${slug}`,
       images: [
-        { url: `https://ryanrishi.com/${project.image.src}`},
+        { url: `https://ryanrishi.com${metadata.image.src}` },
       ],
     },
     twitter: {
-      title: project.name,
-      images: `https://ryanrishi.com/${project.image.src}`,
+      title: metadata.name,
+      images: `https://ryanrishi.com${metadata.image.src}`,
     },
   }
 }
