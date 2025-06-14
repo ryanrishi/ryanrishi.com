@@ -1,21 +1,23 @@
-import { allProjects } from 'contentlayer/generated'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import kebabCase from 'lodash.kebabcase'
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import { useMDXComponent } from 'next-contentlayer/hooks'
 
-import mdxComponents from 'mdx-components'
 import TagPill from '@/components/tag-pill'
+import { getAllProjects, getProjectBySlug } from '@/lib/projects'
 
 dayjs.extend(utc)
 
-export const generateStaticParams = async () => allProjects.map((project) => ({ slug: project.slug }))
+export const dynamicParams = false
 
-export const generateMetadata = ({ params }: { params: { slug: string } }): Metadata => {
-  const project = allProjects.find((project) => project.slug === params.slug)
-  if (!project) throw new Error(`Project not found for slug: ${decodeURIComponent(params.slug)}`)
+export async function generateStaticParams () {
+  const projects = await getAllProjects()
+
+  return projects.map((project) => ({ slug: project.slug }))
+}
+
+export async function generateMetadata ({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const project = await getProjectBySlug(decodeURIComponent(params.slug))
 
   return {
     title: project.name,
@@ -36,23 +38,21 @@ export const generateMetadata = ({ params }: { params: { slug: string } }): Meta
   }
 }
 
-export default function Project({ params }: { params: { slug: string } }) {
-  const project = allProjects.find((project) => project.slug === params.slug)
-  if (!project) notFound()
-
-  const MDXContent = useMDXComponent(project.body.code)
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const { default: Project, metadata } = await import(`@/projects/${slug}.mdx`)
 
   return (
-    <>
-      <h1>{project.name}</h1>
-      <MDXContent components={mdxComponents} />
-      {project.tags && (
+    <div className="prose dark:prose-invert max-w-none">
+      <h1>{metadata.name}</h1>
+      <Project />
+      {metadata.tags && (
         <div className="flex flex-row flex-wrap my-12 gap-4">
-          {project.tags.map(tag => (
+          {metadata.tags.map(tag => (
             <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>
           ))}
         </div>
       )}
-    </>
+    </div>
   )
 }
