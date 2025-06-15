@@ -1,10 +1,11 @@
-import { allPosts, allProjects } from 'contentlayer/generated'
 import { compareDesc } from 'date-fns'
 import NextLink from 'next/link'
 import { ReactNode } from 'react'
 
 import { FancyH1 } from '@/components/headings'
 import Link from '@/components/link'
+import { getAllPosts } from '@/lib/posts'
+import { getAllProjects } from '@/lib/projects'
 
 interface SectionProps {
   title: { text: string; url?: string; }
@@ -26,9 +27,14 @@ function Section({ title, description, children }: SectionProps) {
   )
 }
 
-export default function Index() {
-  const recentPosts = allPosts.sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt))).slice(0, 3)
-  const recentProjects = allProjects.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date))).slice(0, 3)
+export default async function Index() {
+  const [posts, projects] = await Promise.all([
+    getAllPosts(),
+    getAllProjects(),
+  ])
+
+  const recentPosts = posts.sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt))).slice(0, 3)
+  const recentProjects = projects.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date))).slice(0, 3)
 
   return (
     <>

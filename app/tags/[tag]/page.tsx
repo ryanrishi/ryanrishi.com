@@ -1,15 +1,23 @@
-import { allPosts, allProjects } from 'contentlayer/generated'
 import isEmpty from 'lodash.isempty'
 import kebabCase from 'lodash.kebabcase'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import Link from '@/components/link'
+import { getAllPosts } from '@/lib/posts'
+import { getAllProjects } from '@/lib/projects'
 
-export const generateStaticParams = async () => Array.from(new Set([
-  ...allPosts.flatMap(post => post.tags),
-  ...allProjects.flatMap(project => project.tags),
+export async function generateStaticParams() {
+  const [posts, projects] = await Promise.all([
+    getAllPosts(),
+    getAllProjects(),
+  ])
+
+  return Array.from(new Set([
+  ...posts.flatMap(post => post.tags),
+  ...projects.flatMap(project => project.tags),
 ]))
+}
 
 export const generateMetadata = ({ params }: { params: { tag: string } }): Metadata => {
   const { tag } = params
@@ -27,10 +35,15 @@ export const generateMetadata = ({ params }: { params: { tag: string } }): Metad
   }
 }
 
-export default function Tag({ params }: { params: { tag: string }}) {
-  const { tag } = params
-  const postsWithTag = allPosts.filter(post => post.tags.map(kebabCase).includes(tag))
-  const projectsWithTag = allProjects.filter(project => project.tags?.map(kebabCase).includes(tag))
+export default async function Tag({ params }: { params: Promise<{ tag: string }>}) {
+  const { tag } = await params
+  const [posts, projects] = await Promise.all([
+    getAllPosts(),
+    getAllProjects(),
+  ])
+
+  const postsWithTag = posts.filter(post => post.tags.map(kebabCase).includes(tag))
+  const projectsWithTag = projects.filter(project => project.tags?.map(kebabCase).includes(tag))
 
   if (isEmpty(postsWithTag) && isEmpty(projectsWithTag)) {
     notFound()
