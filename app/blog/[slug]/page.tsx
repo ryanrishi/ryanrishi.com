@@ -1,7 +1,10 @@
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
+import fs from 'fs'
+import matter from 'gray-matter'
 import kebabCase from 'lodash.kebabcase'
 import type { Metadata } from 'next'
+import path from 'path'
 
 import TagPill from '@/components/tag-pill'
 import { getAllPosts } from '@/lib/posts'
@@ -16,44 +19,49 @@ export async function generateStaticParams () {
   return posts.map((post) => ({ slug: post.slug }))
 }
 
-export async function generateMetadata ({ params }: { params: { slug: string } }): Metadata {
+export async function generateMetadata ({ params }: { params: { slug: string } }): Promise<Metadata> {
   const slug = decodeURIComponent(params.slug)
-  const { metadata } = await import(`@/blog/${slug}.mdx`)
+  const filePath = path.join(process.cwd(), 'app', 'blog', `${slug}.mdx`)
+  const fileContent = fs.readFileSync(filePath, 'utf8')
+  const { data: frontmatter } = matter(fileContent)
 
   return {
-    title: metadata.title,
-    description: metadata.description,
+    title: frontmatter.title,
+    description: frontmatter.description,
     openGraph: {
-      title: metadata.title,
+      title: frontmatter.title,
       type: 'article',
-      publishedTime: metadata.publishedAt,
+      publishedTime: frontmatter.publishedAt,
       authors: 'Ryan Rishi',
       url: `https://ryanrishi.com/blog/${decodeURIComponent(params.slug)}`,
       images: [
-        { url: `https://ryanrishi.com/${metadata.image}` },
+        { url: `https://ryanrishi.com/${frontmatter.image}` },
       ],
-      tags: metadata.tags,
+    tags: frontmatter.tags,
     },
     twitter: {
-      title: metadata.title,
-      images: `https://ryanrishi.com/${metadata.image}`,
+      title: frontmatter.title,
+      images: `https://ryanrishi.com/${frontmatter.image}`,
     },
   }
 }
 
 export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const { default: Post, metadata } = await import(`@/blog/${slug}.mdx`)
+  const { default: Post } = await import(`@/blog/${slug}.mdx`)
+  const filePath = path.join(process.cwd(), 'app', 'blog', `${slug}.mdx`)
+  const fileContent = fs.readFileSync(filePath, 'utf8')
+  const { data: frontmatter } = matter(fileContent)
 
   return (
     <>
-      <h1>{metadata.title}</h1>
-      <p className="-mt-4 text-slate-500">{dayjs.utc(metadata.publishedAt).format('MMMM D, YYYY')}</p>
+      <h1>{frontmatter.title}</h1>
+      <p className="-mt-4 text-slate-500">{dayjs.utc(frontmatter.publishedAt).format('MMMM D, YYYY')}</p>
 
       <Post />
 
       <div className="flex flex-row flex-wrap my-12 gap-4">
-        {metadata.tags.map(tag => (
+        {frontmatter.tags.map(tag => (
           <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>
         ))}
       </div>

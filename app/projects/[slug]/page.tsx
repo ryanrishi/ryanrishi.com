@@ -1,5 +1,8 @@
+import fs from 'fs'
+import matter from 'gray-matter'
 import kebabCase from 'lodash.kebabcase'
 import { Metadata } from 'next'
+import path from 'path'
 
 import TagPill from '@/components/tag-pill'
 import { getAllProjects } from '@/lib/projects'
@@ -15,38 +18,45 @@ export async function generateStaticParams () {
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const slug = decodeURIComponent(params.slug)
-  const { metadata } = await import(`@/projects/${slug}.mdx`)
+  const filePath = path.join(process.cwd(), 'app', 'projects', `${slug}.mdx`)
+  const fileContent = fs.readFileSync(filePath, 'utf8')
+  const { data: frontmatter } = matter(fileContent)
 
   return {
-    title: metadata.name,
-    description: metadata.description,
+    title: frontmatter.name,
+    description: frontmatter.description,
     openGraph: {
-      title: metadata.name,
+      title: frontmatter.name,
       type: 'article',
-      publishedTime: metadata.date,
+      publishedTime: frontmatter.date,
       url: `https://ryanrishi.com/projects/${slug}`,
-      images: [
-        { url: `https://ryanrishi.com${metadata.image.src}` },
-      ],
+      ...(frontmatter.image && {
+        images: [{ url: `https://ryanrishi.com${frontmatter.image.src}` }],
+      }),
     },
     twitter: {
-      title: metadata.name,
-      images: `https://ryanrishi.com${metadata.image.src}`,
+      title: frontmatter.name,
+      ...(frontmatter.image && {
+        images: `https://ryanrishi.com${frontmatter.image.src}`,
+      }),
     },
   }
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const { default: Project, metadata } = await import(`@/projects/${slug}.mdx`)
+  const { default: Project } = await import(`@/projects/${slug}.mdx`)
+  const filePath = path.join(process.cwd(), 'app', 'projects', `${slug}.mdx`)
+  const fileContent = fs.readFileSync(filePath, 'utf8')
+  const { data: frontmatter } = matter(fileContent)
 
   return (
     <div className="prose dark:prose-invert max-w-none">
-      <h1>{metadata.name}</h1>
+      <h1>{frontmatter.name}</h1>
       <Project />
-      {metadata.tags && (
+      {frontmatter.tags && (
         <div className="flex flex-row flex-wrap my-12 gap-4">
-          {metadata.tags.map(tag => (
+          {frontmatter.tags.map(tag => (
             <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>
           ))}
         </div>

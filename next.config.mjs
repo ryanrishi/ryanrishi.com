@@ -3,11 +3,11 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
+import remarkFrontmatter from 'remark-frontmatter'
+import mdxFrontmatter from 'remark-mdx-frontmatter'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable the Rust-based MDX compiler
-  experimental: { mdxRs: true },
   pageExtensions: ['md', 'mdx', 'ts', 'tsx'],
   async redirects() {
     return [
@@ -33,8 +33,12 @@ const withMdx = createMDX({
     rehypePlugins: [
       rehypeSlug,
       [rehypeAutolinkHeadings, { properties: { class: ['anchor'] } } ],
-      [rehypePrettyCode, { theme: 'material-theme' }]],
-    remarkPlugins: [remarkGfm],
+      [rehypePrettyCode, { theme: 'material-theme' }]
+    ],
+    remarkPlugins: [
+      remarkFrontmatter,
+      [mdxFrontmatter, { name: 'frontmatter' }]
+    ],
   },
 })
 

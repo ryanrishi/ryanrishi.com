@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)",
+      "Bash(yarn add:*)",
+      "Bash(yarn build)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(yarn list)"
+    ],
+    "deny": []
+  }
+}
