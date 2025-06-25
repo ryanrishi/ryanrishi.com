@@ -23,9 +23,9 @@ const generatePurgeCssSafelist = () => {
 const config: Config = {
   content: [
     'app/**/*.tsx',
+    'app/**/*.mdx',
     'components/**/*.tsx',
     'layouts/**/*.tsx',
-    'content/**/*.md',
   ],
   safelist: generatePurgeCssSafelist(),
   darkMode: 'class',
