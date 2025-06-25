@@ -36,6 +36,7 @@ const withMdx = createMDX({
       [rehypePrettyCode, { theme: 'material-theme' }]
     ],
     remarkPlugins: [
+      remarkGfm,
       remarkFrontmatter,
       [mdxFrontmatter, { name: 'frontmatter' }]
     ],
