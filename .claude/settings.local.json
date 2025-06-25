@@ -8,7 +8,9 @@
       "Bash(grep:*)",
       "Bash(yarn list)",
       "Bash(yarn info:*)",
-      "Bash(yarn list:*)"
+      "Bash(yarn list:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }
