@@ -50,10 +50,10 @@ html {
 
 .prose table td:only-child,
 .prose table th:only-child {
-  @apply border-0 p-0 text-center;
+  @apply border-0 text-center;
 }
 
 .prose table td p,
 .prose table th p {
-  @apply text-sm italic mt-2 mb-0;
+  @apply text-sm italic;
 }
