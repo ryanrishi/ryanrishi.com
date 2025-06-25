@@ -31,3 +31,23 @@ html {
 .prose *:hover > .anchor {
   @apply visible;
 }
+
+/* Center all images in prose content */
+.prose img {
+  @apply mx-auto;
+}
+
+/* Style tables used for image captions (single row, single column with centered alignment) */
+.prose table {
+  @apply mx-auto;
+}
+
+.prose table td:only-child,
+.prose table th:only-child {
+  @apply border-0 p-0 text-center;
+}
+
+.prose table td p,
+.prose table th p {
+  @apply text-sm italic mt-2 mb-0;
+}
