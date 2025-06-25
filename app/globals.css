@@ -37,6 +37,12 @@ html {
   @apply mx-auto;
 }
 
+/* Ensure SVGs in prose inherit color properly */
+.prose svg {
+  color: inherit;
+}
+
+
 /* Style tables used for image captions (single row, single column with centered alignment) */
 .prose table {
   @apply mx-auto;
