@@ -40,9 +40,16 @@ Cypress.Commands.add('waitForLogoAnimations', () => {
 
 Cypress.Commands.add('waitForImagesLoaded', (options = {}) => {
   const timeout = options.timeout || 30000
-  
+
   cy.waitUntil(() => {
-    return cy.get('img').then($images => {
+    return cy.get('body').then($body => {
+      const $images = $body.find('img')
+      
+      // If no images exist, consider them "loaded"
+      if ($images.length === 0) {
+        return true
+      }
+      
       // Check if all images have loaded
       const allLoaded = Array.from($images).every(img => {
         return img.complete && img.naturalHeight !== 0
@@ -52,6 +59,6 @@ Cypress.Commands.add('waitForImagesLoaded', (options = {}) => {
   }, {
     timeout,
     interval: 500,
-    errorMsg: 'Images did not finish loading within the timeout period'
+    errorMsg: `Images did not finish loading within ${timeout}ms`
   })
 })
