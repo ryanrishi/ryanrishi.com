@@ -1,58 +1,67 @@
-import { allPosts } from 'contentlayer/generated'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
+import fs from 'fs'
+import matter from 'gray-matter'
 import kebabCase from 'lodash.kebabcase'
 import type { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import { useMDXComponent } from 'next-contentlayer/hooks'
+import path from 'path'
 
-import mdxComponents from '@/components/mdx-components'
 import TagPill from '@/components/tag-pill'
+import { getAllPosts } from '@/lib/posts'
 
 dayjs.extend(utc)
 
-export const generateStaticParams = async () => allPosts.map((post) => ({ slug: post.slug }))
+export const dynamicParams = false
 
-export const generateMetadata = ({ params }: { params: { slug: string } }): Metadata => {
-  const post = allPosts.find((post) => post.slug === decodeURIComponent(params.slug))
-  if (!post) throw new Error(`Post not found for slug: ${decodeURIComponent(params.slug)}`)
+export async function generateStaticParams () {
+  const posts = await getAllPosts()
+
+  return posts.map((post) => ({ slug: post.slug }))
+}
+
+export async function generateMetadata ({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const slug = decodeURIComponent(params.slug)
+  const filePath = path.join(process.cwd(), 'app', 'blog', `${slug}.mdx`)
+  const fileContent = fs.readFileSync(filePath, 'utf8')
+  const { data: frontmatter } = matter(fileContent)
 
   return {
-    title: post.title,
-    description: post.description,
+    title: frontmatter.title,
+    description: frontmatter.description,
     openGraph: {
-      title: post.title,
+      title: frontmatter.title,
       type: 'article',
-      publishedTime: post.publishedAt,
+      publishedTime: frontmatter.publishedAt,
       authors: 'Ryan Rishi',
       url: `https://ryanrishi.com/blog/${decodeURIComponent(params.slug)}`,
       images: [
-        { url: `https://ryanrishi.com/${post.image}` },
+        { url: `https://ryanrishi.com/${frontmatter.image}` },
       ],
-      tags: post.tags,
+    tags: frontmatter.tags,
     },
     twitter: {
-      title: post.title,
-      images: `https://ryanrishi.com/${post.image}`,
+      title: frontmatter.title,
+      images: `https://ryanrishi.com/${frontmatter.image}`,
     },
   }
 }
 
-export default function Post({ params }: { params: { slug: string } }) {
-  const post = allPosts.find((post) => post.slug === params.slug)
-  if (!post) notFound()
-
-  const MDXContent = useMDXComponent(post.body.code)
+export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const { default: Post } = await import(`@/blog/${slug}.mdx`)
+  const filePath = path.join(process.cwd(), 'app', 'blog', `${slug}.mdx`)
+  const fileContent = fs.readFileSync(filePath, 'utf8')
+  const { data: frontmatter } = matter(fileContent)
 
   return (
     <>
-      <h1>{post.title}</h1>
-      <p className="-mt-4 text-slate-500">{dayjs.utc(post.publishedAt).format('MMMM D, YYYY')}</p>
+      <h1>{frontmatter.title}</h1>
+      <p className="-mt-4 text-slate-500">{dayjs.utc(frontmatter.publishedAt).format('MMMM D, YYYY')}</p>
 
-      <MDXContent components={mdxComponents} />
+      <Post />
 
       <div className="flex flex-row flex-wrap my-12 gap-4">
-        {post.tags.map(tag => (
+        {frontmatter.tags.map(tag => (
           <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>
         ))}
       </div>

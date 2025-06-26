@@ -1,58 +1,66 @@
-import { allProjects } from 'contentlayer/generated'
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
+import fs from 'fs'
+import matter from 'gray-matter'
 import kebabCase from 'lodash.kebabcase'
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import { useMDXComponent } from 'next-contentlayer/hooks'
+import path from 'path'
 
-import mdxComponents from '@/components/mdx-components'
 import TagPill from '@/components/tag-pill'
+import { getAllProjects } from '@/lib/projects'
 
-dayjs.extend(utc)
 
-export const generateStaticParams = async () => allProjects.map((project) => ({ slug: project.slug }))
+export const dynamicParams = false
 
-export const generateMetadata = ({ params }: { params: { slug: string } }): Metadata => {
-  const project = allProjects.find((project) => project.slug === params.slug)
-  if (!project) throw new Error(`Project not found for slug: ${decodeURIComponent(params.slug)}`)
+export async function generateStaticParams () {
+  const projects = await getAllProjects()
+
+  return projects.map((project) => ({ slug: project.slug }))
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const slug = decodeURIComponent(params.slug)
+  const filePath = path.join(process.cwd(), 'app', 'projects', `${slug}.mdx`)
+  const fileContent = fs.readFileSync(filePath, 'utf8')
+  const { data: frontmatter } = matter(fileContent)
 
   return {
-    title: project.name,
-    description: project.description,
+    title: frontmatter.name,
+    description: frontmatter.description,
     openGraph: {
-      title: project.name,
+      title: frontmatter.name,
       type: 'article',
-      publishedTime: project.date,
-      url: `https://ryanrishi.com/projects/${decodeURIComponent(params.slug)}`,
-      images: [
-        { url: `https://ryanrishi.com/${project.image.src}`},
-      ],
+      publishedTime: frontmatter.date,
+      url: `https://ryanrishi.com/projects/${slug}`,
+      ...(frontmatter.image && {
+        images: [{ url: `https://ryanrishi.com${frontmatter.image.src}` }],
+      }),
     },
     twitter: {
-      title: project.name,
-      images: `https://ryanrishi.com/${project.image.src}`,
+      title: frontmatter.name,
+      ...(frontmatter.image && {
+        images: `https://ryanrishi.com${frontmatter.image.src}`,
+      }),
     },
   }
 }
 
-export default function Project({ params }: { params: { slug: string } }) {
-  const project = allProjects.find((project) => project.slug === params.slug)
-  if (!project) notFound()
-
-  const MDXContent = useMDXComponent(project.body.code)
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const { default: Project } = await import(`@/projects/${slug}.mdx`)
+  const filePath = path.join(process.cwd(), 'app', 'projects', `${slug}.mdx`)
+  const fileContent = fs.readFileSync(filePath, 'utf8')
+  const { data: frontmatter } = matter(fileContent)
 
   return (
-    <>
-      <h1>{project.name}</h1>
-      <MDXContent components={mdxComponents} />
-      {project.tags && (
+    <div className="prose dark:prose-invert max-w-none">
+      <h1>{frontmatter.name}</h1>
+      <Project />
+      {frontmatter.tags && (
         <div className="flex flex-row flex-wrap my-12 gap-4">
-          {project.tags.map(tag => (
+          {frontmatter.tags.map(tag => (
             <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>
           ))}
         </div>
       )}
-    </>
+    </div>
   )
 }

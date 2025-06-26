@@ -1,11 +1,10 @@
-import { allPosts } from 'contentlayer/generated'
-import { compareDesc } from 'date-fns'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { Metadata } from 'next'
 import Link from 'next/link'
 
 import { FancyH1 } from '@/components/headings'
+import { getAllPosts } from '@/lib/posts'
 
 dayjs.extend(utc)
 
@@ -19,8 +18,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function BlogIndex() {
-  const posts = allPosts.sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)))
+export default async function BlogIndex() {
+  const posts = await getAllPosts()
 
   return (
     <>

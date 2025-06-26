@@ -9,9 +9,6 @@
     ],
     "paths": {
       "@/*": ["./app/*"],
-      "contentlayer/generated": [
-        "./.contentlayer/generated"
-      ]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -36,7 +33,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".contentlayer/generated",
     ".next/types/**/*.ts"
   ],
   "exclude": [

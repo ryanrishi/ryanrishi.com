@@ -1,8 +1,9 @@
-import { allPosts, allProjects } from 'contentlayer/generated'
 import kebabCase from 'lodash.kebabcase'
 import type { Metadata } from 'next'
 
 import TagPill from '@/components/tag-pill'
+import { getAllPosts } from '@/lib/posts'
+import { getAllProjects } from '@/lib/projects'
 
 export const metadata: Metadata = {
   title: 'Tags',
@@ -14,10 +15,15 @@ export const metadata: Metadata = {
   },
 }
 
-export default function TagsIndex() {
+export default async function TagsIndex() {
+  const [posts, projects] = await Promise.all([
+    getAllPosts(),
+    getAllProjects(),
+  ])
+
   const tags = new Set([
-    ...allPosts.flatMap(post => post.tags),
-    ...allProjects.flatMap(project => project.tags),
+    ...posts.flatMap(post => post.tags),
+    ...projects.flatMap(project => project.tags),
   ])
 
   return (
