@@ -21,7 +21,8 @@ describe('Projects', () => {
       }
     })
     // Use custom command to wait for all images to load reliably
-    cy.waitForImagesLoaded({ timeout: 30000 })
+    // Projects page has many large images, so use longer timeout
+    cy.waitForImagesLoaded({ timeout: 60000 })
     cy.percySnapshot('Projects')
   })
 
