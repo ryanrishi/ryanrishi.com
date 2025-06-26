@@ -45,21 +45,27 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }) {
+  const isTestEnvironment = process.env.NEXT_PUBLIC_VERCEL_ENV === 'test'
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
-        <Script id="google-analytics">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+        {!isTestEnvironment && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
+            <Script id="google-analytics">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
 
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
-              page_path: window.location.pathname,
-            });
-          `}
-        </Script>
+                gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+                  page_path: window.location.pathname,
+                });
+              `}
+            </Script>
+          </>
+        )}
       </head>
       <body>
         <Providers>
@@ -71,7 +77,7 @@ export default function RootLayout({ children }) {
           <Footer />
         </div>
         </Providers>
-        <Analytics />
+        {!isTestEnvironment && <Analytics />}
       </body>
     </html>
   )

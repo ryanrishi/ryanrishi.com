@@ -32,6 +32,10 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000, // 1 year
   },
+  env: {
+    // Disable analytics in test environment to prevent network requests
+    NEXT_PUBLIC_VERCEL_ENV: process.env.CYPRESS ? 'test' : process.env.NEXT_PUBLIC_VERCEL_ENV,
+  },
 }
 
 const withMdx = createMDX({

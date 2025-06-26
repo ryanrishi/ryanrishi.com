@@ -1,0 +1,5 @@
+version: 2
+discovery:
+  network-idle-timeout: 60000  # Increase from default 30s to 60s
+  request-headers:
+    User-Agent: "Percy-Cypress"
