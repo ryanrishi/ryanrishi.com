@@ -21,7 +21,7 @@ describe('Home', () => {
     ['Ryan Rishi', 'Blog', 'Projects'].forEach((sectionTitle) => {
       cy.get('h1').contains(sectionTitle).scrollIntoView()
     })
-    
+
     // Take a single snapshot of the entire page after all content is loaded
     cy.scrollTo('top')
     cy.percySnapshot('Home')
