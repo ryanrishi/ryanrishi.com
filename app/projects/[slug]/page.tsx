@@ -16,9 +16,10 @@ export async function generateStaticParams () {
   return projects.map((project) => ({ slug: project.slug }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const slug = decodeURIComponent(params.slug)
-  const filePath = path.join(process.cwd(), 'app', 'projects', `${slug}.mdx`)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const decodedSlug = decodeURIComponent(slug)
+  const filePath = path.join(process.cwd(), 'app', 'projects', `${decodedSlug}.mdx`)
   const fileContent = fs.readFileSync(filePath, 'utf8')
   const { data: frontmatter } = matter(fileContent)
 
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: frontmatter.name,
       type: 'article',
       publishedTime: frontmatter.date,
-      url: `https://ryanrishi.com/projects/${slug}`,
+      url: `https://ryanrishi.com/projects/${decodedSlug}`,
       ...(frontmatter.image && {
         images: [{ url: `https://ryanrishi.com${frontmatter.image.src}` }],
       }),

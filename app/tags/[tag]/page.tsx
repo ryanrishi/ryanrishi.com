@@ -13,14 +13,16 @@ export async function generateStaticParams() {
     getAllProjects(),
   ])
 
-  return Array.from(new Set([
-  ...posts.flatMap(post => post.tags),
-  ...projects.flatMap(project => project.tags),
-]))
+  const allTags = Array.from(new Set([
+    ...posts.flatMap(post => post.tags),
+    ...projects.flatMap(project => project.tags),
+  ]))
+
+  return allTags.map(tag => ({ tag: kebabCase(tag) }))
 }
 
-export const generateMetadata = ({ params }: { params: { tag: string } }): Metadata => {
-  const { tag } = params
+export const generateMetadata = async ({ params }: { params: Promise<{ tag: string }> }): Promise<Metadata> => {
+  const { tag } = await params
 
   return {
     title: tag,
