@@ -27,9 +27,6 @@ describe('Projects', () => {
   })
 
   it('each project', () => {
-    // Projects with unique layouts that need visual testing
-    const projectsToSnapshot = ['Loudness Wars', 'COVID-19 Dashboard', 'Homelab']
-    
     // see https://stackoverflow.com/a/61130646/5699147
     cy.get('li').then((projects) => {
       for (let i = 0; i < projects.length; i++) {
@@ -39,14 +36,11 @@ describe('Projects', () => {
         cy.get('h1').scrollIntoView()
         cy.get('h1').first().then(($title) => {
           const title = $title.text()
-          
+
           // Wait for images to load reliably
           cy.waitForImagesLoaded({ timeout: 30000 })
-          
-          // Only snapshot projects with unique layouts
-          if (projectsToSnapshot.includes(title)) {
-            cy.percySnapshot(title)
-          }
+
+          cy.percySnapshot(title)
         })
         cy.go('back')
         cy.title().should('include', 'Projects') // wait for router to finish transition to projects index
