@@ -17,10 +17,14 @@ describe('Home', () => {
   })
 
   it('renders the home page', () => {
+    // Scroll through all sections to ensure they're loaded
     ['Ryan Rishi', 'Blog', 'Projects'].forEach((sectionTitle) => {
       cy.get('h1').contains(sectionTitle).scrollIntoView()
-      cy.percySnapshot(`Home - ${sectionTitle}`)
     })
+
+    // Take a single snapshot of the entire page after all content is loaded
+    cy.scrollTo('top')
+    cy.percySnapshot('Home')
   })
 
   it('navigates to each blog post', () => {

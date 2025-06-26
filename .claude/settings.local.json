@@ -10,7 +10,9 @@
       "Bash(yarn info:*)",
       "Bash(yarn list:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(ls:*)",
+      "Bash(git checkout:*)"
     ],
     "deny": []
   }
