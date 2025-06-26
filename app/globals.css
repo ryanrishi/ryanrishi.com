@@ -32,8 +32,9 @@ html {
   @apply visible;
 }
 
-/* Center all images in prose content */
-.prose img {
+/* Center all images and SVGs in prose content */
+.prose img,
+.prose svg {
   @apply mx-auto;
 }
 
