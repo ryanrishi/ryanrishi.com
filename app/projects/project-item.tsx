@@ -13,6 +13,9 @@ export default function ProjectItem({ project }) {
               alt={project.image.alt}
               width={project.image.width}
               height={project.image.height}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              quality={80}
+              priority={false}
             />
           </div>
         )}
