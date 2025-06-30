@@ -42,7 +42,7 @@
     "unified": "^11.0.5"
   },
   "devDependencies": {
-    "@percy/cli": "^1.30.10",
+    "@percy/cli": "^1.31.0",
     "@percy/cypress": "^3.1.4",
     "@types/d3": "^7.1.0",
     "@types/gtag.js": "0.0.20",
