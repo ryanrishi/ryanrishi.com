@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* Safelist dynamic classes used in Callout component */
 @source inline("text-{green,blue,yellow,red}-800");
