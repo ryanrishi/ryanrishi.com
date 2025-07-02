@@ -824,10 +824,10 @@
     postcss "^8.4.41"
     tailwindcss "4.1.11"
 
-"@tailwindcss/typography@^0.5.10":
-  version "0.5.10"
-  resolved "https://registry.npmjs.org/@tailwindcss/typography/-/typography-0.5.10.tgz"
-  integrity sha512-Pe8BuPJQJd3FfRnm6H0ulKIGoMEQS+Vq01R6M5aCrFB/ccR/shT+0kXLjouGC1gFLm9hopTFN+DMP0pfwRWzPw==
+"@tailwindcss/typography@0.0.0-insiders.fda8ce5":
+  version "0.0.0-insiders.fda8ce5"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/typography/-/typography-0.0.0-insiders.fda8ce5.tgz#940655b593fa081bf6398fbe8fa35af6c218c867"
+  integrity sha512-PrMc/Wv0p68M/bIYdX2anxtTBx7f5NHIBH0ljmtHxTHEXDxc+fO2qLzWzUUn7L9mSSA3+u8gB/jLmbfnFqavlQ==
   dependencies:
     lodash.castarray "^4.4.0"
     lodash.isplainobject "^4.0.6"
