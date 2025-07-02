@@ -1,33 +1,13 @@
-// Using any since Tailwind v4 config types have changed
+import type { Config } from 'tailwindcss'
 import colors from 'tailwindcss/colors'
 
-const generatePurgeCssSafelist = () => {
-  // keep these in sync with styles in components/callout.js
-  const calloutColors = ['green', 'blue', 'yellow', 'red']
-  const safelistColors = ['slate', ...calloutColors]
-
-  const textStyles = safelistColors.map(color => `text-${color}-800`)
-  const backgroundStyles = safelistColors.map(color => `bg-${color}-100`)
-  const borderStyles = safelistColors.map(color => `border-${color}-800`)
-
-  const darkModeBackgroundStyles = safelistColors.map(color => `dark:bg-${color}-800`)
-  const darkModeTextStyles = [
-    ...safelistColors.map(color => `dark:text-${color}-600`),
-    ...safelistColors.map(color => `dark:text-${color}-50`),
-  ]
-  const darkModeBorderStyles = safelistColors.map(color => `dark:border-${color}-300`)
-
-  return [...textStyles, ...borderStyles, ...backgroundStyles, ...darkModeBackgroundStyles, ...darkModeTextStyles, ...darkModeBorderStyles]
-}
-
-const config: any = {
+const config: Config = {
   content: [
     'app/**/*.tsx',
     'app/**/*.mdx',
     'components/**/*.tsx',
     'layouts/**/*.tsx',
   ],
-  safelist: generatePurgeCssSafelist(),
   darkMode: 'class',
   theme: {
     container: {
@@ -51,9 +31,6 @@ const config: any = {
         },
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [
     require('@tailwindcss/typography'),
