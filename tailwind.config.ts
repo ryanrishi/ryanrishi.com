@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+// Using any since Tailwind v4 config types have changed
 import colors from 'tailwindcss/colors'
 
 const generatePurgeCssSafelist = () => {
@@ -20,7 +20,7 @@ const generatePurgeCssSafelist = () => {
   return [...textStyles, ...borderStyles, ...backgroundStyles, ...darkModeBackgroundStyles, ...darkModeTextStyles, ...darkModeBorderStyles]
 }
 
-const config: Config = {
+const config: any = {
   content: [
     'app/**/*.tsx',
     'app/**/*.mdx',

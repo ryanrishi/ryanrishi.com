@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* keep these bg-* and dark:bg-* in sync with app/layout.tsx */
 
 body {
