@@ -64,7 +64,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <div className="bg-slate-50 dark:bg-slate-800 dark:text-slate-400">
             <Header />
-            <div className="container max-w-4xl p-4">
+            <div className="container mx-auto max-w-4xl p-4">
               {children}
             </div>
           <Footer />
