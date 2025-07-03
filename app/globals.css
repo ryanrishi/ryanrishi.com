@@ -1,13 +1,15 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+@variant dark (.dark &);
 
-/* Safelist dynamic classes used in Callout component */
+/* Safelist only for dynamic classes (eg. Callout component) */
 @source inline("text-{green,blue,yellow,red}-800");
 @source inline("bg-{green,blue,yellow,red}-100");
 @source inline("border-{green,blue,yellow,red}-800");
 @source inline("dark:bg-{green,blue,yellow,red}-800");
 @source inline("dark:text-{green,blue,yellow,red}-50");
 @source inline("dark:border-{green,blue,yellow,red}-300");
+
 
 /* keep these bg-* and dark:bg-* in sync with app/layout.tsx */
 
