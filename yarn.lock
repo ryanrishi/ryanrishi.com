@@ -360,10 +360,10 @@
   dependencies:
     fast-glob "3.3.1"
 
-"@next/mdx@^15.3.4":
-  version "15.3.4"
-  resolved "https://registry.yarnpkg.com/@next/mdx/-/mdx-15.3.4.tgz#1254e37396a5fefec9559be800b787dc1bcb1f00"
-  integrity sha512-Ok4Laq+Yxxu0hPefpE7Yi19dj8BBTIw9/Kf0fbRByn2sYF1cAINFG1EcfcZUy6tZ5ctB8jEtjzixUsKXvFuRXA==
+"@next/mdx@^15.3.5":
+  version "15.3.5"
+  resolved "https://registry.yarnpkg.com/@next/mdx/-/mdx-15.3.5.tgz#580fdec4a99b5891b4c2bc4a35a58757be3c6014"
+  integrity sha512-/2rRCgPKNp2ttQscU13auI+cYYACdPa80Okgi/1+NNJJeWn9yVxwGnqZc3SX30T889bZbLqcY4oUjqYGAygL4g==
   dependencies:
     source-map "^0.7.0"
 
