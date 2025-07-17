@@ -8,7 +8,7 @@ describe('Mobile Navigation', () => {
     })
 
     cy.visit('/')
-    cy.viewport('iphone-13') // Mobile viewport to ensure mobile nav is visible
+    cy.viewport('iphone-x') // Mobile viewport to ensure mobile nav is visible
   })
 
   it('displays hamburger menu on mobile', () => {
@@ -137,13 +137,13 @@ describe('Mobile Navigation', () => {
 
   it('works across different mobile viewport sizes', () => {
     const viewports = [
-      { width: 375, height: 812, name: 'iPhone 13/14/15' },
-      { width: 428, height: 926, name: 'iPhone 14 Pro Max' },
-      { width: 393, height: 851, name: 'Pixel 7' }
+      'iphone-x',
+      'iphone-xr', 
+      'samsung-s10'
     ]
 
-    viewports.forEach(({ width, height, name }) => {
-      cy.viewport(width, height)
+    viewports.forEach((viewport) => {
+      cy.viewport(viewport)
 
       // Reload page to ensure clean state for new viewport
       cy.reload()
@@ -160,7 +160,7 @@ describe('Mobile Navigation', () => {
       cy.get('[aria-label="YouTube"]').should('be.visible')
 
       // Take Percy screenshot for this viewport
-      cy.percySnapshot(`Mobile Nav - ${name}`)
+      cy.percySnapshot(`Mobile Nav - ${viewport}`)
 
       // Close menu
       cy.get('[data-testid="hamburger-menu"]').click()
