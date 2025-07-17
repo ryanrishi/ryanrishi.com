@@ -151,7 +151,7 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-slate-900/20 backdrop-blur-md z-40"
+              className="fixed inset-0 bg-slate-900/20 backdrop-blur-md z-30"
               data-testid="mobile-nav-backdrop"
               onClick={() => {
                 setIsExiting(true)
@@ -171,7 +171,7 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
                 bounce: 0.2,
                 duration: 0.6,
               }}
-              className="fixed top-0 right-0 h-full w-full bg-gradient-to-br from-slate-800 to-slate-900 dark:from-slate-900 dark:to-black z-40 flex flex-col justify-center items-center px-8 text-white"
+              className="fixed top-0 right-0 h-full w-full bg-gradient-to-br from-slate-800 to-slate-900 dark:from-slate-900 dark:to-black z-30 flex flex-col justify-center items-center px-8 text-white"
             >
               {/* Main Navigation */}
               <motion.ul

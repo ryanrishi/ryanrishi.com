@@ -48,7 +48,7 @@ describe('Mobile Navigation', () => {
     cy.get('[data-testid="hamburger-menu"]').click()
     cy.get('[role="dialog"]').should('be.visible')
 
-    // Close mobile nav immediately
+    // Close mobile nav
     cy.get('[data-testid="hamburger-menu"]').click()
 
     // Wait for mobile nav to close
