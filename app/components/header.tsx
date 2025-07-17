@@ -15,6 +15,7 @@ import { useDisableBodyScroll } from '@/hooks'
 import Logo from './logo'
 
 const items = [
+  { title: 'Home', href: '/' },
   { title: 'Music', href: '/music' },
   { title: 'Projects', href: '/projects' },
   { title: 'Blog', href: '/blog' },
@@ -50,12 +51,78 @@ const HeaderLink = ({ className = '', href, children }) => (
   </Link>
 )
 
+function MobileNavItem({ item, index, isExiting, pathname }: { 
+  item: { title: string; href: string }, 
+  index: number, 
+  isExiting: boolean,
+  pathname: string 
+}) {
+  const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+  
+  return (
+    <motion.li
+      variants={{
+        open: {
+          x: 0,
+          opacity: 1,
+          transition: {
+            type: 'spring',
+            bounce: 0.3,
+            duration: 0.6,
+            delay: index * 0.1,
+          },
+        },
+        closed: {
+          x: isExiting ? 100 : -100,
+          opacity: 0,
+          transition: {
+            type: 'spring',
+            bounce: 0.3,
+            duration: 0.4,
+            delay: isExiting ? (3 - index) * 0.08 : 0,
+          },
+        },
+      }}
+      initial="closed"
+      animate="open"
+      exit="closed"
+      className="overflow-visible"
+    >
+      <Link 
+        href={item.href}
+        className={`block text-5xl font-bold tracking-tight leading-tight transition-all duration-200 ${
+          isActive 
+            ? 'text-white' 
+            : 'text-slate-100 hover:text-white'
+        }`}
+      >
+        {item.title}
+      </Link>
+    </motion.li>
+  )
+}
+
 function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }) {
   const pathname = usePathname()
+  const [isExiting, setIsExiting] = useState(false)
+  const [previousPathname, setPreviousPathname] = useState(pathname)
 
   useEffect(() => {
-    setIsOpen(false)
-  }, [pathname, setIsOpen])
+    if (isOpen) {
+      setIsExiting(false)
+      setPreviousPathname(pathname)
+    }
+  }, [isOpen, pathname])
+
+  useEffect(() => {
+    // Only close if pathname actually changed while menu was open
+    if (pathname !== previousPathname && isOpen) {
+      setIsExiting(true)
+      setTimeout(() => {
+        setIsOpen(false)
+      }, 200)
+    }
+  }, [pathname, previousPathname, isOpen, setIsOpen])
 
   return (
     <>
@@ -64,132 +131,103 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
           <Logo width={100 / 3} />
           <HeaderLink href="/">Ryan Rishi</HeaderLink>
         </div>
-        <div className="z-40 flex flex-row items-center">
+        <div className="z-50 flex flex-row items-center gap-2">
           <DarkModeButton />
-
-          {/* TODO put this on <Hamburger> but it's not picking up class name */}
-          {/* check back when hamburger-react v3 is released: https://github.com/luukdv/hamburger-react/issues/45#issuecomment-902639087 */}
-          <Hamburger
-            toggled={isOpen}
-            toggle={setIsOpen}
-          />
+          <div data-testid="hamburger-menu">
+            <Hamburger
+              toggled={isOpen}
+              toggle={setIsOpen}
+              size={20}
+            />
+          </div>
         </div>
       </div>
 
       <AnimatePresence>
         {isOpen && (
-          <MotionConfig
-            transition={{
-              type: 'spring',
-              bounce: 0.1,
-            }}
-          >
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-slate-900/20 backdrop-blur-md z-40"
+              onClick={() => {
+                setIsExiting(true)
+                setTimeout(() => setIsOpen(false), 200)
+              }}
+            />
+            
+            {/* Menu Panel */}
             <motion.div
               role="dialog"
-              variants={{
-                open: {
-                  x: '0%',
-                  transition: {
-                    type: 'spring',
-                    bounce: 0.1,
-                    staggerChildren: 0.25,
-                    when: 'beforeChildren',
-                  },
-                },
-                closed: {
-                  x: '100%',
-                  transition: {
-                    type: 'spring',
-                    bounce: 0.1,
-                    staggerChildren: 0.25,
-                    when: 'afterChildren',
-                  },
-                },
+              aria-modal="true"
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{
+                type: 'spring',
+                bounce: 0.2,
+                duration: 0.6,
               }}
-              initial="closed"
-              animate="open"
-              exit="closed"
-              className="fixed inset-0 bg-blue-600 mx-auto p-6 space-y-10 flex flex-col justify-center">
-              <motion.div
-                variants={{
-                  open: {
-                    y: '0%',
-                    opacity: 1,
-                  },
-                  closed: {
-                    y: '25%',
-                    opacity: 0,
-                  },
-                }}
+              className="fixed top-0 right-0 h-full w-full bg-gradient-to-br from-slate-800 to-slate-900 dark:from-slate-900 dark:to-black z-40 flex flex-col justify-center items-center px-8 text-white"
+            >
+              {/* Main Navigation */}
+              <motion.ul 
+                className="space-y-6 mb-16"
+                initial={false}
+                animate={isOpen ? 'open' : 'closed'}
               >
-                <motion.ul className="space-y-5">
-                  {items.map((item) => (
-                    <li
-                      key={item.href}
-                      className="text-4xl"
-                    >
-                      <Link href={item.href}>{item.title}</Link>
-                    </li>
-                  ))}
-                </motion.ul>
-              </motion.div>
-
-              <motion.div
-                variants={{
-                  open: {
-                    y: '0%',
-                    opacity: 1,
-                  },
-                  closed: {
-                    y: '25%',
-                    opacity: 0,
-                  },
-                }}
-                className="w-full h-px bg-slate-900/30 dark:bg-white/30"
-              >
-              </motion.div>
-
-              <motion.ul
-                variants={{
-                  open: {
-                    y: '0%',
-                    opacity: 1,
-                  },
-                  closed: {
-                    y: '25%',
-                    opacity: 0,
-                  },
-                }}
-                className="flex items-center gap-x-4 text-2xl"
-              >
-                <li>
-                  <Link href="https://github.com/ryanrishi">
-                    <ImGithub />
-                  </Link>
-                </li>
-                <li>
-                  <Link href="https://twitter.com/ryanrishi">
-                    <ImTwitter />
-                  </Link>
-                </li>
-                <li>
-                  <Link href="https://linkedin.com/in/ryanrishi">
-                    <ImLinkedin />
-                  </Link>
-                </li>
-                <li>
-                  <Link href="https://soundcloud.com/ryanrishi">
-                    <ImSoundcloud />
-                  </Link>
-                </li>
-                <li>
-                  <Link href="https://youtube.com/RyanRishiPercussion">
-                    <ImYoutube />
-                  </Link>
-                </li>
+                {items.map((item, index) => (
+                  <MobileNavItem
+                    key={item.href}
+                    item={item}
+                    index={index}
+                    isExiting={isExiting}
+                    pathname={pathname}
+                  />
+                ))}
               </motion.ul>
+
+              {/* Divider */}
+              <motion.div
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                exit={{ scaleX: 0, opacity: 0 }}
+                transition={{ delay: 0.6, duration: 0.4 }}
+                className="w-24 h-px bg-slate-400 dark:bg-slate-600 mb-12"
+              />
+
+              {/* Social Links */}
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: 20, opacity: 0 }}
+                transition={{ delay: 0.8, duration: 0.4 }}
+                className="flex items-center gap-x-6 text-2xl text-slate-300 dark:text-slate-400"
+              >
+                {[
+                  { href: 'https://github.com/ryanrishi', icon: ImGithub, label: 'GitHub' },
+                  { href: 'https://twitter.com/ryanrishi', icon: ImTwitter, label: 'Twitter' },
+                  { href: 'https://linkedin.com/in/ryanrishi', icon: ImLinkedin, label: 'LinkedIn' },
+                  { href: 'https://soundcloud.com/ryanrishi', icon: ImSoundcloud, label: 'SoundCloud' },
+                  { href: 'https://youtube.com/RyanRishiPercussion', icon: ImYoutube, label: 'YouTube' },
+                ].map(({ href, icon: Icon, label }) => (
+                  <motion.a
+                    key={href}
+                    href={href}
+                    aria-label={label}
+                    className="hover:text-slate-100 dark:hover:text-slate-200 transition-colors duration-200 hover:scale-110"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Icon />
+                  </motion.a>
+                ))}
+              </motion.div>
             </motion.div>
-          </MotionConfig>
+          </>
         )}
       </AnimatePresence>
     </>
