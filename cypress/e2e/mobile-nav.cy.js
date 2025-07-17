@@ -12,13 +12,13 @@ describe('Mobile Navigation', () => {
   it('opens mobile nav when hamburger is clicked', () => {
     // Initially mobile nav should be closed
     cy.get('[role="dialog"]').should('not.exist')
-    
+
     // Click hamburger menu
     cy.get('[data-testid="hamburger-menu"]').click()
-    
+
     // Mobile nav should be open
     cy.get('[role="dialog"]').should('be.visible')
-    
+
     // Check that all nav items are present
     cy.get('[role="dialog"]').within(() => {
       cy.contains('Home').should('be.visible')
@@ -27,10 +27,10 @@ describe('Mobile Navigation', () => {
       cy.contains('Blog').should('be.visible')
       cy.contains('Contact').should('be.visible')
     })
-    
+
     // Wait for last social link to be visible (ensures all animations complete)
     cy.get('[aria-label="YouTube"]').should('be.visible')
-    
+
     // Take Percy screenshot of open mobile nav
     cy.percySnapshot('Mobile Nav - Open')
   })
@@ -39,10 +39,10 @@ describe('Mobile Navigation', () => {
     // Open mobile nav
     cy.get('[data-testid="hamburger-menu"]').click()
     cy.get('[role="dialog"]').should('be.visible')
-    
+
     // Close mobile nav
     cy.get('[data-testid="hamburger-menu"]').click()
-    
+
     // Wait for mobile nav to close
     cy.get('[role="dialog"]').should('not.exist')
   })
@@ -51,10 +51,10 @@ describe('Mobile Navigation', () => {
     // Open mobile nav
     cy.get('[data-testid="hamburger-menu"]').click()
     cy.get('[role="dialog"]').should('be.visible')
-    
+
     // Click backdrop
     cy.get('[data-testid="mobile-nav-backdrop"]').click()
-    
+
     // Wait for mobile nav to close
     cy.get('[role="dialog"]').should('not.exist')
   })
@@ -63,14 +63,14 @@ describe('Mobile Navigation', () => {
     // Open mobile nav
     cy.get('[data-testid="hamburger-menu"]').click()
     cy.get('[role="dialog"]').should('be.visible')
-    
+
     // Click on Projects link
     cy.get('[role="dialog"]').contains('Projects').click()
-    
+
     // Should be on projects page
     cy.url().should('include', '/projects')
     cy.get('h1').should('contain', 'Projects')
-    
+
     // Mobile nav should be closed
     cy.get('[role="dialog"]').should('not.exist')
   })
@@ -78,21 +78,21 @@ describe('Mobile Navigation', () => {
   it('highlights active page in mobile nav', () => {
     // Go to blog page first
     cy.visit('/blog')
-    
+
     // Open mobile nav
     cy.get('[data-testid="hamburger-menu"]').click()
     cy.get('[role="dialog"]').should('be.visible')
-    
+
     // Blog link should be highlighted (white text)
     cy.get('[role="dialog"]').contains('Blog').should('have.class', 'text-white')
-    
+
     // Other links should not be highlighted
     cy.get('[role="dialog"]').contains('Home').should('have.class', 'text-slate-100')
     cy.get('[role="dialog"]').contains('Projects').should('have.class', 'text-slate-100')
-    
+
     // Wait for last social link to be visible (ensures all animations complete)
     cy.get('[aria-label="YouTube"]').should('be.visible')
-    
+
     // Take Percy screenshot of active state
     cy.percySnapshot('Mobile Nav - Active State (Blog)')
   })
@@ -101,7 +101,7 @@ describe('Mobile Navigation', () => {
     // Open mobile nav
     cy.get('[data-testid="hamburger-menu"]').click()
     cy.get('[role="dialog"]').should('be.visible')
-    
+
     // Check social links are present
     cy.get('[role="dialog"]').within(() => {
       cy.get('[aria-label="GitHub"]').should('be.visible')
@@ -115,10 +115,10 @@ describe('Mobile Navigation', () => {
   it('has proper accessibility attributes', () => {
     // Open mobile nav
     cy.get('[data-testid="hamburger-menu"]').click()
-    
+
     // Check accessibility attributes
     cy.get('[role="dialog"]').should('have.attr', 'aria-modal', 'true')
-    
+
     // Check social links have proper labels
     cy.get('[aria-label="GitHub"]').should('exist')
     cy.get('[aria-label="Twitter"]').should('exist')
@@ -136,24 +136,24 @@ describe('Mobile Navigation', () => {
 
     viewports.forEach(({ width, height, name }) => {
       cy.viewport(width, height)
-      
+
       // Reload page to ensure clean state for new viewport
       cy.reload()
-      
+
       // Wait for page to be ready and hamburger menu to be properly positioned
       cy.get('[data-testid="hamburger-menu"]').should('be.visible')
       cy.get('[data-testid="hamburger-menu"]').should('not.be.disabled')
-      
+
       // Test basic functionality
       cy.get('[data-testid="hamburger-menu"]').click()
       cy.get('[role="dialog"]').should('be.visible')
-      
+
       // Wait for last social link to be visible (ensures all animations complete)
       cy.get('[aria-label="YouTube"]').should('be.visible')
-      
+
       // Take Percy screenshot for this viewport
       cy.percySnapshot(`Mobile Nav - ${name}`)
-      
+
       // Close menu
       cy.get('[data-testid="hamburger-menu"]').click()
       cy.get('[role="dialog"]').should('not.exist')
