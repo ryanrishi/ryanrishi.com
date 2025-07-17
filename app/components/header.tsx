@@ -14,7 +14,14 @@ import { useDisableBodyScroll } from '@/hooks'
 
 import Logo from './logo'
 
-const items = [
+const desktopItems = [
+  { title: 'Music', href: '/music' },
+  { title: 'Projects', href: '/projects' },
+  { title: 'Blog', href: '/blog' },
+  { title: 'Contact', href: '/contact' },
+]
+
+const mobileItems = [
   { title: 'Home', href: '/' },
   { title: 'Music', href: '/music' },
   { title: 'Projects', href: '/projects' },
@@ -180,7 +187,7 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
                 initial={false}
                 animate={isOpen ? 'open' : 'closed'}
               >
-                {items.map((item, index) => (
+                {mobileItems.map((item, index) => (
                   <MobileNavItem
                     key={item.href}
                     item={item}
@@ -262,7 +269,7 @@ export default function Header() {
           <HeaderLink href="/" className="ml-4">Ryan Rishi</HeaderLink>
         </div>
         <div className="flex flex-row items-center">
-          {items.map(({ title, href }) => (
+          {desktopItems.map(({ title, href }) => (
             <HeaderLink
               key={href}
               href={href}
