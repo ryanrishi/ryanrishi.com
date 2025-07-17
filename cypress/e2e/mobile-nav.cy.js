@@ -8,7 +8,7 @@ describe('Mobile Navigation', () => {
     })
 
     cy.visit('/')
-    cy.viewport('iphone-6') // Mobile viewport to ensure mobile nav is visible
+    cy.viewport('iphone-13') // Mobile viewport to ensure mobile nav is visible
   })
 
   it('displays hamburger menu on mobile', () => {
@@ -137,9 +137,9 @@ describe('Mobile Navigation', () => {
 
   it('works across different mobile viewport sizes', () => {
     const viewports = [
-      { width: 375, height: 667, name: 'iPhone 6/7/8' },
-      { width: 414, height: 896, name: 'iPhone XR' },
-      { width: 360, height: 640, name: 'Android' }
+      { width: 375, height: 812, name: 'iPhone 13/14/15' },
+      { width: 428, height: 926, name: 'iPhone 14 Pro Max' },
+      { width: 393, height: 851, name: 'Pixel 7' }
     ]
 
     viewports.forEach(({ width, height, name }) => {
