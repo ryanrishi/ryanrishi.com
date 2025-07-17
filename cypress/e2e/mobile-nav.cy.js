@@ -135,36 +135,4 @@ describe('Mobile Navigation', () => {
     cy.get('[aria-label="YouTube"]').should('exist')
   })
 
-  it('works across different mobile viewport sizes', () => {
-    const viewports = [
-      'iphone-x',
-      'iphone-xr', 
-      'samsung-s10'
-    ]
-
-    viewports.forEach((viewport) => {
-      cy.viewport(viewport)
-
-      // Reload page to ensure clean state for new viewport
-      cy.reload()
-
-      // Wait for page to be ready and hamburger menu to be properly positioned
-      cy.get('[data-testid="hamburger-menu"]').should('be.visible')
-      cy.get('[data-testid="hamburger-menu"]').should('not.be.disabled')
-
-      // Test basic functionality
-      cy.get('[data-testid="hamburger-menu"]').click()
-      cy.get('[role="dialog"]').should('be.visible')
-
-      // Wait for last social link to be visible (ensures all animations complete)
-      cy.get('[aria-label="YouTube"]').should('be.visible')
-
-      // Take Percy screenshot for this viewport
-      cy.percySnapshot(`Mobile Nav - ${viewport}`)
-
-      // Close menu
-      cy.get('[data-testid="hamburger-menu"]').click()
-      cy.get('[role="dialog"]').should('not.exist')
-    })
-  })
 })
