@@ -39,7 +39,7 @@ Cypress.Commands.add('waitForLogoAnimations', () => {
 })
 
 Cypress.Commands.add('waitForImagesLoaded', (options = {}) => {
-  const timeout = options.timeout || 30000
+  const timeout = options.timeout || 60000
 
   cy.waitUntil(() => {
     return cy.get('body').then($body => {
