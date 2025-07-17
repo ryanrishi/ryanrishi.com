@@ -1,6 +1,6 @@
 'use client'
 
-import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Squash as Hamburger } from 'hamburger-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -51,14 +51,14 @@ const HeaderLink = ({ className = '', href, children }) => (
   </Link>
 )
 
-function MobileNavItem({ item, index, isExiting, pathname }: { 
-  item: { title: string; href: string }, 
-  index: number, 
+function MobileNavItem({ item, index, isExiting, pathname }: {
+  item: { title: string; href: string },
+  index: number,
   isExiting: boolean,
-  pathname: string 
+  pathname: string
 }) {
   const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
-  
+
   return (
     <motion.li
       variants={{
@@ -88,11 +88,11 @@ function MobileNavItem({ item, index, isExiting, pathname }: {
       exit="closed"
       className="overflow-visible"
     >
-      <Link 
+      <Link
         href={item.href}
         className={`block text-5xl font-bold tracking-tight leading-tight transition-all duration-200 ${
-          isActive 
-            ? 'text-white' 
+          isActive
+            ? 'text-white'
             : 'text-slate-100 hover:text-white'
         }`}
       >
@@ -158,7 +158,7 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
                 setTimeout(() => setIsOpen(false), 200)
               }}
             />
-            
+
             {/* Menu Panel */}
             <motion.div
               role="dialog"
@@ -174,7 +174,7 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
               className="fixed top-0 right-0 h-full w-full bg-gradient-to-br from-slate-800 to-slate-900 dark:from-slate-900 dark:to-black z-40 flex flex-col justify-center items-center px-8 text-white"
             >
               {/* Main Navigation */}
-              <motion.ul 
+              <motion.ul
                 className="space-y-6 mb-16"
                 initial={false}
                 animate={isOpen ? 'open' : 'closed'}
