@@ -137,12 +137,15 @@ describe('Mobile Navigation', () => {
     viewports.forEach(({ width, height, name }) => {
       cy.viewport(width, height)
       
-      // Wait for viewport to settle and ensure hamburger menu is clickable
+      // Reload page to ensure clean state for new viewport
+      cy.reload()
+      
+      // Wait for page to be ready and hamburger menu to be properly positioned
       cy.get('[data-testid="hamburger-menu"]').should('be.visible')
       cy.get('[data-testid="hamburger-menu"]').should('not.be.disabled')
       
       // Test basic functionality
-      cy.get('[data-testid="hamburger-menu"]').click({ force: true })
+      cy.get('[data-testid="hamburger-menu"]').click()
       cy.get('[role="dialog"]').should('be.visible')
       
       // Wait for last social link to be visible (ensures all animations complete)
@@ -152,7 +155,7 @@ describe('Mobile Navigation', () => {
       cy.percySnapshot(`Mobile Nav - ${name}`)
       
       // Close menu
-      cy.get('[data-testid="hamburger-menu"]').click({ force: true })
+      cy.get('[data-testid="hamburger-menu"]').click()
       cy.get('[role="dialog"]').should('not.exist')
     })
   })
