@@ -1,5 +1,12 @@
 describe('Mobile Navigation', () => {
   beforeEach(() => {
+    cy.on('uncaught:exception', (e) => {
+      // Next throws this error on 404
+      if (e.message.match(/NEXT_NOT_FOUND/)) {
+        return false
+      }
+    })
+
     cy.visit('/')
     cy.viewport('iphone-6') // Mobile viewport to ensure mobile nav is visible
   })
@@ -7,6 +14,7 @@ describe('Mobile Navigation', () => {
   it('displays hamburger menu on mobile', () => {
     cy.get('[data-testid="hamburger-menu"]').should('be.visible')
     cy.get('nav').should('not.be.visible') // Desktop nav should be hidden
+    cy.percySnapshot('Mobile Nav - Closed')
   })
 
   it('opens mobile nav when hamburger is clicked', () => {
@@ -64,12 +72,12 @@ describe('Mobile Navigation', () => {
     cy.get('[data-testid="hamburger-menu"]').click()
     cy.get('[role="dialog"]').should('be.visible')
 
-    // Click on Projects link
-    cy.get('[role="dialog"]').contains('Projects').click()
+    // Click on Music link (first nav item)
+    cy.get('[role="dialog"]').contains('Music').click()
 
-    // Should be on projects page
-    cy.url().should('include', '/projects')
-    cy.get('h1').should('contain', 'Projects')
+    // Should be on music page
+    cy.url().should('include', '/music')
+    cy.get('h1').should('contain', 'Music')
 
     // Mobile nav should be closed
     cy.get('[role="dialog"]').should('not.exist')
