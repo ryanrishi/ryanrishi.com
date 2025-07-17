@@ -48,6 +48,9 @@ describe('Mobile Navigation', () => {
     cy.get('[data-testid="hamburger-menu"]').click()
     cy.get('[role="dialog"]').should('be.visible')
 
+    // Wait for animations to complete
+    cy.get('[aria-label="YouTube"]').should('be.visible')
+
     // Close mobile nav
     cy.get('[data-testid="hamburger-menu"]').click()
 
@@ -60,8 +63,11 @@ describe('Mobile Navigation', () => {
     cy.get('[data-testid="hamburger-menu"]').click()
     cy.get('[role="dialog"]').should('be.visible')
 
-    // Click backdrop
-    cy.get('[data-testid="mobile-nav-backdrop"]').click()
+    // Wait for animations to complete
+    cy.get('[aria-label="YouTube"]').should('be.visible')
+
+    // Click backdrop at specific coordinates to avoid menu items
+    cy.get('[data-testid="mobile-nav-backdrop"]').click(10, 10)
 
     // Wait for mobile nav to close
     cy.get('[role="dialog"]').should('not.exist')
