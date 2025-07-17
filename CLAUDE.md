@@ -15,6 +15,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `yarn test` - Run Cypress tests (opens interactive test runner)
 - Tests are located in `cypress/e2e/`
 
+#### Percy Visual Testing
+- Requires `PERCY_PAGE_LOAD_TIMEOUT=60000` environment variable for CI
+- This prevents timeout issues on the projects page with multiple images
+- Cypress has custom `waitForImagesLoaded` command with 60s timeout
+
 ### Contact Form Development
 When working on the contact form, add an entry to `/etc/hosts` using a subdomain of allowed Formspree domains:
 ```

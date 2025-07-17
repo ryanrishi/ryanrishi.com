@@ -28,6 +28,7 @@ export default async function ProjectsIndex() {
           .map((project, i) =>
             <ProjectItem
               project={project}
+              index={i}
               key={i}
             />
           )
