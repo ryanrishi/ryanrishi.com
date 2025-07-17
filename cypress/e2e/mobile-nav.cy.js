@@ -52,8 +52,8 @@ describe('Mobile Navigation', () => {
     cy.get('[data-testid="hamburger-menu"]').click()
     cy.get('[role="dialog"]').should('be.visible')
     
-    // Click backdrop (area outside the menu)
-    cy.get('body').click(100, 100) // Click on backdrop area
+    // Click backdrop
+    cy.get('[data-testid="mobile-nav-backdrop"]').click()
     
     // Wait for mobile nav to close
     cy.get('[role="dialog"]').should('not.exist')

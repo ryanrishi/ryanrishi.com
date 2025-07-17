@@ -153,6 +153,7 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               className="fixed inset-0 bg-slate-900/20 backdrop-blur-md z-40"
+              data-testid="mobile-nav-backdrop"
               onClick={() => {
                 setIsExiting(true)
                 setTimeout(() => setIsOpen(false), 200)
