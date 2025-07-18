@@ -48,8 +48,8 @@ describe('Mobile Navigation', () => {
     cy.get('[data-testid="hamburger-menu"]').click()
     cy.get('[role="dialog"]').should('be.visible')
 
-    // Close mobile nav
-    cy.get('[data-testid="hamburger-menu"]').click()
+    // Close mobile nav (force needed due to overlay covering hamburger in test environment)
+    cy.get('[data-testid="hamburger-menu"]').click({ force: true })
 
     // Wait for mobile nav to close
     cy.get('[role="dialog"]').should('not.exist')

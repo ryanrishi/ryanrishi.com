@@ -132,7 +132,7 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
         </div>
         <div className="z-50 flex flex-row items-center gap-2">
           <DarkModeButton />
-          <div data-testid="hamburger-menu" className="relative z-50">
+          <div data-testid="hamburger-menu">
             <Hamburger
               toggled={isOpen}
               toggle={setIsOpen}
