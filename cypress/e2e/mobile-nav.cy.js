@@ -48,9 +48,9 @@ describe('Mobile Navigation', () => {
     cy.get('[data-testid="hamburger-menu"]').click()
     cy.get('[role="dialog"]').should('be.visible')
 
-    // Close mobile nav - try clicking the actual hamburger element inside
+    // Close mobile nav - click the actual hamburger element inside
     cy.get('[data-testid="hamburger-menu"]').within(() => {
-      cy.get('*').first().click({ force: true })
+      cy.get('*').first().click()
     })
 
     // Wait for mobile nav to close
