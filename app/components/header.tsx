@@ -132,7 +132,7 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
         </div>
         <div className="z-50 flex flex-row items-center gap-2">
           <DarkModeButton />
-          <div data-testid="hamburger-menu" className="relative z-50">
+          <div data-testid="hamburger-menu">
             <Hamburger
               toggled={isOpen}
               toggle={setIsOpen}
@@ -153,6 +153,7 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
               transition={{ duration: 0.3 }}
               className="fixed inset-0 bg-slate-900/20 backdrop-blur-md z-30"
               data-testid="mobile-nav-backdrop"
+              // onClick handler exists but is unreachable since dialog covers full screen
               onClick={() => {
                 setIsExiting(true)
                 setTimeout(() => setIsOpen(false), 200)
