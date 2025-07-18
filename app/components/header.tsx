@@ -153,11 +153,6 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
               transition={{ duration: 0.3 }}
               className="fixed inset-0 bg-slate-900/20 backdrop-blur-md z-30"
               data-testid="mobile-nav-backdrop"
-              // onClick handler exists but is unreachable since dialog covers full screen
-              onClick={() => {
-                setIsExiting(true)
-                setTimeout(() => setIsOpen(false), 200)
-              }}
             />
 
             {/* Menu Panel */}
