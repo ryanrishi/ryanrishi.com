@@ -13,7 +13,9 @@
       "Bash(git commit:*)",
       "Bash(ls:*)",
       "Bash(git checkout:*)",
-      "Bash(npm view:*)"
+      "Bash(npm view:*)",
+      "Bash(yarn lint)",
+      "Bash(yarn cypress run:*)"
     ],
     "deny": []
   }
