@@ -36,8 +36,8 @@ describe('Mobile Navigation', () => {
       cy.contains('Contact').should('be.visible')
     })
 
-    // Wait for last social link to be visible (ensures all animations complete)
-    cy.get('[aria-label="YouTube"]').should('be.visible')
+    // Wait for all animations to complete by checking final opacity
+    cy.get('[aria-label="YouTube"]').should('have.css', 'opacity', '1')
 
     // Take Percy screenshot of open mobile nav
     cy.percySnapshot('Mobile Nav - Open')
@@ -90,8 +90,8 @@ describe('Mobile Navigation', () => {
     cy.get('[role="dialog"]').contains('Home').should('have.class', 'text-slate-100')
     cy.get('[role="dialog"]').contains('Projects').should('have.class', 'text-slate-100')
 
-    // Wait for last social link to be visible (ensures all animations complete)
-    cy.get('[aria-label="YouTube"]').should('be.visible')
+    // Wait for all animations to complete by checking final opacity
+    cy.get('[aria-label="YouTube"]').should('have.css', 'opacity', '1')
 
     // Take Percy screenshot of active state
     cy.percySnapshot('Mobile Nav - Active State (Blog)')
