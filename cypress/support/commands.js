@@ -62,3 +62,26 @@ Cypress.Commands.add('waitForImagesLoaded', (options = {}) => {
     errorMsg: `Images did not finish loading within ${timeout}ms`,
   })
 })
+
+// Wait for mobile nav list items to finish Framer Motion animations
+// Consider settled when opacity is 1 and transform is identity
+Cypress.Commands.add('waitForMobileNavSettled', () => {
+  cy.get('[role="dialog"] li').should(($lis) => {
+    expect($lis.length, 'nav item count').to.eq(5)
+    $lis.each((_, li) => {
+      const win = li.ownerDocument && li.ownerDocument.defaultView
+      const style = win ? win.getComputedStyle(li) : null
+      expect(style, 'computed style present').to.not.be.null
+      if (!style) return
+      expect(style.opacity, 'opacity').to.eq('1')
+      const tf = style.transform
+      const settled = tf === 'none' || tf === 'matrix(1, 0, 0, 1, 0, 0)'
+      expect(settled, `transform settled exactly: ${tf}`).to.be.true
+    })
+  })
+})
+
+// Percy snapshot helper for consistent mobile widths
+Cypress.Commands.add('percyMobileSnapshot', (name, options = {}) => {
+  cy.percySnapshot(name, { widths: [375], ...options })
+})
