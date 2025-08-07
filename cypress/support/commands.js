@@ -66,6 +66,7 @@ Cypress.Commands.add('waitForImagesLoaded', (options = {}) => {
 // Wait for mobile nav list items to finish Framer Motion animations
 // Consider settled when opacity is 1 and transform is identity
 Cypress.Commands.add('waitForMobileNavSettled', () => {
+  // Menu items settled
   cy.get('[role="dialog"] li').should(($lis) => {
     expect($lis.length, 'nav item count').to.eq(5)
     $lis.each((_, li) => {
@@ -78,6 +79,20 @@ Cypress.Commands.add('waitForMobileNavSettled', () => {
       const settled = tf === 'none' || tf === 'matrix(1, 0, 0, 1, 0, 0)'
       expect(settled, `transform settled exactly: ${tf}`).to.be.true
     })
+  })
+
+  // Social icons container settled (this element animates opacity and translateY)
+  cy.get('[role="dialog"] [aria-label="GitHub"]').parent().should(($container) => {
+    expect($container.length, 'social container').to.eq(1)
+    const el = $container[0]
+    const win = el.ownerDocument && el.ownerDocument.defaultView
+    const style = win ? win.getComputedStyle(el) : null
+    expect(style, 'computed style present').to.not.be.null
+    if (!style) return
+    expect(style.opacity, 'opacity').to.eq('1')
+    const tf = style.transform
+    const settled = tf === 'none' || tf === 'matrix(1, 0, 0, 1, 0, 0)'
+    expect(settled, `social transform settled exactly: ${tf}`).to.be.true
   })
 })
 
