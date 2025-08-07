@@ -14,7 +14,7 @@ describe('Mobile Navigation', () => {
   it('displays hamburger menu on mobile', () => {
     cy.get('[data-testid="hamburger-menu"]').should('be.visible')
     cy.get('nav').should('not.be.visible') // Desktop nav should be hidden
-    cy.percySnapshot('Mobile Nav - Closed')
+    cy.percySnapshot('Mobile Nav - Closed', { widths: [375] })
   })
 
   it('opens mobile nav when hamburger is clicked', () => {
@@ -36,11 +36,24 @@ describe('Mobile Navigation', () => {
       cy.contains('Contact').should('be.visible')
     })
 
-    // Wait for all animations to complete by checking final opacity
-    cy.get('[aria-label="YouTube"]').should('have.css', 'opacity', '1')
+    // Wait until animated items have fully settled (Cypress retries this assertion).
+    // Consider settled when opacity is 1 and transform is none or an identity matrix with zero translate.
+    cy.get('[role="dialog"] li').should(($lis) => {
+      expect($lis.length, 'nav item count').to.eq(5)
+      $lis.each((_, li) => {
+        const win = li.ownerDocument && li.ownerDocument.defaultView
+        const style = win ? win.getComputedStyle(li) : null
+        expect(style, 'computed style present').to.not.be.null
+        if (!style) return
+        expect(style.opacity, 'opacity').to.eq('1')
+        const tf = style.transform
+        const settled = tf === 'none' || tf === 'matrix(1, 0, 0, 1, 0, 0)'
+        expect(settled, `transform settled exactly: ${tf}`).to.be.true
+      })
+    })
 
     // Take Percy screenshot of open mobile nav
-    cy.percySnapshot('Mobile Nav - Open')
+    cy.percySnapshot('Mobile Nav - Open', { widths: [375] })
   })
 
   it('closes mobile nav when hamburger is clicked again', () => {
@@ -90,11 +103,23 @@ describe('Mobile Navigation', () => {
     cy.get('[role="dialog"]').contains('Home').should('have.class', 'text-slate-100')
     cy.get('[role="dialog"]').contains('Projects').should('have.class', 'text-slate-100')
 
-    // Wait for all animations to complete by checking final opacity
-    cy.get('[aria-label="YouTube"]').should('have.css', 'opacity', '1')
+    // Wait until animated items have fully settled (Cypress retries this assertion).
+    cy.get('[role="dialog"] li').should(($lis) => {
+      expect($lis.length, 'nav item count').to.eq(5)
+      $lis.each((_, li) => {
+        const win = li.ownerDocument && li.ownerDocument.defaultView
+        const style = win ? win.getComputedStyle(li) : null
+        expect(style, 'computed style present').to.not.be.null
+        if (!style) return
+        expect(style.opacity, 'opacity').to.eq('1')
+        const tf = style.transform
+        const settled = tf === 'none' || tf === 'matrix(1, 0, 0, 1, 0, 0)'
+        expect(settled, `transform settled exactly: ${tf}`).to.be.true
+      })
+    })
 
-    // Take Percy screenshot of active state
-    cy.percySnapshot('Mobile Nav - Active State (Blog)')
+    // Take Percy screenshot of active state at mobile width only
+    cy.percySnapshot('Mobile Nav - Active State (Blog)', { widths: [375] })
   })
 
   it('displays social links in mobile nav', () => {
