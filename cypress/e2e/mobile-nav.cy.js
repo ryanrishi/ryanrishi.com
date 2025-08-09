@@ -14,7 +14,7 @@ describe('Mobile Navigation', () => {
   it('displays hamburger menu on mobile', () => {
     cy.get('[data-testid="hamburger-menu"]').should('be.visible')
     cy.get('nav').should('not.be.visible') // Desktop nav should be hidden
-    cy.percySnapshot('Mobile Nav - Closed')
+    cy.percyMobileSnapshot('Mobile Nav - Closed')
   })
 
   it('opens mobile nav when hamburger is clicked', () => {
@@ -36,11 +36,11 @@ describe('Mobile Navigation', () => {
       cy.contains('Contact').should('be.visible')
     })
 
-    // Wait for all animations to complete by checking final opacity
-    cy.get('[aria-label="YouTube"]').should('have.css', 'opacity', '1')
+    // Wait until animated items have fully settled
+    cy.waitForMobileNavSettled()
 
     // Take Percy screenshot of open mobile nav
-    cy.percySnapshot('Mobile Nav - Open')
+    cy.percyMobileSnapshot('Mobile Nav - Open')
   })
 
   it('closes mobile nav when hamburger is clicked again', () => {
@@ -90,11 +90,11 @@ describe('Mobile Navigation', () => {
     cy.get('[role="dialog"]').contains('Home').should('have.class', 'text-slate-100')
     cy.get('[role="dialog"]').contains('Projects').should('have.class', 'text-slate-100')
 
-    // Wait for all animations to complete by checking final opacity
-    cy.get('[aria-label="YouTube"]').should('have.css', 'opacity', '1')
+    // Wait until animated items have fully settled
+    cy.waitForMobileNavSettled()
 
-    // Take Percy screenshot of active state
-    cy.percySnapshot('Mobile Nav - Active State (Blog)')
+    // Take Percy screenshot of active state at mobile width only
+    cy.percyMobileSnapshot('Mobile Nav - Active State (Blog)')
   })
 
   it('displays social links in mobile nav', () => {
