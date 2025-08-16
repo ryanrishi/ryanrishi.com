@@ -38,7 +38,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "4.0.1",
     "remark-mdx-frontmatter": "^5.2.0",
-    "sharp": "^0.34.1",
+    "sharp": "^0.34.3",
     "shiki": "^3.7.0",
     "unified": "^11.0.5"
   },
