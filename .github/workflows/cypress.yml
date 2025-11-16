@@ -19,13 +19,13 @@ jobs:
           PERCY_TOKEN: "${{ secrets.PERCY_TOKEN }}"
           CYPRESS_DEFAULT_COMMAND_TIMEOUT: 10000
       - name: Upload Cypress videos
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: cypress-videos
           path: cypress/videos
       - name: Upload Cypress screenshots
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: always()
         with:
           name: cypress-screenshots
