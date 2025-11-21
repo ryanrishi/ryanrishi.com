@@ -12,7 +12,7 @@
     "test": "start-server-and-test start 3000 cypress:open"
   },
   "dependencies": {
-    "@mdx-js/loader": "^3.1.0",
+    "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.5.2",
     "@tailwindcss/typography": "^0.5.10",
