@@ -9,7 +9,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v6.2.0
       - name: Cypress
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           build: yarn build
           start: yarn start
