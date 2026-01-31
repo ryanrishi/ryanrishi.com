@@ -44,7 +44,7 @@ describe('Test Page', () => {
             .withArgs('(prefers-color-scheme: dark)')
             .returns({
               matches: true,
-              addEventListener: () => {}, // eslint-disable-line @typescript-eslint/no-empty-function
+              addEventListener: () => {},
             })
         },
       })

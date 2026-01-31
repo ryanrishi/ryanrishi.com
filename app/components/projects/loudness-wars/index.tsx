@@ -313,7 +313,7 @@ const Chart = () => {
   const setSelectedTrack = (track: Track) => {
     event({
       action: 'loudness wars | select track',
-      params: track,
+      params: track as any,
     })
 
     _setSelectedTrack(track)

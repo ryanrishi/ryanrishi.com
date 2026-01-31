@@ -1,10 +1,4 @@
 import createMDX from '@next/mdx'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypePrettyCode from 'rehype-pretty-code'
-import rehypeSlug from 'rehype-slug'
-import remarkGfm from 'remark-gfm'
-import remarkFrontmatter from 'remark-frontmatter'
-import mdxFrontmatter from 'remark-mdx-frontmatter'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -36,15 +30,17 @@ const nextConfig = {
 
 const withMdx = createMDX({
   options: {
+    // Turbopack requires MDX loader options to be JSON-serializable.
+    // Use package-name strings rather than imported plugin functions.
     rehypePlugins: [
-      rehypeSlug,
-      [rehypeAutolinkHeadings, { properties: { class: ['anchor'] } } ],
-      [rehypePrettyCode, { theme: 'material-theme' }]
+      'rehype-slug',
+      ['rehype-autolink-headings', { properties: { class: ['anchor'] } }],
+      ['rehype-pretty-code', { theme: 'material-theme' }],
     ],
     remarkPlugins: [
-      remarkGfm,
-      remarkFrontmatter,
-      [mdxFrontmatter, { name: 'frontmatter' }]
+      'remark-gfm',
+      'remark-frontmatter',
+      ['remark-mdx-frontmatter', { name: 'frontmatter' }],
     ],
   },
 })
