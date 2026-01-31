@@ -1,6 +1,7 @@
 describe('Music', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000/music')
+    // This page includes third-party embeds (e.g. YouTube) which can delay the window load event in CI.
+    cy.visit('http://localhost:3000/music', { timeout: 120000 })
     cy.waitForLogoAnimations()
   })
 
