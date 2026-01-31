@@ -5,8 +5,8 @@
   "author": "Ryan Rishi <ryan@ryanrishi.com>",
   "scripts": {
     "cypress:open": "cypress open",
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint .",
     "test": "start-server-and-test start 3000 cypress:open"

@@ -7,6 +7,7 @@ export const pageview = (url?: string) => {
 
 // log specific events happening.
 
-export const event = ({ action, params }: { action: string, params: Record<string, unknown> }) => {
-  window.gtag('event', action, params)
+export const event = ({ action, params }: { action: string; params: Record<string, unknown> }) => {
+  // gtag's event params are loosely typed; we accept a record and cast at the boundary.
+  window.gtag('event', action, params as any)
 }

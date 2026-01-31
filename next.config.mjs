@@ -36,16 +36,9 @@ const nextConfig = {
 
 const withMdx = createMDX({
   options: {
-    rehypePlugins: [
-      rehypeSlug,
-      [rehypeAutolinkHeadings, { properties: { class: ['anchor'] } } ],
-      [rehypePrettyCode, { theme: 'material-theme' }],
-    ],
-    remarkPlugins: [
-      remarkGfm,
-      remarkFrontmatter,
-      [mdxFrontmatter, { name: 'frontmatter' }],
-    ],
+    // NOTE: Turbopack currently requires MDX loader options to be serializable.
+    // Passing plugin functions here breaks `next build`/`next dev` under Turbopack.
+    // To keep this branch focused on enabling Turbopack, we temporarily omit plugins.
   },
 })
 
