@@ -34,11 +34,8 @@ Cypress.Commands.add('waitForLogoAnimations', () => {
       cy.get('nav svg path')
         .eq(i)
         .invoke('attr', 'stroke-dasharray')
-        .should((val) => {
-          // CI (Chromium) sometimes reports this without units: "1 1" vs "1px 1px"
-          const normalized = String(val || '').replaceAll('px', '').trim()
-          expect(normalized).to.eq('1 1')
-        })
+        // CI (Chromium) sometimes reports this without units: "1 1" vs "1px 1px"
+        .should('match', /^1(px)? 1(px)?$/)
     }
 
     return true
