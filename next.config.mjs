@@ -2,8 +2,8 @@ import createMDX from '@next/mdx'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
-import remarkGfm from 'remark-gfm'
 import remarkFrontmatter from 'remark-frontmatter'
+import remarkGfm from 'remark-gfm'
 import mdxFrontmatter from 'remark-mdx-frontmatter'
 
 /** @type {import('next').NextConfig} */
@@ -39,12 +39,12 @@ const withMdx = createMDX({
     rehypePlugins: [
       rehypeSlug,
       [rehypeAutolinkHeadings, { properties: { class: ['anchor'] } } ],
-      [rehypePrettyCode, { theme: 'material-theme' }]
+      [rehypePrettyCode, { theme: 'material-theme' }],
     ],
     remarkPlugins: [
       remarkGfm,
       remarkFrontmatter,
-      [mdxFrontmatter, { name: 'frontmatter' }]
+      [mdxFrontmatter, { name: 'frontmatter' }],
     ],
   },
 })

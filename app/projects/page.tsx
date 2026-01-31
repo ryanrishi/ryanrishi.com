@@ -30,7 +30,7 @@ export default async function ProjectsIndex() {
               project={project}
               index={i}
               key={i}
-            />
+            />,
           )
         }
       </ul>
