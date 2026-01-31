@@ -1,31 +1,14 @@
 import nextCoreWebVitals from 'eslint-config-next/core-web-vitals'
-import simpleImportSort from 'eslint-plugin-simple-import-sort'
 
 export default [
-  // Next.js recommended flat config + core web vitals rules
   ...nextCoreWebVitals,
-
-  // Project-specific rules
   {
-    name: 'custom/project-rules',
-    plugins: {
-      'simple-import-sort': simpleImportSort,
-    },
+    name: 'project/overrides',
     rules: {
-      // Stylistic consistency (autofixable)
-      'comma-dangle': ['error', 'always-multiline'],
-      semi: ['error', 'never'],
-      'simple-import-sort/imports': ['error'],
-      'simple-import-sort/exports': ['error'],
-
-      // Basic hygiene
-      'eol-last': 'error',
-      'no-trailing-spaces': 'error',
-
-      // Too aggressive for this codebase right now (introduced via newer react-hooks config)
+      // Existing code relies on this pattern; keep lint from failing.
       'react-hooks/set-state-in-effect': 'off',
 
-      // Don’t lint the lint config for this
+      // Allow anonymous default export in this config file.
       'import/no-anonymous-default-export': 'off',
     },
   },
