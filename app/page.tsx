@@ -13,7 +13,8 @@ interface SectionProps {
   children: ReactNode
 }
 
-const MaybeWrapInLink = ({ children, href }) => href ? <NextLink href={href} legacyBehavior>{children}</NextLink> : children
+const MaybeWrapInLink = ({ children, href }) =>
+  href ? <NextLink href={href}>{children}</NextLink> : children
 
 function Section({ title, description, children }: SectionProps) {
   return (

@@ -6,7 +6,7 @@ export const pageview = (url?: string) => {
 }
 
 // log specific events happening.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export const event = ({ action, params }: { action: string, params: any }) => {
   window.gtag('event', action, params)
 }
