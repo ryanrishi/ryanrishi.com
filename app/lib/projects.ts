@@ -27,7 +27,7 @@ export async function getAllProjects(): Promise<Project[]> {
       const fileContent = await fs.readFile(filePath, 'utf8')
       const { data } = matter(fileContent)
       return { slug, ...data } as Project
-    }),
+    })
   )
   return projects.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }

@@ -1,6 +1,9 @@
 import nextCoreWebVitals from 'eslint-config-next/core-web-vitals'
 
 export default [
+  {
+    ignores: ['.next/**', 'out/**', 'dist/**'],
+  },
   ...nextCoreWebVitals,
   {
     name: 'project/overrides',

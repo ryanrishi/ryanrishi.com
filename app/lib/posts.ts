@@ -23,7 +23,7 @@ export async function getAllPosts(): Promise<Post[]> {
       const fileContent = await fs.readFile(filePath, 'utf8')
       const { data } = matter(fileContent)
       return { slug, ...data } as Post
-    }),
+    })
   )
   return posts.sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)))
 }
