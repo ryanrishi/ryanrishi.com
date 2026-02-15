@@ -3,6 +3,11 @@
 @variant dark (.dark &);
 
 @theme {
+  /* Tailwind v4 shortened the default --font-sans to "ui-sans-serif, system-ui, sans-serif" which
+     Percy's headless browser doesn't resolve correctly, rendering Times New Roman instead. Adding
+     the explicit fallbacks from Tailwind v3 ensures consistent rendering in Percy snapshots. */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
   --color-valencia-50: #FBEBEA;
   --color-valencia-100: #F6D8D5;
   --color-valencia-200: #EDB0AB;
