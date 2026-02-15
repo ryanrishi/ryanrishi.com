@@ -29,7 +29,7 @@ type Columns = 'track_id' | 'track_name' | 'artist_name' | 'album_name' | 'relea
 const trackFillColor = '#69b3a2'
 const selectedTrackFillColor = '#f38f9f'
 
-const drawChart = async (svgRef: RefObject<SVGSVGElement>, setSelectedTrack, isMounted: () => boolean) => {
+const drawChart = async (svgRef: RefObject<SVGSVGElement | null>, setSelectedTrack, isMounted: () => boolean) => {
   let $selectedTrack
 
   const data = await d3.csv<Columns>('/loudness-wars.csv').then(tracks => tracks.map(track => ({

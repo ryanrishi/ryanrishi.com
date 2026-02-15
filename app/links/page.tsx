@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
 import { FaGlassWhiskey } from 'react-icons/fa'
 import { GrMail } from 'react-icons/gr'
 import { ImGithub, ImLab, ImLinkedin } from 'react-icons/im'
@@ -9,7 +10,7 @@ import { SiTwilio } from 'react-icons/si'
 import headshot from '../../public/img/ryan.jpeg'
 
 interface Link {
-  icon?: JSX.Element;
+  icon?: React.JSX.Element;
   label: string;
   description?: string;
   url: string;
