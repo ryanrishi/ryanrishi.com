@@ -5,7 +5,7 @@ import { Squash as Hamburger } from 'hamburger-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState, useSyncExternalStore } from 'react'
 import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi'
 import { ImGithub, ImLinkedin, ImSoundcloud, ImTwitter, ImYoutube } from 'react-icons/im'
 import { IconContext } from 'react-icons/lib'
@@ -21,14 +21,12 @@ const items = [
   { title: 'Contact', href: '/contact' },
 ]
 
+const subscribe = () => () => {}
+
 function DarkModeButton() {
   const { resolvedTheme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const mounted = useSyncExternalStore(subscribe, () => true, () => false)
 
-  useEffect(() => setMounted(true), [])
-
-  // avoid mismatch between SSR and CSR
-  // see https://github.com/pacocoursey/next-themes#avoid-hydration-mismatch
   if (!mounted) return null
 
   return (
@@ -103,25 +101,27 @@ function MobileNavItem({ item, index, isExiting, pathname }: {
 
 function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch<SetStateAction<boolean>> }) {
   const pathname = usePathname()
-  const [isExiting, setIsExiting] = useState(false)
-  const [previousPathname, setPreviousPathname] = useState(pathname)
+  const [prevIsOpen, setPrevIsOpen] = useState(isOpen)
+  const [pathnameOnOpen, setPathnameOnOpen] = useState(pathname)
+
+  if (isOpen && !prevIsOpen) {
+    setPrevIsOpen(true)
+    setPathnameOnOpen(pathname)
+  }
+  if (!isOpen && prevIsOpen) {
+    setPrevIsOpen(false)
+  }
+
+  const isExiting = isOpen && pathname !== pathnameOnOpen
 
   useEffect(() => {
-    if (isOpen) {
-      setIsExiting(false)
-      setPreviousPathname(pathname)
-    }
-  }, [isOpen, pathname])
-
-  useEffect(() => {
-    // Only close if pathname actually changed while menu was open
-    if (pathname !== previousPathname && isOpen) {
-      setIsExiting(true)
-      setTimeout(() => {
+    if (isExiting) {
+      const timeout = setTimeout(() => {
         setIsOpen(false)
       }, 200)
+      return () => clearTimeout(timeout)
     }
-  }, [pathname, previousPathname, isOpen, setIsOpen])
+  }, [isExiting, setIsOpen])
 
   return (
     <>
