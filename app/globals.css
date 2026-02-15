@@ -1,3 +1,29 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@variant dark (.dark &);
+
+@theme {
+  --color-valencia-50: #FBEBEA;
+  --color-valencia-100: #F6D8D5;
+  --color-valencia-200: #EDB0AB;
+  --color-valencia-300: #E58980;
+  --color-valencia-400: #DC6156;
+  --color-valencia-500: #D33A2C;
+  --color-valencia-600: #A92E23;
+  --color-valencia-700: #7F231A;
+  --color-valencia-800: #541712;
+  --color-valencia-900: #2A0C09;
+}
+
+/* Safelist for dynamic Callout component classes */
+@source inline("text-{green,blue,yellow,red,slate}-800");
+@source inline("bg-{green,blue,yellow,red,slate}-100");
+@source inline("border-{green,blue,yellow,red,slate}-800");
+@source inline("dark:bg-{green,blue,yellow,red,slate}-800");
+@source inline("dark:text-{green,blue,yellow,red,slate}-50");
+@source inline("dark:text-{green,blue,yellow,red,slate}-600");
+@source inline("dark:border-{green,blue,yellow,red,slate}-300");
+
 /* keep these bg-* and dark:bg-* in sync with app/layout.tsx */
 
 body {
