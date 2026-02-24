@@ -24,7 +24,7 @@
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.19",
     "eslint-config-next": "^16.1.6",
-    "framer-motion": "12.23.12",
+    "framer-motion": "12.34.3",
     "gray-matter": "^4.0.3",
     "hamburger-react": "^2.5.2",
     "next": "^16.1.6",
