@@ -21,19 +21,18 @@ describe('Footer', () => {
 
   it('has valid links', () => {
     cy.get('footer a').then((links) => {
-      for (let i = 0; i < links.length; i++) {
-        cy.get('footer a').eq(i).then((link) => {
-          if (link.prop('href').includes('localhost')) {
-            cy.visit(link.prop('href')) // verify it's not a 404
-            cy.url().should('eq', link.prop('href'))  // wait for page to load
-            cy.go('back', { failOnStatusCode: false })
-          }
-          else {
-            // external links are annoying, like LinkedIn returning 999
-            // I'll ignore these for now
-          }
-        })
-      }
+      const localHrefs = []
+      links.each((_, link) => {
+        const href = link.href
+        if (href.includes('localhost')) {
+          localHrefs.push(href)
+        }
+      })
+
+      localHrefs.forEach((href) => {
+        cy.visit(href)
+        cy.url().should('eq', href)
+      })
     })
   })
 
