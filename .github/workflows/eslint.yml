@@ -8,5 +8,5 @@ jobs:
         uses: actions/checkout@v6
       - name: Setup Node.js environment
         uses: actions/setup-node@v6.2.0
-      - run: yarn install
-      - run: yarn eslint
+      - run: npm ci
+      - run: npm run lint

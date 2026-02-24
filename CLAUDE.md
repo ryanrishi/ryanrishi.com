@@ -5,14 +5,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Commands
 
 ### Setup and Development
-- `yarn install` - Install dependencies 
-- `yarn dev` - Start development server at localhost:3000
-- `yarn build` - Build production version
-- `yarn start` - Start production server
-- `yarn lint` - Run ESLint
+- `npm install` - Install dependencies
+- `npm run dev` - Start development server at localhost:3000
+- `npm run build` - Build production version
+- `npm start` - Start production server
+- `npm run lint` - Run ESLint
 
 ### Testing
-- `yarn test` - Run Cypress tests (opens interactive test runner)
+- `npm test` - Run Cypress tests (opens interactive test runner)
 - Tests are located in `cypress/e2e/`
 
 #### Percy Visual Testing
@@ -74,6 +74,6 @@ This is a Next.js 14 personal website with the following key characteristics:
 - **Hooks**: Custom hooks in `app/hooks/` including body scroll management
 
 ### Environment Requirements
-- Node.js environment with yarn package manager (use `yarn` not `npm`)
+- Node.js environment with npm package manager
 - Google Analytics tracking ID via `NEXT_PUBLIC_GOOGLE_ANALYTICS` env var
 - Formspree integration for contact form
