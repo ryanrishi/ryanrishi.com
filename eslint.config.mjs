@@ -1,5 +1,5 @@
 import nextConfig from 'eslint-config-next'
-import cypressPlugin from 'eslint-plugin-cypress/flat'
+import cypressPlugin from 'eslint-plugin-cypress'
 
 const eslintConfig = [
   ...nextConfig,
