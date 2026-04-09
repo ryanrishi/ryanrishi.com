@@ -1,6 +1,10 @@
+const skipChartAnimations = (win) => {
+  win.__SKIP_CHART_ANIMATIONS__ = true
+}
+
 describe('Projects', () => {
   beforeEach(() => {
-    cy.visit('/projects')
+    cy.visit('/projects', { onBeforeLoad: skipChartAnimations })
     cy.viewport('ipad-2') // a tall viewport since some  of these pages are long
     cy.waitForLogoAnimations()
   })

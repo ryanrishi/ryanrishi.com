@@ -278,18 +278,20 @@ const drawChart = async (svgRef: RefObject<SVGSVGElement | null>, setSelectedTra
       .attr('stroke', '#ffab00')
   }
 
+  const skipAnimations = typeof window !== 'undefined' && (window as any).__SKIP_CHART_ANIMATIONS__
+
   y.domain([minLoudness, maxLoudness])
   y.range([h - margin.top - margin.bottom, 0])
   yAxis
     .transition()
-    .duration(1000)
+    .duration(skipAnimations ? 0 : 1000)
     .attr('opacity', 1)
     .call(d3.axisLeft(y).tickValues([-24, -18, -12, -9, -6, -3, -1.5]).tickFormat(d => String(d)))
 
   await svg.selectAll('circle')
     .transition()
-    .delay((d, i) => i / 3)
-    .duration(1000)
+    .delay((d, i) => skipAnimations ? 0 : i / 3)
+    .duration(skipAnimations ? 0 : 1000)
     .attr('cx', (d: Track) => x(d.releaseDate))
     .attr('cy', (d: Track) => y(d.loudness))
     .end()
