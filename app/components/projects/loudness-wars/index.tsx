@@ -289,7 +289,7 @@ const drawChart = async (svgRef: RefObject<SVGSVGElement | null>, setSelectedTra
     .call(d3.axisLeft(y).tickValues([-24, -18, -12, -9, -6, -3, -1.5]).tickFormat(d => String(d)))
 
   await svg.selectAll('circle')
-    .transition()
+    .transition('entrance')
     .delay((d, i) => skipAnimations ? 0 : i / 3)
     .duration(skipAnimations ? 0 : 1000)
     .attr('cx', (d: Track) => x(d.releaseDate))
