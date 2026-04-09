@@ -286,19 +286,19 @@ const drawChart = async (svgRef: RefObject<SVGSVGElement | null>, setSelectedTra
     .attr('opacity', 1)
     .call(d3.axisLeft(y).tickValues([-24, -18, -12, -9, -6, -3, -1.5]).tickFormat(d => String(d)))
 
-  let numTransitions = 0
-  svg.selectAll('circle')
+  await svg.selectAll('circle')
     .transition()
     .delay((d, i) => i / 3)
     .duration(1000)
     .attr('cx', (d: Track) => x(d.releaseDate))
     .attr('cy', (d: Track) => y(d.loudness))
-    .on('start', () => ++numTransitions)
-    .on('end', () => {
-      if (--numTransitions === 0) {
-        drawTrendline()
-      }
-    })
+    .end()
+
+  if (!isMounted()) {
+    return
+  }
+
+  drawTrendline()
 }
 
 const Chart = () => {
