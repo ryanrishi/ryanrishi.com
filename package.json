@@ -57,7 +57,7 @@
     "eslint-plugin-cypress": "^6.1.0",
     "lodash.isempty": "^4.4.0",
     "lodash.kebabcase": "^4.1.1",
-    "postcss": "8.5.8",
+    "postcss": "8.5.10",
     "start-server-and-test": "2.1.5",
     "tailwindcss": "^4.1.18",
     "typescript": "5.9.3"
