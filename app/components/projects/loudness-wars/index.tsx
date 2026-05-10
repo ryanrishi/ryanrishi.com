@@ -58,7 +58,7 @@ const drawChart = async (svgRef: RefObject<SVGSVGElement | null>, setSelectedTra
       }
     })(),
     releaseDatePrecision: track.release_date_precision,
-    loudness: track.loudness,
+    loudness: +track.loudness!,
   })).filter(x => x.releaseDate.getFullYear() >= 1970) // only 2 tracks in 1969, insufficient data size
     .sort((a, b) => a.releaseDate.valueOf() - b.releaseDate.valueOf()))
 
@@ -240,7 +240,7 @@ const drawChart = async (svgRef: RefObject<SVGSVGElement | null>, setSelectedTra
     /* eslint-disable indent */
       .style('cursor', 'pointer')
       .attr('cx', d => x(d.releaseDate))
-      .attr('cy', d => y(+d.loudness!))
+      .attr('cy', d => y(d.loudness))
       .attr('r', r)
       .attr('fill', trackFillColor)
       .attr('opacity', 0.4)
