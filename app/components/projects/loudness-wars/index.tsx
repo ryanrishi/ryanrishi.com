@@ -58,7 +58,7 @@ const drawChart = async (svgRef: RefObject<SVGSVGElement | null>, setSelectedTra
       }
     })(),
     releaseDatePrecision: track.release_date_precision,
-    loudness: track.loudness,
+    loudness: +track.loudness!,
   })).filter(x => x.releaseDate.getFullYear() >= 1970) // only 2 tracks in 1969, insufficient data size
     .sort((a, b) => a.releaseDate.valueOf() - b.releaseDate.valueOf()))
 
@@ -129,6 +129,8 @@ const drawChart = async (svgRef: RefObject<SVGSVGElement | null>, setSelectedTra
     .style('text-anchor', 'end')
     .style('font-size', '1rem')
     .text('Loudness (dB)')
+
+  const skipAnimations = typeof window !== 'undefined' && (window as any).__SKIP_CHART_ANIMATIONS__
 
   const transitionDuration = 200
   const r = Math.min((width / 480) * 5, 5)
@@ -238,7 +240,7 @@ const drawChart = async (svgRef: RefObject<SVGSVGElement | null>, setSelectedTra
     /* eslint-disable indent */
       .style('cursor', 'pointer')
       .attr('cx', d => x(d.releaseDate))
-      .attr('cy', d => y(+d.loudness!))
+      .attr('cy', d => y(d.loudness))
       .attr('r', r)
       .attr('fill', trackFillColor)
       .attr('opacity', 0.4)
@@ -278,23 +280,32 @@ const drawChart = async (svgRef: RefObject<SVGSVGElement | null>, setSelectedTra
       .attr('stroke', '#ffab00')
   }
 
-  const skipAnimations = typeof window !== 'undefined' && (window as any).__SKIP_CHART_ANIMATIONS__
-
   y.domain([minLoudness, maxLoudness])
   y.range([h - margin.top - margin.bottom, 0])
-  yAxis
-    .transition()
-    .duration(skipAnimations ? 0 : 1000)
-    .attr('opacity', 1)
-    .call(d3.axisLeft(y).tickValues([-24, -18, -12, -9, -6, -3, -1.5]).tickFormat(d => String(d)))
 
-  await svg.selectAll('circle')
-    .transition('entrance')
-    .delay((d, i) => skipAnimations ? 0 : i / 3)
-    .duration(skipAnimations ? 0 : 1000)
-    .attr('cx', (d: Track) => x(d.releaseDate))
-    .attr('cy', (d: Track) => y(d.loudness))
-    .end()
+  if (skipAnimations) {
+    yAxis
+      .attr('opacity', 1)
+      .call(d3.axisLeft(y).tickValues([-24, -18, -12, -9, -6, -3, -1.5]).tickFormat(d => String(d)))
+
+    svg.selectAll('circle')
+      .attr('cx', (d: Track) => x(d.releaseDate))
+      .attr('cy', (d: Track) => y(d.loudness))
+  } else {
+    yAxis
+      .transition()
+      .duration(1000)
+      .attr('opacity', 1)
+      .call(d3.axisLeft(y).tickValues([-24, -18, -12, -9, -6, -3, -1.5]).tickFormat(d => String(d)))
+
+    await svg.selectAll('circle')
+      .transition('entrance')
+      .delay((d, i) => i / 3)
+      .duration(1000)
+      .attr('cx', (d: Track) => x(d.releaseDate))
+      .attr('cy', (d: Track) => y(d.loudness))
+      .end()
+  }
 
   if (!isMounted()) {
     return
