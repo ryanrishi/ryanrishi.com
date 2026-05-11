@@ -1,5 +1,7 @@
 name: ESLint
 on: [push]
+permissions:
+  contents: read
 jobs:
   eslint:
     runs-on: ubuntu-latest
