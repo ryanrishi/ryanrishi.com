@@ -43,7 +43,7 @@
     "unified": "^11.0.5"
   },
   "devDependencies": {
-    "@percy/cli": "^1.31.11",
+    "@percy/cli": "^1.31.13",
     "@percy/cypress": "^3.1.7",
     "@tailwindcss/postcss": "^4.2.4",
     "@types/d3": "^7.1.0",
@@ -57,8 +57,8 @@
     "eslint-plugin-cypress": "^6.3.1",
     "lodash.isempty": "^4.4.0",
     "lodash.kebabcase": "^4.1.1",
-    "postcss": "8.5.10",
-    "start-server-and-test": "3.0.2",
+    "postcss": "8.5.14",
+    "start-server-and-test": "3.0.5",
     "tailwindcss": "^4.1.18",
     "typescript": "5.9.3"
   }
