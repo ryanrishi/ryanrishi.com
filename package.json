@@ -43,7 +43,7 @@
     "unified": "^11.0.5"
   },
   "devDependencies": {
-    "@percy/cli": "^1.31.11",
+    "@percy/cli": "^1.31.13",
     "@percy/cypress": "^3.1.7",
     "@tailwindcss/postcss": "^4.2.4",
     "@types/d3": "^7.1.0",
