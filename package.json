@@ -48,7 +48,7 @@
     "@tailwindcss/postcss": "^4.2.4",
     "@types/d3": "^7.1.0",
     "@types/gtag.js": "0.0.20",
-    "@types/react": "^19.2.14",
+    "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "cypress": "^15.16.0",
     "cypress-real-events": "1.15.0",
