@@ -45,7 +45,7 @@
   "devDependencies": {
     "@percy/cli": "^1.31.13",
     "@percy/cypress": "^3.1.7",
-    "@tailwindcss/postcss": "^4.2.4",
+    "@tailwindcss/postcss": "^4.3.0",
     "@types/d3": "^7.1.0",
     "@types/gtag.js": "0.0.20",
     "@types/react": "^19.2.15",
