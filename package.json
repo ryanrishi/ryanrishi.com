@@ -21,7 +21,7 @@
     "@vercel/speed-insights": "^2.0.0",
     "classnames": "^2.3.1",
     "d3": "^7.9.0",
-    "date-fns": "^4.1.0",
+    "date-fns": "^4.4.0",
     "dayjs": "^1.11.20",
     "eslint-config-next": "^16.2.6",
     "framer-motion": "12.38.0",
