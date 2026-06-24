@@ -22,7 +22,7 @@
     "classnames": "^2.3.1",
     "d3": "^7.9.0",
     "date-fns": "^4.4.0",
-    "dayjs": "^1.11.20",
+    "dayjs": "^1.11.21",
     "eslint-config-next": "^16.2.9",
     "framer-motion": "12.38.0",
     "gray-matter": "^4.0.3",
