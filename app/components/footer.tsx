@@ -1,5 +1,8 @@
+'use client'
+
 import classNames from 'classnames'
 import NextLink from 'next/link'
+import { usePathname } from 'next/navigation'
 import { ReactNode } from 'react'
 import { ImGithub, ImLinkedin, ImSoundcloud, ImTwitter, ImYoutube } from 'react-icons/im'
 
@@ -22,6 +25,13 @@ const FooterLink = ({ children, href, className }: FooterLinkProps) => {
 }
 
 export default function Footer() {
+  const pathname = usePathname()
+
+  // hide the footer on the links (link-in-bio) page, matching the header
+  if (pathname === '/links') {
+    return null
+  }
+
   return (
     <footer>
       <div className="container mx-auto max-w-4xl p-4 lg:py-8 flex flex-row justify-around">

@@ -1,6 +1,7 @@
 import kebabCase from 'lodash.kebabcase'
 import type { Metadata } from 'next'
 
+import { FancyH1 } from '@/components/headings'
 import TagPill from '@/components/tag-pill'
 import { getAllPosts } from '@/lib/posts'
 import { getAllProjects } from '@/lib/projects'
@@ -28,7 +29,7 @@ export default async function TagsIndex() {
 
   return (
     <>
-      <h1>Tags</h1>
+      <FancyH1>Tags</FancyH1>
       <div data-test-id="tags" className="flex flex-row flex-wrap prose leading-10 gap-4">
         {Array.from(tags).sort().map((tag) => (
           tag && <TagPill key={tag} href={`/tags/${kebabCase(tag)}`}>{tag}</TagPill>

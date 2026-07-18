@@ -7,7 +7,7 @@ import { ImGithub, ImLab, ImLinkedin } from 'react-icons/im'
 import { IoMdGlobe } from 'react-icons/io'
 import { SiTwilio } from 'react-icons/si'
 
-import headshot from '../../public/img/ryan.jpeg'
+import headshot from '../../public/img/headshot.jpeg'
 
 interface Link {
   icon?: React.JSX.Element;
@@ -66,32 +66,43 @@ function LinkButton({ link }: { link: Link }) {
   const { icon, label, url } = link
 
   return (
-    <Link href={url}>
-      <button className="p-0.5 mb-4 overflow-hidden w-[75vw] max-w-screen-md text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-        <div className="relative inline-flex items-center justify-center py-4 gap-4 w-full transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-          {icon && <span className="relative">{icon}</span>}
-          <span>{label}</span>
-        </div>
-      </button>
+    <Link
+      href={url}
+      className="group flex w-full items-center justify-center gap-3 rounded-lg border border-slate-200 bg-white py-4 transition-colors hover:border-valencia-500 dark:border-slate-700 dark:bg-slate-900 dark:hover:border-valencia-500"
+    >
+      {icon && (
+        <span className="text-slate-500 transition-colors group-hover:text-valencia-600 dark:group-hover:text-valencia-500">
+          {icon}
+        </span>
+      )}
+      <span className="font-mono text-sm text-slate-700 transition-colors group-hover:text-valencia-600 dark:text-slate-300 dark:group-hover:text-valencia-500">
+        {label}
+      </span>
     </Link>
   )
 }
 
 export default function Links() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <div className="flex flex-col items-center justify-center w-[75vw] max-w-screen-md">
-        <Image className="rounded-full h-32 w-32" src={headshot} alt="Ryan Rishi" />
-        <h1 className="text-4xl mt-4 mb-8">Ryan Rishi</h1>
-        <p className="text-center">Experienced software engineer with expertise in backend, infra, and AI</p>
-        <br />
-        <div className="flex items-center justify-center">
-          <ul className="flex flex-col">
-            {links.map((link, i) => (
-              <LinkButton link={link} key={i} />
-              ))}
-          </ul>
-        </div>
+    <div className="flex min-h-screen flex-col items-center justify-center">
+      <div className="flex w-[75vw] max-w-md flex-col items-center">
+        <Image
+          className="h-32 w-32 rounded-full object-cover"
+          src={headshot}
+          alt="Ryan Rishi"
+          placeholder="blur"
+        />
+        <h1 className="mt-6 text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">Ryan Rishi.</h1>
+        <p className="mt-2 mb-8 text-center text-slate-600 dark:text-slate-400">
+          Experienced software engineer with expertise in backend, infra, and AI
+        </p>
+        <ul className="flex w-full flex-col gap-3">
+          {links.map((link, i) => (
+            <li key={i}>
+              <LinkButton link={link} />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )

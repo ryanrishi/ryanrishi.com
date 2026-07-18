@@ -57,7 +57,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
   return (
     <>
       <h1>{frontmatter.title}</h1>
-      <p className="-mt-4 text-slate-500">{dayjs.utc(frontmatter.publishedAt).format('MMMM D, YYYY')}</p>
+      <p className="-mt-4 font-mono text-sm text-slate-500">{dayjs.utc(frontmatter.publishedAt).format('MMMM D, YYYY')}</p>
 
       <Post />
 
