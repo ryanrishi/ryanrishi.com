@@ -20,7 +20,7 @@ export default function ContentRow({
   dateProps,
 }: ContentRowProps) {
   return (
-    <div className="group relative border-b border-slate-200 dark:border-slate-800 py-5" {...rowProps}>
+    <div {...rowProps} className="group relative border-b border-slate-200 dark:border-slate-800 py-5">
       <div className="flex items-baseline justify-between gap-4">
         <Heading className="m-0 text-lg font-medium">
           <NextLink
@@ -31,7 +31,7 @@ export default function ContentRow({
           </NextLink>
         </Heading>
         {date && (
-          <span className="shrink-0 font-mono text-xs text-slate-400 dark:text-slate-500" {...dateProps}>
+          <span {...dateProps} className="shrink-0 font-mono text-xs text-slate-400 dark:text-slate-500">
             {date}
           </span>
         )}
