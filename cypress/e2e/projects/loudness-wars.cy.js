@@ -1,9 +1,13 @@
 // keep this in sync with projects/loudness-wars/index.tsx L35
 const selectedTrackFillColor = '#f38f9f'
 
+const skipChartAnimations = (win) => {
+  win.__SKIP_CHART_ANIMATIONS__ = true
+}
+
 describe('Projects | Loudness Wars', () => {
   beforeEach(() => {
-    cy.visit('/projects/loudness-wars')
+    cy.visit('/projects/loudness-wars', { onBeforeLoad: skipChartAnimations })
     cy.viewport('macbook-13')
     cy.waitForLogoAnimations()
   })
