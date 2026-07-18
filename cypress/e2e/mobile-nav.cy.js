@@ -14,7 +14,7 @@ describe('Mobile Navigation', () => {
   it('displays hamburger menu on mobile', () => {
     cy.get('[data-testid="hamburger-menu"]').should('be.visible')
     cy.get('nav').should('not.be.visible') // Desktop nav should be hidden
-    cy.get('[aria-label="Dark mode toggle"]').should('be.visible')
+    cy.get('[aria-label="Dark mode toggle"]:visible').should('be.visible')
     cy.percyMobileSnapshot('Mobile Nav - Closed')
   })
 
@@ -40,7 +40,7 @@ describe('Mobile Navigation', () => {
     // Wait until animated items have fully settled
     cy.waitForMobileNavSettled()
 
-    cy.get('[aria-label="Dark mode toggle"]').should('be.visible')
+    cy.get('[aria-label="Dark mode toggle"]:visible').should('be.visible')
 
     // Take Percy screenshot of open mobile nav
     cy.percyMobileSnapshot('Mobile Nav - Open')
@@ -96,7 +96,7 @@ describe('Mobile Navigation', () => {
     // Wait until animated items have fully settled
     cy.waitForMobileNavSettled()
 
-    cy.get('[aria-label="Dark mode toggle"]').should('be.visible')
+    cy.get('[aria-label="Dark mode toggle"]:visible').should('be.visible')
 
     // Take Percy screenshot of active state at mobile width only
     cy.percyMobileSnapshot('Mobile Nav - Active State (Blog)')
