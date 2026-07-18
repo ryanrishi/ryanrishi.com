@@ -1,10 +1,22 @@
 'use client'
 
+import { MotionGlobalConfig } from 'framer-motion'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { ThemeProvider } from 'next-themes'
 import { Suspense, useEffect } from 'react'
 
 import { pageview } from '@/lib/ga'
+
+declare global {
+  interface Window {
+    Cypress?: unknown
+  }
+}
+
+// Skip Framer Motion animations under Cypress so Percy snapshots are deterministic
+if (typeof window !== 'undefined' && window.Cypress) {
+  MotionGlobalConfig.skipAnimations = true
+}
 
 function PageView() {
   const pathname = usePathname()
