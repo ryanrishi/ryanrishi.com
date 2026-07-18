@@ -7,9 +7,6 @@ import { GeistSans } from 'geist/font/sans'
 import Script from 'next/script'
 import type { Metadata } from 'next/types'
 
-import Footer from '@/components/footer'
-import Header from '@/components/header'
-
 import Providers from './providers'
 
 export const metadata: Metadata = {
@@ -65,13 +62,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <Providers>
-          <div className="bg-slate-50 dark:bg-slate-800 dark:text-slate-400">
-            <Header />
-            <div className="container mx-auto max-w-3xl p-4">
-              {children}
-            </div>
-          <Footer />
-        </div>
+          {children}
         </Providers>
         <Analytics />
         <SpeedInsights />

@@ -19,7 +19,7 @@ export async function generateStaticParams () {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const decodedSlug = decodeURIComponent(slug)
-  const filePath = path.join(process.cwd(), 'app', 'projects', `${decodedSlug}.mdx`)
+  const filePath = path.join(process.cwd(), 'app', '(site)', 'projects', `${decodedSlug}.mdx`)
   const fileContent = fs.readFileSync(filePath, 'utf8')
   const { data: frontmatter } = matter(fileContent)
 
@@ -46,8 +46,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const { default: Project } = await import(`@/projects/${slug}.mdx`)
-  const filePath = path.join(process.cwd(), 'app', 'projects', `${slug}.mdx`)
+  const { default: Project } = await import(`../${slug}.mdx`)
+  const filePath = path.join(process.cwd(), 'app', '(site)', 'projects', `${slug}.mdx`)
   const fileContent = fs.readFileSync(filePath, 'utf8')
   const { data: frontmatter } = matter(fileContent)
 

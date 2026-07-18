@@ -17,7 +17,7 @@ export interface Project {
 }
 
 export async function getAllProjects(): Promise<Project[]> {
-  const dir = path.join(process.cwd(), 'app', 'projects')
+  const dir = path.join(process.cwd(), 'app', '(site)', 'projects')
   const files = await fs.readdir(dir)
   const mdxFiles = files.filter((f) => f.endsWith('.mdx'))
   const projects = await Promise.all(
