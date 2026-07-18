@@ -83,12 +83,12 @@ describe('Mobile Navigation', () => {
     cy.get('[data-testid="hamburger-menu"]').click()
     cy.get('[role="dialog"]').should('be.visible')
 
-    // Blog link should be highlighted (white text)
-    cy.get('[role="dialog"]').contains('Blog').should('have.class', 'text-white')
+    // Blog link should be highlighted (valencia accent)
+    cy.get('[role="dialog"]').contains('Blog').should('have.class', 'text-valencia-600')
 
     // Other links should not be highlighted
-    cy.get('[role="dialog"]').contains('Home').should('have.class', 'text-slate-100')
-    cy.get('[role="dialog"]').contains('Projects').should('have.class', 'text-slate-100')
+    cy.get('[role="dialog"]').contains('Home').should('have.class', 'text-slate-500')
+    cy.get('[role="dialog"]').contains('Projects').should('have.class', 'text-slate-500')
 
     // Wait until animated items have fully settled
     cy.waitForMobileNavSettled()

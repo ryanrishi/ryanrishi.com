@@ -32,7 +32,7 @@ function DarkModeButton() {
   return (
     <button
       aria-label="Dark mode toggle"
-      className="rounded h-8 w-8 flex flex-row justify-center items-center bg-slate-200 text-slate-700 hover:bg-slate-300 dark:bg-slate-600 dark:text-slate-300 dark:hover:bg-slate-500 bg-opacity-75 transition-colors"
+      className="rounded h-8 w-8 flex flex-row justify-center items-center bg-slate-200 text-slate-700 hover:bg-slate-300 dark:bg-slate-600 dark:text-slate-300 dark:hover:bg-slate-500 cursor-pointer transition-colors"
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >
       <IconContext.Provider value={{ size: '16' }}>
@@ -150,7 +150,7 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
         </div>
         <div className="z-50 flex flex-row items-center gap-2">
           <DarkModeButton />
-          <div data-testid="hamburger-menu">
+          <div data-testid="hamburger-menu" className="cursor-pointer">
             <Hamburger
               toggled={isOpen}
               toggle={setIsOpen}
@@ -262,7 +262,7 @@ export default function Header() {
   }
 
   return (
-    <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:py-8 container mx-auto dark:text-slate-50 relative z-10 transition">
+    <header className="max-w-3xl flex flex-col md:flex-row justify-between p-4 md:py-8 container mx-auto dark:text-slate-50 relative z-10 transition">
       <div className="md:hidden">
         <MobileNav
           isOpen={isMobileNavOpen}

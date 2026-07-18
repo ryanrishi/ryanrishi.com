@@ -34,7 +34,7 @@ export default function Footer() {
 
   return (
     <footer>
-      <div className="container mx-auto max-w-4xl p-4 lg:py-8 flex flex-row justify-around">
+      <div className="container mx-auto max-w-3xl p-4 lg:py-8 flex flex-row justify-around">
         <div className="flex flex-col">
           <FooterLink href="/">Home</FooterLink>
           <FooterLink href="/blog">Blog</FooterLink>

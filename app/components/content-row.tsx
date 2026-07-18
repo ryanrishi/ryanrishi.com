@@ -20,12 +20,12 @@ export default function ContentRow({
   dateProps,
 }: ContentRowProps) {
   return (
-    <div className="group border-b border-slate-200 dark:border-slate-800 py-5" {...rowProps}>
+    <div className="group relative border-b border-slate-200 dark:border-slate-800 py-5" {...rowProps}>
       <div className="flex items-baseline justify-between gap-4">
-        <Heading className="m-0 text-base font-medium">
+        <Heading className="m-0 text-lg font-medium">
           <NextLink
             href={href}
-            className="text-slate-900 no-underline transition-colors group-hover:text-valencia-600 dark:text-slate-100 dark:group-hover:text-valencia-500"
+            className="text-slate-900 no-underline transition-colors after:absolute after:inset-0 group-hover:text-valencia-600 dark:text-slate-100 dark:group-hover:text-valencia-500"
           >
             {title}
           </NextLink>
