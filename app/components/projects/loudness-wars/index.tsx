@@ -167,10 +167,15 @@ const drawChart = async (svgRef: RefObject<SVGSVGElement | null>, setSelectedTra
   }
 
   function onMouseIn(e: MouseEvent, d) {
-    d3.select(this)
-      .transition()
-      .duration(transitionDuration)
-      .attr('r', 2 * r)
+    const circle = d3.select(this)
+    if (skipAnimations) {
+      circle.attr('r', 2 * r)
+    } else {
+      circle
+        .transition()
+        .duration(transitionDuration)
+        .attr('r', 2 * r)
+    }
 
     tooltip
       .interrupt()
@@ -198,7 +203,14 @@ const drawChart = async (svgRef: RefObject<SVGSVGElement | null>, setSelectedTra
   }
 
   function onMouseOut() {
-    d3.select(this)
+    const circle = d3.select(this)
+    if (skipAnimations) {
+      circle.attr('r', r)
+      tooltip.style('opacity', 0).style('display', 'none')
+      return
+    }
+
+    circle
       .transition()
       .duration(transitionDuration)
       .attr('r', r)
