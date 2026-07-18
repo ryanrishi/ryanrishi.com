@@ -3,12 +3,12 @@ import Link from 'next/link'
 
 export default function ProjectItem({ project, index = 0 }) {
   return (
-    <li className="border border-slate-200 dark:border-slate-700 rounded shadow hover:scale-105 transition-transform">
+    <li className="group">
       <Link href={`/projects/${project.slug}`}>
         {project.image && (
-          <div className="h-64">
+          <div className="h-64 overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-800">
             <Image
-              className="object-cover w-full h-full transition transform rounded-t"
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               src={project.image.src}
               alt={project.image.alt}
               width={project.image.width}
@@ -20,9 +20,9 @@ export default function ProjectItem({ project, index = 0 }) {
             />
           </div>
         )}
-        <div className="p-4">
-          <h3 className="font-semibold">{project.name}</h3>
-          <p>{project.description}</p>
+        <div className="pt-4">
+          <h3 className="font-semibold text-slate-900 transition-colors group-hover:text-valencia-600 dark:text-slate-100 dark:group-hover:text-valencia-500">{project.name}</h3>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{project.description}</p>
         </div>
       </Link>
     </li>

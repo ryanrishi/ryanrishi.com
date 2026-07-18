@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Test() {
-  const { default: Test } = await import('@/%5Ftest/test.mdx')
+  const { default: Test } = await import('./test.mdx')
 
   return (
     <>

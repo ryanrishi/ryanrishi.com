@@ -17,10 +17,10 @@ export const metadata: Metadata = {
 }
 
 export default async function Music() {
-  const { default: Music } = await import('@/music/music.mdx')
+  const { default: Music } = await import('./music.mdx')
 
   return (
-    <div className="prose dark:prose-invert max-w-screen-xl">
+    <div className="prose dark:prose-invert max-w-none">
       <FancyH1>Music</FancyH1>
       <Music />
     </div>

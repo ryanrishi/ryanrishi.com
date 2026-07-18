@@ -5,7 +5,7 @@ import { Squash as Hamburger } from 'hamburger-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
-import { Dispatch, SetStateAction, useEffect, useState, useSyncExternalStore } from 'react'
+import { Dispatch, ReactNode, SetStateAction, useEffect, useState, useSyncExternalStore } from 'react'
 import { HiOutlineMoon, HiOutlineSun } from 'react-icons/hi'
 import { ImGithub, ImLinkedin, ImSoundcloud, ImTwitter, ImYoutube } from 'react-icons/im'
 import { IconContext } from 'react-icons/lib'
@@ -32,7 +32,7 @@ function DarkModeButton() {
   return (
     <button
       aria-label="Dark mode toggle"
-      className="rounded h-8 w-8 flex flex-row justify-center items-center bg-slate-200 text-slate-700 hover:bg-slate-300 dark:bg-slate-600 dark:text-slate-300 dark:hover:bg-slate-500 bg-opacity-75 transition-colors"
+      className="rounded h-8 w-8 flex flex-row justify-center items-center bg-slate-200 text-slate-700 hover:bg-slate-300 dark:bg-slate-600 dark:text-slate-300 dark:hover:bg-slate-500 cursor-pointer transition-colors"
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >
       <IconContext.Provider value={{ size: '16' }}>
@@ -42,11 +42,29 @@ function DarkModeButton() {
   )
 }
 
-const HeaderLink = ({ className = '', href, children }) => (
-  <Link href={href} className={`italic uppercase font-bold mx-2 ${className}`}>
-    {children}
+const Wordmark = ({ className = '' }) => (
+  <Link href="/" className={`font-bold tracking-tight text-slate-900 dark:text-slate-50 ${className}`}>
+    Ryan Rishi
   </Link>
 )
+
+function NavLink({ href, children }: { href: string, children: ReactNode }) {
+  const pathname = usePathname()
+  const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href)
+
+  return (
+    <Link
+      href={href}
+      className={`font-mono text-sm tracking-tight mx-3 transition-colors ${
+        isActive
+          ? 'text-valencia-600 dark:text-valencia-500'
+          : 'text-slate-600 dark:text-slate-400 hover:text-valencia-600 dark:hover:text-valencia-500'
+      }`}
+    >
+      {children}
+    </Link>
+  )
+}
 
 function MobileNavItem({ item, index, isExiting, pathname }: {
   item: { title: string; href: string },
@@ -87,10 +105,10 @@ function MobileNavItem({ item, index, isExiting, pathname }: {
     >
       <Link
         href={item.href}
-        className={`block text-5xl font-bold tracking-tight leading-tight transition-all duration-200 ${
+        className={`block text-3xl font-bold tracking-tight leading-tight transition-colors duration-200 ${
           isActive
-            ? 'text-white'
-            : 'text-slate-100 hover:text-white'
+            ? 'text-valencia-600 dark:text-valencia-500'
+            : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-50'
         }`}
       >
         {item.title}
@@ -126,13 +144,13 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
   return (
     <>
       <div className="flex justify-between items-center">
-        <div className="flex flex-row items-center dark:text-green-200">
+        <div className="flex flex-row items-center gap-4 text-slate-900 dark:text-slate-50">
           <Logo width={100 / 3} />
-          <HeaderLink href="/">Ryan Rishi</HeaderLink>
+          <Wordmark />
         </div>
         <div className="z-50 flex flex-row items-center gap-2">
           <DarkModeButton />
-          <div data-testid="hamburger-menu">
+          <div data-testid="hamburger-menu" className="cursor-pointer">
             <Hamburger
               toggled={isOpen}
               toggle={setIsOpen}
@@ -167,7 +185,7 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
                 bounce: 0.2,
                 duration: 0.6,
               }}
-              className="fixed top-0 right-0 h-full w-full bg-gradient-to-br from-slate-800 to-slate-900 dark:from-slate-900 dark:to-black z-30 flex flex-col justify-center items-center px-8 text-white"
+              className="fixed top-0 right-0 h-full w-full bg-slate-50 dark:bg-slate-900 z-30 flex flex-col justify-center items-center px-8 text-slate-900 dark:text-slate-50"
             >
               {/* Main Navigation */}
               <motion.ul
@@ -201,7 +219,7 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: 20, opacity: 0 }}
                 transition={{ delay: 0.8, duration: 0.4 }}
-                className="flex items-center gap-x-6 text-2xl text-slate-300 dark:text-slate-400"
+                className="flex items-center gap-x-6 text-2xl text-slate-500 dark:text-slate-400"
               >
                 {[
                   { href: 'https://github.com/ryanrishi', icon: ImGithub, label: 'GitHub' },
@@ -214,7 +232,7 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
                     key={href}
                     href={href}
                     aria-label={label}
-                    className="hover:text-slate-100 dark:hover:text-slate-200 transition-colors duration-200 hover:scale-110"
+                    className="hover:text-slate-900 dark:hover:text-slate-200 transition-colors duration-200 hover:scale-110"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -232,19 +250,11 @@ function MobileNav({ isOpen, setIsOpen }: { isOpen: boolean, setIsOpen: Dispatch
 
 export default function Header() {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false)
-  const pathname = usePathname()
-
 
   useDisableBodyScroll(isMobileNavOpen)
 
-  // hide this page on links page
-  // this is yet another hack around server components since usePathname is a client-side hook
-  if (pathname === '/links') {
-    return null
-  }
-
   return (
-    <header className="max-w-4xl flex flex-col md:flex-row justify-between p-4 md:py-8 container mx-auto dark:text-slate-50 relative z-10 transition">
+    <header className="max-w-3xl flex flex-col md:flex-row justify-between p-4 md:py-8 container mx-auto dark:text-slate-50 relative z-10 transition">
       <div className="md:hidden">
         <MobileNav
           isOpen={isMobileNavOpen}
@@ -252,18 +262,18 @@ export default function Header() {
         />
       </div>
       <nav className="hidden md:flex flex-row justify-between items-center w-full">
-        <div className="flex flex-row items-center dark:text-green-200">
+        <div className="flex flex-row items-center gap-4 text-slate-900 dark:text-slate-50">
           <Logo width={100 / 3} />
-          <HeaderLink href="/" className="ml-4">Ryan Rishi</HeaderLink>
+          <Wordmark />
         </div>
         <div className="flex flex-row items-center">
           {items.map(({ title, href }) => (
-            <HeaderLink
+            <NavLink
               key={href}
               href={href}
             >
               {title}
-            </HeaderLink>
+            </NavLink>
           ))}
           <DarkModeButton />
         </div>

@@ -25,6 +25,7 @@
     "dayjs": "^1.11.21",
     "eslint-config-next": "^16.2.9",
     "framer-motion": "12.38.0",
+    "geist": "^1.7.2",
     "gray-matter": "^4.0.3",
     "hamburger-react": "^2.5.2",
     "next": "^16.2.7",

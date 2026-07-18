@@ -31,8 +31,8 @@ local.ryanrishi.com  127.0.0.1
 This is a Next.js 14 personal website with the following key characteristics:
 
 ### Content Management
-- **Blog Posts**: MDX files in `app/blog/` with frontmatter metadata
-- **Projects**: MDX files in `app/projects/` with frontmatter metadata  
+- **Blog Posts**: MDX files in `app/(site)/blog/` with frontmatter metadata
+- **Projects**: MDX files in `app/(site)/projects/` with frontmatter metadata  
 - **Content Loading**: Server-side dynamic imports read metadata from MDX files at build time
 - **Sorting**: Posts sorted by `publishedAt` date (desc), Projects sorted by `date` (desc)
 
@@ -51,7 +51,8 @@ This is a Next.js 14 personal website with the following key characteristics:
 
 ### Page Structure
 - **App Router**: Next.js 13+ file-based routing in `app/` directory
-- **Layout**: Global layout with Header/Footer, Google Analytics, Vercel Analytics
+- **Route group**: Chromed pages live in an `app/(site)/` route group whose layout renders the shared `SiteChrome` (Header + container + Footer). The root layout holds only Providers + analytics, so `app/links/` renders chrome-free. `(site)` does not affect URLs.
+- **Layout**: Root layout wraps everything in Providers + Google/Vercel Analytics; `app/(site)/layout.tsx` adds the visible chrome. The 404 (`app/not-found.tsx`) renders inside `SiteChrome` to keep the chrome.
 - **Dynamic Routes**: `[slug]` patterns for blog posts and projects
 - **Tags**: Tag-based filtering for both blog and projects
 

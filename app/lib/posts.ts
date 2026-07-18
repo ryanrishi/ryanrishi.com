@@ -13,7 +13,7 @@ export interface Post {
 }
 
 export async function getAllPosts(): Promise<Post[]> {
-  const dir = path.join(process.cwd(), 'app', 'blog')
+  const dir = path.join(process.cwd(), 'app', '(site)', 'blog')
   const files = await fs.readdir(dir)
   const mdxFiles = files.filter((f) => f.endsWith('.mdx'))
   const posts = await Promise.all(

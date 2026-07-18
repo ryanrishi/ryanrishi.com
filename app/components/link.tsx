@@ -7,7 +7,7 @@ interface LinkProps {
   className?: string;
 }
 
-const className = 'underline-offset-4 decoration-neutral-600 dark:decoration-neutral-200'
+const className = 'text-valencia-600 dark:text-valencia-500 underline-offset-4 hover:underline'
 
 export default function Link({ href, children, ...props }: LinkProps) {
   const isInternalLink = href?.startsWith('/') || href?.startsWith('#')

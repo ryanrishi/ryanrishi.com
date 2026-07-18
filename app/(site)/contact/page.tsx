@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   },
 }
 
-const sharedInputClassNames = 'block w-full border rounded py-3 px-4 mb-3 mt-2 leading-tight appearance-none text-slate-800 bg-slate-100 dark:text-slate-100 dark:bg-slate-700 border-slate-300 hover:border-slate-400 transition'
+const sharedInputClassNames = 'block w-full border rounded py-3 px-4 mb-3 mt-2 leading-tight appearance-none text-slate-800 bg-slate-100 dark:text-slate-100 dark:bg-slate-800 border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 focus:border-valencia-500 focus:outline-none focus:ring-1 focus:ring-valencia-500 transition'
 
 function Label({ htmlFor, children }) {
   return (
     <label
-      className="block uppercase tracking-wide text-slate-600 dark:text-slate-300 text-xs font-bold mb-2"
+      className="block font-mono uppercase tracking-wide text-slate-600 dark:text-slate-400 text-xs mb-2"
       htmlFor={htmlFor}
     >
       {children}
@@ -30,6 +30,9 @@ export default function Contact() {
   return (
     <div className="w-full max-w-screen-xl">
       <FancyH1>Contact</FancyH1>
+      <p className="mb-8 max-w-prose text-slate-600 dark:text-slate-400">
+        Have a question, an idea, or just want to talk shop or music? Drop me a note below and I&apos;ll get back to you.
+      </p>
       <form
         className="mx-auto"
         action="https://formspree.io/f/mleppawq"
@@ -37,11 +40,11 @@ export default function Contact() {
       >
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
-            <Label htmlFor="grid-full-name">
-              Your Name
+            <Label htmlFor="name">
+              Name
               <input
                 type="text"
-                id="grid-full-name"
+                id="name"
                 name="name"
                 className={sharedInputClassNames}
                 required
@@ -51,8 +54,8 @@ export default function Contact() {
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
-            <Label htmlFor="grid-password">
-              E-mail
+            <Label htmlFor="email">
+              Email
               <input
                 id="email"
                 type="email"
@@ -65,7 +68,7 @@ export default function Contact() {
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full px-3">
-            <Label htmlFor="grid-password">
+            <Label htmlFor="message">
               Message
               <textarea
                 id="message"
@@ -80,7 +83,7 @@ export default function Contact() {
           <div className="md:w-1/3">
             <button
               type="submit"
-              className="shadow bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-700 transition focus:shadow-outline focus:outline-teal-300 dark:focus:outline-teal-800 text-teal-50 dark:text-teal-50 font-semibold py-2 px-4 uppercase italic rounded"
+              className="rounded bg-valencia-500 hover:bg-valencia-600 text-white font-mono text-sm py-2 px-5 cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-valencia-400 dark:focus:ring-valencia-500"
             >
               Send
             </button>

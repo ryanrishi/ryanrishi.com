@@ -22,7 +22,7 @@ export async function generateStaticParams () {
 export async function generateMetadata ({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const decodedSlug = decodeURIComponent(slug)
-  const filePath = path.join(process.cwd(), 'app', 'blog', `${decodedSlug}.mdx`)
+  const filePath = path.join(process.cwd(), 'app', '(site)', 'blog', `${decodedSlug}.mdx`)
   const fileContent = fs.readFileSync(filePath, 'utf8')
   const { data: frontmatter } = matter(fileContent)
 
@@ -49,15 +49,15 @@ export async function generateMetadata ({ params }: { params: Promise<{ slug: st
 
 export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const { default: Post } = await import(`@/blog/${slug}.mdx`)
-  const filePath = path.join(process.cwd(), 'app', 'blog', `${slug}.mdx`)
+  const { default: Post } = await import(`../${slug}.mdx`)
+  const filePath = path.join(process.cwd(), 'app', '(site)', 'blog', `${slug}.mdx`)
   const fileContent = fs.readFileSync(filePath, 'utf8')
   const { data: frontmatter } = matter(fileContent)
 
   return (
     <>
       <h1>{frontmatter.title}</h1>
-      <p className="-mt-4 text-slate-500">{dayjs.utc(frontmatter.publishedAt).format('MMMM D, YYYY')}</p>
+      <p className="-mt-4 font-mono text-sm text-slate-500">{dayjs.utc(frontmatter.publishedAt).format('MMMM D, YYYY')}</p>
 
       <Post />
 

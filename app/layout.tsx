@@ -2,11 +2,10 @@ import './globals.css'
 
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { GeistMono } from 'geist/font/mono'
+import { GeistSans } from 'geist/font/sans'
 import Script from 'next/script'
 import type { Metadata } from 'next/types'
-
-import Footer from '@/components/footer'
-import Header from '@/components/header'
 
 import Providers from './providers'
 
@@ -46,7 +45,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <head>
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
         <Script id="google-analytics">
@@ -63,13 +62,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <Providers>
-          <div className="bg-slate-50 dark:bg-slate-800 dark:text-slate-400">
-            <Header />
-            <div className="container mx-auto max-w-4xl p-4">
-              {children}
-            </div>
-          <Footer />
-        </div>
+          {children}
         </Providers>
         <Analytics />
         <SpeedInsights />
