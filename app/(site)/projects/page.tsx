@@ -2,17 +2,29 @@ import { compareDesc } from 'date-fns'
 import { Metadata } from 'next'
 
 import { FancyH1 } from '@/components/headings'
+import { baseOpenGraph, baseTwitter, ogImage, SITE_URL } from '@/lib/metadata'
 import { getAllProjects } from '@/lib/projects'
 
 import ProjectItem from './project-item'
 
+const title = 'Projects'
+const description = 'Data visualization, conference talks, and web scrapers.'
+
 export const metadata: Metadata = {
-  title: 'Projects',
+  title,
+  description,
   openGraph: {
-    title: 'Projects',
+    ...baseOpenGraph,
+    title,
+    description,
+    url: `${SITE_URL}/projects`,
+    images: [ogImage(title, description)],
   },
   twitter: {
-    title: 'Projects',
+    ...baseTwitter,
+    title,
+    description,
+    images: [ogImage(title, description)],
   },
 }
 

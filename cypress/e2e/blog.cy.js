@@ -17,6 +17,11 @@ describe('Blog', () => {
       cy.get('head meta[property="og:title"]').should('have.attr', 'content', title)
     })
 
+    it('og:image', () => {
+      cy.get('head meta[property="og:image"]').should('have.attr', 'content').and('include', '/og?title=Blog')
+      cy.get('head meta[name="twitter:image"]').should('have.attr', 'content').and('include', '/og?title=Blog')
+    })
+
     it('og:article', () => {
       cy.get('[data-test-blog-post] h2 a').first().click()
       cy.url().should('match', /\/blog\/[0-9a-z-]*$/)
@@ -24,6 +29,9 @@ describe('Blog', () => {
       cy.get('head meta[property="article:author"]').should('have.attr', 'content', 'Ryan Rishi')
       cy.get('head meta[property="article:published_time"]').should('have.attr', 'content')
         .and('match', /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z/)
+      // regression guard: post image resolves with a single slash (no `//img`)
+      cy.get('head meta[property="og:image"]').should('have.attr', 'content')
+        .and('match', /^https:\/\/ryanrishi\.com\/img\/.+/)
     })
   })
 

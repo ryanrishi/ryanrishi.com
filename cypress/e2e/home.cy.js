@@ -14,6 +14,11 @@ describe('Home', () => {
     it('author', () => {
       cy.get('head meta[name="author"]').should('have.attr', 'content', 'Ryan Rishi')
     })
+
+    it('og:image', () => {
+      cy.get('head meta[property="og:image"]').should('have.attr', 'content', 'https://ryanrishi.com/og')
+      cy.get('head meta[name="twitter:image"]').should('have.attr', 'content', 'https://ryanrishi.com/og')
+    })
   })
 
   it('renders the home page', () => {

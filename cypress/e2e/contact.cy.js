@@ -7,6 +7,8 @@ describe('Contact', () => {
   it('meta', () => {
     const title = 'Contact | Ryan Rishi'
     cy.title().should('eq', title)
+    cy.get('head meta[property="og:title"]').should('have.attr', 'content', title)
+    cy.get('head meta[property="og:image"]').should('have.attr', 'content').and('include', '/og?title=Contact')
   })
 
   it('renders contact page', () => {

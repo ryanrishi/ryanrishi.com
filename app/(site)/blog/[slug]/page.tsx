@@ -7,6 +7,7 @@ import type { Metadata } from 'next'
 import path from 'path'
 
 import TagPill from '@/components/tag-pill'
+import { baseOpenGraph, baseTwitter, ogImage, SITE_NAME, SITE_URL } from '@/lib/metadata'
 import { getAllPosts } from '@/lib/posts'
 
 dayjs.extend(utc)
@@ -26,23 +27,27 @@ export async function generateMetadata ({ params }: { params: Promise<{ slug: st
   const fileContent = fs.readFileSync(filePath, 'utf8')
   const { data: frontmatter } = matter(fileContent)
 
+  const images = [frontmatter.image ?? ogImage(frontmatter.title)]
+
   return {
     title: frontmatter.title,
     description: frontmatter.description,
     openGraph: {
-      title: frontmatter.title,
+      ...baseOpenGraph,
       type: 'article',
+      title: frontmatter.title,
+      description: frontmatter.description,
+      url: `${SITE_URL}/blog/${decodedSlug}`,
       publishedTime: frontmatter.publishedAt,
-      authors: 'Ryan Rishi',
-      url: `https://ryanrishi.com/blog/${decodedSlug}`,
-      images: [
-        { url: `https://ryanrishi.com/${frontmatter.image}` },
-      ],
-    tags: frontmatter.tags,
+      authors: SITE_NAME,
+      tags: frontmatter.tags,
+      images,
     },
     twitter: {
+      ...baseTwitter,
       title: frontmatter.title,
-      images: `https://ryanrishi.com/${frontmatter.image}`,
+      description: frontmatter.description,
+      images,
     },
   }
 }

@@ -4,6 +4,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import Link from '@/components/link'
+import { baseOpenGraph, baseTwitter, ogImage, SITE_URL } from '@/lib/metadata'
 import { getAllPosts } from '@/lib/posts'
 import { getAllProjects } from '@/lib/projects'
 
@@ -23,16 +24,23 @@ export async function generateStaticParams() {
 
 export const generateMetadata = async ({ params }: { params: Promise<{ tag: string }> }): Promise<Metadata> => {
   const { tag } = await params
+  const description = `Content tagged with "${tag}"`
 
   return {
     title: tag,
-    description: `Content tagged with "${tag}"`,
+    description,
     openGraph: {
+      ...baseOpenGraph,
       title: tag,
-      url: `https://ryanrishi.com/tags/${kebabCase(tag)}`,
+      description,
+      url: `${SITE_URL}/tags/${kebabCase(tag)}`,
+      images: [ogImage(tag, description)],
     },
     twitter: {
+      ...baseTwitter,
       title: tag,
+      description,
+      images: [ogImage(tag, description)],
     },
   }
 }

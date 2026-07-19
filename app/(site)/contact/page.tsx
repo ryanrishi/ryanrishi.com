@@ -2,14 +2,26 @@ import classNames from 'classnames'
 import { Metadata } from 'next/types'
 
 import { FancyH1 } from '@/components/headings'
+import { baseOpenGraph, baseTwitter, ogImage, SITE_URL } from '@/lib/metadata'
+
+const title = 'Contact'
+const description = 'Have a question, an idea, or just want to talk shop or music? Drop me a note.'
 
 export const metadata: Metadata = {
-  title: 'Contact',
+  title,
+  description,
   openGraph: {
-    title: 'Contact',
+    ...baseOpenGraph,
+    title,
+    description,
+    url: `${SITE_URL}/contact`,
+    images: [ogImage(title, description)],
   },
   twitter: {
-    title: 'Contact',
+    ...baseTwitter,
+    title,
+    description,
+    images: [ogImage(title, description)],
   },
 }
 
