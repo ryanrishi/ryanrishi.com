@@ -7,36 +7,34 @@ import { GeistSans } from 'geist/font/sans'
 import Script from 'next/script'
 import type { Metadata } from 'next/types'
 
+import { baseOpenGraph, baseTwitter, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/metadata'
+
 import Providers from './providers'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ryanrishi.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Ryan Rishi',
-    template: '%s | Ryan Rishi',
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
+  description: SITE_DESCRIPTION,
   authors: {
-    name: 'Ryan Rishi',
-    url: new URL('https://ryanrishi.com'),
+    name: SITE_NAME,
+    url: new URL(SITE_URL),
   },
   openGraph: {
-    type: 'website',
+    ...baseOpenGraph,
     title: {
-      default: 'Ryan Rishi',
-      template: '%s | Ryan Rishi',
+      default: SITE_NAME,
+      template: `%s | ${SITE_NAME}`,
     },
-    description: 'Full-stack software engineer and musician who loves cooking, camping, and flying.',
-    url: 'https://ryanrishi.com',
-    siteName: 'Ryan Rishi',
-    locale: 'en_US',
   },
   twitter: {
+    ...baseTwitter,
     title: {
-      default: 'Ryan Rishi',
-      template: '%s | Ryan Rishi',
+      default: SITE_NAME,
+      template: `%s | ${SITE_NAME}`,
     },
-    creator: '@ryanrishi',
-    card: 'summary_large_image',
   },
   verification: {
     google: 'kausNF9hQubv5pYpPGZt6JjoZ45qF__IlkNNrlr',

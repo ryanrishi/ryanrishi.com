@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 import path from 'path'
 
 import TagPill from '@/components/tag-pill'
+import { baseOpenGraph, baseTwitter, ogImage, SITE_URL } from '@/lib/metadata'
 import { getAllProjects } from '@/lib/projects'
 
 
@@ -23,23 +24,25 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const fileContent = fs.readFileSync(filePath, 'utf8')
   const { data: frontmatter } = matter(fileContent)
 
+  const images = [frontmatter.image?.src ?? ogImage(frontmatter.name)]
+
   return {
     title: frontmatter.name,
     description: frontmatter.description,
     openGraph: {
-      title: frontmatter.name,
+      ...baseOpenGraph,
       type: 'article',
+      title: frontmatter.name,
+      description: frontmatter.description,
+      url: `${SITE_URL}/projects/${decodedSlug}`,
       publishedTime: frontmatter.date,
-      url: `https://ryanrishi.com/projects/${decodedSlug}`,
-      ...(frontmatter.image && {
-        images: [{ url: `https://ryanrishi.com${frontmatter.image.src}` }],
-      }),
+      images,
     },
     twitter: {
+      ...baseTwitter,
       title: frontmatter.name,
-      ...(frontmatter.image && {
-        images: `https://ryanrishi.com${frontmatter.image.src}`,
-      }),
+      description: frontmatter.description,
+      images,
     },
   }
 }

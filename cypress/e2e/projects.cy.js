@@ -15,6 +15,19 @@ describe('Projects', () => {
       cy.title().should('eq', title)
       cy.get('head meta[property="og:title"]').should('have.attr', 'content', title)
     })
+
+    it('og:image', () => {
+      cy.get('head meta[property="og:image"]').should('have.attr', 'content').and('include', '/og?title=Projects')
+      cy.get('head meta[name="twitter:image"]').should('have.attr', 'content').and('include', '/og?title=Projects')
+    })
+
+    it('og:article', () => {
+      cy.get('li a').first().click()
+      cy.url().should('include', '/projects/')
+      cy.get('head meta[property="og:type"]').should('have.attr', 'content', 'article')
+      cy.get('head meta[property="og:image"]').should('have.attr', 'content')
+        .and('match', /^https:\/\/ryanrishi\.com\/img\/.+/)
+    })
   })
 
   it('renders the project page', () => {

@@ -4,17 +4,29 @@ import { Metadata } from 'next'
 
 import ContentRow from '@/components/content-row'
 import { FancyH1 } from '@/components/headings'
+import { baseOpenGraph, baseTwitter, ogImage, SITE_URL } from '@/lib/metadata'
 import { getAllPosts } from '@/lib/posts'
 
 dayjs.extend(utc)
 
+const title = 'Blog'
+const description = 'Writing about technology, music, and life.'
+
 export const metadata: Metadata = {
-  title: 'Blog',
+  title,
+  description,
   openGraph: {
-    title: 'Blog',
+    ...baseOpenGraph,
+    title,
+    description,
+    url: `${SITE_URL}/blog`,
+    images: [ogImage(title, description)],
   },
   twitter: {
-    title: 'Blog',
+    ...baseTwitter,
+    title,
+    description,
+    images: [ogImage(title, description)],
   },
 }
 
