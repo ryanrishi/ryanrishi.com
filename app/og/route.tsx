@@ -2,10 +2,12 @@ import { ImageResponse } from 'next/og'
 
 import { SITE_DESCRIPTION, SITE_NAME } from '@/lib/metadata'
 
+const clamp = (value: string, max: number) => value.length > max ? `${value.slice(0, max - 1)}…` : value
+
 export function GET(request: Request) {
   const { searchParams } = new URL(request.url)
-  const title = searchParams.get('title') ?? SITE_NAME
-  const subtitle = searchParams.get('subtitle') ?? SITE_DESCRIPTION
+  const title = clamp(searchParams.get('title') ?? SITE_NAME, 100)
+  const subtitle = clamp(searchParams.get('subtitle') ?? SITE_DESCRIPTION, 200)
 
   return new ImageResponse(
     (

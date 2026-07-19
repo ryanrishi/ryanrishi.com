@@ -3,16 +3,28 @@ import type { Metadata } from 'next'
 
 import { FancyH1 } from '@/components/headings'
 import TagPill from '@/components/tag-pill'
+import { baseOpenGraph, baseTwitter, ogImage, SITE_URL } from '@/lib/metadata'
 import { getAllPosts } from '@/lib/posts'
 import { getAllProjects } from '@/lib/projects'
 
+const title = 'Tags'
+const description = 'Browse posts and projects by topic.'
+
 export const metadata: Metadata = {
-  title: 'Tags',
+  title,
+  description,
   openGraph: {
-    title: 'Tags',
+    ...baseOpenGraph,
+    title,
+    description,
+    url: `${SITE_URL}/tags`,
+    images: [ogImage(title, description)],
   },
   twitter: {
-    title: 'Tags',
+    ...baseTwitter,
+    title,
+    description,
+    images: [ogImage(title, description)],
   },
 }
 

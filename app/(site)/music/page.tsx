@@ -1,18 +1,26 @@
 import { Metadata } from 'next'
 
 import { FancyH1 } from '@/components/headings'
+import { baseOpenGraph, baseTwitter, ogImage, SITE_URL } from '@/lib/metadata'
+
+const title = 'Music'
+const description = 'My music projects and performances'
 
 export const metadata: Metadata = {
-  title: 'Music',
-  description: 'My music projects and performances',
+  title,
+  description,
   openGraph: {
-    title: 'Music',
-    description: 'My music projects and performances',
+    ...baseOpenGraph,
+    title,
+    description,
+    url: `${SITE_URL}/music`,
+    images: [ogImage(title, description)],
   },
   twitter: {
-    card: 'summary',
-    title: 'Music',
-    description: 'My music projects and performances',
+    ...baseTwitter,
+    title,
+    description,
+    images: [ogImage(title, description)],
   },
 }
 
