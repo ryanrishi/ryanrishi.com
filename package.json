@@ -39,7 +39,7 @@
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "4.0.1",
     "remark-mdx-frontmatter": "^5.2.0",
-    "sharp": "^0.34.3",
+    "sharp": "^0.35.0",
     "shiki": "^4.2.0",
     "unified": "^11.0.5"
   },
@@ -58,7 +58,7 @@
     "eslint-plugin-cypress": "^6.4.1",
     "lodash.isempty": "^4.4.0",
     "lodash.kebabcase": "^4.1.1",
-    "postcss": "8.5.15",
+    "postcss": "8.5.16",
     "start-server-and-test": "3.0.5",
     "tailwindcss": "^4.3.1",
     "typescript": "6.0.3"
