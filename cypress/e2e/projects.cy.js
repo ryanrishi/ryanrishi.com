@@ -49,6 +49,11 @@ describe('Projects', () => {
         cy.get('li a').eq(i).click()
         cy.url().should('include', '/projects/')
         cy.waitForLogoAnimations()
+        cy.url().then((url) => {
+          if (url.includes('loudness-wars')) {
+            cy.get('svg [data-test-trendline="true"]') // wait for chart to finish rendering
+          }
+        })
         cy.get('h1').scrollIntoView()
         cy.get('h1').first().then(($title) => {
           const title = $title.text()
