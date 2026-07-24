@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 
 import { FancyH1 } from '@/components/headings'
 
@@ -6,6 +7,10 @@ export const metadata: Metadata = {
   title: 'test',
   description: 'this is only a test',
   keywords: ['test', 'second tag'],
+  robots: {
+    index: false,
+    follow: false,
+  },
   openGraph: {
     type: 'article',
     title: 'test',
@@ -22,6 +27,10 @@ export const metadata: Metadata = {
 }
 
 export default async function Test() {
+  if (process.env.VERCEL_ENV === 'production') {
+    notFound()
+  }
+
   const { default: Test } = await import('./test.mdx')
 
   return (
