@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
+  alternates: {
+    types: { 'application/rss+xml': '/feed.xml' },
+  },
   authors: {
     name: SITE_NAME,
     url: new URL(SITE_URL),
