@@ -22,11 +22,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...staticRoutes.map(route => ({ url: `${SITE_URL}${route}` })),
     ...posts.map(post => ({
       url: `${SITE_URL}/blog/${post.slug}`,
-      lastModified: post.publishedAt,
+      lastModified: new Date(post.publishedAt),
     })),
     ...projects.map(project => ({
       url: `${SITE_URL}/projects/${project.slug}`,
-      lastModified: project.date,
+      lastModified: new Date(project.date),
     })),
     ...tags.map(tag => ({ url: `${SITE_URL}/tags/${kebabCase(tag)}` })),
   ]
