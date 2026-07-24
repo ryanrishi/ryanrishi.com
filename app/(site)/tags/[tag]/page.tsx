@@ -1,9 +1,8 @@
-import isEmpty from 'lodash.isempty'
-import kebabCase from 'lodash.kebabcase'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 import Link from '@/components/link'
+import { kebabCase } from '@/lib/kebab-case'
 import { baseOpenGraph, baseTwitter, ogImage, SITE_URL } from '@/lib/metadata'
 import { getAllPosts } from '@/lib/posts'
 import { getAllProjects } from '@/lib/projects'
@@ -15,8 +14,8 @@ export async function generateStaticParams() {
   ])
 
   const allTags = Array.from(new Set([
-    ...posts.flatMap(post => post.tags),
-    ...projects.flatMap(project => project.tags),
+    ...posts.flatMap(post => post.tags ?? []),
+    ...projects.flatMap(project => project.tags ?? []),
   ]))
 
   return allTags.map(tag => ({ tag: kebabCase(tag) }))
@@ -55,7 +54,7 @@ export default async function Tag({ params }: { params: Promise<{ tag: string }>
   const postsWithTag = posts.filter(post => post.tags.map(kebabCase).includes(tag))
   const projectsWithTag = projects.filter(project => project.tags?.map(kebabCase).includes(tag))
 
-  if (isEmpty(postsWithTag) && isEmpty(projectsWithTag)) {
+  if (postsWithTag.length === 0 && projectsWithTag.length === 0) {
     notFound()
   }
 
@@ -63,14 +62,14 @@ export default async function Tag({ params }: { params: Promise<{ tag: string }>
     <>
       <div className="prose dark:prose-invert">
         <h1>Content tagged with <code>{tag.replace('-', ' ')}</code></h1>
-        {!isEmpty(postsWithTag) && <h3>Posts</h3>}
+        {postsWithTag.length > 0 && <h3>Posts</h3>}
         {postsWithTag.map((post) => (
           <li key={post.slug}>
             <Link href={`/blog/${post.slug}`}>{post.title}</Link>
           </li>
         ))}
 
-        {!isEmpty(projectsWithTag) && <h3>Projects</h3>}
+        {projectsWithTag.length > 0 && <h3>Projects</h3>}
         {projectsWithTag.map((project) => (
           <li key={project.slug}>
             <Link href={`/projects/${project.slug}`}>{project.name}</Link>

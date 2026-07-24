@@ -1,8 +1,8 @@
-import kebabCase from 'lodash.kebabcase'
 import type { Metadata } from 'next'
 
 import { FancyH1 } from '@/components/headings'
 import TagPill from '@/components/tag-pill'
+import { kebabCase } from '@/lib/kebab-case'
 import { baseOpenGraph, baseTwitter, ogImage, SITE_URL } from '@/lib/metadata'
 import { getAllPosts } from '@/lib/posts'
 import { getAllProjects } from '@/lib/projects'
