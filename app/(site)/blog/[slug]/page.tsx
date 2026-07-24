@@ -2,11 +2,11 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import fs from 'fs'
 import matter from 'gray-matter'
-import kebabCase from 'lodash.kebabcase'
 import type { Metadata } from 'next'
 import path from 'path'
 
 import TagPill from '@/components/tag-pill'
+import { kebabCase } from '@/lib/kebab-case'
 import { baseOpenGraph, baseTwitter, ogImage, SITE_NAME, SITE_URL } from '@/lib/metadata'
 import { getAllPosts } from '@/lib/posts'
 
