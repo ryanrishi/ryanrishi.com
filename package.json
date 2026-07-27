@@ -22,7 +22,7 @@
     "classnames": "^2.3.1",
     "d3": "^7.9.0",
     "eslint-config-next": "^16.2.9",
-    "framer-motion": "12.38.0",
+    "framer-motion": "12.42.2",
     "geist": "^1.7.2",
     "gray-matter": "^4.0.3",
     "hamburger-react": "^2.5.2",
