@@ -58,7 +58,7 @@ This is a Next.js personal website with the following key characteristics:
 
 ### Key Libraries
 - **Animations**: Framer Motion
-- **Dates**: date-fns for post sorting
+- **Dates**: no date library — `app/lib/format-date.ts` wraps `Intl.DateTimeFormat`, and sorting compares `Date.getTime()`
 - **Icons**: react-icons
 - **Data Visualization**: D3.js (transpiled in next.config.mjs)
 - **Analytics**: Google Analytics + Vercel Analytics/Speed Insights
