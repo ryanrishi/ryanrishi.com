@@ -1,16 +1,12 @@
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
-import { compareDesc } from 'date-fns'
 import NextLink from 'next/link'
 import { ReactNode } from 'react'
 
 import ContentRow from '@/components/content-row'
 import { FancyH1 } from '@/components/headings'
 import Link from '@/components/link'
+import { formatShortDate } from '@/lib/format-date'
 import { getAllPosts } from '@/lib/posts'
 import { getAllProjects } from '@/lib/projects'
-
-dayjs.extend(utc)
 
 interface SectionProps {
   title: { text: string; url?: string; }
@@ -47,8 +43,8 @@ export default async function Index() {
     getAllProjects(),
   ])
 
-  const recentPosts = posts.sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt))).slice(0, 3)
-  const recentProjects = projects.sort((a, b) => compareDesc(new Date(a.date), new Date(b.date))).slice(0, 3)
+  const recentPosts = posts.slice(0, 3)
+  const recentProjects = projects.slice(0, 3)
 
   return (
     <>
@@ -74,7 +70,7 @@ export default async function Index() {
             key={post.slug}
             href={`/blog/${post.slug}`}
             title={post.title}
-            date={dayjs.utc(post.publishedAt).format('MMM YYYY')}
+            date={formatShortDate(post.publishedAt)}
             description={post.description}
           />
         ))}
@@ -90,7 +86,7 @@ export default async function Index() {
             key={project.slug}
             href={`/projects/${project.slug}`}
             title={project.name}
-            date={dayjs.utc(project.date).format('MMM YYYY')}
+            date={formatShortDate(project.date)}
             description={project.description}
           />
         ))}

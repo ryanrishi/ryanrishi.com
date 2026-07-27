@@ -21,8 +21,6 @@
     "@vercel/speed-insights": "^2.0.0",
     "classnames": "^2.3.1",
     "d3": "^7.9.0",
-    "date-fns": "^4.4.0",
-    "dayjs": "^1.11.21",
     "eslint-config-next": "^16.2.9",
     "framer-motion": "12.38.0",
     "geist": "^1.7.2",
@@ -40,8 +38,7 @@
     "remark-gfm": "4.0.1",
     "remark-mdx-frontmatter": "^5.2.0",
     "sharp": "^0.35.1",
-    "shiki": "^4.3.1",
-    "unified": "^11.0.5"
+    "shiki": "^4.3.1"
   },
   "devDependencies": {
     "@percy/cli": "^1.31.13",

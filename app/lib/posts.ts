@@ -1,4 +1,3 @@
-import { compareDesc } from 'date-fns'
 import fs from 'fs/promises'
 import matter from 'gray-matter'
 import path from 'path'
@@ -25,5 +24,5 @@ export async function getAllPosts(): Promise<Post[]> {
       return { slug, ...data } as Post
     })
   )
-  return posts.sort((a, b) => compareDesc(new Date(a.publishedAt), new Date(b.publishedAt)))
+  return posts.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
 }

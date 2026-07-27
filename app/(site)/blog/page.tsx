@@ -1,13 +1,10 @@
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
 import { Metadata } from 'next'
 
 import ContentRow from '@/components/content-row'
 import { FancyH1 } from '@/components/headings'
+import { formatDate } from '@/lib/format-date'
 import { baseOpenGraph, baseTwitter, ogImage, SITE_URL } from '@/lib/metadata'
 import { getAllPosts } from '@/lib/posts'
-
-dayjs.extend(utc)
 
 const title = 'Blog'
 const description = 'Writing about technology, music, and life.'
@@ -42,7 +39,7 @@ export default async function BlogIndex() {
             key={post.slug}
             href={`/blog/${post.slug}`}
             title={post.title}
-            date={dayjs.utc(post.publishedAt).format('MMMM D, YYYY')}
+            date={formatDate(post.publishedAt)}
             description={post.description}
             headingLevel="h2"
             rowProps={{ 'data-test-blog-post': true }}
