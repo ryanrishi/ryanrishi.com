@@ -1,16 +1,13 @@
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
 import fs from 'fs'
 import matter from 'gray-matter'
 import type { Metadata } from 'next'
 import path from 'path'
 
 import TagPill from '@/components/tag-pill'
+import { formatDate } from '@/lib/format-date'
 import { kebabCase } from '@/lib/kebab-case'
 import { baseOpenGraph, baseTwitter, ogImage, SITE_NAME, SITE_URL } from '@/lib/metadata'
 import { getAllPosts } from '@/lib/posts'
-
-dayjs.extend(utc)
 
 export const dynamicParams = false
 
@@ -62,7 +59,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
   return (
     <>
       <h1>{frontmatter.title}</h1>
-      <p className="-mt-4 font-mono text-sm text-slate-500">{dayjs.utc(frontmatter.publishedAt).format('MMMM D, YYYY')}</p>
+      <p className="-mt-4 font-mono text-sm text-slate-500">{formatDate(frontmatter.publishedAt)}</p>
 
       <Post />
 

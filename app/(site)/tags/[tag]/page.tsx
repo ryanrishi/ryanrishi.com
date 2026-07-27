@@ -61,20 +61,32 @@ export default async function Tag({ params }: { params: Promise<{ tag: string }>
   return (
     <>
       <div className="prose dark:prose-invert">
-        <h1>Content tagged with <code>{tag.replace('-', ' ')}</code></h1>
-        {postsWithTag.length > 0 && <h3>Posts</h3>}
-        {postsWithTag.map((post) => (
-          <li key={post.slug}>
-            <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-          </li>
-        ))}
+        <h1>Content tagged with <code>{tag.replaceAll('-', ' ')}</code></h1>
+        {postsWithTag.length > 0 && (
+          <>
+            <h3>Posts</h3>
+            <ul>
+              {postsWithTag.map((post) => (
+                <li key={post.slug}>
+                  <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
 
-        {projectsWithTag.length > 0 && <h3>Projects</h3>}
-        {projectsWithTag.map((project) => (
-          <li key={project.slug}>
-            <Link href={`/projects/${project.slug}`}>{project.name}</Link>
-          </li>
-        ))}
+        {projectsWithTag.length > 0 && (
+          <>
+            <h3>Projects</h3>
+            <ul>
+              {projectsWithTag.map((project) => (
+                <li key={project.slug}>
+                  <Link href={`/projects/${project.slug}`}>{project.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       </div>
 
       <div className="flex items-center justify-center my-8">
