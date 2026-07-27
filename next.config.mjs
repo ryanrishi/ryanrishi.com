@@ -10,11 +10,6 @@ const nextConfig = {
         destination: '/blog/:year-:month-:day-:post',
         permanent: false,
       },
-      {
-        source: '/covid-19-dashboard',
-        destination: 'https://labs.ryanrishi.com/covid-19-dashboard/',
-        permanent: false,
-      },
     ]
   },
   transpilePackages: [
