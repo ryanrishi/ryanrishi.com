@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const SITE_URL = 'https://ryanrishi.com'
 export const SITE_NAME = 'Ryan Rishi'
-export const SITE_DESCRIPTION = 'Full-stack software engineer and musician who loves cooking, camping, and flying.'
+export const SITE_DESCRIPTION = 'Software engineer crafting exceptional user experiences. Musician, marathon runner, and backgammon player who loves cooking and camping.'
 
 export function ogImage(title?: string, subtitle?: string): string {
   const params = new URLSearchParams()

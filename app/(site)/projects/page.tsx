@@ -7,7 +7,7 @@ import { getAllProjects } from '@/lib/projects'
 import ProjectItem from './project-item'
 
 const title = 'Projects'
-const description = 'Data visualization, conference talks, and web scrapers.'
+const description = 'Data visualization, conference talks, web scrapers, and homelab.'
 
 export const metadata: Metadata = {
   title,
