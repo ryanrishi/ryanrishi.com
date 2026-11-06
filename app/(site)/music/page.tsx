@@ -4,7 +4,7 @@ import { FancyH1 } from '@/components/headings'
 import { baseOpenGraph, baseTwitter, ogImage, SITE_URL } from '@/lib/metadata'
 
 const title = 'Music'
-const description = 'My music projects and performances'
+const description = 'My music projects and performances.'
 
 export const metadata: Metadata = {
   title,
