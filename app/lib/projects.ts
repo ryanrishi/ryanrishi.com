@@ -7,6 +7,7 @@ export interface Project {
   name: string
   description: string
   date: string
+  ongoing?: boolean
   tags: string[]
   image?: {
     src: string
@@ -29,5 +30,7 @@ export async function getAllProjects(): Promise<Project[]> {
       return { slug, ...data } as Project
     })
   )
-  return projects.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  return projects.sort((a, b) =>
+    Number(!!b.ongoing) - Number(!!a.ongoing) || new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
 }
