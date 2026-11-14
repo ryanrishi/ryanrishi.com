@@ -100,3 +100,27 @@ html {
 .prose table th p {
   @apply text-sm italic;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .loudness-trendline {
+    stroke-dasharray: 1;
+    animation: draw-trendline 1.5s ease-out 0.3s both;
+  }
+}
+
+@keyframes draw-trendline {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+.loudness-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1), fill 250ms, opacity 250ms;
+}
+
+.loudness-point:hover .loudness-dot {
+  transform: scale(2.2);
+  opacity: 1;
+  fill: var(--color-valencia-500);
+}

@@ -1,23 +1,83 @@
 ---
 name: Homelab
-description: Ongoing project of managing servers and services at home.
+description: Twenty years of running servers at home, from DynDNS on the family PC to a k3s cluster.
 image:
   src: /img/projects/homelab/massimo-botturi-zFYUsLk_50Y-unsplash.jpg
   alt: Homelab
   width: 2268
   height: 4032
 date: "2020-02-25T00:00:00Z"
+ongoing: true
 ---
 
-An ongoing project for services I run at home. I have a few Intel NUCs running [Proxmox](https://www.proxmox.com/), a few Synology NAS for persistent storage and backups, and a handful of Raspberry Pis for ad-hoc projects.
+An ongoing project for services I run at home. Everything is managed as code in [ryanrishi/homelab](https://github.com/ryanrishi/homelab).
 
-Services include:
-- [Pi-Hole](https://pi-hole.net) for network-wide ad blocking and DNS resolution
-- [ddclient](https://sourceforge.net/p/ddclient/wiki/Home) for dynamic DNS
-- [WireGuard](https://wiki.archlinux.org/index.php/WireGuard) for VPN
-- [Grafana](https://grafana.com) + [InfluxDB](https://www.influxdata.com/products/influxdb-overview) for storing and visualizing metrics
-- [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) on every host, plus some extra SNMP metrics for Synology NASs
+## Today
 
-All of these are running as LXCs or via Docker on VMs. Everything is provisioned with [Ansible](https://www.ansible.com) so that changes are reliable and repeatable.
+<HomelabDiagram />
 
-Future improvements include a separate VLAN for the lab, offsite backups, and improved monitoring for Docker containers.
+Three mini PCs form a [Proxmox](https://www.proxmox.com/) cluster. [Terraform](https://www.terraform.io) creates the VMs, and cloud-init runs [Ansible](https://www.ansible.com) on first boot to join each VM to a [k3s](https://k3s.io) cluster. [Flux](https://fluxcd.io) deploys everything in the cluster from Git, with secrets encrypted by [SOPS](https://github.com/getsops/sops). [Longhorn](https://longhorn.io) replicates volumes across nodes, the Synology NAS holds backups and media, and [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) sends alerts to my phone.
+
+## How it got here
+
+<Timeline>
+  <TimelineItem date="2006" title="Dynamic DNS on the family PC">
+    I set up [DynDNS](https://en.wikipedia.org/wiki/Dyn_(company)) on my family's home PC so that I could access my iTunes library from my school's computer lab.
+  </TimelineItem>
+
+  <TimelineItem date="2013" title="A Raspberry Pi">
+    A Raspberry Pi at my family's house ran long-running CS projects that I didn't want to run on my laptop. SSH was exposed to the public internet. I was young and naive.
+  </TimelineItem>
+
+  <TimelineItem date="2013–2020" title="A VPS">
+    A [DigitalOcean](https://www.digitalocean.com) VPS ran my website for a while, and then replaced the Raspberry Pi. I got increasingly sick of paying the monthly fee.
+  </TimelineItem>
+
+  <TimelineItem date="Spring 2020" title="Ansible, Pis, and the first NUC">
+    I suddenly had a lot of time at home, so I revived a few Raspberry Pis and installed Grafana, InfluxDB, Telegraf, the \*arr services, and ddclient. I managed them by hand over SSH at first, then with Ansible, which I was using a lot at work. ARM wasn't a great fit for those services, so I bought a 2-bay NAS in April and an Intel NUC in May, installed Proxmox on the NUC, and moved everything into VMs.
+  </TimelineItem>
+
+  <TimelineItem date="August 2020" title="A second site">
+    I replicated the NUC + NAS setup at my family's vacation home, and added a [WireGuard](https://www.wireguard.com) VM so that I could access services while away. I acknowledged that all future WiFi outages would be blamed on my servers.
+  </TimelineItem>
+
+  <TimelineItem date="2021" title="Offsite backups">
+    I set up Time Machine on both NUC + NAS setups so that I had offsite backups.
+  </TimelineItem>
+
+  <TimelineItem date="March 2023" title="NYC">
+    After one too many "why isn't the internet working, are your computers messing with it?" accusations, I brought my main NUC + NAS to NYC and started reviving the homelab in a new network.
+  </TimelineItem>
+
+  <TimelineItem date="November 2023" title="UniFi and VLANs">
+    My first UniFi equipment meant I could finally separate the network into VLANs: IoT, homelab, and everything else. I tried AdGuard on the UniFi router instead of Pi-hole, but I wasn't impressed, because I couldn't decide what to allow and what to block.
+  </TimelineItem>
+
+  <TimelineItem date="Spring 2024" title="k3s">
+    Upgrading Ansible-managed VMs was fragile, and my services relied too heavily on router-configured DNS to find each other, so I bit the bullet and installed [k3s](https://k3s.io) on about seven VMs, all on one physical host. In April I figured out [MetalLB](https://metallb.io), which gives services in the cluster their own IPs on the LAN, starting with Pi-hole.
+  </TimelineItem>
+
+  <TimelineItem date="Mid-2025" title="Out of memory">
+    One physical node with 16 GB of RAM can't comfortably run three k3s control plane nodes in addition to my existing VMs and LXCs.
+  </TimelineItem>
+
+  <TimelineItem date="Late 2025" title="A Proxmox cluster">
+    I bought a Lenovo M720s off Facebook Marketplace and added it as a second Proxmox node. I learned the hard way about corosync, because the cluster kept becoming unresponsive. It turned out to be a bad Ethernet cable.
+  </TimelineItem>
+
+  <TimelineItem date="January 2026" title="Home Assistant and a flaky NIC">
+    I installed [Home Assistant](https://www.home-assistant.io) on k3s, and failures started almost immediately: its mDNS traffic triggered e1000e driver hangs on the M720s's Intel I219-V NIC. I bought a Lenovo M920q off eBay to replace it.
+  </TimelineItem>
+
+  <TimelineItem date="May 2026" title="Storage">
+    I added a second disk to each k3s agent VM and set up [Longhorn](https://longhorn.io) for replicated storage. I also mitigated the e1000e hangs by disabling TSO and GSO on the NICs.
+  </TimelineItem>
+
+  <TimelineItem date="July 2026" title="A third node">
+    I brought the second NUC from my family's vacation home to NYC and added it to the Proxmox cluster as a third node.
+  </TimelineItem>
+
+  <TimelineItem date="2026" title="Writing my own services">
+    I started writing my own services: a revamped version of my [camping reservation bot](/projects/letscamp), and an email organizer that scans my inbox every 15 minutes and classifies emails as recruiter mail, shopping, and so on.
+  </TimelineItem>
+</Timeline>
