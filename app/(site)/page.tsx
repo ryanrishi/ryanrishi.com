@@ -57,6 +57,8 @@ export default async function Index() {
           <Image
             src={headshot}
             alt="Ryan Rishi"
+            width={64}
+            height={64}
             placeholder="blur"
             className="h-16 w-16 rounded-full object-cover"
           />
