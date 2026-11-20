@@ -20,6 +20,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Logo: dynamic(() => import('@/components/logo')),
     LoudnessWars: dynamic(() => import('@/components/projects/loudness-wars')),
     VideoContainer: dynamic(() => import('@/components/video-container')),
+    WorkflowDiagram: dynamic(() => import('@/components/projects/terraform-provider-glinet/workflow-diagram')),
 
     ...components,
   }

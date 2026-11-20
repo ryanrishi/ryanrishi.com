@@ -1,6 +1,6 @@
 ---
 name: GL.iNet Terraform Provider
-description: A Terraform provider for interacting with GL.iNet routers
+description: A Terraform provider and a Go client for GL.iNet travel routers, taken from a stalled side project to 1.0 with a team of AI agents.
 image:
   src: /img/projects/terraform-provider-glinet/axt1800_scene_cabin.jpg
   alt: GL.iNet AXT1800 Travel Router
@@ -13,49 +13,128 @@ tags:
   - homelab
 ---
 
-I have a nifty little [GL.iNet travel router](https://www.gl-inet.com/products/gl-axt1800/) that I use when traveling. To ensure a secure connection, I've automated the process of connecting it to my VPN in my [homelab](/projects/homelab). This not only maintains a secure connection but also allows me to leverage services I run at home, such as a network-wide ad blocker.
+I travel with a [GL.iNet Slate AX (GL-AXT1800)](https://www.gl-inet.com/products/gl-axt1800/), a small router that sits between my devices and whatever hotel or café Wi-Fi I'm on. It keeps a WireGuard tunnel back to my [homelab](/projects/homelab). My traffic goes through home, and I keep the services I run there, like network-wide ad blocking.
 
-As part of this project, I'm currently developing a Terraform provider specifically tailored for configuring the GL.iNet router. This serves as a hands-on learning experience for me in both Go programming and advanced Terraform usage. The ultimate goal is to define the router's end state using Terraform, enabling the provider to configure the router accordingly.
-
-The Terraform provider will cover a range of configurations, from VPN settings to specific firewall rules and network-wide ad-blocking preferences. By encapsulating these configurations in Terraform, I aim to streamline the deployment and management of my travel router setup.
-
-That would look something like this:
+Everything else in my homelab is code. The router was the one box I configured by clicking through a web UI and hoping I'd remember what I did. `terraform-provider-glinet` fixes that. I describe the router in Terraform or OpenTofu, and a plan shows where the router and the code differ.
 
 ```hcl
 provider "glinet" {
-  username = "username"
-  password = "password"
+  host     = "http://192.168.8.1"
+  password = var.glinet_password
 }
 
-resource "glinet_system_timezone_config" "timezone_config" {
-  zonename = "America/New_York"
+resource "glinet_adguardhome" "this" {
+  enabled     = true
+  dns_enabled = true
 }
 
-resource "glinet_adguard_config" "adguard_config" {
-  enabled = true
+# The web UI only offers 70 to 90 °C.
+resource "glinet_fan" "this" {
+  temperature = 60
 }
 
-resource "glinet_repeater_config" "repeater_config" {
-  auto = true   # automatically try to connect to saved networks
+# Read the POSIX TZ string from this machine's zoneinfo file
+# instead of hard-coding daylight saving rules.
+data "external" "tz" {
+  program = ["sh", "-c", "printf '{\"posix\":\"%s\"}' \"$(tail -n 1 /usr/share/zoneinfo/America/New_York)\""]
 }
 
-resource "glinet_wireguard_client" "wireguard_client" {
-  name        = "xyz"
-  address_v4  = "10.8.0.0/24"
-  private_key = "XVpIdr+oYjTcgDwzSZmNa1nSsk8JO+tx1NBo17LDBAI="
-  public_key  = "zv0p34WZN7p2vIgehwe33QF27ExjChrPUisk481JHU0="
-  allowed_ips = "0.0.0.0/0,::/0"
-  endpoint    = "wireguard.xyz"
+resource "glinet_system_timezone" "this" {
+  zone_name = "America/New York"
+  timezone  = data.external.tz.result.posix
 }
 
-data "glinet_clients" "clients" {}
+resource "glinet_wireguard_client_group" "home" {
+  name = "home"
+}
 
-output "clients" {
-  description = "List of connected clients"
-  value = [for client in glinet_clients.clients[*]: "${client.name}\t${client.ip}"]
+resource "glinet_wireguard_client_config" "home" {
+  group_id    = glinet_wireguard_client_group.home.id
+  name        = "home server"
+  address_v4  = "10.0.0.2/32"
+  private_key = var.wireguard_private_key
+  public_key  = var.wireguard_server_public_key
+  endpoint    = "vpn.example.com:51820"
+  allowed_ips = ["0.0.0.0/0", "::/0"]
 }
 ```
 
-During this journey, I've encountered interesting challenges, such as using JSON-RPC, which required me to delve deeper into the intricacies of remote procedure calls. Moreover, transitioning from languages like Java and TypeScript, where I extensively leverage generics, I found myself adapting to Go's unique approach, which notably lacks this feature. This shift encouraged me to explore alternative strategies for achieving similar flexibility and code reuse in the absence of generics.
+## What it does
 
-The provider code is [here](https://github.com/ryanrishi/terraform-provider-glinet) and its documentation is [here](https://registry.terraform.io/providers/ryanrishi/glinet/latest/docs).
+- **Coverage** - The provider manages Wi-Fi, LAN, WAN and multi-WAN, DNS, the firewall, WireGuard, Tailscale, ZeroTier, AdGuard Home, parental control, and hardware settings like the fan. For each resource it implements, it covers the options of the firmware 4.8.3 web UI, not only the ones my router uses.
+- **Import** - Every resource supports import, so you can adopt an existing router one setting at a time. Many optional attributes keep the router's current value when you leave them out.
+- **Warnings** - A wrong WAN setting or a Wi-Fi restart can cut off your access. The affected resources carry a warning at the top of their documentation. The provider also rejects a switch to an empty allow list.
+- **Destroy** - Depending on the resource, destroy disables a feature, removes an entry, or leaves the router setting in place. Each resource's documentation says which.
+- **Tested where I could** - I tested on one Slate AX with firmware 4.7.0 and 4.8.3. Each resource documents which writes were tested on hardware and which only against a fake router. The repository also lists what I left out, and why.
+- **Versioning** - Both projects follow semantic versioning from 1.0. CI runs on Terraform and OpenTofu.
+
+### The client: glinet-client-go
+
+The provider talks to the router through [glinet-client-go](https://github.com/ryanrishi/glinet-client-go), a Go library I wrote alongside it. Other Go programs can use it directly. It has typed methods for each part of the router's JSON-RPC API, and it handles login and session renewal.
+
+```go
+client, err := glinet.NewClientWithHost("192.168.8.1", "root", []byte(password))
+if err != nil {
+	return err
+}
+
+tz, err := client.System.GetTimezoneConfig(ctx)
+```
+
+The client also ships an in-memory fake router for tests. The provider's default test suite runs against it, and other projects can use it too. The repository keeps saved, redacted responses from the real router, with a report per firmware version that says which writes were verified on hardware.
+
+## How I built this
+
+An older version of this page showed an example full of resources I hadn't built. It was a wish list with syntax highlighting.
+
+<Timeline>
+  <TimelineItem date="2022" title="Two repos">
+    I started the provider and, the same day, a Go client for the router's API, to learn Go and Terraform.
+  </TimelineItem>
+
+  <TimelineItem date="2023" title="Firmware v4 and a few releases">
+    I rewrote the client for the JSON-RPC API of firmware v4 and shipped a few small releases.
+  </TimelineItem>
+
+  <TimelineItem date="2024–2025" title="Stalled">
+    Almost nothing for more than two years.
+  </TimelineItem>
+
+  <TimelineItem date="2026" title="1.0">
+    I picked it up again with [Claude Code](https://claude.com/claude-code). Eight days later, both projects were at 1.0.
+  </TimelineItem>
+</Timeline>
+
+### How the AI-assisted development worked
+
+One long Claude Code session ran Claude Fable 5.2 as the orchestrator. It wrote almost no code. It wrote a brief for each task and handed it to a Claude Opus 5.5 subagent. Each subagent worked in a separate checkout, so several could run at once. The orchestrator then checked the diff and opened a pull request. GitHub Copilot reviewed every pull request, and valid findings went back to the same subagent.
+
+<WorkflowDiagram />
+
+At first I approved every push and merge. Later the orchestrator handled routine merges and brought me the decisions: scope, naming, anything that could affect my router, and the release. I also ran each release on my own network, which is where most of my feedback came from. Handing over the routine work was only safe because the rules were written down first:
+
+- **No guessing** - GL.iNet's official API reference is offline. Router behaviour had to be confirmed on the real router. Where that wasn't possible, the write format came from the web UI's code, and the documentation says so.
+- **Mock data only** - Nothing I configured for myself goes into a public repo, secret or not. Recorded responses are redacted by default. The question for every value is "did I set this?", not "is it on a list?".
+- **Guardrails for the real router** - The router sat on my desk with my home Wi-Fi as its uplink. The agents never touched my WireGuard configuration or the uplink, and never wrote while I was away. The riskiest tests go through a [local proxy](https://github.com/ryanrishi/terraform-provider-glinet/blob/v1.0.0/internal/provider/provider_test.go#L67-L70) that checks each call before it reaches the router. The reboot schedule test, for example, can only ever turn the schedule off.
+- **Plan, never apply** - In my homelab repo, the agents could run `terraform plan`. `terraform apply` needed my permission every time.
+- **It's for everyone** - The agents first built what my own router used. I told them: "this provider is not just for my use; it's for everyone." They then audited each resource against the web UI and added the options I don't use.
+
+### Fun problems I worked out
+
+- **Overheating** - At one point the router kept dropping off the network, with nothing in the logs. It was sitting in the sun at 70 °C with the fan off, because the fan doesn't start until 75. I lowered the threshold to 60 through the API, and the outages stopped. The web UI only offers 70 to 90 °C. `glinet_fan` now manages that setting in my own config.
+- **A firmware fault** - Firmware 4.8.3 accepts a firewall rule without a destination port. It then returns HTTP 500 when you try to change or remove it. The provider can't fix firmware, so it warns during planning. When it sees that failure, it gives you the SSH commands to recover.
+- **An update with nothing in it** - After I imported my WireGuard config, Terraform showed an update even though the values matched. The imported state lacked the "sensitive" mark that my variable had. It's documented now, because if I hit it, others will.
+- **Time zone** - I wanted `zone_name = "America/New York"` instead of a POSIX TZ string. I could have put a lookup table in the provider, but I didn't love that a country changing its daylight saving rules would require a provider release. So the provider stays dumb, and the consuming Terraform code provides the POSIX string from the machine's zoneinfo file with an `external` data source, like in the example above.
+- **Consistent names** - Before 1.0 I approved consistent names for switches, MAC addresses, and allow and block lists. I preferred a clean interface over compatibility with a 0.x release. A plan of my real homelab state against the 1.0 build showed no changes.
+- **A second opinion** - Before tagging, I had OpenAI's Codex (`gpt-6.2-sol`) review both repositories adversarially. It found that destroying a parental-control group could delete a different group after a rename on the router. It also found a failed router write that could be read as success. Both were fixed before release.
+- **Catching the orchestrator** - It merged the release-preparation PR while those fixes were still open. I asked, "Why are you merging the release PR if there's still work?" Since then, the version heading and the tag are the last change. Releases also fail unless the tag is on `main`.
+
+I didn't type most of the code. I decided what it does, what it refuses to do, and what counts as proof that it works.
+
+## Links and what's next
+
+- Provider: [github.com/ryanrishi/terraform-provider-glinet](https://github.com/ryanrishi/terraform-provider-glinet)
+- Documentation: [Terraform Registry](https://registry.terraform.io/providers/ryanrishi/glinet/latest/docs)
+- Go client: [github.com/ryanrishi/glinet-client-go](https://github.com/ryanrishi/glinet-client-go)
+
+Two gaps I'd like help with are Wi-Fi 7 multi-link networks and cellular modems. I don't own that hardware, and I won't add support for an API I can't record. If you own one of those models, or you work at GL.iNet, I'd love the help.
