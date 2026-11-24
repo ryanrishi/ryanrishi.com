@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { CgTwilio } from 'react-icons/cg'
 import { FaGlassWhiskey } from 'react-icons/fa'
 import { GrMail } from 'react-icons/gr'
 import { ImGithub, ImLab, ImLinkedin } from 'react-icons/im'
 import { IoMdGlobe } from 'react-icons/io'
-import { SiTwilio } from 'react-icons/si'
 
 import headshot from '../../public/img/headshot.jpeg'
 
@@ -41,7 +41,7 @@ const staticLinks: Link[] = [
 
 const contentLinks: Link[] = [
   {
-    icon: <SiTwilio />,
+    icon: <CgTwilio />,
     label: 'Twilio Alpha',
     url: 'https://twilioalpha.com',
   },
