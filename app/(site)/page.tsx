@@ -1,12 +1,16 @@
+import Image from 'next/image'
 import NextLink from 'next/link'
 import { ReactNode } from 'react'
 
 import ContentRow from '@/components/content-row'
 import { FancyH1 } from '@/components/headings'
 import Link from '@/components/link'
+import LoudnessWarsPreview from '@/components/projects/loudness-wars/preview'
 import { formatShortDate } from '@/lib/format-date'
 import { getAllPosts } from '@/lib/posts'
 import { getAllProjects } from '@/lib/projects'
+
+import headshot from '../../public/img/headshot.jpeg'
 
 interface SectionProps {
   title: { text: string; url?: string; }
@@ -48,18 +52,34 @@ export default async function Index() {
 
   return (
     <>
-      <Section title={{ text: 'Ryan Rishi' }} description="software engineer · staff @ twilio">
-        <div className="prose dark:prose-invert max-w-none">
-          <p>I&apos;m a software engineer with a focus on crafting <b>exceptional user experiences</b>.</p>
-          <p>
-            As a Staff Software Engineer at <Link href="https://twilio.com">Twilio</Link>, I&apos;m deeply involved in the exciting field of <Link href="https://www.twilio.com/en-us/products/conversational-ai">Conversational AI</Link>.
-            Throughout my career, I&apos;ve navigated the realms of frontend, backend, infrastructure, and operations, always with a user-first approach to building digital products. My experience spans innovative startups in <Link href="https://jelli.com">audio ad tech</Link>, <Link href="https://envoy.com">workplace platforms</Link>, and <Link href="https://en.wikipedia.org/wiki/SkySat">satellite imaging</Link>, where I&apos;ve led the charge in developing robust backend services to improve user interactions.
-          </p>
-          <p>My go-to tools lately are <Link href="https://nextjs.com">Next.js</Link>, <Link href="https://tailwindcss.com">TailwindCSS</Link>, <Link href="https://spring.io">Spring / Spring Boot</Link>, and <Link href="https://d3js.org">d3</Link>&mdash; don&apos;t miss my take on the <Link href="/projects/loudness-wars">Loudness Wars</Link>.</p>
-          <p>Off the clock, my world revolves around <Link href="/music">music</Link>, culinary experiments, backgammon, and running.</p>
-          <p>If you&apos;re interested in a tech chat or swapping music, feel free to <Link href="/contact">reach out</Link>. Let&apos;s make something cool or share some tunes.</p>
+      <section className="mb-16">
+        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
+          <Image
+            src={headshot}
+            alt="Ryan Rishi"
+            width={64}
+            height={64}
+            placeholder="blur"
+            className="h-16 w-16 rounded-full object-cover"
+          />
+          <div>
+            <h1 className="not-prose text-4xl font-bold tracking-tighter text-slate-900 md:text-5xl dark:text-slate-50">Ryan Rishi.</h1>
+            <p className="mt-2 font-mono text-sm text-slate-500 dark:text-slate-400">software engineer · staff @ twilio</p>
+          </div>
         </div>
-      </Section>
+        <div className="prose dark:prose-invert max-w-none">
+          <p>
+            I&apos;m a Staff Software Engineer at <Link href="https://twilio.com">Twilio</Link>, where I work on <Link href="https://www.twilio.com/docs/conversations/agent-connect">Twilio Agent Connect</Link>, enabling any and all agents to use Twilio&apos;s rich communications channels to deliver excellent customer experiences.
+          </p>
+          <p>
+            I&apos;ve worked across frontend, backend, and infrastructure at startups in <Link href="https://en.wikipedia.org/wiki/Jelli">audio ad tech</Link>, <Link href="https://envoy.com">workplace platforms</Link>, and <Link href="https://en.wikipedia.org/wiki/SkySat">satellite imaging</Link>. Lately I reach for <Link href="https://nextjs.org">Next.js</Link>, <Link href="https://tailwindcss.com">Tailwind</Link>, <Link href="https://spring.io">Spring Boot</Link>, and <Link href="https://d3js.org">d3</Link>.
+          </p>
+          <p>
+            Off the clock: <Link href="/music">music</Link>, cooking, backgammon, and running. <Link href="/contact">Reach out</Link> to talk tech or swap music.
+          </p>
+        </div>
+        <LoudnessWarsPreview />
+      </section>
 
       <Section
         title={{ text: 'Blog', url: '/blog' }}
@@ -79,14 +99,14 @@ export default async function Index() {
 
       <Section
         title={{ text: 'Projects', url: '/projects' }}
-        description="Data visualization, conference talks, and web scrapers."
+        description="Data visualization, conference talks, web scrapers, and homelab."
       >
         {recentProjects.map((project) => (
           <ContentRow
             key={project.slug}
             href={`/projects/${project.slug}`}
             title={project.name}
-            date={formatShortDate(project.date)}
+            date={project.ongoing ? 'Ongoing' : formatShortDate(project.date)}
             description={project.description}
           />
         ))}

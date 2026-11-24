@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { CgTwilio } from 'react-icons/cg'
 import { FaGlassWhiskey } from 'react-icons/fa'
 import { GrMail } from 'react-icons/gr'
 import { ImGithub, ImLab, ImLinkedin } from 'react-icons/im'
@@ -29,7 +28,7 @@ const staticLinks: Link[] = [
   },
   {
     icon: <ImGithub />,
-    label: 'Github',
+    label: 'GitHub',
     url: 'https://github.com/ryanrishi',
   },
   {
@@ -40,11 +39,6 @@ const staticLinks: Link[] = [
 ]
 
 const contentLinks: Link[] = [
-  {
-    icon: <CgTwilio />,
-    label: 'Twilio Alpha',
-    url: 'https://twilioalpha.com',
-  },
   {
     icon: <FaGlassWhiskey />,
     label: 'Virtual Bartender',
@@ -94,7 +88,7 @@ export default function Links() {
         />
         <h1 className="mt-6 text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">Ryan Rishi.</h1>
         <p className="mt-2 mb-8 text-center text-slate-600 dark:text-slate-400">
-          Experienced software engineer with expertise in backend, infra, and AI
+          Software engineer crafting exceptional user experiences
         </p>
         <ul className="flex w-full flex-col gap-3">
           {links.map((link, i) => (

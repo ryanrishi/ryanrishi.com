@@ -8,7 +8,7 @@ const nextConfig = {
       {
         source: '/:year((?!_next).*)/:month/:day/:post.html',
         destination: '/blog/:year-:month-:day-:post',
-        permanent: false,
+        permanent: true,
       },
     ]
   },
