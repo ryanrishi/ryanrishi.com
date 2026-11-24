@@ -116,7 +116,7 @@ At first I approved every push and merge. Later I delegated routine merges and k
 - **Plan, never apply** - In my homelab repo, the agents could run `terraform plan`. `terraform apply` needed my permission every time.
 - **It's for everyone** - The agents first built what my own router used. I told them: "this provider is not just for my use; it's for everyone." They then audited each resource against the web UI and added the options I don't use.
 
-### Fun problems I worked out
+### Bugs, trade-offs, and release decisions
 
 - **Overheating** - At one point the router kept dropping off the network, with nothing in the logs. It was sitting in the sun at 70 °C with the fan off, because the fan doesn't start until 75. I lowered the threshold to 60 through the API, and the outages stopped. The web UI only offers 70 to 90 °C. `glinet_fan` now manages that setting in my own config.
 - **A firmware fault** - Firmware 4.8.3 accepts a firewall rule without a destination port. It then returns HTTP 500 when you try to change or remove it. The provider can't fix firmware, so it warns during planning. When it sees that failure, it gives you the SSH commands to recover.
