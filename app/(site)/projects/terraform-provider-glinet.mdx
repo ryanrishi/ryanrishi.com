@@ -44,6 +44,7 @@ resource "glinet_system_timezone" "this" {
   timezone  = data.external.tz.result.posix
 }
 
+# Saves the profile. Starting the tunnel is a separate step.
 resource "glinet_wireguard_client_group" "home" {
   name = "home"
 }
@@ -61,16 +62,16 @@ resource "glinet_wireguard_client_config" "home" {
 
 ## What it does
 
-- **Manage the router as code** - Wi-Fi, LAN, WAN and multi-WAN, DNS, the firewall, WireGuard, Tailscale, ZeroTier, AdGuard Home, parental control, and hardware settings like the fan. For each resource it implements, the provider covers the options of the firmware 4.8.3 web UI, not only the ones my router uses.
+- **Manage the router as code** - Wi-Fi, LAN, WAN and multi-WAN, DNS, the firewall, WireGuard, Tailscale, ZeroTier, AdGuard Home, parental control, and hardware settings like the fan. Resources cover the options that the firmware 4.8.3 web UI offers, not only the ones my router uses. The exceptions are documented.
 - **Import existing configuration from the router** - Every resource supports import, so you can adopt a router one setting at a time. Many optional attributes keep the router's current value when you leave them out.
-- **Avoid locking yourself out** - A wrong WAN setting or a Wi-Fi restart can cut off your access. The affected resources carry a warning at the top of their documentation. The provider also rejects a switch to an empty allow list.
+- **Know the lockout risks** - A wrong WAN setting or a Wi-Fi restart can cut off your access. The affected resources carry a warning at the top of their documentation. The provider also rejects a switch to allow-list mode while the allow list is empty.
 - **Destroy without surprises** - Depending on the resource, destroy disables a feature, removes an entry, or leaves the router setting in place. Each resource's documentation says which.
-- **Know what was verified on hardware** - The provider was verified on a Slate AX with firmware 4.7.0 and 4.8.3. Each resource documents which writes ran on the real router and which only against a fake router. The repository also lists what is out of scope, and why.
-- **Upgrade with confidence** - Both projects follow semantic versioning from 1.0. CI runs on Terraform and OpenTofu.
+- **Know what was verified on hardware** - Hardware tests ran on a Slate AX with firmware 4.7.0 and 4.8.3. Each resource documents which writes ran on the real router and which ran only against a fake router. The repository also lists what is out of scope, and why.
+- **Run it on Terraform or OpenTofu** - The provider's CI tests both. Both projects follow semantic versioning from 1.0.
 
 ### The client: glinet-client-go
 
-The provider talks to the router through [glinet-client-go](https://github.com/ryanrishi/glinet-client-go), a Go library I wrote alongside it. Other Go programs can use it directly. It has typed methods for each part of the router's JSON-RPC API, and it handles login and session renewal.
+The provider talks to the router through [glinet-client-go](https://github.com/ryanrishi/glinet-client-go), a Go library I wrote alongside it. It handles login and session renewal. It has typed methods for most of the router's JSON-RPC API and a generic call for the rest.
 
 ```go
 client, err := glinet.NewClientWithHost("192.168.8.1", "root", []byte(password))
@@ -103,15 +104,15 @@ An older version of this page showed an example full of resources I hadn't built
 
 ### How the AI-assisted development worked
 
-One long Claude Code session ran Claude Fable 5.2 as the orchestrator. It wrote almost no code. It wrote a brief for each task and handed it to a Claude Opus 5.5 subagent. Each subagent worked in a separate checkout, so several could run at once. The orchestrator then checked the diff and opened a pull request. GitHub Copilot reviewed every pull request, and valid findings went back to the same subagent.
+One long Claude Code session ran Claude Fable 5.2 as the orchestrator. It wrote the task briefs, checked the diffs, and opened the pull requests, but wrote almost no code itself. Claude Opus 5.5 subagents implemented the tasks, each in a separate checkout so several could run at once. GitHub Copilot reviewed every pull request, and valid findings went back to the same subagent.
 
 <WorkflowDiagram />
 
-At first I approved every push and merge. Later the orchestrator handled routine merges and brought me the decisions: scope, naming, anything that could affect my router, and the release. I also ran each release on my own network, which is where most of my feedback came from. Handing over the routine work was only safe because the rules were written down first:
+At first I approved every push and merge. Later I delegated routine merges and kept the decisions: scope, naming, anything that could affect my router, and the release. I ran each release on my own network, which is where most of my feedback came from. Delegating was only safe because the rules were written down first:
 
 - **No guessing** - GL.iNet's official API reference is offline. Router behaviour had to be confirmed on the real router. Where that wasn't possible, the write format came from the web UI's code, and the documentation says so.
 - **Mock data only** - Nothing I configured for myself goes into a public repo, secret or not. Recorded responses are redacted by default. The question for every value is "did I set this?", not "is it on a list?".
-- **Guardrails for the real router** - The router sat on my desk with my home Wi-Fi as its uplink. The agents never touched my WireGuard configuration or the uplink, and never wrote while I was away. The riskiest tests go through a [local proxy](https://github.com/ryanrishi/terraform-provider-glinet/blob/v1.0.0/internal/provider/provider_test.go#L67-L70) that checks each call before it reaches the router. The reboot schedule test, for example, can only ever turn the schedule off.
+- **Guardrails for the real router** - The router sat on my desk with my home Wi-Fi as its uplink. The agents never touched my WireGuard configuration or the uplink, and never wrote while I was away. Several real-router tests go through a [local proxy](https://github.com/ryanrishi/terraform-provider-glinet/blob/v1.0.0/internal/provider/provider_test.go#L67-L70) that checks each call before it reaches the router. The reboot schedule test, for example, can only write a disabled schedule.
 - **Plan, never apply** - In my homelab repo, the agents could run `terraform plan`. `terraform apply` needed my permission every time.
 - **It's for everyone** - The agents first built what my own router used. I told them: "this provider is not just for my use; it's for everyone." They then audited each resource against the web UI and added the options I don't use.
 
@@ -119,11 +120,11 @@ At first I approved every push and merge. Later the orchestrator handled routine
 
 - **Overheating** - At one point the router kept dropping off the network, with nothing in the logs. It was sitting in the sun at 70 °C with the fan off, because the fan doesn't start until 75. I lowered the threshold to 60 through the API, and the outages stopped. The web UI only offers 70 to 90 °C. `glinet_fan` now manages that setting in my own config.
 - **A firmware fault** - Firmware 4.8.3 accepts a firewall rule without a destination port. It then returns HTTP 500 when you try to change or remove it. The provider can't fix firmware, so it warns during planning. When it sees that failure, it gives you the SSH commands to recover.
-- **An update with nothing in it** - After I imported my WireGuard config, Terraform showed an update even though the values matched. The imported state lacked the "sensitive" mark that my variable had. It's documented now, because if I hit it, others will.
+- **An update with nothing in it** - After I imported my WireGuard config, Terraform showed an update even though the values matched. The imported state lacked the "sensitive" mark that my variable had. It's documented now.
 - **Time zone** - I wanted `zone_name = "America/New York"` instead of a POSIX TZ string. I could have put a lookup table in the provider, but I didn't love that a country changing its daylight saving rules would require a provider release. So the provider stays dumb, and the consuming Terraform code provides the POSIX string from the machine's zoneinfo file with an `external` data source, like in the example above.
-- **Consistent names** - Before 1.0 I approved consistent names for switches, MAC addresses, and allow and block lists. I preferred a clean interface over compatibility with a 0.x release. A plan of my real homelab state against the 1.0 build showed no changes.
+- **Consistent names** - Before 1.0 I approved consistent names for switches, MAC addresses, and allow and block lists. I preferred a clean interface over compatibility with a 0.x release. After I renamed the attributes in my homelab code, a plan against my real state showed no changes.
 - **A second opinion** - Before tagging, I had OpenAI's Codex (`gpt-6.2-sol`) review both repositories adversarially. It found that destroying a parental-control group could delete a different group after a rename on the router. It also found a failed router write that could be read as success. Both were fixed before release.
-- **Catching the orchestrator** - It merged the release-preparation PR while those fixes were still open. I asked, "Why are you merging the release PR if there's still work?" Since then, the version heading and the tag are the last change. Releases also fail unless the tag is on `main`.
+- **Catching the orchestrator** - It merged the release-preparation PR while those fixes were still open. I asked, "Why are you merging the release PR if there's still work?" Since then, the version heading and the tag come last, after every fix is merged. The provider's release workflow also fails unless the tagged commit is on `main`.
 
 I didn't type most of the code. I decided what it does, what it refuses to do, and what counts as proof that it works.
 
