@@ -21,6 +21,7 @@
     "@vercel/speed-insights": "^2.0.0",
     "classnames": "^2.3.1",
     "d3": "^7.9.2",
+    "d3-transition": "^3.0.2",
     "eslint-config-next": "^16.3.6",
     "framer-motion": "13.1.1",
     "geist": "^1.7.2",

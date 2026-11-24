@@ -2,6 +2,7 @@
 
 /* eslint indent: ["warn", 2, { "SwitchCase": 1 }] */
 import * as d3 from 'd3'
+import 'd3-transition'
 import { type RefObject, useEffect, useRef, useState } from 'react'
 
 import { event } from '@/lib/ga'
