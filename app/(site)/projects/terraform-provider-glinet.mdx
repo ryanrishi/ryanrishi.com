@@ -61,10 +61,10 @@ resource "glinet_wireguard_client_config" "home" {
 
 ## What it does
 
-- **Manage the router as code** - Wi-Fi, LAN, WAN and multi-WAN, DNS, the firewall, WireGuard, Tailscale, ZeroTier, AdGuard Home, parental control, and hardware settings like the fan. Resources cover the options that the firmware 4.8.3 web UI offers, not only the ones my router uses. The exceptions are documented.
-- **Import existing configuration from the router** - Every resource supports import, so you can adopt a router one setting at a time. Many optional attributes keep the router's current value when you leave them out.
+- **Coverage** - Wi-Fi, LAN, WAN and multi-WAN, DNS, the firewall, WireGuard, Tailscale, ZeroTier, AdGuard Home, parental control, and hardware settings like the fan. Resources cover the options that the firmware 4.8.3 web UI offers, not only the ones my router uses. The exceptions are documented.
+- **Import** - Every resource supports import, so you can adopt a router one setting at a time. Many optional attributes keep the router's current value when you leave them out.
 - **Lockout risks** - A wrong WAN setting or a Wi-Fi restart can cut off your access. The affected resources carry a warning at the top of their documentation. The provider also rejects a switch to allow-list mode while the allow list is empty.
-- **Destroy without surprises** - Depending on the resource, destroy disables a feature, removes an entry, or leaves the router setting in place. Each resource's documentation says which.
+- **Destroy behavior** - Depending on the resource, destroy disables a feature, removes an entry, or leaves the router setting in place. Each resource's documentation says which.
 - **Hardware test coverage** - Hardware tests ran on a Slate AX with firmware 4.7.0 and 4.8.3. Each resource documents which writes ran on the real router and which ran only against a fake router. The repository also lists what is out of scope, and why.
 - **Versioning and CI** - Both projects follow semantic versioning from 1.0. The provider's CI tests Terraform and OpenTofu.
 
