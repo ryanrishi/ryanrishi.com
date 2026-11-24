@@ -61,12 +61,12 @@ resource "glinet_wireguard_client_config" "home" {
 
 ## What it does
 
-- **Coverage** - The provider manages Wi-Fi, LAN, WAN and multi-WAN, DNS, the firewall, WireGuard, Tailscale, ZeroTier, AdGuard Home, parental control, and hardware settings like the fan. For each resource it implements, it covers the options of the firmware 4.8.3 web UI, not only the ones my router uses.
-- **Import** - Every resource supports import, so you can adopt an existing router one setting at a time. Many optional attributes keep the router's current value when you leave them out.
-- **Warnings** - A wrong WAN setting or a Wi-Fi restart can cut off your access. The affected resources carry a warning at the top of their documentation. The provider also rejects a switch to an empty allow list.
-- **Destroy** - Depending on the resource, destroy disables a feature, removes an entry, or leaves the router setting in place. Each resource's documentation says which.
-- **Tested where I could** - I tested on one Slate AX with firmware 4.7.0 and 4.8.3. Each resource documents which writes were tested on hardware and which only against a fake router. The repository also lists what I left out, and why.
-- **Versioning** - Both projects follow semantic versioning from 1.0. CI runs on Terraform and OpenTofu.
+- **Manage the router as code** - Wi-Fi, LAN, WAN and multi-WAN, DNS, the firewall, WireGuard, Tailscale, ZeroTier, AdGuard Home, parental control, and hardware settings like the fan. For each resource it implements, the provider covers the options of the firmware 4.8.3 web UI, not only the ones my router uses.
+- **Import existing configuration from the router** - Every resource supports import, so you can adopt a router one setting at a time. Many optional attributes keep the router's current value when you leave them out.
+- **Avoid locking yourself out** - A wrong WAN setting or a Wi-Fi restart can cut off your access. The affected resources carry a warning at the top of their documentation. The provider also rejects a switch to an empty allow list.
+- **Destroy without surprises** - Depending on the resource, destroy disables a feature, removes an entry, or leaves the router setting in place. Each resource's documentation says which.
+- **Know what was verified on hardware** - The provider was verified on a Slate AX with firmware 4.7.0 and 4.8.3. Each resource documents which writes ran on the real router and which only against a fake router. The repository also lists what is out of scope, and why.
+- **Upgrade with confidence** - Both projects follow semantic versioning from 1.0. CI runs on Terraform and OpenTofu.
 
 ### The client: glinet-client-go
 
