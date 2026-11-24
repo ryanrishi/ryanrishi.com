@@ -1,6 +1,6 @@
 ---
 name: GL.iNet Terraform Provider
-description: A Terraform provider and a Go client for GL.iNet travel routers, taken from a stalled side project to 1.0 with a team of AI agents.
+description: A Terraform provider and a Go client for GL.iNet travel routers, taken from a stalled side project to v1.0.0 with a team of AI agents.
 image:
   src: /img/projects/terraform-provider-glinet/axt1800_scene_cabin.jpg
   alt: GL.iNet AXT1800 Travel Router
@@ -66,7 +66,7 @@ resource "glinet_wireguard_client_config" "home" {
 - **Lockout risks** - A wrong WAN setting or a Wi-Fi restart can cut off your access. The affected resources carry a warning at the top of their documentation. The provider also rejects a switch to allow-list mode while the allow list is empty.
 - **Destroy behavior** - Depending on the resource, destroy disables a feature, removes an entry, or leaves the router setting in place. Each resource's documentation says which.
 - **Hardware test coverage** - Hardware tests ran on a Slate AX with firmware 4.7.0 and 4.8.3. Each resource documents which writes ran on the real router and which ran only against a fake router. The repository also lists what is out of scope, and why.
-- **Versioning and CI** - Both projects follow semantic versioning from 1.0. The provider's CI tests Terraform and OpenTofu.
+- **Versioning and CI** - Both projects follow semantic versioning from v1.0.0. The provider's CI tests Terraform and OpenTofu.
 
 ### The client: glinet-client-go
 
@@ -96,8 +96,8 @@ An older version of this page showed an example full of resources I hadn't built
     I rewrote the client for the JSON-RPC API of firmware v4 and shipped a few small releases.
   </TimelineItem>
 
-  <TimelineItem date="2026" title="1.0">
-    After more than two years away, I picked it up again with [Claude Code](https://claude.com/claude-code). Eight days later, both projects were at 1.0.
+  <TimelineItem date="2026" title="v1.0.0">
+    After more than two years away, I picked it up again with [Claude Code](https://claude.com/claude-code). Eight days later, both projects had shipped v1.0.0.
   </TimelineItem>
 </Timeline>
 
@@ -121,7 +121,7 @@ At first I approved every push and merge. Later I delegated routine merges and k
 - **A firmware fault** - Firmware 4.8.3 accepts a firewall rule without a destination port. It then returns HTTP 500 when you try to change or remove it. The provider can't fix firmware, so it warns during planning. When it sees that failure, it gives you the SSH commands to recover.
 - **An update with nothing in it** - After I imported my WireGuard config, Terraform showed an update even though the values matched. The imported state lacked the "sensitive" mark that my variable had. It's documented now.
 - **Time zone rules** - I wanted to set only `zone_name`, but the router also needs a POSIX TZ string. I could have put a lookup table in the provider, but I didn't love that a country changing its daylight saving rules would require a provider release. So the provider stays dumb, and the consuming Terraform code provides the POSIX string from the machine's zoneinfo file with an `external` data source, like in the example above.
-- **The 1.0 upgrade** - Before 1.0 I approved consistent names for switches, MAC addresses, and allow and block lists. I preferred a clean interface over compatibility with a 0.x release. After I renamed the attributes in my homelab code, a plan against my real state showed no changes.
+- **The v1.0.0 upgrade** - Before v1.0.0 I approved consistent names for switches, MAC addresses, and allow and block lists. I preferred a clean interface over compatibility with a 0.x release. After I renamed the attributes in my homelab code, a plan against my real state showed no changes.
 - **A second opinion** - Before tagging, I had OpenAI's Codex (`gpt-6.2-sol`) review both repositories adversarially. It found that destroying a parental-control group could delete a different group after a rename on the router. It also found a failed router write that could be read as success. Both were fixed before release.
 - **Release sequencing** - The orchestrator merged release preparation while those fixes were still open. I now leave the version bump and tagging until the fixes are merged. The provider's release workflow also fails unless the tagged commit is on `main`.
 
@@ -133,4 +133,4 @@ I didn't type most of the code. I decided what it does, what it refuses to do, a
 - Documentation: [Terraform Registry](https://registry.terraform.io/providers/ryanrishi/glinet/latest/docs)
 - Go client: [github.com/ryanrishi/glinet-client-go](https://github.com/ryanrishi/glinet-client-go)
 
-Two gaps I'd like help with are Wi-Fi 7 multi-link networks and cellular modems. I don't own that hardware, and I won't add support for an API I can't record. If you own one of those models, or you work at GL.iNet, I'd love the help.
+Two gaps I'd like help with are [Wi-Fi 7 multi-link networks](https://github.com/ryanrishi/terraform-provider-glinet/issues/127) and [cellular modems](https://github.com/ryanrishi/terraform-provider-glinet/issues/128). I don't own that hardware, and I won't add support for an API I can't record. If you own one of those models, the issues say what I need. And if you work at GL.iNet and want to send me a router for testing, I won't say no.
