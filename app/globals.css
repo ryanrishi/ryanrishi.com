@@ -61,8 +61,10 @@ html {
   }
 }
 
-.prose *:hover > .anchor {
-  @apply visible;
+@media (hover: hover) {
+  .prose *:hover > .anchor {
+    @apply visible;
+  }
 }
 
 /* Body/MDX links use the single accent; underline only on hover */
