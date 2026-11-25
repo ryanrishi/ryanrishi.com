@@ -46,7 +46,7 @@ html {
 }
 
 .prose .anchor {
-  @apply invisible no-underline;
+  @apply opacity-0 no-underline;
 
   margin-left: -1em;
   padding-right: 0.38em;
@@ -61,8 +61,10 @@ html {
   }
 }
 
-.prose *:hover > .anchor {
-  @apply visible;
+@media (hover: hover) {
+  .prose *:hover > .anchor {
+    @apply opacity-100;
+  }
 }
 
 /* Body/MDX links use the single accent; underline only on hover */
