@@ -46,7 +46,7 @@ html {
 }
 
 .prose .anchor {
-  @apply invisible no-underline;
+  @apply opacity-0 no-underline;
 
   margin-left: -1em;
   padding-right: 0.38em;
@@ -63,7 +63,7 @@ html {
 
 @media (hover: hover) {
   .prose *:hover > .anchor {
-    @apply visible;
+    @apply opacity-100;
   }
 }
 
